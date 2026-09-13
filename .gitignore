@@ -7,10 +7,9 @@ out/
 build/
 dist/
 
-# env（秘密情報。.env.example は追跡する）
+# env（秘密情報）
 .env
 .env.*
-!.env.example
 
 # data fetch logs（scripts が再生成）
 logs/
