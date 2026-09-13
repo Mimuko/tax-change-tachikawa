@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-09-13T03:47:34.406Z",
+  "latestFiscalYear": 2023,
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "series": {
+    "insured": [
+      {
+        "year": 2019,
+        "value": 44747
+      },
+      {
+        "year": 2020,
+        "value": 44946
+      },
+      {
+        "year": 2021,
+        "value": 45088
+      },
+      {
+        "year": 2022,
+        "value": 45156
+      },
+      {
+        "year": 2023,
+        "value": 45209
+      }
+    ],
+    "certified": [
+      {
+        "year": 2019,
+        "value": 8639,
+        "secondInsured": 206
+      },
+      {
+        "year": 2020,
+        "value": 8827,
+        "secondInsured": 204
+      },
+      {
+        "year": 2021,
+        "value": 8978,
+        "secondInsured": 216
+      },
+      {
+        "year": 2022,
+        "value": 9087,
+        "secondInsured": 211
+      },
+      {
+        "year": 2023,
+        "value": 9226,
+        "secondInsured": 232
+      }
+    ],
+    "benefits": [
+      {
+        "year": 2019,
+        "value": 11314243659
+      },
+      {
+        "year": 2020,
+        "value": 11515114002
+      },
+      {
+        "year": 2021,
+        "value": 11963494164
+      },
+      {
+        "year": 2022,
+        "value": 12089388278
+      },
+      {
+        "year": 2023,
+        "value": 12714555458
+      }
+    ],
+    "premiumRevenue": [
+      {
+        "year": 2019,
+        "value": 3015823400
+      },
+      {
+        "year": 2020,
+        "value": 2958623000
+      },
+      {
+        "year": 2021,
+        "value": 2964357300
+      },
+      {
+        "year": 2022,
+        "value": 2990866900
+      },
+      {
+        "year": 2023,
+        "value": 3000481600
+      }
+    ]
+  },
+  "provenance": {
+    "insured": {
+      "title": "介護保険第1号被保険者の推移",
+      "sha256": "249a149ed8379c0b17575be787907e8f4a242681a152a8af8636c775b2ed35ae",
+      "definition": "各年度末現在の第1号被保険者総数",
+      "unit": "人"
+    },
+    "certified": {
+      "title": "要介護（要支援）認定状況の推移（認定者数）",
+      "sha256": "bd46cc43b0c0944bf391785ea902a55824920230512edf56467aa53f07ba6823",
+      "definition": "各年度末現在の認定者総数（第2号被保険者を含む）",
+      "unit": "人"
+    },
+    "benefits": {
+      "title": "介護保険給付状況の推移",
+      "sha256": "354f9087da92bcb3738df27d3cd3225e7fef7f0ef833af2e56328068535db53e",
+      "definition": "各年度末現在として掲載された介護保険給付総額",
+      "unit": "円"
+    },
+    "premiumRevenue": {
+      "title": "介護保険料（現年分）収入状況の推移",
+      "sha256": "edebe9f9df44df23f00894e73e17e605a63042a6f38a5b2cfdbe25c9267bcd5b",
+      "definition": "各年度末現在の現年分収入額",
+      "unit": "円"
+    }
+  }
+}

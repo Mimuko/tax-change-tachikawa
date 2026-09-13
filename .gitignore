@@ -1,0 +1,45 @@
+# dependencies
+node_modules/
+
+# next.js / build
+.next/
+out/
+build/
+dist/
+
+# env（秘密情報。.env.example は追跡する）
+.env
+.env.*
+!.env.example
+
+# data fetch logs（scripts が再生成）
+logs/
+
+# debug / test
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+coverage/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# hosting CLI local
+.vercel
+.netlify
+
+# certificates / keys
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE（個人設定）
+.idea/
+.vscode/
+*.swp
+*.swo

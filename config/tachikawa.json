@@ -1,0 +1,13 @@
+{
+  "municipalityCode": "132021",
+  "municipalityName": "東京都立川市",
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "license": "CC BY 4.0",
+  "sources": [
+    { "file": "insured.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-1kaigohokendai1gouhihokensha8.csv" },
+    { "file": "certified.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-3-2youkaigoninteijokyo-youkaigoninteishasu8.csv" },
+    { "file": "premium-revenue.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-4kaigohokenryoshunyujokyo8.csv" },
+    { "file": "benefits.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-5kaigohokenkyufujokyo8.csv" },
+    { "file": "service-benefits.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-6kaigo_service_kyufukensu_kyufugaku8.csv" }
+  ]
+}

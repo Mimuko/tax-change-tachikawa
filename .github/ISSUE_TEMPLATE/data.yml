@@ -1,0 +1,17 @@
+name: データ追加・修正
+description: データソース、値、定義、分類の追加・修正
+title: "[Data] "
+labels: ["data"]
+body:
+  - type: input
+    attributes: { label: 原典URL }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: 対象データ, description: 指標・年度・単位・正式定義を記載してください }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: ライセンス, description: 帰属表示・加工・再配布条件を記載してください }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: 提案内容と表示への影響 }
+    validations: { required: true }

@@ -1,0 +1,28 @@
+{
+  "name": "tax-change-tachikawa",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "data:fetch": "node scripts/fetch-data.mjs",
+    "data:normalize": "node scripts/build-data.mjs",
+    "data:update": "npm run data:fetch && npm run data:normalize && npm test",
+    "data:build": "npm run data:normalize",
+    "dev": "next dev",
+    "build": "npm run data:build && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "next": "16.3.5",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  }
+}

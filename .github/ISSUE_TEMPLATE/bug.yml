@@ -1,0 +1,13 @@
+name: 不具合報告
+description: 表示・処理・アクセシビリティ上の不具合
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    attributes: { label: 発生していること, description: 期待する結果との違いを記載してください }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: 再現手順 }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: 環境, description: OS・ブラウザ・画面幅など }
