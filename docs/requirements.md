@@ -85,7 +85,21 @@
 | Should | 計画値と実績値 | 第9期計画等の定義・年度が一致するものに限定 |
 | Should | 事業所数・施設数・定員 | 同一定義の時系列を確保できた場合のみ |
 | Should | 介護職員数・常勤換算 | 市区町村粒度・時系列・集計定義を検証後に採用 |
-| Should | 介護職賃金と全職種比較 | 東京都の参考指標として明確に分離 |
+| Should | 介護職賃金と全職種比較 | 都道府県の参考指標として明確に分離（市区町村の代理にしない） |
+
+## Act 3 データ可用性（支える人・待遇）
+
+`dashboard.json` の `place` と系列の有無で UI を分岐する。判定は `resolveSupportAvailability` が正本。
+
+| 条件 | Gap Interlude | Act 3 | GeographyChip |
+|---|---|---|---|
+| 市区町村の賃金または職員数に比較可能な時系列（2点以上） | 表示しない | 市区町村スコープで表示 | `municipality` |
+| 市区町村系列なし・都道府県参考（`reference.prefecture`, `referenceOnly: true`）のみ | 表示する | 都道府県参考スコープで表示 | `prefecture-ref` |
+| いずれも比較不可 | — | Act 3 非表示 | — |
+
+- 都道府県参考値を市区町村の実績として扱わない。
+- 詳細アコーディオン・振り返り（Act 5）も同じ可用性に追随する。
+- 自治体ラベルは `config/*.json` → `place.municipalityLabel` / `place.prefectureLabel` から解決する。
 
 ## 表現ルール
 

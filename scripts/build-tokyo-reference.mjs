@@ -178,6 +178,28 @@ if ([2020, 2021, 2022, 2023].some((y) => !years.has(y))) {
   fail(`2020–2023 の連続値が揃いません: ${[...years].join(",")}`);
 }
 
+/**
+ * DB 0004007961 の meta 時間軸は取得時点で「時間軸（2020～2023）」のみ。
+ * 令和6年調査の結果は公開済みだが、同 DB/API には未反映。
+ * 公開 Excel（一般労働者・都道府県×職種（特掲）・性別・産業計・役職者を除く）の同一定義セルで補完する。
+ * 2023年クロスチェック: 同公開表シリーズの令和5年表と DB 値が 266.4千円で一致。
+ * 出典: e-Stat statInfId=000040247966（千葉～愛知）、１３東京 × 介護職員（医療・福祉施設等） × 男女計 × 所定内給与額 294.2千円。
+ */
+const PUBLISHED_TABLE_2024 = {
+  year: 2024,
+  value: 294_200,
+  note:
+    "2024年は e-Stat DB 0004007961（時間軸 2020–2023）に未収録のため、令和6年賃金構造基本統計調査の公開表（一般労働者・都道府県別・職種（特掲）・性別・産業計・役職者を除く、statInfId=000040247966）から、東京都×介護職員（医療・福祉施設等）×男女計×所定内給与額（294.2千円）を円換算して追記。役職者を含む本表（000040247953）は用いない。2023年は同系列の公開表と DB が一致することを確認済み。",
+};
+
+let supplementedFromPublishedTable = false;
+if (!years.has(2024)) {
+  points.push({ year: PUBLISHED_TABLE_2024.year, value: PUBLISHED_TABLE_2024.value });
+  years.add(2024);
+  points.sort((a, b) => a.year - b.year);
+  supplementedFromPublishedTable = true;
+}
+
 const payload = {
   metrics: [
     {
@@ -192,10 +214,7 @@ const payload = {
         definition:
           "一般労働者・企業規模10人以上・男女計・東京都・介護職員（医療・福祉施設等）・所定内給与額。2020年改定後のみ。千円表記を円に換算。",
         unit: "yen_per_month",
-        note:
-          years.has(2024)
-            ? undefined
-            : "e-Stat DB 0004007961 の時間軸は取得時点で 2020–2023。2024年値が公開され次第、再取得で追記する。",
+        note: supplementedFromPublishedTable ? PUBLISHED_TABLE_2024.note : undefined,
       },
     },
   ],

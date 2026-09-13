@@ -1,7 +1,15 @@
 {
-  "generatedAt": "2026-09-13T05:55:10.792Z",
+  "generatedAt": "2026-09-13T08:16:53.190Z",
   "latestFiscalYear": 2023,
   "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "place": {
+    "municipalityCode": "132021",
+    "municipalityLabel": "立川市",
+    "prefectureLabel": "東京都",
+    "links": {
+      "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+    }
+  },
   "series": {
     "insured": [
       {
@@ -154,7 +162,7 @@
   "premiumStandard": {
     "metricId": "ltc_premium_standard_monthly",
     "sourceUrl": "https://www.city.tachikawa.lg.jp/kenko/kaigo/1003390/1021216.html",
-    "definition": "第1号被保険者の介護保険料基準月額。個人の実際の支払額ではない。",
+    "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
     "periods": [
       {
         "label": "第8期",
@@ -169,7 +177,7 @@
     ]
   },
   "reference": {
-    "tokyo": [
+    "prefecture": [
       {
         "metricId": "care_worker_scheduled_salary_tokyo",
         "label": "介護職員の所定内給与（東京都）",
@@ -192,13 +200,17 @@
           {
             "year": 2023,
             "value": 266400
+          },
+          {
+            "year": 2024,
+            "value": 294200
           }
         ],
         "provenance": {
           "title": "賃金構造基本統計調査 DB 0004007961",
           "definition": "一般労働者・企業規模10人以上・男女計・東京都・介護職員（医療・福祉施設等）・所定内給与額。2020年改定後のみ。千円表記を円に換算。",
           "unit": "yen_per_month",
-          "note": "e-Stat DB 0004007961 の時間軸は取得時点で 2020–2023。2024年値が公開され次第、再取得で追記する。"
+          "note": "2024年は e-Stat DB 0004007961（時間軸 2020–2023）に未収録のため、令和6年賃金構造基本統計調査の公開表（一般労働者・都道府県別・職種（特掲）・性別・産業計・役職者を除く、statInfId=000040247966）から、東京都×介護職員（医療・福祉施設等）×男女計×所定内給与額（294.2千円）を円換算して追記。役職者を含む本表（000040247953）は用いない。2023年は同系列の公開表と DB が一致することを確認済み。"
         }
       }
     ]

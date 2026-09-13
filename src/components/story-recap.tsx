@@ -1,7 +1,8 @@
 import GeographyChip from "./geography-chip";
 
-type RecapGroup = {
-  variant: "tachikawa" | "tokyo-ref" | "tachikawa-policy";
+export type RecapGroup = {
+  scope: "municipality" | "prefecture-ref" | "municipality-policy";
+  chipLabel: string;
   title: string;
   items: string[];
 };
@@ -12,14 +13,14 @@ export default function StoryRecap({ groups, shareUrl }: { groups: RecapGroup[];
       <div className="story-recap-inner">
         <p className="eyebrow">Act 5 — 振り返り</p>
         <h2>
-          あなたは、<br />
-          <em>何が気になりましたか？</em>
+          見た変化を、
+          <em>もう一度</em>
         </h2>
-        <p>本編で見た内容を、地域のまとまりごとに振り返ります。</p>
+        <p>本編で見た指標を、地域のまとまりごとに振り返ります。</p>
         <div className="story-recap-grid">
           {groups.map((group) => (
-            <article key={group.variant} className="story-recap-group">
-              <GeographyChip variant={group.variant} />
+            <article key={`${group.scope}-${group.title}`} className="story-recap-group">
+              <GeographyChip scope={group.scope} label={group.chipLabel} />
               <h3>{group.title}</h3>
               <ul>
                 {group.items.map((item) => (

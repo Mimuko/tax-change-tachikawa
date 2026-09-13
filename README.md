@@ -11,15 +11,24 @@
 
 ## MVPの対象
 
-- 自治体: 東京都立川市
+- 自治体: 東京都立川市（`config/tachikawa.json` でラベル・出典を分離）
 - テーマ: 介護
-- 期間: 各指標で比較可能な直近5年度
-- ホスティング: Netlify
+- 期間: 各指標で比較可能な直近年度
+- ホスティング: Netlify（静的エクスポート）
 - 仕様正本: [`docs/requirements.md`](docs/requirements.md)
+- 構成: [`docs/architecture.md`](docs/architecture.md)
+
+物語の流れは、需要とお金（Scrollytelling）→ 受け皿 → 支える人・待遇 → 保険料 → 振り返りです。支える人・待遇（Act 3）は、市区町村データと都道府県参考の**可用性に応じて表示を分岐**します。都道府県値を市区町村の代理として扱いません。
 
 ## データソース
 
-現在の実装は、[立川市オープンデータ「統計年報・社会福祉」](https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html)に掲載された介護保険第1号被保険者、要介護認定者、保険料収入、介護保険給付、サービス別給付のCSVを使用します。詳しい採否・定義・ライセンス状況は [`docs/data-sources.md`](docs/data-sources.md) と [`data/README.md`](data/README.md) を参照してください。
+| 区分 | 出典 | 主な指標 |
+|---|---|---|
+| 市区町村 | [立川市オープンデータ「統計年報・社会福祉」](https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html) | 第1号被保険者、認定者、保険料収入、介護保険給付 |
+| 市区町村 | 厚労省 介護サービス情報公表システム OD | 提供単位数（受け皿） |
+| 都道府県参考 | [賃金構造基本統計調査](https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html)（e-Stat） | 介護職員の所定内給与（東京都・`referenceOnly`） |
+
+採否・定義・ライセンスは [`docs/data-sources.md`](docs/data-sources.md)、[`docs/metrics.md`](docs/metrics.md)、[`data/README.md`](data/README.md) を参照してください。
 
 ## 必要環境
 
@@ -32,20 +41,30 @@
 git clone <PUBLIC_REPOSITORY_URL>
 cd tax-change-tachikawa
 npm ci
+npm run data:build
 npm run dev
 ```
 
 `<PUBLIC_REPOSITORY_URL>` はGitHub公開後に実URLへ置き換えます。ブラウザで `http://localhost:3000` を開いてください。
 
+リポジトリに含まれる `data/processed/dashboard.json` でも開発できますが、データ更新後は `npm run data:build` を実行してください。
+
 ## データ更新
 
 ```bash
 npm run data:fetch
+npm run data:service-units
+npm run data:tokyo-reference   # 要 E_STAT_APP_ID（任意。.env 可）
 npm run data:normalize
 npm test
 ```
 
-`data:fetch` は立川市固有設定を [`config/tachikawa.json`](config/tachikawa.json) から読み、原本を `data/raw/tachikawa/` に保存します。`data:normalize` はShift_JISのCSVを検証し、`data/processed/dashboard.json` を生成します。
+- `data:fetch` … [`config/tachikawa.json`](config/tachikawa.json) のURLから原本を `data/raw/tachikawa/` へ保存
+- `data:service-units` … 提供単位数を `data/curated/` へ生成
+- `data:tokyo-reference` … 都道府県参考の賃金系列を curated へ生成（未設定時は既存 curated を維持）
+- `data:normalize` / `data:build` … `data/processed/dashboard.json` を生成（`place`・市区町村系列・`reference.prefecture` を含む）
+
+e-Stat 再取得用のアプリIDが必要な場合だけ `.env` に `E_STAT_APP_ID` を置いてください（コミットしない）。変数名のみスクリプト先頭コメントと docs に記載します。
 
 ## ビルド
 
@@ -53,7 +72,7 @@ npm test
 npm run build
 ```
 
-静的サイトは `out/` に生成されます。ビルド時にも正規化を再実行します。
+静的サイトは `out/` に生成されます。ビルド時にも `data:build` を実行します。
 
 ## Netlifyへのデプロイ
 
@@ -62,7 +81,11 @@ npm run build
 3. Node.js 22を使用します。
 4. Deploy Previewでデータ差分、出典リンク、モバイル表示を確認してから公開します。
 
-設定は [`netlify.toml`](netlify.toml) に定義しています。現在のMVPは外部APIキーを必要としません。
+設定は [`netlify.toml`](netlify.toml) に定義しています。本番ビルドに e-Stat API キーは必須ではありません（検証済み JSON / curated をリポジトリに含めます）。
+
+## 他自治体への展開（方針）
+
+自治体名・都道府県名・出典URLは `config/*.json` → `dashboard.json` の `place` に載せ、UI にハードコードしません。市区町村の職員・給与時系列が揃えば Act 3 は Gap なしで表示し、無い場合のみ都道府県参考を明示します。詳細は [`docs/architecture.md`](docs/architecture.md) と [`docs/requirements.md`](docs/requirements.md) の Act 3 節を参照してください。
 
 ## ライセンス
 

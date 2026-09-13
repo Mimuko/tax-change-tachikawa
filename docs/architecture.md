@@ -50,8 +50,12 @@ logs/                 取得結果（原本はGit方針を別途判断）
 2. **Act 1 需要とお金** — Scrollytelling（被保険者・認定者・給付総額の3系列）
 3. **Interlude Pause** — 人とお金の変化から「支える側」への橋渡し
 4. **Act 2 受け皿** — 立川市の提供単位数（`service_unit_count`、厚労省OD集計）
-5. **Interlude Gap** — 立川市単位で継続比較できる公開データを確認できなかった支える人・待遇を明示
-6. **Act 3 支える人と待遇** — 東京都参考値（`docs/metrics.md` 確定 ID。curated / e-Stat 接続後に表示）
+5. **Interlude Gap** — 市区町村単位の支える人・待遇がなく、都道府県参考のみある場合に表示（`resolveSupportAvailability` の `showDataGap`）
+6. **Act 3 支える人と待遇** — データ可用性で分岐（`ActSupportSection` + `src/lib/support-availability.ts`）
+   - **Case A（市区町村）**: `series.careWorkerSalary` または `series.careWorkerWorkforce` に比較可能な2点以上 → Gap なし・市区町村 chip
+   - **Case B（都道府県参考）**: 市区町村系列なし・`reference.prefecture` に `referenceOnly: true` の比較可能系列 → Gap + 都道府県参考 chip（都道府県値を市区町村の代理にしない）
+   - **Case C（非表示）**: 上記いずれもなし → Act 3 全体を非表示
+   - `dashboard.json` の `place`（`config/*.json` 由来）でラベルと出典リンクを解決。UI コンポーネントに自治体名のハードコードは置かない
 7. **Act 4 市民との接点** — 保険料基準月額の期ごと表示
 8. **Act 5 振り返り** — 3地域グループの要約と共有導線
 9. 詳細アコーディオン（定義・出典）

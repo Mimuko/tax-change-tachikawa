@@ -31,11 +31,13 @@ const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / 
 export default function SimpleSeriesChart({
   series,
   kicker,
+  heading,
   note,
   indexMode = true,
 }: {
   series: SimpleSeries[];
   kicker?: string;
+  heading?: string;
   note?: string;
   indexMode?: boolean;
 }) {
@@ -64,7 +66,9 @@ export default function SimpleSeriesChart({
       <div className="chart-heading">
         <div>
           {kicker ? <p className="chart-kicker">{kicker}</p> : null}
-          <p className="ui-label">{indexMode ? "初年度を100とした変化" : series[0].label}</p>
+          <p className="ui-label">
+            {heading ?? (indexMode ? "初年度を100とした変化" : series[0].label)}
+          </p>
         </div>
       </div>
       <svg className="simple-series-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={series.map((item) => item.label).join("、")}>

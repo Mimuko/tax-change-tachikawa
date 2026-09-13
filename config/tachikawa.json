@@ -1,8 +1,13 @@
 {
   "municipalityCode": "132021",
   "municipalityName": "東京都立川市",
+  "municipalityLabel": "立川市",
+  "prefectureLabel": "東京都",
   "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
   "license": "CC BY 4.0",
+  "links": {
+    "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+  },
   "sources": [
     { "file": "insured.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-1kaigohokendai1gouhihokensha8.csv" },
     { "file": "certified.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-3-2youkaigoninteijokyo-youkaigoninteishasu8.csv" },
@@ -13,7 +18,7 @@
   "premiumStandard": {
     "metricId": "ltc_premium_standard_monthly",
     "sourceUrl": "https://www.city.tachikawa.lg.jp/kenko/kaigo/1003390/1021216.html",
-    "definition": "第1号被保険者の介護保険料基準月額。個人の実際の支払額ではない。",
+    "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
     "periods": [
       { "label": "第8期", "range": "2021–2023年度", "value": 5880 },
       { "label": "第9期", "range": "2024–2026年度", "value": 6183 }

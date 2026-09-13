@@ -16,7 +16,8 @@ export type PremiumPeriod = {
   value: number;
 };
 
-export type TokyoReferenceMetric = {
+/** Prefecture-level reference metric (never treated as municipal proxy). */
+export type ReferenceMetric = {
   metricId: string;
   label: string;
   unit: string;
@@ -26,16 +27,30 @@ export type TokyoReferenceMetric = {
   provenance?: Provenance;
 };
 
+export type PlaceInfo = {
+  municipalityCode: string;
+  municipalityLabel: string;
+  prefectureLabel: string;
+  links?: {
+    wageStructureSurvey?: string;
+  };
+};
+
 export type DashboardData = {
   generatedAt: string;
   latestFiscalYear: number;
   sourcePage: string;
+  place: PlaceInfo;
   series: {
     insured: DataPoint[];
     certified: CertifiedPoint[];
     benefits: DataPoint[];
     premiumRevenue: DataPoint[];
     serviceUnitCount?: DataPoint[];
+    /** Municipal care-worker salary when comparable public data exists. */
+    careWorkerSalary?: DataPoint[];
+    /** Municipal care-worker headcount / FTE when comparable public data exists. */
+    careWorkerWorkforce?: DataPoint[];
   };
   provenance: {
     insured: Provenance;
@@ -43,6 +58,8 @@ export type DashboardData = {
     benefits: Provenance;
     premiumRevenue: Provenance;
     serviceUnitCount?: Provenance;
+    careWorkerSalary?: Provenance;
+    careWorkerWorkforce?: Provenance;
   };
   premiumStandard: {
     metricId: string;
@@ -51,6 +68,7 @@ export type DashboardData = {
     periods: PremiumPeriod[];
   };
   reference: {
-    tokyo: TokyoReferenceMetric[];
+    /** Prefecture reference metrics (`referenceOnly: true`). */
+    prefecture: ReferenceMetric[];
   };
 };

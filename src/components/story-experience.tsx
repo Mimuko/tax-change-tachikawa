@@ -8,6 +8,61 @@ type Series = { id: string; label: string; shortLabel: string; unit: string; col
 const formatValue = (value: number, unit: string) => unit === "人" ? `${value.toLocaleString("ja-JP")}人` : `${(value / 100_000_000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億円`;
 const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / points[0].value) * 100;
 
+const changeDirection = (delta: number) => {
+  if (Math.abs(delta) < 2) return "ほぼ横ばい";
+  return delta >= 0 ? "増えた" : "減った";
+};
+
+function buildStepCopy(series: Series[]) {
+  const insuredDelta = change(series[0].points);
+  const certifiedDelta = change(series[1].points);
+  const benefitsDelta = change(series[2].points);
+
+  const insuredTitle =
+    Math.abs(insuredDelta) < 2
+      ? "高齢者の加入者数は、大きく変わらなかった"
+      : insuredDelta >= 0
+        ? "高齢者の加入者数は、増えた"
+        : "高齢者の加入者数は、減った";
+
+  const certifiedTitle =
+    Math.abs(certifiedDelta) < 2
+      ? "介護を必要とする人は、ほぼ横ばい"
+      : certifiedDelta >= 0
+        ? "介護を必要とする人は、増えた"
+        : "介護を必要とする人は、減った";
+
+  const benefitsTitle =
+    benefitsDelta > certifiedDelta && benefitsDelta >= 2
+      ? "給付費は、認定者より大きく伸びた"
+      : changeDirection(benefitsDelta) === "ほぼ横ばい"
+        ? "給付費は、ほぼ横ばい"
+        : benefitsDelta >= 0
+          ? "給付費は、増えた"
+          : "給付費は、減った";
+
+  return [
+    {
+      eyebrow: "01 — 立川市・第1号被保険者数",
+      title: insuredTitle,
+      body: "65歳以上の第1号被保険者数です。5年間で大きな変動はなく、ほぼ同じ水準で推移しています。",
+    },
+    {
+      eyebrow: "02 — 立川市・要支援・要介護認定者数",
+      title: certifiedTitle,
+      body: "要支援・要介護の認定者総数です。第2号被保険者も含むため、加入者数との比率はここでは示しません。",
+    },
+    {
+      eyebrow: "03 — 立川市・介護保険給付総額",
+      title: benefitsTitle,
+      body:
+        benefitsDelta > certifiedDelta && benefitsDelta >= 2
+          ? "居宅・施設・地域密着型サービスを合わせた給付総額です。認定者の伸びよりも大きく、同じ5年間で増えています。"
+          : "居宅・施設・地域密着型サービスを合わせた給付総額です。5年間の推移を、他の指標と並べて見ています。",
+    },
+  ];
+}
+
 function CumulativeChart({ series, active, enteringId }: { series: Series[]; active: number; enteringId: string | null }) {
   const width = 720, height = 500, left = 58, right = 34, top = 70, bottom = 58;
   const visible = series.slice(0, active + 1);
@@ -100,15 +155,6 @@ export default function StoryExperience({ series }: { series: Series[] }) {
     }
   }, [series]);
 
-  const goToStep = useCallback((index: number) => {
-    applyActive(index);
-    const el = steps.current[index];
-    if (el) {
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      el.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" });
-    }
-  }, [applyActive]);
-
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
@@ -121,34 +167,11 @@ export default function StoryExperience({ series }: { series: Series[] }) {
     return () => observer.disconnect();
   }, [applyActive]);
 
-  const copy = [
-    { eyebrow: "01 — 介護を必要とする人", title: "高齢者の加入者は、ほぼ同じ規模で推移", body: "第1号被保険者、つまり65歳以上の加入者数です。大きく跳ねるのではなく、5年間を通して緩やかに変化しています。" },
-    { eyebrow: "02 — 認定を受けた人", title: "同じ間に、認定者は増えました", body: "要支援・要介護の認定者総数を重ねます。40〜64歳の第2号被保険者も含むため、加入者数との比率をここでは断定しません。" },
-    { eyebrow: "03 — 行政支出", title: "給付総額の線を重ねる", body: "居宅・施設・地域密着型サービスを合わせた給付総額です。認定者と同じ方向に動いていても、因果関係や政策評価を示すものではありません。" },
-  ];
+  const copy = buildStepCopy(series);
 
   return (
-    <section className="scrolly" id="story">
+    <section className="scrolly" id="story" aria-label="立川市の介護に関する5年間の変化">
       <div className="narrative">
-        <nav className="step-controls" aria-label="ストーリーのステップ">
-          <div className="step-controls-nav">
-            <button type="button" className="step-nav-btn" disabled={active === 0} onClick={() => goToStep(active - 1)}>前へ</button>
-            <div className="step-tabs">
-              {series.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className="step-tab"
-                  aria-current={active === index ? "true" : undefined}
-                  onClick={() => goToStep(index)}
-                >
-                  {item.shortLabel}
-                </button>
-              ))}
-            </div>
-            <button type="button" className="step-nav-btn" disabled={active === series.length - 1} onClick={() => goToStep(active + 1)}>次へ</button>
-          </div>
-        </nav>
         {copy.map((step, index) => {
           const item = series[index], delta = change(item.points), latest = item.points.at(-1)!;
           return (
@@ -179,7 +202,7 @@ export default function StoryExperience({ series }: { series: Series[] }) {
           );
         })}
       </div>
-      <aside className="visual-stage"><CumulativeChart series={series} active={active} enteringId={enteringId} /></aside>
+      <aside className="visual-stage" aria-label="変化を重ねたグラフ"><CumulativeChart series={series} active={active} enteringId={enteringId} /></aside>
     </section>
   );
 }

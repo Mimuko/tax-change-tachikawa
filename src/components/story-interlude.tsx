@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type StoryInterludeProps = {
   variant: "pause" | "gap";
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   children: ReactNode;
 };
 

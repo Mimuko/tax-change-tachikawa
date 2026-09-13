@@ -83,6 +83,12 @@ const data = {
     ...[insuredRows, benefitRows, premiumRows, certificationRows].map((rows) => Number(rows.at(-1)[0] ?? rows.at(-1).year)),
   ),
   sourcePage,
+  place: {
+    municipalityCode: municipality.municipalityCode,
+    municipalityLabel: municipality.municipalityLabel ?? municipality.municipalityName,
+    prefectureLabel: municipality.prefectureLabel,
+    links: municipality.links ?? {},
+  },
   series: {
     insured: insuredRows.map((row) => ({ year: number(row[0]), value: number(row[2]) })),
     certified: certificationRows.map((row) => ({ year: row.year, value: row.total, secondInsured: row.secondInsured })),
@@ -101,7 +107,7 @@ const data = {
     definition: municipality.premiumStandard.definition,
     periods: municipality.premiumStandard.periods,
   },
-  reference: { tokyo: [] },
+  reference: { prefecture: [] },
 };
 
 const requiredSeries = ["insured", "certified", "benefits", "premiumRevenue"];
@@ -124,22 +130,56 @@ if (serviceUnitCount?.points?.length) {
   }
 }
 
-const tokyoReference = await loadOptionalJson("data/curated/tokyo-reference.json");
-const allowedTokyoIds = new Set([
+const prefectureReference =
+  (await loadOptionalJson("data/curated/prefecture-reference.json")) ??
+  (await loadOptionalJson("data/curated/tokyo-reference.json"));
+const allowedReferenceIds = new Set([
   "care_worker_fte",
   "care_worker_headcount",
   "care_worker_scheduled_salary_tokyo",
+  "care_worker_scheduled_salary",
 ]);
-if (tokyoReference?.metrics?.length) {
-  data.reference.tokyo = tokyoReference.metrics.filter((metric) => {
-    if (!allowedTokyoIds.has(metric.metricId)) {
-      throw new Error(`tokyo reference: unexpected metricId ${metric.metricId}`);
+if (prefectureReference?.metrics?.length) {
+  data.reference.prefecture = prefectureReference.metrics.filter((metric) => {
+    if (!allowedReferenceIds.has(metric.metricId)) {
+      throw new Error(`prefecture reference: unexpected metricId ${metric.metricId}`);
     }
-    if (metric.geography !== "tokyo" || metric.referenceOnly !== true) {
-      throw new Error(`tokyo reference: ${metric.metricId} must be geography=tokyo and referenceOnly=true`);
+    if (metric.referenceOnly !== true) {
+      throw new Error(`prefecture reference: ${metric.metricId} must be referenceOnly=true`);
+    }
+    if (!metric.geography) {
+      throw new Error(`prefecture reference: ${metric.metricId} must set geography`);
     }
     return metric.points?.some((point) => point.value !== null && Number.isFinite(point.value));
   });
+}
+
+const localSalary = await loadOptionalJson("data/curated/local-care-worker-salary.json");
+if (localSalary?.points?.length) {
+  const validPoints = localSalary.points.filter((point) => point.value !== null && Number.isFinite(point.value));
+  if (validPoints.length >= 2) {
+    data.series.careWorkerSalary = validPoints.map(({ year, value }) => ({ year, value }));
+    data.provenance.careWorkerSalary = {
+      title: localSalary.provenance?.title ?? localSalary.label,
+      definition: localSalary.provenance?.definition ?? "",
+      unit: localSalary.provenance?.unit ?? localSalary.unit,
+      note: localSalary.provenance?.note,
+    };
+  }
+}
+
+const localWorkforce = await loadOptionalJson("data/curated/local-care-worker-workforce.json");
+if (localWorkforce?.points?.length) {
+  const validPoints = localWorkforce.points.filter((point) => point.value !== null && Number.isFinite(point.value));
+  if (validPoints.length >= 2) {
+    data.series.careWorkerWorkforce = validPoints.map(({ year, value }) => ({ year, value }));
+    data.provenance.careWorkerWorkforce = {
+      title: localWorkforce.provenance?.title ?? localWorkforce.label,
+      definition: localWorkforce.provenance?.definition ?? "",
+      unit: localWorkforce.provenance?.unit ?? localWorkforce.unit,
+      note: localWorkforce.provenance?.note,
+    };
+  }
 }
 
 const output = resolve(root, "data/processed/dashboard.json");
