@@ -1,0 +1,35 @@
+{
+  "metrics": [
+    {
+      "metricId": "care_worker_scheduled_salary_tokyo",
+      "label": "介護職員の所定内給与（東京都）",
+      "unit": "円",
+      "referenceOnly": true,
+      "geography": "tokyo",
+      "points": [
+        {
+          "year": 2020,
+          "value": 256600
+        },
+        {
+          "year": 2021,
+          "value": 260500
+        },
+        {
+          "year": 2022,
+          "value": 253000
+        },
+        {
+          "year": 2023,
+          "value": 266400
+        }
+      ],
+      "provenance": {
+        "title": "賃金構造基本統計調査 DB 0004007961",
+        "definition": "一般労働者・企業規模10人以上・男女計・東京都・介護職員（医療・福祉施設等）・所定内給与額。2020年改定後のみ。千円表記を円に換算。",
+        "unit": "yen_per_month",
+        "note": "e-Stat DB 0004007961 の時間軸は取得時点で 2020–2023。2024年値が公開され次第、再取得で追記する。"
+      }
+    }
+  ]
+}

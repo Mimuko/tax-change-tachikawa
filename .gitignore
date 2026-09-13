@@ -15,6 +15,9 @@ dist/
 # data fetch logs（scripts が再生成）
 logs/
 
+# API 調査キャッシュ（ローカル一時）
+.cache/
+
 # debug / test
 npm-debug.log*
 yarn-debug.log*

@@ -9,5 +9,14 @@
     { "file": "premium-revenue.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-4kaigohokenryoshunyujokyo8.csv" },
     { "file": "benefits.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-5kaigohokenkyufujokyo8.csv" },
     { "file": "service-benefits.csv", "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-4-6kaigo_service_kyufukensu_kyufugaku8.csv" }
-  ]
+  ],
+  "premiumStandard": {
+    "metricId": "ltc_premium_standard_monthly",
+    "sourceUrl": "https://www.city.tachikawa.lg.jp/kenko/kaigo/1003390/1021216.html",
+    "definition": "第1号被保険者の介護保険料基準月額。個人の実際の支払額ではない。",
+    "periods": [
+      { "label": "第8期", "range": "2021–2023年度", "value": 5880 },
+      { "label": "第9期", "range": "2024–2026年度", "value": 6183 }
+    ]
+  }
 }

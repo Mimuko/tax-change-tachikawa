@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "data:fetch": "node scripts/fetch-data.mjs",
+    "data:service-units": "node scripts/build-service-unit-count.mjs",
+    "data:tokyo-reference": "node scripts/build-tokyo-reference.mjs",
     "data:normalize": "node scripts/build-data.mjs",
     "data:update": "npm run data:fetch && npm run data:normalize && npm test",
     "data:build": "npm run data:normalize",

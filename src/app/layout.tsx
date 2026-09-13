@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-noto-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "自分の街はどう変わった？｜立川市の介護",
@@ -8,5 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ja"><body>{children}</body></html>;
+  return (
+    <html lang="ja" className={notoSansJp.variable}>
+      <body>
+        <a className="skip-link" href="#main">本文へスキップ</a>
+        {children}
+      </body>
+    </html>
+  );
 }

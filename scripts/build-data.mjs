@@ -42,6 +42,15 @@ async function load(name) {
   };
 }
 
+async function loadOptionalJson(relativePath) {
+  try {
+    const path = resolve(root, relativePath);
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
 function latestFive(rows, headerRow, yearColumn = 0) {
   const data = rows.slice(headerRow + 1).filter((row) => /^20\d{2}/.test(row[yearColumn] ?? ""));
   return data.slice(-5);
@@ -84,12 +93,53 @@ const data = {
     insured: { title: "介護保険第1号被保険者の推移", sha256: insured.hash, definition: "各年度末現在の第1号被保険者総数", unit: "人" },
     certified: { title: "要介護（要支援）認定状況の推移（認定者数）", sha256: certified.hash, definition: "各年度末現在の認定者総数（第2号被保険者を含む）", unit: "人" },
     benefits: { title: "介護保険給付状況の推移", sha256: benefits.hash, definition: "各年度末現在として掲載された介護保険給付総額", unit: "円" },
-    premiumRevenue: { title: "介護保険料（現年分）収入状況の推移", sha256: premium.hash, definition: "各年度末現在の現年分収入額", unit: "円" }
-  }
+    premiumRevenue: { title: "介護保険料（現年分）収入状況の推移", sha256: premium.hash, definition: "各年度末現在の現年分収入額", unit: "円" },
+  },
+  premiumStandard: {
+    metricId: municipality.premiumStandard.metricId,
+    sourceUrl: municipality.premiumStandard.sourceUrl,
+    definition: municipality.premiumStandard.definition,
+    periods: municipality.premiumStandard.periods,
+  },
+  reference: { tokyo: [] },
 };
 
-for (const [key, rows] of Object.entries(data.series)) {
+const requiredSeries = ["insured", "certified", "benefits", "premiumRevenue"];
+for (const key of requiredSeries) {
+  const rows = data.series[key];
   if (rows.length !== 5 || rows.some((row) => row.value === null)) throw new Error(`${key}: 最新5点を検証できません`);
+}
+
+const serviceUnitCount = await loadOptionalJson("data/curated/service-unit-count.json");
+if (serviceUnitCount?.points?.length) {
+  const validPoints = serviceUnitCount.points.filter((point) => point.value !== null && Number.isFinite(point.value));
+  if (validPoints.length > 0) {
+    data.series.serviceUnitCount = validPoints.map(({ year, value }) => ({ year, value }));
+    data.provenance.serviceUnitCount = {
+      title: serviceUnitCount.provenance?.title ?? serviceUnitCount.label,
+      definition: serviceUnitCount.provenance?.definition ?? "",
+      unit: serviceUnitCount.provenance?.unit ?? serviceUnitCount.unit,
+      note: serviceUnitCount.provenance?.note,
+    };
+  }
+}
+
+const tokyoReference = await loadOptionalJson("data/curated/tokyo-reference.json");
+const allowedTokyoIds = new Set([
+  "care_worker_fte",
+  "care_worker_headcount",
+  "care_worker_scheduled_salary_tokyo",
+]);
+if (tokyoReference?.metrics?.length) {
+  data.reference.tokyo = tokyoReference.metrics.filter((metric) => {
+    if (!allowedTokyoIds.has(metric.metricId)) {
+      throw new Error(`tokyo reference: unexpected metricId ${metric.metricId}`);
+    }
+    if (metric.geography !== "tokyo" || metric.referenceOnly !== true) {
+      throw new Error(`tokyo reference: ${metric.metricId} must be geography=tokyo and referenceOnly=true`);
+    }
+    return metric.points?.some((point) => point.value !== null && Number.isFinite(point.value));
+  });
 }
 
 const output = resolve(root, "data/processed/dashboard.json");
