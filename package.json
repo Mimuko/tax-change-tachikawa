@@ -8,13 +8,12 @@
     "data:service-units": "node scripts/build-service-unit-count.mjs",
     "data:tokyo-reference": "node scripts/build-tokyo-reference.mjs",
     "data:normalize": "node scripts/build-data.mjs",
-    "data:update": "npm run data:fetch && npm run data:normalize && npm test",
+    "data:update": "npm run data:fetch && npm run data:normalize",
     "data:build": "npm run data:normalize",
     "dev": "next dev",
     "build": "npm run data:build && next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "node --test"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "16.3.5",

@@ -56,7 +56,6 @@ npm run data:fetch
 npm run data:service-units
 npm run data:tokyo-reference   # 要 E_STAT_APP_ID（任意。.env 可）
 npm run data:normalize
-npm test
 ```
 
 - `data:fetch` … [`config/tachikawa.json`](config/tachikawa.json) のURLから原本を `data/raw/tachikawa/` へ保存

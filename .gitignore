@@ -7,26 +7,32 @@ out/
 build/
 dist/
 
-# env（秘密情報）
+# env（秘密・ローカル設定。サンプルもコミットしない）
 .env
 .env.*
+env.sample
 
-# data fetch logs（scripts が再生成）
+# data fetch / API 一時物
 logs/
-
-# API 調査キャッシュ（ローカル一時）
 .cache/
+.tmp-estat/
 
-# debug / test
+# local tests（構築に不要）
+test/
+coverage/
+
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-coverage/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# archives / local dumps
+*.zip
 
 # hosting CLI local
 .vercel

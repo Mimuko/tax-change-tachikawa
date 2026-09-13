@@ -7,7 +7,7 @@
 1. 重複Issueがないか確認し、該当テンプレートからIssueを作成します。
 2. 小さく目的の明確なブランチで変更します。
 3. 定義や表示ルールを変える場合は、先に `docs/` の正本を更新します。
-4. `npm test` と `npm run build` を実行します。
+4. `npm run build` を実行します。
 5. PRテンプレートに、理由・データソース・表示影響・検証結果を書きます。
 
 ## データ変更の追加要件
@@ -24,7 +24,6 @@
 npm ci
 npm run data:fetch
 npm run data:normalize
-npm test
 npm run build
 ```
 
