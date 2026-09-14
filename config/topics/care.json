@@ -1,0 +1,60 @@
+{
+  "id": "care",
+  "label": "介護",
+  "metrics": {
+    "ltc_first_insured_persons": {
+      "label": "介護保険第1号被保険者数",
+      "unit": "人",
+      "definition": "年度末の65歳以上の第1号被保険者数",
+      "comparison": "同一地域・年度末・定義の連続年のみ指数化"
+    },
+    "care_certified_persons": {
+      "label": "要支援・要介護認定者数",
+      "unit": "人",
+      "definition": "年度末の認定者総数。第2号被保険者を含む",
+      "comparison": "第1号被保険者の認定率では第2号を除外"
+    },
+    "ltc_benefit_total_yen": {
+      "label": "介護保険給付総額",
+      "unit": "円",
+      "definition": "居宅・施設・地域密着型サービスの給付総額",
+      "comparison": "決算歳出とは別系列。年度・給付範囲が同じ場合のみ比較"
+    },
+    "service_unit_count": {
+      "label": "介護サービスの提供単位数",
+      "unit": "単位",
+      "definition": "サービスコード×事業所番号の一意組合せ数",
+      "comparison": "同一サービス範囲・同じ12月末の公表掲載数。稼働数と断定しない"
+    },
+    "care_worker_headcount": {
+      "label": "介護職員数",
+      "unit": "人",
+      "definition": "サービス・職種・勤務形態別の従事者数",
+      "comparison": "同一地域・分類の連続年のみ。サービス横断合算禁止"
+    },
+    "care_worker_fte": {
+      "label": "介護職員 常勤換算数",
+      "unit": "fte",
+      "definition": "サービス・職種別の常勤換算従事者数",
+      "comparison": "実人数と分離。同一サービス・職種内のみ"
+    },
+    "care_worker_scheduled_salary": {
+      "label": "介護職員の所定内給与",
+      "unit": "円",
+      "definition": "一般労働者・企業規模10人以上・男女計・介護職員（医療・福祉施設等）",
+      "comparison": "名目月額。2020年改定前とは接続しない。参考地域を保持"
+    },
+    "ltc_premium_standard_monthly": {
+      "label": "介護保険料基準月額",
+      "unit": "円",
+      "definition": "第1号被保険者の計画期間別の基準月額",
+      "comparison": "計画期間値。個人の実支払額ではない"
+    },
+    "ltc_premium_revenue_yen": {
+      "label": "介護保険料収入",
+      "unit": "円",
+      "definition": "現年分の介護保険料収入額",
+      "comparison": "給付費・基準額と分離。個人負担に読み替えない"
+    }
+  }
+}

@@ -1,5 +1,22 @@
 # 税金で、何が変わった？（仮称）
 
+## 自治体×テーマ構成
+
+現在の公開ストーリーは `/tachikawa/care/`、出典は `/tachikawa/care/data/` です。既存の `/`・`/data/` も利用できます。
+
+自治体情報は `config/municipalities/`、テーマの指標定義は `config/topics/`、ストーリーの指標参照は `config/stories/`、原典設定は `config/data-sources/` で管理します。画面の組み合わせとコピーは `src/stories/`、共通部品は `src/components/` に置きます。
+
+```bash
+npm run data:fetch -- tachikawa care
+npm run data:normalize -- tachikawa care
+npm test
+npm run dev
+# 本番用静的出力
+npm run build
+```
+
+引数省略時は `tachikawa care`。未対応の組み合わせはエラーになります。新規自治体・テーマの追加手順と今回の移行範囲は [architecture.md](docs/architecture.md) を参照してください。
+
 立川市の介護に関する公開行政データを、一般市民が「自分の街で何が変わったか」として理解できるよう再編集する、オープンソースのData Storytellingプロジェクトです。
 
 > [!IMPORTANT]
@@ -11,7 +28,7 @@
 
 ## MVPの対象
 
-- 自治体: 東京都立川市（`config/tachikawa.json` でラベル・出典を分離）
+- 自治体: 東京都立川市（`config/data-sources/tachikawa/care.json` でラベル・出典を分離）
 - テーマ: 介護
 - 期間: 各指標で比較可能な直近年度
 - ホスティング: Netlify（静的エクスポート）
@@ -47,7 +64,7 @@ npm run dev
 
 `<PUBLIC_REPOSITORY_URL>` はGitHub公開後に実URLへ置き換えます。ブラウザで `http://localhost:3000` を開いてください。
 
-リポジトリに含まれる `data/processed/dashboard.json` でも開発できますが、データ更新後は `npm run data:build` を実行してください。
+リポジトリに含まれる `data/processed/tachikawa/care/dashboard.json` でも開発できますが、データ更新後は `npm run data:build` を実行してください。
 
 ## データ更新
 
@@ -58,10 +75,10 @@ npm run data:tokyo-reference   # 要 E_STAT_APP_ID（任意。.env 可）
 npm run data:normalize
 ```
 
-- `data:fetch` … [`config/tachikawa.json`](config/tachikawa.json) のURLから原本を `data/raw/tachikawa/` へ保存
+- `data:fetch` … [`config/data-sources/tachikawa/care.json`](config/data-sources/tachikawa/care.json) のURLから原本を `data/raw/tachikawa/care/` へ保存
 - `data:service-units` … 提供単位数を `data/curated/` へ生成
 - `data:tokyo-reference` … 都道府県参考の賃金系列を curated へ生成（未設定時は既存 curated を維持）
-- `data:normalize` / `data:build` … `data/processed/dashboard.json` を生成（`place`・市区町村系列・`reference.prefecture` を含む）
+- `data:normalize` / `data:build` … `data/processed/tachikawa/care/dashboard.json` を生成（`place`・市区町村系列・`reference.prefecture` を含む）
 
 e-Stat 再取得用のアプリIDが必要な場合だけ `.env` に `E_STAT_APP_ID` を置いてください（コミットしない）。変数名のみスクリプト先頭コメントと docs に記載します。
 

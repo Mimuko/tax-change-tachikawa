@@ -1,9 +1,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
-const config = JSON.parse(await readFile(resolve(root, "config/tachikawa.json"), "utf8"));
-const destination = resolve(root, "data/raw/tachikawa");
+const dataset = await datasetContext(root);
+const config = dataset.config;
+const destination = resolve(root, dataset.rawPath);
 await mkdir(destination, { recursive: true });
 
 const log = { fetchedAt: new Date().toISOString(), municipalityCode: config.municipalityCode, files: [] };

@@ -13,9 +13,11 @@
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
-const outPath = resolve(root, "data/curated/tokyo-reference.json");
+const dataset = await datasetContext(root);
+const outPath = resolve(root, dataset.curatedPath, "tokyo-reference.json");
 const STATS_DATA_ID = "0004007961";
 const API = "https://api.e-stat.go.jp/rest/3.0/app/json";
 
@@ -220,7 +222,7 @@ const payload = {
   ],
 };
 
-await mkdir(resolve(root, "data/curated"), { recursive: true });
+await mkdir(resolve(root, dataset.curatedPath), { recursive: true });
 await writeFile(outPath, JSON.stringify(payload, null, 2) + "\n", "utf8");
 console.log(
   `Wrote ${outPath} (${points.map((p) => `${p.year}:${p.value}`).join(", ")})`,

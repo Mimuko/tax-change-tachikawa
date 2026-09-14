@@ -4,6 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "test": "node --test",
     "data:fetch": "node scripts/fetch-data.mjs",
     "data:service-units": "node scripts/build-service-unit-count.mjs",
     "data:tokyo-reference": "node scripts/build-tokyo-reference.mjs",

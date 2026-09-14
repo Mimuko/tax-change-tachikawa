@@ -10,9 +10,9 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "自分の街はどう変わった？｜立川市の介護",
-  description: "立川市の公開データから、介護を必要とする人と支出の変化をたどります。",
-  openGraph: { title: "自分の街はどう変わった？", description: "立川市の介護の変化を、公開行政データから読み解く。", type: "website" },
+  title: "machinohenka｜自分の街はどう変わった？",
+  description: "自治体の公開行政データから、街の変化をたどります。",
+  openGraph: { title: "自分の街はどう変わった？", description: "街の変化を、公開行政データから読み解く。", type: "website" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
