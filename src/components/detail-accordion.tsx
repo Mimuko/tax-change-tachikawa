@@ -200,7 +200,9 @@ export default function DetailAccordion({ items }: { items: DetailItem[] }) {
     <section className="detail-section" aria-labelledby={`${baseId}-heading`}>
       <div className="detail-inner">
         <p className="eyebrow">詳細データ</p>
-        <h2 id={`${baseId}-heading`}>気になったところから、詳しく見る</h2>
+        <h2 id={`${baseId}-heading`}>
+          気になったところから、<br className="mobile-only-break" />詳しく見る
+        </h2>
         <p>気になったテーマから、具体値・定義・出典を確認できます。</p>
         <div className="detail-list">
           {items.map((item, index) => {
