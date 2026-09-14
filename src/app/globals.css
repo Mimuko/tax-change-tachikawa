@@ -383,10 +383,7 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   .detail-list { margin-top: 2.75rem; }
   .detail-row { grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem; gap: .5rem; }
   .detail-title { overflow-wrap: anywhere; }
-  .detail-popover-inner {
-    margin-bottom: .75rem;
-    background: color-mix(in srgb, var(--paper) 58%, var(--panel));
-  }
+  .detail-popover-inner { background: color-mix(in srgb, var(--paper) 58%, var(--panel)); }
   .detail-body {
     padding: 1.25rem 1rem 1.5rem;
     overflow-wrap: anywhere;
