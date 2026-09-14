@@ -381,9 +381,41 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   .detail-list { margin-top: 2.75rem; }
   .detail-row { grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem; gap: .5rem; }
   .detail-title { overflow-wrap: anywhere; }
-  .detail-stats { grid-template-columns: 1fr; }
-  .detail-body { overflow-wrap: anywhere; }
-  .detail-body table { display: block; max-width: 100%; overflow-x: auto; }
+  .detail-popover-inner {
+    margin-bottom: .75rem;
+    border-top: 1px solid var(--line);
+    background: color-mix(in srgb, var(--paper) 58%, var(--panel));
+  }
+  .detail-body {
+    padding: 1.25rem 1rem 1.5rem;
+    overflow-wrap: anywhere;
+    line-height: 1.8;
+  }
+  .detail-metric + .detail-metric { margin-top: 2.5rem; padding-top: 2rem; }
+  .detail-metric-name {
+    margin-bottom: 1rem;
+    padding-left: .65rem;
+    border-left: 3px solid var(--orange);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .detail-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  .detail-stats div {
+    min-width: 0;
+    padding: .75rem;
+    background: var(--paper);
+  }
+  .detail-stats div:first-child { grid-column: 1 / -1; }
+  .detail-stats dt { line-height: 1.55; }
+  .detail-stats dd { font-size: 1.2rem; line-height: 1.35; overflow-wrap: anywhere; }
+  .detail-body table { display: table; max-width: 100%; table-layout: fixed; }
+  .detail-body caption { padding-bottom: .35rem; }
+  .detail-body th,
+  .detail-body td { padding: .55rem .35rem; }
+  .detail-body th:first-child { width: 34%; }
+  .detail-body p { margin-top: 1rem; }
+  .detail-body p > strong:first-child { color: var(--ink); }
+  .detail-body a { display: inline-block; padding-block: .3rem; }
   .premium-period { padding: 1rem; }
   .premium-period-value { font-size: 1.35rem; }
   .button-primary { width: 100%; text-align: center; }
