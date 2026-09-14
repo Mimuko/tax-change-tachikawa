@@ -1,9 +1,11 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
-const municipality = JSON.parse(await readFile(resolve(root, "config/tachikawa.json"), "utf8"));
+const dataset = await datasetContext(root);
+const municipality = dataset.config;
 const sourcePage = municipality.sourcePage;
 
 function parseCsv(text) {
@@ -34,7 +36,7 @@ const number = (raw) => {
 };
 
 async function load(name) {
-  const path = resolve(root, "data/raw/tachikawa", name);
+  const path = resolve(root, dataset.rawPath, name);
   const bytes = await readFile(path);
   return {
     rows: parseCsv(new TextDecoder("shift_jis").decode(bytes)),
@@ -43,6 +45,7 @@ async function load(name) {
 }
 
 async function loadOptionalJson(relativePath) {
+  relativePath = relativePath.replace("data/curated/", `${dataset.curatedPath}/`);
   try {
     const path = resolve(root, relativePath);
     return JSON.parse(await readFile(path, "utf8"));
@@ -182,7 +185,7 @@ if (localWorkforce?.points?.length) {
   }
 }
 
-const output = resolve(root, "data/processed/dashboard.json");
+const output = resolve(root, dataset.outputPath);
 await mkdir(dirname(output), { recursive: true });
 await writeFile(output, JSON.stringify(data, null, 2) + "\n", "utf8");
 console.log(`Wrote ${output}`);

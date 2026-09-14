@@ -1,6 +1,6 @@
 # curated データ
 
-`scripts/build-data.mjs` が任意で読み込み、`data/processed/dashboard.json` へマージする。
+`scripts/build-data.mjs` が任意で読み込み、`data/processed/tachikawa/care/dashboard.json` へマージする。
 
 ## service-unit-count.json
 

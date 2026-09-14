@@ -1,17 +1,18 @@
 import Link from "next/link";
 
-type Props = { active?: "home" | "data" };
+import type { StoryContext } from "../lib/story-registry";
+type Props = { active?: "home" | "data"; context: StoryContext };
 
-export default function SiteTopbar({ active }: Props) {
+export default function SiteTopbar({ active, context }: Props) {
   return (
     <nav className="topbar" aria-label="サイト内のページ">
       <Link className="wordmark" href="/">
-        TACHIKAWA / 介護の5年間
+        machinohenka / {context.municipality.municipalityLabel}・{context.topic.label}
       </Link>
       <ul className="topbar-nav">
         <li>
           <Link
-            href="/"
+            href={context.href}
             className="topbar-nav-link"
             aria-current={active === "home" ? "page" : undefined}
           >
@@ -20,7 +21,7 @@ export default function SiteTopbar({ active }: Props) {
         </li>
         <li>
           <Link
-            href="/data/"
+            href={context.dataHref}
             className="topbar-nav-link"
             aria-current={active === "data" ? "page" : undefined}
           >

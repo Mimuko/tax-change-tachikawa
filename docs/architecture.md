@@ -1,5 +1,36 @@
 # アーキテクチャ
 
+## MY-152: 自治体×テーマへの段階移行（2026-09-14）
+
+実装済みの公開単位は `tachikawa/care`。自治体とテーマの直積を自動公開せず、検証済みの組み合わせだけを `src/lib/story-registry.ts` に登録する。
+
+| 責務 | 正本 |
+|---|---|
+| 自治体コード・名称・都道府県 | `config/municipalities/tachikawa.json` |
+| 指標の意味・単位・比較ルール | `config/topics/care.json` |
+| 原典URL・取得条件・自治体の制度値 | `config/data-sources/tachikawa/care.json` |
+| ストーリー識別・指標参照・冒頭の順序 | `config/stories/tachikawa-care.json` |
+| コピー・表示条件・部品の組み合わせ | `src/stories/care-story.tsx`, `care-copy.ts` |
+| 共通のスクロール表現・Act・Interlude・Recap・Detail等 | `src/components/` |
+| 取得・加工先の解決と未対応データセットの拒否 | `scripts/lib/dataset-context.mjs` |
+| 自治体×テーマのデータ | `data/{raw,curated,processed}/tachikawa/care/` |
+
+ストーリーはテーマのmetricIdを参照する。旧データのseriesKeyとの対応はストーリー側のアダプターで保持し、テーマ定義には入れない。原典固有の説明は各データのprovenanceに残す。起動時に自治体コード・テーマ・指標参照の整合性を確認する。
+
+`/[municipality]/[topic]/` とその `data/` を登録一覧から静的生成する。未知の組み合わせは404。`/` と `/data/` は立川市×介護への互換エントリーであり、将来のハブ化はここだけで実施できる。共通ナビゲーションは現在のストーリーのURLを受け取る。
+
+介護固有の構成は共通テンプレートとして固定しない。別テーマ追加時には新しいstory rendererが共通部品を組み合わせる。現行DashboardDataおよび介護パーサーは介護用アダプターとして維持し、教育データにこの形を強制しない。
+
+### 次の組み合わせを追加する手順
+
+1. 自治体またはテーマの正本を追加し、指標定義・比較可能性・出典を監査する。
+2. 原典設定とパーサーを追加し、dataset-contextで対応を明示する。現状は立川市×介護以外のコマンド引数を拒否する。
+3. raw・curated・processedを自治体×テーマ配下へ生成する。
+4. metricIdを参照するストーリーとrendererを実装し、登録する。
+5. 指標参照、未知ルート、欠損・参考値の表示、静的ビルドを検証する。
+
+立川市×教育、練馬区×介護はこの移行では公開・データ追加していない。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。追加自治体での定義差や部分的な取得可否は、そのデータ監査時に検証する。
+
 ## 方針
 
 MVPは静的生成を中心にし、DBを導入しない。取得元の不安定さをユーザー画面へ伝播させず、検証済みJSONをデプロイ単位に含める。
@@ -15,7 +46,7 @@ MVPは静的生成を中心にし、DBを導入しない。取得元の不安定
   -> Netlify
 ```
 
-## ディレクトリ案
+## 初期構想（下記のMY-152実装で段階移行）
 
 ```text
 docs/                 仕様の正本
@@ -87,7 +118,7 @@ logs/                 取得結果（原本はGit方針を別途判断）
 ## 公開・再現性
 
 - `npm ci -> npm run data:fetch -> npm run data:normalize -> npm run build` を標準手順とする。
-- 取得元URLとメタデータは `config/tachikawa.json`、共通CSV処理は `scripts/` に分離する。
+- 取得元URLとメタデータは `config/data-sources/tachikawa/care.json`、共通CSV処理は `scripts/` に分離する。
 - rawファイルとprocessedファイルには出典・取得日時・SHA-256を結び付ける。
 - GitHub Actions導入時は、データ更新PRに加工後JSONと検証結果を含め、人が定義変更を確認してからマージする。
 - 公開リポジトリ作成、Branch protection、Netlify連携はO-10確定後に実施する。

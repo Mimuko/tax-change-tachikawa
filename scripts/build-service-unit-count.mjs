@@ -15,9 +15,11 @@ import { createInterface } from "node:readline";
 import { Readable } from "node:stream";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
-const MUNICIPALITY = "132021";
+const dataset = await datasetContext(root);
+const MUNICIPALITY = dataset.config.municipalityCode;
 const BASE = "https://www.mhlw.go.jp";
 const YEARS = [2020, 2021, 2022, 2023, 2024];
 
@@ -169,7 +171,7 @@ const curated = {
   },
 };
 
-const outDir = resolve(root, "data/curated");
+const outDir = resolve(root, dataset.curatedPath);
 await mkdir(outDir, { recursive: true });
 const outPath = resolve(outDir, "service-unit-count.json");
 await writeFile(outPath, JSON.stringify(curated, null, 2) + "\n", "utf8");

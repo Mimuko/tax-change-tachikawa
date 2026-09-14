@@ -5,63 +5,8 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 type Point = { year: number; value: number };
 type Series = { id: string; label: string; shortLabel: string; unit: string; color: string; points: Point[] };
 
-const formatValue = (value: number, unit: string) => unit === "人" ? `${value.toLocaleString("ja-JP")}人` : `${(value / 100_000_000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億円`;
+const formatValue = (value: number, unit: string) => unit === "人" ? `${value.toLocaleString("ja-JP")}人` : unit === "円" ? `${(value / 100_000_000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億円` : `${value.toLocaleString("ja-JP")}${unit}`;
 const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / points[0].value) * 100;
-
-const changeDirection = (delta: number) => {
-  if (Math.abs(delta) < 2) return "ほぼ横ばい";
-  return delta >= 0 ? "増えた" : "減った";
-};
-
-function buildStepCopy(series: Series[]) {
-  const insuredDelta = change(series[0].points);
-  const certifiedDelta = change(series[1].points);
-  const benefitsDelta = change(series[2].points);
-
-  const insuredTitle =
-    Math.abs(insuredDelta) < 2
-      ? "高齢者の加入者数は、大きく変わらなかった"
-      : insuredDelta >= 0
-        ? "高齢者の加入者数は、増えた"
-        : "高齢者の加入者数は、減った";
-
-  const certifiedTitle =
-    Math.abs(certifiedDelta) < 2
-      ? "介護を必要とする人は、ほぼ横ばい"
-      : certifiedDelta >= 0
-        ? "介護を必要とする人は、増えた"
-        : "介護を必要とする人は、減った";
-
-  const benefitsTitle =
-    benefitsDelta > certifiedDelta && benefitsDelta >= 2
-      ? "給付費は、認定者より大きく伸びた"
-      : changeDirection(benefitsDelta) === "ほぼ横ばい"
-        ? "給付費は、ほぼ横ばい"
-        : benefitsDelta >= 0
-          ? "給付費は、増えた"
-          : "給付費は、減った";
-
-  return [
-    {
-      eyebrow: "01 — 立川市・第1号被保険者数",
-      title: insuredTitle,
-      body: "65歳以上の第1号被保険者数です。5年間で大きな変動はなく、ほぼ同じ水準で推移しています。",
-    },
-    {
-      eyebrow: "02 — 立川市・要支援・要介護認定者数",
-      title: certifiedTitle,
-      body: "要支援・要介護の認定者総数です。第2号被保険者も含むため、加入者数との比率はここでは示しません。",
-    },
-    {
-      eyebrow: "03 — 立川市・介護保険給付総額",
-      title: benefitsTitle,
-      body:
-        benefitsDelta > certifiedDelta && benefitsDelta >= 2
-          ? "居宅・施設・地域密着型サービスを合わせた給付総額です。認定者の伸びよりも大きく、同じ5年間で増えています。"
-          : "居宅・施設・地域密着型サービスを合わせた給付総額です。5年間の推移を、他の指標と並べて見ています。",
-    },
-  ];
-}
 
 function CumulativeChart({ series, active, enteringId }: { series: Series[]; active: number; enteringId: string | null }) {
   const width = 720, height = 500, left = 58, right = 34, top = 70, bottom = 58;
@@ -78,12 +23,12 @@ function CumulativeChart({ series, active, enteringId }: { series: Series[]; act
       <div className="chart-heading">
         <div>
           <p className="chart-kicker">5年間の変化を重ねる</p>
-          <p className="ui-label">2019年度を100とした変化</p>
+          <p className="ui-label">{series[0].points[0].year}年度を100とした変化</p>
         </div>
         <span className="chart-progress" aria-live="polite" aria-atomic="true">表示中 {active + 1} / {series.length}</span>
       </div>
       <svg className="cumulative-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="chart-title chart-desc">
-        <title id="chart-title">立川市の介護に関する3指標の変化指数</title>
+        <title id="chart-title">表示指標の変化指数</title>
         <desc id="chart-desc">スクロールに合わせて系列が追加されます。現在は{visible.map((item) => item.label).join("、")}を表示しています。</desc>
         {ticks.map((tick) => <g key={tick}><line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" /><text x={left - 12} y={y(tick) + 5} textAnchor="end" className="axis-label">{tick.toFixed(0)}</text></g>)}
         {series[0].points.map((point, i) => <text key={point.year} x={x(i)} y={height - 20} textAnchor="middle" className="axis-label">{String(point.year).slice(2)}</text>)}
@@ -135,7 +80,7 @@ function StepDetails({ label, children }: { label: string; children: ReactNode }
   );
 }
 
-export default function StoryExperience({ series }: { series: Series[] }) {
+export default function StoryExperience({ series, copy, label }: { series: Series[]; copy: { eyebrow: string; title: string; body: string }[]; label: string }) {
   const [active, setActive] = useState(0);
   const [enteringId, setEnteringId] = useState<string | null>(series[0]?.id ?? null);
   const steps = useRef<(HTMLElement | null)[]>([]);
@@ -167,10 +112,9 @@ export default function StoryExperience({ series }: { series: Series[] }) {
     return () => observer.disconnect();
   }, [applyActive]);
 
-  const copy = buildStepCopy(series);
 
   return (
-    <section className="scrolly" id="story" aria-label="立川市の介護に関する5年間の変化">
+    <section className="scrolly" id="story" aria-label={label}>
       <div className="narrative">
         {copy.map((step, index) => {
           const item = series[index], delta = change(item.points), latest = item.points.at(-1)!;

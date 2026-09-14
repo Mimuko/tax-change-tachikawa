@@ -1,0 +1,11 @@
+{
+  "id": "tachikawa-care",
+  "municipality": "tachikawa",
+  "topic": "care",
+  "renderer": "tachikawa-care",
+  "opening": [
+    { "metricId": "ltc_first_insured_persons", "seriesKey": "insured", "shortLabel": "加入者", "color": "var(--series-1)" },
+    { "metricId": "care_certified_persons", "seriesKey": "certified", "shortLabel": "認定者", "color": "var(--series-2)" },
+    { "metricId": "ltc_benefit_total_yen", "seriesKey": "benefits", "shortLabel": "給付総額", "color": "var(--series-3)" }
+  ]
+}
