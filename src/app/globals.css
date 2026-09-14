@@ -385,7 +385,6 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   .detail-title { overflow-wrap: anywhere; }
   .detail-popover-inner {
     margin-bottom: .75rem;
-    border-top: 1px solid var(--line);
     background: color-mix(in srgb, var(--paper) 58%, var(--panel));
   }
   .detail-body {
