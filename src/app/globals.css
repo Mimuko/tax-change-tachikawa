@@ -33,6 +33,7 @@ body { min-width: 0; margin: 0; overflow-x: clip; background: var(--paper); colo
 button, a { font: inherit; }
 a { color: inherit; text-underline-offset: .25em; }
 a:not(.wordmark):not(.circle-button):not(.button-primary):not(.topbar a) { text-decoration: underline; }
+.mobile-only-break { display: none; }
 
 /* Skip link */
 .skip-link {
@@ -337,6 +338,7 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
 
 @media (max-width: 600px) {
   :root { --space-page: 1.25rem; }
+  .mobile-only-break { display: block; }
   .topbar {
     align-items: stretch;
     flex-direction: column;
