@@ -17,32 +17,32 @@ type DataGapCopyTemplate = {
 
 const KIND_DEFAULTS: Record<DataGapKind, DataGapCopyTemplate> = {
   not_published: {
-    title: "{label}は、公開されている表では確認できていません。",
-    body: "原典を確認しましたが、{place}の値を掲載している表は見当たりませんでした。",
+    title: "{place}の{label}について、公表されているデータを確認できませんでした。",
+    body: "今回は掲載していません。",
   },
   wrong_geography: {
-    title: "{label}は、この街の年次変化としては並べられない。",
-    body: "公開されている表は、{place}より広い地域の集計です。その値を{place}の実績にはしません。",
+    title: "{place}だけの{label}の年次推移を確認できるデータはありません。",
+    body: "公表単位が{place}より広い地域の集計のため、その値は{place}の実績としては扱っていません。",
   },
   single_point_only: {
-    title: "{label}は、年次の変化としては示していません。",
-    body: "公開されているのは単年または一点の値だけです。推移の比較には使いません。",
+    title: "{label}は、今回は年次推移として掲載していません。",
+    body: "公表されているのは単年または一点の値だけで、複数年を同じ条件で比較できません。",
   },
   definition_break: {
-    title: "{label}は、年次の変化としては示していません。",
-    body: "途中で定義や集計方法が変わったため、同じ系列として並べません。",
+    title: "{label}は、今回は年次推移として掲載していません。",
+    body: "途中で定義や集計方法が変わったため、同じ推移としてつなげていません。",
   },
   not_equivalent: {
-    title: "{label}は、この指標と同じ意味では扱いません。",
-    body: "名前は近い別の指標です。代理にはしません。",
+    title: "名前の近い別指標は、{label}の代わりには使っていません。",
+    body: "定義が異なるため、代替指標としては使用していません。",
   },
   incompatible_period: {
     title: "{label}は、他の指標と同じ期間としては示していません。",
-    body: "基準日や期間の種別が異なるため、同一のグラフには載せません。",
+    body: "基準日や期間の種別が異なるため、同じグラフには載せていません。",
   },
   unavailable_for_comparison: {
-    title: "{label}は、いまは年次の変化として示していません。",
-    body: "原典に{place}の表はあります。同じ定義で複数年を並べられることの確認が終わっていないため、本編の推移には載せていません。",
+    title: "{place}の{label}データはありますが、今回は推移には掲載していません。",
+    body: "複数年を同じ条件で比較できるか確認中です。",
   },
 };
 
@@ -57,4 +57,9 @@ export function resolveDataGapCopy(gap: DataGap, options: DataGapCopyOptions): D
   const note = gap.note ? fillTemplate(gap.note, options) : null;
   const body = note ? `${bodyBase} ${note}` : bodyBase;
   return { title, body };
+}
+
+/** Interlude 以外で title + body を1段落として使うとき */
+export function formatDataGapPublicText(copy: DataGapCopy): string {
+  return `${copy.title} ${copy.body}`;
 }

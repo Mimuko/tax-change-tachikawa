@@ -1,6 +1,6 @@
 import type { EducationDashboardData } from "../types/education-dashboard";
 import type { StoryContext } from "../lib/story-registry";
-import { resolveDataGapCopy } from "../lib/data-gap-copy";
+import { formatDataGapPublicText, resolveDataGapCopy } from "../lib/data-gap-copy";
 import { buildEducationStepCopy } from "./education-copy";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
 import GeographyChip from "../components/geography-chip";
@@ -145,16 +145,16 @@ export default function EducationStory({
       title: "1人あたり教育費",
       kind: "unavailable",
       note:
-        costCopy?.body ??
-        "東京都地方教育費調査の年度連続監査後に掲載します。会計年度実績であり、5月1日時点の児童生徒数とは期間種別が異なります。",
+        (costCopy && formatDataGapPublicText(costCopy)) ??
+        "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今回は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。",
     },
     {
       id: "refusal",
       title: "不登校",
       kind: "unavailable",
       note:
-        refusalCopy?.body ??
-        "立川市単位で継続比較できる公開データは確認できていません。不就学の件数は不登校の代理にしません。",
+        (refusalCopy && formatDataGapPublicText(refusalCopy)) ??
+        "立川市だけの不登校の年次推移を確認できるデータはありません。文部科学省の調査は都道府県・指定都市単位で公表されています。東京都全体の値は、立川市の実績としては扱っていません。",
     },
     {
       id: "source",
@@ -213,14 +213,10 @@ export default function EducationStory({
     {
       scope: "municipality",
       chipLabel: place.municipalityLabel,
-      title: "今回、年次の変化としては示していないこと",
+      title: "年次推移として掲載していないもの",
       items: [
-        refusalGap
-          ? "不登校: 公表は都道府県・指定都市。立川市の年次変化としては並べていません。"
-          : "不登校: 市単位の継続公表系列は未確認",
-        costGap
-          ? "1人あたり教育費: 原典の市表はあります。複数年の定義確認が終わるまで推移には載せていません。"
-          : "1人あたり教育費: 年度連続監査後に掲載",
+        "不登校：立川市だけの年次データがないため、掲載していません。",
+        "1人あたり教育費：複数年を同じ条件で比較できるか確認中のため、掲載していません。",
       ],
     },
   ];
@@ -274,13 +270,7 @@ export default function EducationStory({
         <StoryInterlude
           variant="pause"
           eyebrow="Act 1 のまとめ"
-          title={
-            <>
-              児童・生徒の数は、
-              <br />
-              大きくは減っていない。
-            </>
-          }
+          title="児童・生徒の数は、大きな変化はない"
         >
           <p>では、学級の数と支援の形は？</p>
         </StoryInterlude>
@@ -341,7 +331,7 @@ export default function EducationStory({
             ]}
             kicker={`${place.municipalityLabel} · 各年5月1日現在`}
             heading="市立小中の教職員数の推移"
-            note="※小と中は別系列です。合算しません。教員以外の教職員を含みます。"
+            note="※小学校と中学校は別系列です、合算はしていません。教員以外の教職員を含んでいます。"
             indexMode={false}
           />
           {seriesNote(data.series.elemStaff, "人")}
@@ -351,11 +341,20 @@ export default function EducationStory({
         <StoryInterlude
           variant="gap"
           eyebrow="データのすきま"
-          title={refusalCopy?.title ?? "不登校は、この街の年次変化としては並べられない。"}
+          title={
+            <>
+              立川市だけの不登校の年次推移を
+              <br />
+              確認できるデータはありません。
+            </>
+          }
         >
           <p>
-            {refusalCopy?.body ??
-              "文科省調査の公表は都道府県・指定都市が中心です。不就学の件数は不登校の代理にしません。"}
+            {refusalGap?.reason ??
+              "文部科学省の調査は都道府県・指定都市単位で公表されています。東京都全体の値は、立川市の実績としては扱っていません。"}
+            <br />
+            {refusalGap?.note ??
+              "また、市が公表している『不就学』は『不登校』とは定義が異なるため、代替指標としては使用していません。"}
           </p>
           {place.links?.mextSchoolRefusalSurvey ? (
             <p>
@@ -421,8 +420,8 @@ export default function EducationStory({
             />
           ) : (
             <p className="act-note act-pending">
-              {costCopy?.body ??
-                "東京都地方教育費調査第7表の年度連続監査後に、ここに掲載します。"}
+              {(costCopy && formatDataGapPublicText(costCopy)) ??
+                "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今回は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。"}
               {place.links?.tokyoEducationExpenseSurvey ? (
                 <>
                   {" "}

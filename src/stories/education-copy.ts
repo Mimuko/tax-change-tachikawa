@@ -23,7 +23,7 @@ export function buildEducationStepCopy(
 
   const junTitle =
     Math.abs(junDelta) < 2
-      ? "市立中学校の生徒数は、大きくは変わっていない"
+      ? "市立中学校の生徒数も、大きくは変わっていない"
       : junDelta >= 0
         ? "市立中学校の生徒数は、増えた"
         : "市立中学校の生徒数は、減った";
