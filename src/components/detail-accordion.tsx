@@ -152,8 +152,13 @@ function DetailBody({ item }: { item: DetailItem }) {
   if (item.kind === "unavailable") {
     return (
       <div className="detail-body">
-        <p><strong>状態:</strong> 立川市単位で継続比較できる公開データを、今回の調査範囲では確認できていません</p>
-        <p>{item.note}</p>
+        {item.note ? (
+          <p>{item.note}</p>
+        ) : (
+          <p>
+            対象の自治体単位で継続比較できる公開データを、今回の調査範囲では確認できていません。
+          </p>
+        )}
       </div>
     );
   }

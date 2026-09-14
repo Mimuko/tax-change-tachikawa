@@ -29,7 +29,20 @@
 4. metricIdを参照するストーリーとrendererを実装し、登録する。
 5. 指標参照、未知ルート、欠損・参考値の表示、静的ビルドを検証する。
 
-立川市×教育、練馬区×介護はこの移行では公開・データ追加していない。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。追加自治体での定義差や部分的な取得可否は、そのデータ監査時に検証する。
+練馬区×介護はこの移行では公開・データ追加していない。立川市×教育は MY-155 で公開済み（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。追加自治体での定義差や部分的な取得可否は、そのデータ監査時に検証する。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
+
+## MY-155: 立川市×教育 データ調査・ストーリー設計（2026-09-14）
+
+`/tachikawa/education` は **公開済み**（`story-registry` 登録）。調査・設計の正本は `docs/education-*.md`。掲載しない指標（DataGap）の共通ルールは `docs/data-definition.md` §掲載しない指標。1人あたり教育費は推移未掲載（DataGap: `unavailable_for_comparison`）。不登校は `wrong_geography`。
+
+| 責務 | 正本 |
+|---|---|
+| データソース監査・更新頻度・公表タイミング | `docs/education-data-sources.md` |
+| 指標採否・期間種別（時点値/年間累計/年度実績） | `docs/education-metrics.md` |
+| Act 構造・DataGap・primitive 再利用 | `docs/education-story.md` |
+| config / processed / renderer | `config/topics/education.json`, `config/data-sources/tachikawa/education.json`, `config/stories/tachikawa-education.json`, `data/processed/tachikawa/education/dashboard.json`, `src/stories/education-story.tsx` |
+
+監査で確定した主系列: 市立小中児童生徒数（5月1日）→ 学級・特別支援 → 教職員 → DataGap（不登校）→ 教育相談（年間累計）→ 1人あたり教育費（会計年度）。期間種別の異なる系列は同一 Act に混在しない。
 
 ## 方針
 

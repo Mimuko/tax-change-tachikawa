@@ -1,0 +1,85 @@
+{
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007015.html",
+  "license": "CC BY 4.0",
+  "pageUpdatedAt": "2026-03-26",
+  "publicationNotes": {
+    "odLag": "ODページ更新とCSV最終年に差がある。2026-09-14監査時点で児童生徒系CSV最終年は2023。",
+    "encoding": "Shift_JIS (CP932)"
+  },
+  "links": {
+    "statisticalYearbookEducation": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007012/1028306.html",
+    "tokyoEducationExpenseSurvey": "https://www.kyoiku.metro.tokyo.lg.jp/about/statistics_and_research/expense_per_area/report2024/report2024_csv",
+    "mextSchoolRefusalSurvey": "https://www.e-stat.go.jp/stat-search/files?toukei=00400304"
+  },
+  "sources": [
+    {
+      "file": "elem-students.csv",
+      "metricIds": ["elem_student_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-2shogakko-gakunenbetsudanjobetsujidosu1.csv"
+    },
+    {
+      "file": "jun-students.csv",
+      "metricIds": ["jun_student_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-2chugakko-gakunenbetsudanjobetsuseitosu1.csv"
+    },
+    {
+      "file": "elem-schools-classes.csv",
+      "metricIds": ["elem_class_count", "elem_special_support_class_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-1shogakko-gakkousutogakkyusu1.csv"
+    },
+    {
+      "file": "jun-schools-classes.csv",
+      "metricIds": ["jun_class_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-1chugakko-gakkosutogakkyusu1.csv"
+    },
+    {
+      "file": "elem-staff.csv",
+      "metricIds": ["elem_staff_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-3shogakko-kyosyokuinsu_21.csv"
+    },
+    {
+      "file": "jun-staff.csv",
+      "metricIds": ["jun_staff_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-4chugakko-kyosyokuinsu1.csv"
+    },
+    {
+      "file": "education-consultation-2014.csv",
+      "metricIds": ["education_consultation_cases"],
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度内の相談件数",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-1-1-2kyoikusodankensu2014-1.csv"
+    },
+    {
+      "file": "education-consultation-to2013.csv",
+      "metricIds": ["education_consultation_cases"],
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度内の相談件数",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-1-1-1kyoikusodankensu2012-20131.csv",
+      "note": "2014以降ファイルと分割。接続前に定義突合"
+    }
+  ],
+  "externalSources": [
+    {
+      "id": "tokyo_education_expense_table7",
+      "metricIds": ["elem_per_student_education_cost", "jun_per_student_education_cost"],
+      "periodKind": "fiscal_year",
+      "publisher": "東京都教育委員会",
+      "url": "https://www.kyoiku.metro.tokyo.lg.jp/about/statistics_and_research/expense_per_area/report2024/report2024_csv",
+      "table": "第7表 区市町村別学校教育費（公費）使途別園児・児童・生徒一人当たり支出額",
+      "publicationTiming": "会計年度確定後、翌年3月頃",
+      "status": "needs_implementation_audit"
+    }
+  ]
+}

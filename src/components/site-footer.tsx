@@ -1,8 +1,12 @@
 import Link from "next/link";
-import type { DashboardData } from "../types/dashboard";
 import type { StoryContext } from "../lib/story-registry";
 
-export default function SiteFooter({ data, context }: { data: DashboardData; context: StoryContext }) {
+type FooterData = {
+  sourcePage: string;
+  latestFiscalYear: number;
+};
+
+export default function SiteFooter({ data, context }: { data: FooterData; context: StoryContext }) {
   return (
     <footer>
       <div>

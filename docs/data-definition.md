@@ -115,6 +115,54 @@ index_value = current_value / base_year_value * 100
 | 自宅で受ける | 訪問介護、訪問入浴、訪問看護、訪問リハビリ | 稼働事業所数 |
 | 地域密着・複合 | 小規模多機能、看護小規模多機能、認知症共同生活、定期巡回 | 登録定員または定員。なければサービス単位数 |
 
+## 掲載しない指標（DataGap）
+
+比較不能・欠測も情報として扱う。推測で補完せず、別指標や広域値を代理にしない。公開文言では実装用語（未接続、取得不可、見つからなかった、データなし、未取得）を使わない。
+
+### 原則
+
+1. **比較不能も情報** — 掲載しない理由を明示し、読者が判断できる状態にする。
+2. **推測禁止** — 欠損を0や推定値で埋めない。
+3. **代理禁止** — 定義・地域・期間が異なる指標を代わりに並べない（例: 不就学を不登校の代理にしない）。
+4. **他地理を自治体実績にしない** — 都道府県・全国の値を市区町村の実績として扱わない（`reference_only: true` と同趣旨）。
+5. **公開で実装用語を使わない** — UI では市民向けの日本語のみ。内部の監査・接続状態は docs / processed JSON に残す。
+6. **掲載判断を伝える** — なぜ掲載しないか、何が比較できないか、参照できる原典があるかを公開文言で示す（`kind` のデフォルト + `title` / `reason` / `note` / 出典リンク）。
+7. **欠測を品質分類する** — DataGap は単なる欠損フラグではなく、公開範囲・定義差・期間差・比較条件などによる品質分類（下記 `kind`）として扱う。
+
+### kind 一覧
+
+| kind | 意味 |
+|---|---|
+| `not_published` | 原典に当該地域の表・値が公開されていない |
+| `wrong_geography` | 表はあるが地域粒度が合わない（都・指定都市など）。自治体実績にしない |
+| `single_point_only` | 単年・一点のみで推移比較に使えない |
+| `definition_break` | 定義・集計方法の変更で系列が途切れた |
+| `not_equivalent` | 名前は近いが別指標。代理にしない |
+| `incompatible_period` | 基準日・期間種別が異なり同一グラフに載せられない |
+| `unavailable_for_comparison` | 原典に地域の表はあるが、複数年の同一定義比較が未確認 |
+
+### 公開文言
+
+- デフォルトは `kind` に対応する title / body（`src/lib/data-gap-copy.ts`）。
+- `gap.title` / `gap.reason` で上書き可。`gap.note` は body の末尾に連結。
+- プレースホルダ `{place}`（自治体ラベル）、`{label}`（指標の短い表示名）を展開する。
+
+### MetricRecord.status との対応
+
+`MetricRecord.status` の union は変更しない。DataGap は UI 向けの掲載判断を表し、次のように対応する。
+
+| DataGap.kind | 主な MetricRecord.status | 備考 |
+|---|---|---|
+| `not_published` | `not_published` | 原典に表・値なし |
+| `wrong_geography` | `not_comparable` | 広域値を自治体代理にしない |
+| `single_point_only` | `not_comparable` | 推移に使わない |
+| `definition_break` | `definition_changed` | 系列接続しない |
+| `not_equivalent` | `not_comparable` | 別指標の代理禁止 |
+| `incompatible_period` | `not_comparable` | 期間種別混在禁止 |
+| `unavailable_for_comparison` | `needs_review` | 監査・定義確認待ち |
+
+**介護 Act 3 Case B（都道府県参考のみ）**: `gaps` レコードは作らない。`reference.prefecture` の `referenceOnly: true` 系列を都道府県参考として表示し、意味は `wrong_geography` 相当（都道府県値を市区町村実績にしない）。UI 分岐は `resolveSupportAvailability` が正本。
+
 ## フィールド監査結果（2026-09-13）
 
 | 監査対象 | 実データ確認 | 連続比較の結論 |

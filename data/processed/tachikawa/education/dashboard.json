@@ -1,0 +1,472 @@
+{
+  "generatedAt": "2026-09-14T09:31:40.048Z",
+  "latestFiscalYear": 2023,
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007015.html",
+  "place": {
+    "municipalityCode": "132021",
+    "municipalityLabel": "立川市",
+    "prefectureLabel": "東京都",
+    "links": {
+      "tokyoEducationExpenseSurvey": "https://www.kyoiku.metro.tokyo.lg.jp/about/statistics_and_research/expense_per_area/report2024/report2024_csv",
+      "mextSchoolRefusalSurvey": "https://www.e-stat.go.jp/stat-search/files?toukei=00400304"
+    }
+  },
+  "series": {
+    "elemStudents": [
+      {
+        "year": 2013,
+        "value": 8620
+      },
+      {
+        "year": 2014,
+        "value": 8663
+      },
+      {
+        "year": 2015,
+        "value": 8625
+      },
+      {
+        "year": 2016,
+        "value": 8549
+      },
+      {
+        "year": 2017,
+        "value": 8613
+      },
+      {
+        "year": 2018,
+        "value": 8625
+      },
+      {
+        "year": 2019,
+        "value": 8637
+      },
+      {
+        "year": 2020,
+        "value": 8599
+      },
+      {
+        "year": 2021,
+        "value": 8630
+      },
+      {
+        "year": 2022,
+        "value": 8619
+      },
+      {
+        "year": 2023,
+        "value": 8586
+      }
+    ],
+    "junStudents": [
+      {
+        "year": 2013,
+        "value": 3827
+      },
+      {
+        "year": 2014,
+        "value": 3754
+      },
+      {
+        "year": 2015,
+        "value": 3834
+      },
+      {
+        "year": 2016,
+        "value": 3906
+      },
+      {
+        "year": 2017,
+        "value": 3945
+      },
+      {
+        "year": 2018,
+        "value": 3844
+      },
+      {
+        "year": 2019,
+        "value": 3742
+      },
+      {
+        "year": 2020,
+        "value": 3776
+      },
+      {
+        "year": 2021,
+        "value": 3780
+      },
+      {
+        "year": 2022,
+        "value": 3789
+      },
+      {
+        "year": 2023,
+        "value": 3783
+      }
+    ],
+    "elemClasses": [
+      {
+        "year": 2013,
+        "value": 277
+      },
+      {
+        "year": 2014,
+        "value": 278
+      },
+      {
+        "year": 2015,
+        "value": 281
+      },
+      {
+        "year": 2016,
+        "value": 276
+      },
+      {
+        "year": 2017,
+        "value": 281
+      },
+      {
+        "year": 2018,
+        "value": 277
+      },
+      {
+        "year": 2019,
+        "value": 276
+      },
+      {
+        "year": 2020,
+        "value": 277
+      },
+      {
+        "year": 2021,
+        "value": 278
+      },
+      {
+        "year": 2022,
+        "value": 281
+      },
+      {
+        "year": 2023,
+        "value": 288
+      }
+    ],
+    "elemSpecialSupportClasses": [
+      {
+        "year": 2013,
+        "value": 14
+      },
+      {
+        "year": 2014,
+        "value": 14
+      },
+      {
+        "year": 2015,
+        "value": 14
+      },
+      {
+        "year": 2016,
+        "value": 15
+      },
+      {
+        "year": 2017,
+        "value": 16
+      },
+      {
+        "year": 2018,
+        "value": 19
+      },
+      {
+        "year": 2019,
+        "value": 19
+      },
+      {
+        "year": 2020,
+        "value": 19
+      },
+      {
+        "year": 2021,
+        "value": 22
+      },
+      {
+        "year": 2022,
+        "value": 23
+      },
+      {
+        "year": 2023,
+        "value": 25
+      }
+    ],
+    "junClasses": [
+      {
+        "year": 2013,
+        "value": 116
+      },
+      {
+        "year": 2014,
+        "value": 114
+      },
+      {
+        "year": 2015,
+        "value": 118
+      },
+      {
+        "year": 2016,
+        "value": 121
+      },
+      {
+        "year": 2017,
+        "value": 124
+      },
+      {
+        "year": 2018,
+        "value": 119
+      },
+      {
+        "year": 2019,
+        "value": 118
+      },
+      {
+        "year": 2020,
+        "value": 118
+      },
+      {
+        "year": 2021,
+        "value": 116
+      },
+      {
+        "year": 2022,
+        "value": 121
+      },
+      {
+        "year": 2023,
+        "value": 120
+      }
+    ],
+    "elemStaff": [
+      {
+        "year": 2013,
+        "value": 541
+      },
+      {
+        "year": 2014,
+        "value": 546
+      },
+      {
+        "year": 2015,
+        "value": 540
+      },
+      {
+        "year": 2016,
+        "value": 547
+      },
+      {
+        "year": 2017,
+        "value": 595
+      },
+      {
+        "year": 2018,
+        "value": 609
+      },
+      {
+        "year": 2019,
+        "value": 631
+      },
+      {
+        "year": 2020,
+        "value": 630
+      },
+      {
+        "year": 2021,
+        "value": 650
+      },
+      {
+        "year": 2022,
+        "value": 626
+      },
+      {
+        "year": 2023,
+        "value": 650
+      }
+    ],
+    "junStaff": [
+      {
+        "year": 2013,
+        "value": 294
+      },
+      {
+        "year": 2014,
+        "value": 294
+      },
+      {
+        "year": 2015,
+        "value": 302
+      },
+      {
+        "year": 2016,
+        "value": 308
+      },
+      {
+        "year": 2017,
+        "value": 309
+      },
+      {
+        "year": 2018,
+        "value": 304
+      },
+      {
+        "year": 2019,
+        "value": 313
+      },
+      {
+        "year": 2020,
+        "value": 317
+      },
+      {
+        "year": 2021,
+        "value": 328
+      },
+      {
+        "year": 2022,
+        "value": 323
+      },
+      {
+        "year": 2023,
+        "value": 331
+      }
+    ],
+    "educationConsultationCases": [
+      {
+        "year": 2014,
+        "value": 302
+      },
+      {
+        "year": 2015,
+        "value": 367
+      },
+      {
+        "year": 2016,
+        "value": 449
+      },
+      {
+        "year": 2017,
+        "value": 515
+      },
+      {
+        "year": 2018,
+        "value": 549
+      },
+      {
+        "year": 2019,
+        "value": 560
+      },
+      {
+        "year": 2020,
+        "value": 560
+      },
+      {
+        "year": 2021,
+        "value": 619
+      },
+      {
+        "year": 2022,
+        "value": 671
+      },
+      {
+        "year": 2023,
+        "value": 632
+      }
+    ]
+  },
+  "provenance": {
+    "elemStudents": {
+      "title": "市立小学校児童数",
+      "definition": "市立小学校の学年別児童数合計。各年5月1日現在。",
+      "unit": "persons",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "c0dcd713834fc39c915dc2933ba5bc8cc8abbaa87ac4e71e34dcabc622ac274e",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-2shogakko-gakunenbetsudanjobetsujidosu1.csv"
+    },
+    "junStudents": {
+      "title": "市立中学校生徒数",
+      "definition": "市立中学校の学年別生徒数合計。各年5月1日現在。",
+      "unit": "persons",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "18affbe507c873591be4f8bff4e1b59a6db17c319e2eba89fff665fc28659f13",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-2chugakko-gakunenbetsudanjobetsuseitosu1.csv"
+    },
+    "elemClasses": {
+      "title": "市立小学校通常学級数",
+      "definition": "市立小学校の通常学級総数。各年5月1日現在。",
+      "unit": "classes",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "4dae2cf3d88aa132a6a54fc59fd64bf1926838c91ab8ca83a0025a5eb79a4bda",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-1shogakko-gakkousutogakkyusu1.csv"
+    },
+    "elemSpecialSupportClasses": {
+      "title": "市立小学校特別支援学級数",
+      "definition": "市立小学校の特別支援学級数。各年5月1日現在。通常学級と分離。",
+      "unit": "classes",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "4dae2cf3d88aa132a6a54fc59fd64bf1926838c91ab8ca83a0025a5eb79a4bda",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-1shogakko-gakkousutogakkyusu1.csv"
+    },
+    "junClasses": {
+      "title": "市立中学校学級数",
+      "definition": "市立中学校の学級総数。各年5月1日現在。",
+      "unit": "classes",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "d0b17874f4e4fb43349d0f92a2157e4a2508f816a747430630b804176250bea1",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-1chugakko-gakkosutogakkyusu1.csv"
+    },
+    "elemStaff": {
+      "title": "市立小学校教職員数",
+      "definition": "教員・養護教諭等を含む教職員数。各年5月1日現在。",
+      "unit": "persons",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "f2a41c681f7082bf0f69208ed585c9b2798a9eedd7ef2dd6062b6f368aeeb20c",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-3-3shogakko-kyosyokuinsu_21.csv"
+    },
+    "junStaff": {
+      "title": "市立中学校教職員数",
+      "definition": "教員・養護教諭等を含む教職員数。各年5月1日現在。小学校と合算しない。",
+      "unit": "persons",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "sha256": "037984275f7879d8afec6d50777e5f9cfc2a029c233a5f1c75ec784f205477f0",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-4-4chugakko-kyosyokuinsu1.csv"
+    },
+    "educationConsultationCases": {
+      "title": "教育相談件数",
+      "definition": "年度内の教育相談件数（男女合算）。時点値系列と混在禁止。2014年度以降ファイルを使用。",
+      "unit": "cases",
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度内の相談件数",
+      "sha256": "c2252992d8333837dd4586592b1295a3feed445df25725b04df550cafcbc3d0d",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-1-1-2kyoikusodankensu2014-1.csv"
+    }
+  },
+  "gaps": [
+    {
+      "id": "non_attendance_school_refusal",
+      "kind": "wrong_geography",
+      "metricId": "non_attendance_school_refusal",
+      "title": "不登校は、この街の年次変化としては並べられない。",
+      "reason": "文科省の調査は都道府県・指定都市の表章で、立川市の行はありません。東京都全体の値を立川市の実績にはしません。",
+      "note": "市の不就学の件数は、不登校の代わりにはしません。"
+    },
+    {
+      "id": "per_student_education_cost",
+      "kind": "unavailable_for_comparison",
+      "metricId": "elem_per_student_education_cost",
+      "title": "1人あたりの教育費は、いまは年次の変化として示していません。",
+      "reason": "東京都の地方教育費調査に立川市の表はあります。同じ定義で複数年を並べられることの確認が終わっていないため、本編の推移には載せていません。",
+      "note": "会計年度の実績です。5月1日現在の児童生徒数を分母にして再計算しません。"
+    }
+  ]
+}
