@@ -72,3 +72,23 @@ export type DashboardData = {
     prefecture: ReferenceMetric[];
   };
 };
+
+export type DataGapKind =
+  | "not_published"
+  | "wrong_geography"
+  | "single_point_only"
+  | "definition_break"
+  | "not_equivalent"
+  | "incompatible_period"
+  | "unavailable_for_comparison";
+
+export type DataGap = {
+  id: string;
+  kind: DataGapKind;
+  metricId?: string;
+  title?: string;
+  reason?: string;
+  note?: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
+};

@@ -1,0 +1,54 @@
+{
+  "id": "tachikawa-education",
+  "municipality": "tachikawa",
+  "topic": "education",
+  "renderer": "tachikawa-education",
+  "status": "registered",
+  "note": "MY-155。story-registry 登録済み。1人あたり教育費は年度連続監査後に接続。",
+  "opening": [
+    {
+      "metricId": "elem_student_count",
+      "seriesKey": "elemStudents",
+      "shortLabel": "小学校児童数",
+      "color": "var(--series-1)"
+    },
+    {
+      "metricId": "jun_student_count",
+      "seriesKey": "junStudents",
+      "shortLabel": "中学校生徒数",
+      "color": "var(--series-2)"
+    }
+  ],
+  "acts": [
+    {
+      "id": "act1_students",
+      "metrics": ["elem_student_count", "jun_student_count"],
+      "periodKind": "as_of"
+    },
+    {
+      "id": "interlude_classes",
+      "metrics": ["elem_class_count", "elem_special_support_class_count"],
+      "periodKind": "as_of"
+    },
+    {
+      "id": "act2_staff",
+      "metrics": ["elem_staff_count", "jun_staff_count"],
+      "periodKind": "as_of"
+    },
+    {
+      "id": "interlude_data_gap_refusal",
+      "type": "data_gap",
+      "reason": "non_attendance_school_refusal_unavailable_at_municipality"
+    },
+    {
+      "id": "act3_consultation",
+      "metrics": ["education_consultation_cases"],
+      "periodKind": "annual_cumulative"
+    },
+    {
+      "id": "act4_per_student_cost",
+      "metrics": ["elem_per_student_education_cost", "jun_per_student_education_cost"],
+      "periodKind": "fiscal_year"
+    }
+  ]
+}
