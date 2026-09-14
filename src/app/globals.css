@@ -28,8 +28,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans); line-height: 1.8; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { min-width: 0; margin: 0; overflow-x: clip; background: var(--paper); color: var(--ink); font-family: var(--font-sans); line-height: 1.8; }
 button, a { font: inherit; }
 a { color: inherit; text-underline-offset: .25em; }
 a:not(.wordmark):not(.circle-button):not(.button-primary):not(.topbar a) { text-decoration: underline; }
@@ -333,6 +333,75 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   footer { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.5rem; }
   .data-content { padding: 3rem 1.5rem 4rem; gap: 3rem; }
   .data-sources article { padding: 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  :root { --space-page: 1.25rem; }
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: .55rem;
+    padding: .8rem 1.25rem .65rem;
+    letter-spacing: .08em;
+  }
+  .wordmark { align-self: flex-start; letter-spacing: .09em; }
+  .topbar a { min-height: 40px; padding-block: .35rem; }
+  .topbar-nav { width: 100%; }
+  .topbar-nav li { flex: 1 1 0; min-width: 0; }
+  .topbar-nav-link { justify-content: center; width: 100%; padding-inline: .35rem; }
+
+  .hero { min-height: calc(100svh - 118px); padding: 3.25rem 1.25rem 2.5rem; }
+  .hero h1 { margin-top: 2.4rem; font-size: clamp(3rem, 16vw, 4.6rem); overflow-wrap: anywhere; }
+  .hero-copy > p:not(.eyebrow) { line-height: 1.75; }
+  .hero-bottom { gap: 1rem; margin-top: 3rem; }
+  .hero-bottom > div { min-width: 0; }
+  .hero-bottom strong { display: block; line-height: 1.7; }
+  .circle-button { flex: 0 0 auto; width: 96px; height: 96px; }
+  .hero-mark { right: -4.5rem; font-size: 12rem; }
+
+  .visual-stage { padding-inline: .75rem; }
+  .chart-heading { gap: .5rem; }
+  .chart-progress { letter-spacing: .04em; }
+  .legend { grid-template-columns: 1fr; }
+  .legend-item { min-width: 0; grid-template-columns: 1.25rem minmax(0, 1fr) auto; }
+  .legend-item > span:nth-child(2) { overflow-wrap: anywhere; }
+  .legend-dot { width: 1.25rem; }
+
+  .narrative { padding-inline: 1.25rem; }
+  .story-step { min-height: 76vh; }
+  .step-stat { gap: .75rem; }
+  .step-stat strong { font-size: clamp(2rem, 12vw, 3rem); }
+  .story-act,
+  .story-recap,
+  .detail-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .simple-chart-shell { margin-inline: -.25rem; padding: 1.1rem .75rem; }
+  .story-recap h2 { font-size: clamp(2.65rem, 14vw, 4rem); }
+  .story-recap-group { padding: 1.25rem; }
+  .story-recap-group li { overflow-wrap: anywhere; }
+  .detail-list { margin-top: 2.75rem; }
+  .detail-row { grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem; gap: .5rem; }
+  .detail-title { overflow-wrap: anywhere; }
+  .detail-stats { grid-template-columns: 1fr; }
+  .detail-body { overflow-wrap: anywhere; }
+  .detail-body table { display: block; max-width: 100%; overflow-x: auto; }
+  .premium-period { padding: 1rem; }
+  .premium-period-value { font-size: 1.35rem; }
+  .button-primary { width: 100%; text-align: center; }
+  footer { padding-inline: 1.25rem; overflow-wrap: anywhere; }
+  .data-content { padding: 2.5rem 1.25rem 4rem; }
+  .data-sources article { padding: 1.25rem; }
+}
+
+@media (max-width: 360px) {
+  .topbar { padding-inline: 1rem; }
+  .topbar-nav-link { font-size: .7rem; }
+  .hero { padding-inline: 1rem; }
+  .hero h1 { font-size: 2.85rem; }
+  .circle-button { width: 88px; height: 88px; font-size: .75rem; }
+  .story-act,
+  .story-recap,
+  .detail-section,
+  .narrative { padding-left: 1rem; padding-right: 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
