@@ -15,6 +15,9 @@ export default function SiteFooter({ data, context }: { data: FooterData; contex
       </div>
       <div>
         <p className="ui-label">データと注意事項</p>
+        <p>
+          本サイトは{context.municipality.municipalityLabel}その他の行政機関が提供・運営する公式サービスではありません。
+        </p>
         <p>本サイトは公開されている行政データを独自に収集・整理・可視化するものです。原典の数値・定義等に関するお問い合わせは、各データの掲載元へお願いいたします。</p>
         <p>
           出典:{" "}

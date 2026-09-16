@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import StoryPage from "../../../stories/story-page";
+import { buildStoryMetadata } from "../../../lib/story-metadata";
 import { getStory, storyParams } from "../../../lib/story-registry";
 export const dynamicParams = false;
 export const generateStaticParams = storyParams;
@@ -8,7 +9,7 @@ export async function generateMetadata({ params }: Props) {
   const { municipality, topic } = await params;
   const context = getStory(municipality, topic);
   if (!context) notFound();
-  return { title: `${context.municipality.municipalityLabel}の${context.topic.label} | machinohenka`, alternates: { canonical: context.href } };
+  return buildStoryMetadata(context);
 }
 export default async function Page({ params }: Props) {
   const { municipality, topic } = await params;
