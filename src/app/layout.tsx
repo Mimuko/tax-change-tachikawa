@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
+import { rootSiteDescription } from "../lib/story-metadata";
+import { getSiteUrl } from "../lib/site-url";
 import "./globals.css";
 
 const notoSansJp = Noto_Sans_JP({
@@ -10,10 +12,27 @@ const notoSansJp = Noto_Sans_JP({
   display: "swap",
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  title: "machinohenka｜自分の街はどう変わった？",
-  description: "自治体の公開行政データから、街の変化をたどります。",
-  openGraph: { title: "自分の街はどう変わった？", description: "街の変化を、公開行政データから読み解く。", type: "website" },
+  metadataBase: siteUrl,
+  title: {
+    default: "machinohenka｜自分の街はどう変わった？",
+    template: "%s",
+  },
+  description: rootSiteDescription,
+  openGraph: {
+    title: "machinohenka｜自分の街はどう変わった？",
+    description: rootSiteDescription,
+    type: "website",
+    locale: "ja_JP",
+    siteName: "machinohenka",
+  },
+  twitter: {
+    card: "summary",
+    title: "machinohenka｜自分の街はどう変わった？",
+    description: rootSiteDescription,
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

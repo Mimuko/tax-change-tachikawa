@@ -55,7 +55,7 @@ npm run build
 ## セットアップとローカル開発
 
 ```bash
-git clone <PUBLIC_REPOSITORY_URL>
+git clone https://github.com/Mimuko/tax-change-tachikawa
 cd tax-change-tachikawa
 npm ci
 npm run data:build
@@ -96,6 +96,7 @@ npm run build
 2. Build commandを `npm run build`、Publish directoryを `out` にします。
 3. Node.js 22を使用します。
 4. Deploy Previewでデータ差分、出典リンク、モバイル表示を確認してから公開します。
+5. OGP・SNS共有用に、Netlify の環境変数 `NEXT_PUBLIC_SITE_URL`（例: `https://your-site.netlify.app`）を本番サイトの URL に設定します。未設定時は Netlify が注入する `URL` をビルド時に利用します。
 
 設定は [`netlify.toml`](netlify.toml) に定義しています。本番ビルドに e-Stat API キーは必須ではありません（検証済み JSON / curated をリポジトリに含めます）。
 

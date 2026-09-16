@@ -1,6 +1,7 @@
 import type { EducationDashboardData } from "../types/education-dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { formatDataGapPublicText, resolveDataGapCopy } from "../lib/data-gap-copy";
+import { buildShareUrl } from "../lib/site-url";
 import { buildEducationStepCopy } from "./education-copy";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
 import GeographyChip from "../components/geography-chip";
@@ -164,7 +165,10 @@ export default function EducationStory({
     },
   ];
 
-  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${place.municipalityLabel}の教育、この数年で何が変わった？ #税金で何が変わった`)}`;
+  const shareUrl = buildShareUrl({
+    text: `${place.municipalityLabel}の教育、この数年で何が変わった？ #税金で何が変わった`,
+    path: context.href,
+  });
 
   const recapGroups: RecapGroup[] = [
     {

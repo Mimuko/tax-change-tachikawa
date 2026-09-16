@@ -1,5 +1,6 @@
 import type { DashboardData } from "../types/dashboard";
 import type { StoryContext } from "../lib/story-registry";
+import { buildShareUrl } from "../lib/site-url";
 import { buildCareStepCopy } from "./care-copy";
 import ActSupportSection from "../components/act-support-section";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
@@ -55,7 +56,7 @@ function buildSupportRecapItems(input: {
     if (input.localSalary?.length) {
       items.push(formatMetricRecap({ label: "介護職員の所定内給与", unit: "円", points: input.localSalary }));
     }
-    return items.length ? items : ["市区町村の支える人・待遇指標は接続後に表示予定"];
+    return items.length ? items : ["市区町村の支える人・待遇指標は、今回は掲載していません。"];
   }
 
   const reference = comparableReferenceMetrics(input.prefectureReference);
@@ -64,7 +65,7 @@ function buildSupportRecapItems(input: {
       formatMetricRecap(metric, `（${input.prefectureLabel}参考）`),
     );
   }
-  return [`${input.prefectureLabel}参考の指標はパイプライン接続後に表示予定`];
+  return [`${input.prefectureLabel}参考の支える人・待遇指標は、今回は掲載していません。`];
 }
 
 export default function CareStory({ data, context }: { data: DashboardData; context: StoryContext }) {
@@ -155,8 +156,8 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         title: "待遇",
         kind: "unavailable",
         note: availability.referenceWageAvailable
-          ? `${place.municipalityLabel}値として扱える賃金時系列は未確定です。${place.prefectureLabel}参考の賃金指標は本編 Act 3 を参照してください。`
-          : `${place.municipalityLabel}値として扱える賃金時系列は未確定です。`,
+          ? `${place.municipalityLabel}だけの賃金の年次推移を確認できるデータはありません。${place.prefectureLabel}参考の賃金指標は本編 Act 3 を参照してください。`
+          : `${place.municipalityLabel}だけの賃金の年次推移を確認できるデータはありません。`,
       };
 
   const detailItems: DetailItem[] = [
@@ -217,7 +218,10 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
     },
   ];
 
-  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${place.municipalityLabel}の介護、この5年で何が変わった？ #税金で何が変わった`)}`;
+  const shareUrl = buildShareUrl({
+    text: `${place.municipalityLabel}の介護、この5年で何が変わった？ #税金で何が変わった`,
+    path: context.href,
+  });
 
   const recapGroups: RecapGroup[] = [
     {
@@ -230,7 +234,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         `給付総額 ${formatBillions(data.series.benefits[0].value)} → ${formatBillions(data.series.benefits.at(-1)!.value)}（5年 ${changePct(data.series.benefits) >= 0 ? "↑" : "↓"}${Math.abs(changePct(data.series.benefits)).toFixed(1)}%）`,
         serviceUnitCount?.length
           ? `提供されているサービス数 ${serviceUnitCount[0].value.toLocaleString("ja-JP")} → ${serviceUnitCount.at(-1)!.value.toLocaleString("ja-JP")}（${serviceUnitCount[0].year}→${serviceUnitCount.at(-1)!.year}）`
-          : "提供されているサービス数はパイプライン接続後に表示予定",
+          : "提供されているサービス数は、今回は掲載していません。",
       ],
     },
     ...(availability.showSupportAct
@@ -332,7 +336,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
             </>
           ) : (
             <p className="act-note act-pending">
-              {place.municipalityLabel}の提供されているサービス数は、同一定義の時系列データをパイプライン接続後にここへ表示します。
+              {place.municipalityLabel}の提供されているサービス数は、同一定義の時系列が揃い次第ここへ掲載します。
             </p>
           )}
         </StoryAct>
