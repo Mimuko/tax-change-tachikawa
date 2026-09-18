@@ -1,12 +1,13 @@
 import type { DashboardData } from "../types/dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { buildShareUrl } from "../lib/site-url";
+import { getTimelineEventCatalog, resolveChartEvents } from "../lib/timeline-events";
 import { buildCareStepCopy } from "./care-copy";
 import ActSupportSection from "../components/act-support-section";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
 import GeographyChip from "../components/geography-chip";
 import PremiumStandardSection from "../components/premium-standard-section";
-import SimpleSeriesChart from "../components/simple-series-chart";
+import ChartWithTimelineEvents from "../components/timeline-events-panel";
 import SiteFooter from "../components/site-footer";
 import SiteTopbar from "../components/site-topbar";
 import StoryAct from "../components/story-act";
@@ -268,6 +269,18 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
   ];
 
   const seriesColors = ["var(--series-1)", "var(--series-2)", "var(--series-3)", "var(--series-4)"];
+  const eventCatalog = getTimelineEventCatalog(context.municipality.id, context.topic.id);
+  const openingYears = act1Series[0]?.points.map((point) => point.year) ?? [];
+  const openingEvents = eventCatalog
+    ? resolveChartEvents({ catalog: eventCatalog, chartId: "opening", chartYears: openingYears })
+    : [];
+  const serviceUnitEvents = eventCatalog && serviceUnitCount?.length
+    ? resolveChartEvents({
+        catalog: eventCatalog,
+        chartId: "act2-service-units",
+        chartYears: serviceUnitCount.map((point) => point.year),
+      })
+    : [];
 
   return (
     <>
@@ -286,7 +299,12 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           <div className="hero-mark" aria-hidden="true">05<span>YEARS</span></div>
         </header>
 
-        <StoryExperience series={act1Series} copy={buildCareStepCopy(act1Series, place.municipalityLabel)} label={`${place.municipalityLabel}の${context.topic.label}に関する変化`} />
+        <StoryExperience
+          series={act1Series}
+          copy={buildCareStepCopy(act1Series, place.municipalityLabel)}
+          label={`${place.municipalityLabel}の${context.topic.label}に関する変化`}
+          events={openingEvents}
+        />
 
         <StoryInterlude
           variant="pause"
@@ -310,7 +328,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         >
           {serviceUnitCount?.length ? (
             <>
-              <SimpleSeriesChart
+              <ChartWithTimelineEvents
                 series={[
                   {
                     label: "提供されているサービス数",
@@ -320,6 +338,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
                     points: serviceUnitCount,
                   },
                 ]}
+                events={serviceUnitEvents}
                 kicker={place.municipalityLabel}
                 heading="介護サービスの提供単位数の推移"
                 note="※1つの事業所が複数のサービスを提供する場合、それぞれ1つとして数えています。"

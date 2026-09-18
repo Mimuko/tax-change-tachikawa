@@ -225,6 +225,100 @@ th, td { padding: .4rem; border-bottom: 1px solid var(--line); text-align: left;
 .simple-series-chart { display: block; width: 100%; margin: 1rem 0 0; overflow: visible; }
 .legend-latest { grid-column: 2 / 4; color: var(--text-secondary); font-size: .7rem; }
 
+.timeline-events-chart { display: grid; gap: 1rem; }
+.timeline-events-chart--cumulative { width: 100%; padding: 0 2rem 1.2rem; }
+.timeline-events-panel {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: color-mix(in srgb, var(--panel) 80%, var(--paper));
+  border: 1px solid var(--border-subtle);
+}
+.timeline-events-panel-head { display: grid; gap: .35rem; }
+.timeline-events-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.timeline-events-disclaimer {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+.timeline-events-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.2rem;
+  margin-top: .85rem;
+}
+.timeline-events-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+.timeline-events-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: .85rem;
+}
+.timeline-event {
+  padding: .85rem 1rem;
+  border-left: 3px solid var(--line);
+  background: var(--paper);
+}
+.timeline-event--municipality { border-left-color: var(--orange); }
+.timeline-event--policy { border-left-color: var(--series-4); }
+.timeline-event--societal { border-left-color: var(--muted); }
+.timeline-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem .75rem;
+  margin-bottom: .35rem;
+  color: var(--text-secondary);
+  font-size: .68rem;
+  letter-spacing: .06em;
+}
+.timeline-event-scope,
+.timeline-event-category {
+  padding: .1rem .45rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--panel);
+}
+.timeline-event-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+.timeline-event-description {
+  margin: .35rem 0 0;
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+.timeline-event-source {
+  margin: .45rem 0 0;
+  font-size: var(--text-xs);
+}
+.timeline-events-empty {
+  margin: .85rem 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+.timeline-event-marker-line {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: .55;
+}
+.timeline-event-marker-dot { fill: currentColor; opacity: .85; }
+.timeline-event-marker--municipality { color: var(--orange-text); }
+.timeline-event-marker--policy { color: var(--series-4); }
+.timeline-event-marker--societal { color: var(--muted); }
+
 .story-recap { padding: 8rem var(--space-page); background: var(--orange-bg); color: var(--text-on-accent); }
 .story-recap-inner { max-width: 1100px; margin: 0 auto; }
 .story-recap h2 { max-width: 900px; margin: .5em 0 .4em; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -.06em; }

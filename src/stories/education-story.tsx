@@ -2,9 +2,11 @@ import type { EducationDashboardData } from "../types/education-dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { formatDataGapPublicText, resolveDataGapCopy } from "../lib/data-gap-copy";
 import { buildShareUrl } from "../lib/site-url";
+import { getTimelineEventCatalog, resolveChartEvents } from "../lib/timeline-events";
 import { buildEducationStepCopy } from "./education-copy";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
 import GeographyChip from "../components/geography-chip";
+import ChartWithTimelineEvents from "../components/timeline-events-panel";
 import SimpleSeriesChart from "../components/simple-series-chart";
 import SiteFooter from "../components/site-footer";
 import SiteTopbar from "../components/site-topbar";
@@ -225,6 +227,22 @@ export default function EducationStory({
     },
   ];
 
+  const eventCatalog = getTimelineEventCatalog(context.municipality.id, context.topic.id);
+  const classEvents = eventCatalog
+    ? resolveChartEvents({
+        catalog: eventCatalog,
+        chartId: "act-classes",
+        chartYears: data.series.elemClasses.map((point) => point.year),
+      })
+    : [];
+  const consultationEvents = eventCatalog
+    ? resolveChartEvents({
+        catalog: eventCatalog,
+        chartId: "act3-consultation",
+        chartYears: data.series.educationConsultationCases.map((point) => point.year),
+      })
+    : [];
+
   return (
     <>
       <SiteTopbar active="home" context={context} />
@@ -285,7 +303,7 @@ export default function EducationStory({
           title="児童の数より、クラスの数と支援の形が変わっている"
           chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
-          <SimpleSeriesChart
+          <ChartWithTimelineEvents
             series={[
               {
                 label: "市立小学校通常学級数",
@@ -302,6 +320,7 @@ export default function EducationStory({
                 points: data.series.elemSpecialSupportClasses,
               },
             ]}
+            events={classEvents}
             kicker={`${place.municipalityLabel} · 各年5月1日現在`}
             heading="市立小学校の学級数の推移"
             note="※通常学級と特別支援学級は別系列です。合算しません。"
@@ -375,7 +394,7 @@ export default function EducationStory({
           title="教育相談の件数は、増えている"
           chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
-          <SimpleSeriesChart
+          <ChartWithTimelineEvents
             series={[
               {
                 label: "教育相談件数",
@@ -385,6 +404,7 @@ export default function EducationStory({
                 points: data.series.educationConsultationCases,
               },
             ]}
+            events={consultationEvents}
             kicker={`${place.municipalityLabel} · 年度内の累計件数`}
             heading="教育相談件数の推移"
             note="※年間累計です。5月1日時点の児童生徒数とは期間種別が異なります。2014年度以降の系列を使用しています。"
