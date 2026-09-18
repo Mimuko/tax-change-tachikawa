@@ -1,14 +1,32 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { TimelineEventsPanel, useTimelineEventVisibility } from "./timeline-events-panel";
+import type { TimelineEvent, TimelineEventScope } from "../types/timeline-event";
 
 type Point = { year: number; value: number };
 type Series = { id: string; label: string; shortLabel: string; unit: string; color: string; points: Point[] };
 
+const eventMarkerClass: Record<TimelineEventScope, string> = {
+  municipality: "timeline-event-marker--municipality",
+  policy: "timeline-event-marker--policy",
+  societal: "timeline-event-marker--societal",
+};
+
 const formatValue = (value: number, unit: string) => unit === "人" ? `${value.toLocaleString("ja-JP")}人` : unit === "円" ? `${(value / 100_000_000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億円` : `${value.toLocaleString("ja-JP")}${unit}`;
 const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / points[0].value) * 100;
 
-function CumulativeChart({ series, active, enteringId }: { series: Series[]; active: number; enteringId: string | null }) {
+function CumulativeChart({
+  series,
+  active,
+  enteringId,
+  events = [],
+}: {
+  series: Series[];
+  active: number;
+  enteringId: string | null;
+  events?: TimelineEvent[];
+}) {
   const width = 720, height = 500, left = 58, right = 34, top = 70, bottom = 58;
   const visible = series.slice(0, active + 1);
   const indexed = series.flatMap((item) => item.points.map((point) => point.value / item.points[0].value * 100));
@@ -17,6 +35,10 @@ function CumulativeChart({ series, active, enteringId }: { series: Series[]; act
   const x = (i: number) => left + i * ((width - left - right) / (series[0].points.length - 1));
   const y = (value: number) => top + (max - value) / (max - min) * (height - top - bottom);
   const ticks = Array.from({ length: 5 }, (_, i) => min + i * ((max - min) / 4));
+  const yearIndex = new Map(series[0].points.map((point, index) => [point.year, index]));
+  const chartEvents = events
+    .map((event) => ({ event, index: yearIndex.get(event.year) }))
+    .filter((item): item is { event: TimelineEvent; index: number } => item.index !== undefined);
 
   return (
     <div className="chart-shell">
@@ -32,6 +54,12 @@ function CumulativeChart({ series, active, enteringId }: { series: Series[]; act
         <desc id="chart-desc">スクロールに合わせて系列が追加されます。現在は{visible.map((item) => item.label).join("、")}を表示しています。</desc>
         {ticks.map((tick) => <g key={tick}><line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" /><text x={left - 12} y={y(tick) + 5} textAnchor="end" className="axis-label">{tick.toFixed(0)}</text></g>)}
         {series[0].points.map((point, i) => <text key={point.year} x={x(i)} y={height - 20} textAnchor="middle" className="axis-label">{String(point.year).slice(2)}</text>)}
+        {chartEvents.map(({ event, index }) => (
+          <g key={event.id} className={`timeline-event-marker ${eventMarkerClass[event.scope]}`} aria-hidden="true">
+            <line x1={x(index)} x2={x(index)} y1={top} y2={height - bottom + 8} className="timeline-event-marker-line" />
+            <circle cx={x(index)} cy={top - 10} r={4} className="timeline-event-marker-dot" />
+          </g>
+        ))}
         <text x={left} y={height - 2} className="axis-note">年度</text>
         {visible.map((item) => {
           const values = item.points.map((point) => point.value / item.points[0].value * 100);
@@ -80,7 +108,18 @@ function StepDetails({ label, children }: { label: string; children: ReactNode }
   );
 }
 
-export default function StoryExperience({ series, copy, label }: { series: Series[]; copy: { eyebrow: string; title: string; body: string }[]; label: string }) {
+export default function StoryExperience({
+  series,
+  copy,
+  label,
+  events = [],
+}: {
+  series: Series[];
+  copy: { eyebrow: string; title: string; body: string }[];
+  label: string;
+  events?: TimelineEvent[];
+}) {
+  const { visibility, visibleEvents, onToggle } = useTimelineEventVisibility(events);
   const [active, setActive] = useState(0);
   const [enteringId, setEnteringId] = useState<string | null>(series[0]?.id ?? null);
   const steps = useRef<(HTMLElement | null)[]>([]);
@@ -146,7 +185,12 @@ export default function StoryExperience({ series, copy, label }: { series: Serie
           );
         })}
       </div>
-      <aside className="visual-stage" aria-label="変化を重ねたグラフ"><CumulativeChart series={series} active={active} enteringId={enteringId} /></aside>
+      <aside className="visual-stage" aria-label="変化を重ねたグラフ">
+        <div className="timeline-events-chart timeline-events-chart--cumulative">
+          <CumulativeChart series={series} active={active} enteringId={enteringId} events={visibleEvents} />
+          <TimelineEventsPanel events={events} visibility={visibility} onToggle={onToggle} />
+        </div>
+      </aside>
     </section>
   );
 }

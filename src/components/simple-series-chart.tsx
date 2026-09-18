@@ -1,6 +1,15 @@
+"use client";
+
 import type { CSSProperties } from "react";
+import type { TimelineEvent, TimelineEventScope } from "../types/timeline-event";
 
 type Point = { year: number; value: number };
+
+const eventMarkerClass: Record<TimelineEventScope, string> = {
+  municipality: "timeline-event-marker--municipality",
+  policy: "timeline-event-marker--policy",
+  societal: "timeline-event-marker--societal",
+};
 
 export type SimpleSeries = {
   label: string;
@@ -30,12 +39,14 @@ const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / 
 
 export default function SimpleSeriesChart({
   series,
+  events = [],
   kicker,
   heading,
   note,
   indexMode = true,
 }: {
   series: SimpleSeries[];
+  events?: TimelineEvent[];
   kicker?: string;
   heading?: string;
   note?: string;
@@ -60,6 +71,10 @@ export default function SimpleSeriesChart({
   const x = (i: number) => left + i * ((width - left - right) / (pointCount - 1));
   const y = (value: number) => top + ((max - value) / (max - min)) * (height - top - bottom);
   const ticks = Array.from({ length: 5 }, (_, i) => min + (i * (max - min)) / 4);
+  const yearIndex = new Map(series[0].points.map((point, index) => [point.year, index]));
+  const chartEvents = events
+    .map((event) => ({ event, index: yearIndex.get(event.year) }))
+    .filter((item): item is { event: TimelineEvent; index: number } => item.index !== undefined);
 
   return (
     <div className="simple-chart-shell">
@@ -84,6 +99,22 @@ export default function SimpleSeriesChart({
           <text key={point.year} x={x(i)} y={height - 16} textAnchor="middle" className="axis-label">
             {String(point.year).slice(2)}
           </text>
+        ))}
+        {chartEvents.map(({ event, index }) => (
+          <g
+            key={event.id}
+            className={`timeline-event-marker ${eventMarkerClass[event.scope]}`}
+            aria-hidden="true"
+          >
+            <line
+              x1={x(index)}
+              x2={x(index)}
+              y1={top}
+              y2={height - bottom + 8}
+              className="timeline-event-marker-line"
+            />
+            <circle cx={x(index)} cy={top - 10} r={4} className="timeline-event-marker-dot" />
+          </g>
         ))}
         {series.map((item) => {
           const values = indexMode
