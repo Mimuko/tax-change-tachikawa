@@ -1,6 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  TimelineEventLayerControls,
+  TimelineEventPopover,
+  useTimelineEventLayer,
+} from "./timeline-event-overlay";
+import {
+  getTimelineEventPopoverLeft,
+  resolveChartEventMarkers,
+  TimelineEventChartLayer,
+} from "./timeline-event-chart-layer";
+import type { TimelineEvent } from "../types/timeline-event";
 
 type Point = { year: number; value: number };
 type Series = { id: string; label: string; shortLabel: string; unit: string; color: string; points: Point[] };
@@ -8,8 +19,33 @@ type Series = { id: string; label: string; shortLabel: string; unit: string; col
 const formatValue = (value: number, unit: string) => unit === "人" ? `${value.toLocaleString("ja-JP")}人` : unit === "円" ? `${(value / 100_000_000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億円` : `${value.toLocaleString("ja-JP")}${unit}`;
 const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / points[0].value) * 100;
 
-function CumulativeChart({ series, active, enteringId }: { series: Series[]; active: number; enteringId: string | null }) {
-  const width = 720, height = 500, left = 58, right = 34, top = 70, bottom = 58;
+function CumulativeChart({
+  series,
+  active,
+  enteringId,
+  events = [],
+  eventLayerAvailable = events.length > 0,
+  selectedEventId,
+  hoveredEventId,
+  activeEvent,
+  onSelectEvent,
+  onHoverEvent,
+  onCloseEvent,
+}: {
+  series: Series[];
+  active: number;
+  enteringId: string | null;
+  events?: TimelineEvent[];
+  eventLayerAvailable?: boolean;
+  selectedEventId?: string | null;
+  hoveredEventId?: string | null;
+  activeEvent?: TimelineEvent;
+  onSelectEvent?: (id: string | null) => void;
+  onHoverEvent?: (id: string | null) => void;
+  onCloseEvent?: () => void;
+}) {
+  const width = 720, height = 500, left = 58, right = 34, bottom = 58;
+  const top = eventLayerAvailable ? 88 : 70;
   const visible = series.slice(0, active + 1);
   const indexed = series.flatMap((item) => item.points.map((point) => point.value / item.points[0].value * 100));
   const min = Math.floor((Math.min(...indexed) - 3) / 5) * 5;
@@ -17,6 +53,9 @@ function CumulativeChart({ series, active, enteringId }: { series: Series[]; act
   const x = (i: number) => left + i * ((width - left - right) / (series[0].points.length - 1));
   const y = (value: number) => top + (max - value) / (max - min) * (height - top - bottom);
   const ticks = Array.from({ length: 5 }, (_, i) => min + i * ((max - min) / 4));
+  const years = series[0].points.map((point) => point.year);
+  const chartEvents = resolveChartEventMarkers(events, years);
+  const popoverLeft = getTimelineEventPopoverLeft(activeEvent, years, x, width);
 
   return (
     <div className="chart-shell">
@@ -27,25 +66,69 @@ function CumulativeChart({ series, active, enteringId }: { series: Series[]; act
         </div>
         <span className="chart-progress" aria-live="polite" aria-atomic="true">表示中 {active + 1} / {series.length}</span>
       </div>
-      <svg className="cumulative-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="chart-title chart-desc">
-        <title id="chart-title">表示指標の変化指数</title>
-        <desc id="chart-desc">スクロールに合わせて系列が追加されます。現在は{visible.map((item) => item.label).join("、")}を表示しています。</desc>
-        {ticks.map((tick) => <g key={tick}><line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" /><text x={left - 12} y={y(tick) + 5} textAnchor="end" className="axis-label">{tick.toFixed(0)}</text></g>)}
-        {series[0].points.map((point, i) => <text key={point.year} x={x(i)} y={height - 20} textAnchor="middle" className="axis-label">{String(point.year).slice(2)}</text>)}
-        <text x={left} y={height - 2} className="axis-note">年度</text>
-        {visible.map((item) => {
-          const values = item.points.map((point) => point.value / item.points[0].value * 100);
-          const path = values.map((value, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(value)}`).join(" ");
-          const isEntering = enteringId === item.id;
-          return (
-            <g key={item.id} className="chart-series" style={{ "--series-color": item.color } as React.CSSProperties}>
-              <path d={path} className={`series-line${isEntering ? " is-entering" : ""}`} pathLength="1" />
-              {values.map((value, i) => <circle key={item.points[i].year} cx={x(i)} cy={y(value)} r={i === values.length - 1 ? 7 : 4} />)}
-              <text x={x(values.length - 1) - 8} y={y(values.at(-1)!) - 14} textAnchor="end" className="end-label">{item.shortLabel}</text>
-            </g>
-          );
-        })}
-      </svg>
+      <div className="chart-plot">
+        <svg
+          className="cumulative-chart"
+          viewBox={`0 0 ${width} ${height}`}
+          role={onSelectEvent ? "group" : "img"}
+          aria-labelledby="chart-title chart-desc"
+        >
+          <title id="chart-title">表示指標の変化指数</title>
+          <desc id="chart-desc">スクロールに合わせて系列が追加されます。現在は{visible.map((item) => item.label).join("、")}を表示しています。</desc>
+          {visible.map((item) => {
+            const values = item.points.map((point) => point.value / item.points[0].value * 100);
+            const path = values.map((value, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(value)}`).join(" ");
+            const isEntering = enteringId === item.id;
+            return (
+              <g key={item.id} className="chart-series" style={{ "--series-color": item.color } as CSSProperties}>
+                <path d={path} className={`series-line${isEntering ? " is-entering" : ""}`} pathLength="1" />
+                {values.map((value, i) => <circle key={item.points[i].year} cx={x(i)} cy={y(value)} r={i === values.length - 1 ? 7 : 4} />)}
+                <text x={x(values.length - 1) - 8} y={y(values.at(-1)!) - 14} textAnchor="end" className="end-label">{item.shortLabel}</text>
+              </g>
+            );
+          })}
+          <TimelineEventChartLayer
+            chartEvents={chartEvents}
+            x={x}
+            width={width}
+            height={height}
+            top={top}
+            bottomHeight={height - bottom + 8}
+            selectedEventId={selectedEventId}
+            hoveredEventId={hoveredEventId}
+            onSelectEvent={onSelectEvent}
+            onHoverEvent={onHoverEvent}
+          >
+            {ticks.map((tick) => (
+              <g key={tick} className="timeline-chart-context">
+                <line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" />
+                <text x={left - 12} y={y(tick) + 5} textAnchor="end" className="axis-label">{tick.toFixed(0)}</text>
+              </g>
+            ))}
+            {series[0].points.map((point, i) => (
+              <text
+                key={point.year}
+                x={x(i)}
+                y={height - 20}
+                textAnchor="middle"
+                className="axis-label timeline-chart-context"
+              >
+                {String(point.year).slice(2)}
+              </text>
+            ))}
+            <text x={left} y={height - 2} className="axis-note timeline-chart-context">年度</text>
+          </TimelineEventChartLayer>
+        </svg>
+        {activeEvent && popoverLeft && onCloseEvent ? (
+          <TimelineEventPopover
+            event={activeEvent}
+            onClose={onCloseEvent}
+            style={{ left: popoverLeft, top: `${(top / height) * 100}%` }}
+            onMouseEnter={onHoverEvent ? () => onHoverEvent(activeEvent.id) : undefined}
+            onMouseLeave={onHoverEvent ? () => onHoverEvent(null) : undefined}
+          />
+        ) : null}
+      </div>
       <div className="legend" aria-label="表示中の指標">
         {visible.map((item) => (
           <div key={item.id} className="legend-item">
@@ -80,7 +163,28 @@ function StepDetails({ label, children }: { label: string; children: ReactNode }
   );
 }
 
-export default function StoryExperience({ series, copy, label }: { series: Series[]; copy: { eyebrow: string; title: string; body: string }[]; label: string }) {
+export default function StoryExperience({
+  series,
+  copy,
+  label,
+  events = [],
+}: {
+  series: Series[];
+  copy: { eyebrow: string; title: string; body: string }[];
+  label: string;
+  events?: TimelineEvent[];
+}) {
+  const {
+    visibility,
+    visibleEvents,
+    onToggle,
+    selectedEventId,
+    hoveredEventId,
+    activeEvent,
+    onSelectEvent,
+    onHoverEvent,
+    clearSelection,
+  } = useTimelineEventLayer(events);
   const [active, setActive] = useState(0);
   const [enteringId, setEnteringId] = useState<string | null>(series[0]?.id ?? null);
   const steps = useRef<(HTMLElement | null)[]>([]);
@@ -111,7 +215,6 @@ export default function StoryExperience({ series, copy, label }: { series: Serie
     steps.current.forEach((step) => step && observer.observe(step));
     return () => observer.disconnect();
   }, [applyActive]);
-
 
   return (
     <section className="scrolly" id="story" aria-label={label}>
@@ -146,7 +249,24 @@ export default function StoryExperience({ series, copy, label }: { series: Serie
           );
         })}
       </div>
-      <aside className="visual-stage" aria-label="変化を重ねたグラフ"><CumulativeChart series={series} active={active} enteringId={enteringId} /></aside>
+      <aside className="visual-stage" aria-label="変化を重ねたグラフ">
+        <div className="timeline-events-chart timeline-events-chart--cumulative">
+          <TimelineEventLayerControls events={events} visibility={visibility} onToggle={onToggle} />
+          <CumulativeChart
+            series={series}
+            active={active}
+            enteringId={enteringId}
+            events={visibleEvents}
+            eventLayerAvailable={events.length > 0}
+            selectedEventId={selectedEventId}
+            hoveredEventId={hoveredEventId}
+            activeEvent={activeEvent}
+            onSelectEvent={onSelectEvent}
+            onHoverEvent={onHoverEvent}
+            onCloseEvent={clearSelection}
+          />
+        </div>
+      </aside>
     </section>
   );
 }

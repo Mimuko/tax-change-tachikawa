@@ -1,4 +1,13 @@
+"use client";
+
 import type { CSSProperties } from "react";
+import { TimelineEventPopover } from "./timeline-event-overlay";
+import {
+  getTimelineEventPopoverLeft,
+  resolveChartEventMarkers,
+  TimelineEventChartLayer,
+} from "./timeline-event-chart-layer";
+import type { TimelineEvent } from "../types/timeline-event";
 
 type Point = { year: number; value: number };
 
@@ -30,12 +39,28 @@ const change = (points: Point[]) => ((points.at(-1)!.value - points[0].value) / 
 
 export default function SimpleSeriesChart({
   series,
+  events = [],
+  eventLayerAvailable = events.length > 0,
+  selectedEventId,
+  hoveredEventId,
+  activeEvent,
+  onSelectEvent,
+  onHoverEvent,
+  onCloseEvent,
   kicker,
   heading,
   note,
   indexMode = true,
 }: {
   series: SimpleSeries[];
+  events?: TimelineEvent[];
+  eventLayerAvailable?: boolean;
+  selectedEventId?: string | null;
+  hoveredEventId?: string | null;
+  activeEvent?: TimelineEvent;
+  onSelectEvent?: (id: string | null) => void;
+  onHoverEvent?: (id: string | null) => void;
+  onCloseEvent?: () => void;
   kicker?: string;
   heading?: string;
   note?: string;
@@ -45,7 +70,7 @@ export default function SimpleSeriesChart({
   const height = 320;
   const left = 52;
   const right = 28;
-  const top = 48;
+  const top = eventLayerAvailable ? 64 : 48;
   const bottom = 44;
 
   const pointCount = series[0]?.points.length ?? 0;
@@ -60,6 +85,9 @@ export default function SimpleSeriesChart({
   const x = (i: number) => left + i * ((width - left - right) / (pointCount - 1));
   const y = (value: number) => top + ((max - value) / (max - min)) * (height - top - bottom);
   const ticks = Array.from({ length: 5 }, (_, i) => min + (i * (max - min)) / 4);
+  const years = series[0].points.map((point) => point.year);
+  const chartEvents = resolveChartEventMarkers(events, years);
+  const popoverLeft = getTimelineEventPopoverLeft(activeEvent, years, x, width);
 
   return (
     <div className="simple-chart-shell">
@@ -71,38 +99,73 @@ export default function SimpleSeriesChart({
           </p>
         </div>
       </div>
-      <svg className="simple-series-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={series.map((item) => item.label).join("、")}>
-        {ticks.map((tick) => (
-          <g key={tick}>
-            <line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" />
-            <text x={left - 10} y={y(tick) + 4} textAnchor="end" className="axis-label">
-              {indexMode ? tick.toFixed(0) : tick.toLocaleString("ja-JP", { maximumFractionDigits: 0 })}
-            </text>
-          </g>
-        ))}
-        {series[0].points.map((point, i) => (
-          <text key={point.year} x={x(i)} y={height - 16} textAnchor="middle" className="axis-label">
-            {String(point.year).slice(2)}
-          </text>
-        ))}
-        {series.map((item) => {
-          const values = indexMode
-            ? item.points.map((point) => (point.value / item.points[0].value) * 100)
-            : item.points.map((point) => point.value);
-          const path = values.map((value, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(value)}`).join(" ");
-          return (
-            <g key={item.label} className="chart-series" style={{ "--series-color": item.color } as CSSProperties}>
-              <path d={path} className="series-line" pathLength="1" />
-              {values.map((value, i) => (
-                <circle key={item.points[i].year} cx={x(i)} cy={y(value)} r={i === values.length - 1 ? 6 : 3} />
-              ))}
-              <text x={x(values.length - 1) - 6} y={y(values.at(-1)!) - 12} textAnchor="end" className="end-label">
-                {item.shortLabel ?? item.label}
+      <div className="chart-plot">
+        <svg
+          className="simple-series-chart"
+          viewBox={`0 0 ${width} ${height}`}
+          role={onSelectEvent ? "group" : "img"}
+          aria-label={series.map((item) => item.label).join("、")}
+        >
+          {series.map((item) => {
+            const values = indexMode
+              ? item.points.map((point) => (point.value / item.points[0].value) * 100)
+              : item.points.map((point) => point.value);
+            const path = values.map((value, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(value)}`).join(" ");
+            return (
+              <g key={item.label} className="chart-series" style={{ "--series-color": item.color } as CSSProperties}>
+                <path d={path} className="series-line" pathLength="1" />
+                {values.map((value, i) => (
+                  <circle key={item.points[i].year} cx={x(i)} cy={y(value)} r={i === values.length - 1 ? 6 : 3} />
+                ))}
+                <text x={x(values.length - 1) - 6} y={y(values.at(-1)!) - 12} textAnchor="end" className="end-label">
+                  {item.shortLabel ?? item.label}
+                </text>
+              </g>
+            );
+          })}
+          <TimelineEventChartLayer
+            chartEvents={chartEvents}
+            x={x}
+            width={width}
+            height={height}
+            top={top}
+            bottomHeight={height - bottom + 8}
+            selectedEventId={selectedEventId}
+            hoveredEventId={hoveredEventId}
+            onSelectEvent={onSelectEvent}
+            onHoverEvent={onHoverEvent}
+          >
+            {ticks.map((tick) => (
+              <g key={tick} className="timeline-chart-context">
+                <line x1={left} x2={width - right} y1={y(tick)} y2={y(tick)} className="grid-line" />
+                <text x={left - 10} y={y(tick) + 4} textAnchor="end" className="axis-label">
+                  {indexMode ? tick.toFixed(0) : tick.toLocaleString("ja-JP", { maximumFractionDigits: 0 })}
+                </text>
+              </g>
+            ))}
+            {series[0].points.map((point, i) => (
+              <text
+                key={point.year}
+                x={x(i)}
+                y={height - 16}
+                textAnchor="middle"
+                className="axis-label timeline-chart-context"
+              >
+                {String(point.year).slice(2)}
               </text>
-            </g>
-          );
-        })}
-      </svg>
+            ))}
+          </TimelineEventChartLayer>
+        </svg>
+        {activeEvent && popoverLeft && onCloseEvent ? (
+          <TimelineEventPopover
+            event={activeEvent}
+            onClose={onCloseEvent}
+            style={{ left: popoverLeft, top: `${(top / height) * 100}%` }}
+            onMouseEnter={onHoverEvent ? () => onHoverEvent(activeEvent.id) : undefined}
+            onMouseLeave={onHoverEvent ? () => onHoverEvent(null) : undefined}
+          />
+        ) : null}
+      </div>
       <div className="legend" aria-label="表示中の指標">
         {series.map((item) => {
           const delta = change(item.points);

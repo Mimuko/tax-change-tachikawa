@@ -135,7 +135,18 @@ caption { text-align: left; font-weight: 700; }
 th, td { padding: .4rem; border-bottom: 1px solid var(--line); text-align: left; }
 
 /* Chart */
-.visual-stage { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; }
+.visual-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  max-height: 100svh;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  padding-block: clamp(1rem, 3vh, 2rem);
+  overflow: visible;
+}
 .chart-shell { width: 100%; padding: 1.6rem 2rem 1.2rem; }
 .chart-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--border-subtle); }
 .chart-progress { color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .1em; white-space: nowrap; }
@@ -225,6 +236,188 @@ th, td { padding: .4rem; border-bottom: 1px solid var(--line); text-align: left;
 .simple-series-chart { display: block; width: 100%; margin: 1rem 0 0; overflow: visible; }
 .legend-latest { grid-column: 2 / 4; color: var(--text-secondary); font-size: .7rem; }
 
+.timeline-events-chart { display: grid; gap: .55rem; }
+.timeline-events-chart--cumulative { width: 100%; padding: 0 2rem 1.2rem; }
+.timeline-event-layer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem .85rem;
+  padding: 0 .15rem;
+}
+.timeline-event-layer-label {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.timeline-events-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .7rem;
+}
+.timeline-events-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.timeline-events-info {
+  position: relative;
+  margin-left: auto;
+}
+.timeline-events-info summary {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  min-height: 1.35rem;
+  padding: .1rem .35rem;
+  border-radius: 2px;
+  color: var(--text-secondary);
+  font-size: .7rem;
+  line-height: 1;
+  cursor: pointer;
+  list-style: none;
+}
+.timeline-events-info summary::-webkit-details-marker { display: none; }
+.timeline-events-info-label { letter-spacing: .02em; }
+.timeline-events-info summary:hover,
+.timeline-events-info[open] summary {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+}
+.timeline-events-info p {
+  position: absolute;
+  right: 0;
+  z-index: 4;
+  width: min(17rem, 75vw);
+  margin: .35rem 0 0;
+  padding: .55rem .7rem;
+  background: var(--paper);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: .68rem;
+  line-height: 1.45;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.chart-plot {
+  position: relative;
+}
+.timeline-event-focus-layer {
+  fill: var(--panel);
+  opacity: .88;
+  animation: timeline-event-focus-in .18s ease-out both;
+}
+.timeline-chart-context { pointer-events: none; }
+@keyframes timeline-event-focus-in {
+  from { opacity: 0; }
+  to { opacity: .88; }
+}
+.timeline-event-popover {
+  position: absolute;
+  z-index: 3;
+  width: min(16.5rem, calc(100% - 1.5rem));
+  max-width: 18rem;
+  padding: .75rem .85rem .7rem;
+  transform: translate(-50%, .35rem);
+  background: var(--paper);
+  border: 1px solid var(--border-subtle);
+  border-left-width: 3px;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 12%, transparent);
+  pointer-events: auto;
+}
+.timeline-event-popover--municipality { border-left-color: var(--orange); }
+.timeline-event-popover--policy { border-left-color: var(--series-4); }
+.timeline-event-popover--societal { border-left-color: var(--muted); }
+.timeline-event-popover-close {
+  position: absolute;
+  top: .25rem;
+  right: .35rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.timeline-event-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .55rem;
+  margin-bottom: .25rem;
+  padding-right: 1.2rem;
+  color: var(--text-secondary);
+  font-size: .65rem;
+  letter-spacing: .04em;
+}
+.timeline-event-scope,
+.timeline-event-category {
+  padding: .05rem .35rem;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+}
+.timeline-event-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+.timeline-event-description {
+  margin: .35rem 0 0;
+  color: var(--muted);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+.timeline-event-source {
+  margin: .45rem 0 0;
+  font-size: var(--text-xs);
+}
+.timeline-event-marker {
+  cursor: pointer;
+  outline: none;
+}
+.timeline-event-marker-line {
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-dasharray: 3 4;
+  opacity: .4;
+  transition: opacity .15s ease;
+}
+.timeline-event-marker-tick {
+  fill: currentColor;
+  stroke: var(--panel);
+  stroke-width: 1.5;
+  opacity: .9;
+}
+.timeline-event-marker-year,
+.timeline-event-marker-label {
+  fill: currentColor;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+}
+.timeline-event-marker-label {
+  font-weight: 500;
+  font-size: 9px;
+  opacity: .9;
+}
+.timeline-event-marker.is-active .timeline-event-marker-line { opacity: .8; }
+.timeline-event-marker.is-active .timeline-event-marker-tick { opacity: 1; }
+.timeline-event-marker:focus-visible .timeline-event-marker-tick {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.timeline-event-marker--municipality { color: var(--orange-text); }
+.timeline-event-marker--policy { color: var(--series-4); }
+.timeline-event-marker--societal { color: var(--muted); }
+.timeline-event-marker-hit { cursor: pointer; }
+
 .story-recap { padding: 8rem var(--space-page); background: var(--orange-bg); color: var(--text-on-accent); }
 .story-recap-inner { max-width: 1100px; margin: 0 auto; }
 .story-recap h2 { max-width: 900px; margin: .5em 0 .4em; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -.06em; }
@@ -308,13 +501,21 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   .hero-bottom { align-items: flex-start; margin-top: 4rem; }
   .hero-mark { right: -24vw; top: 46%; opacity: .55; }
   .scrolly { display: flex; flex-direction: column-reverse; gap: 0; padding: 0; }
-  .visual-stage { z-index: 5; height: auto; top: 0; width: 100%; padding: .5rem 1rem; background: var(--panel); }
+  .visual-stage { z-index: 5; height: auto; max-height: none; top: 0; width: 100%; padding: .5rem 1rem; background: var(--panel); overflow: visible; }
   .chart-shell { padding: .7rem 0; background: var(--panel); }
   .chart-heading .ui-label { font-size: var(--text-xs); }
   .cumulative-chart { max-height: 38vh; margin: .4rem 0; }
   .legend { margin-left: 0; gap: .25rem .8rem; }
   .legend-item { font-size: .7rem; }
   .chart-note { margin-left: 0; font-size: .7rem; }
+  .timeline-events-chart--cumulative { padding-inline: .75rem; }
+  .timeline-event-layer { gap: .35rem .55rem; }
+  .timeline-event-marker-label { display: none; }
+  .timeline-event-popover {
+    left: 50% !important;
+    width: min(18rem, calc(100% - 1rem));
+    transform: translate(-50%, .5rem);
+  }
   .narrative { padding: 6vh 1.5rem 16vh; }
   .story-step { min-height: 82vh; }
   .story-step h2 { font-size: clamp(1.85rem, 6.5vw, 2.35rem); max-width: none; }

@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "id": "covid-19-school-2020",
+      "year": 2020,
+      "scope": "societal",
+      "category": "感染症",
+      "title": "新型コロナウイルス感染症による学校の一時休業等",
+      "description": "2020年2月以降、全国の小中学校等で一時的な休校やオンライン配信等が行われました。",
+      "source": {
+        "label": "文部科学省（新型コロナウイルス感染症対策）",
+        "url": "https://www.mext.go.jp/a_menu/coronavirus/index.html"
+      }
+    },
+    {
+      "id": "special-needs-education-2018",
+      "year": 2018,
+      "scope": "policy",
+      "category": "特別支援教育",
+      "title": "切れ目ない支援体制整備充実事業（2018年度）",
+      "description": "2018年度、文部科学省は自治体等による特別支援教育の切れ目ない支援体制整備を支援する事業を実施しました。",
+      "source": {
+        "label": "文部科学省（特別支援教育・平成30年度実施事業）",
+        "url": "https://www.mext.go.jp/a_menu/shotou/tokubetu/main/006/h30/1419310.htm"
+      }
+    }
+  ],
+  "bindings": [
+    {
+      "chartId": "opening",
+      "eventIds": ["covid-19-school-2020"]
+    },
+    {
+      "chartId": "act-classes",
+      "eventIds": ["special-needs-education-2018", "covid-19-school-2020"]
+    },
+    {
+      "chartId": "act3-consultation",
+      "eventIds": ["covid-19-school-2020"]
+    }
+  ]
+}
