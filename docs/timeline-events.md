@@ -21,6 +21,17 @@
 
 `bindings` で `chartId` と `eventIds` を結び、指標ごとに掲載対象を限定する。イベント未登録の chart は従来どおり表示する。
 
+画面側では `resolveTimelineEvents` に自治体 ID・テーマ ID・グラフ ID・表示系列を渡す。横軸の正本である先頭系列からの年度抽出と、未登録時の空配列化は共通処理が担うため、自治体やテーマごとに同じ解決処理を実装しない。
+
+## 他の自治体・テーマへの追加手順
+
+1. `config/events/<municipality>-<topic>.json` にイベントとグラフ binding を定義する
+2. `src/lib/timeline-events.ts` の `catalogs` にカタログを登録する
+3. 対象グラフを `ChartWithTimelineEvents` で描画するか、`StoryExperience` の `events` に解決結果を渡す
+4. `resolveTimelineEvents` の `chartId` と JSON の binding を一致させる
+
+カタログや binding がない自治体・テーマ・グラフでは空配列となり、出来事 UI とフォーカスレイヤーは表示されない。
+
 ## スコープ分類
 
 | scope | 意味 | UI ラベル例 |
@@ -66,7 +77,7 @@
 対象:
 
 - 立川市×介護: Act 1 累積グラフ（`opening`）、Act 2 サービス数（`act2-service-units`）
-- 立川市×教育: 学級数（`act-classes`）、教育相談（`act3-consultation`）
+- 立川市×教育: Act 1 累積グラフ（`opening`）、学級数（`act-classes`）、教育相談（`act3-consultation`）
 
 残課題:
 

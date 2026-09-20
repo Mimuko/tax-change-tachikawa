@@ -2,7 +2,7 @@ import type { EducationDashboardData } from "../types/education-dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { formatDataGapPublicText, resolveDataGapCopy } from "../lib/data-gap-copy";
 import { buildShareUrl } from "../lib/site-url";
-import { getTimelineEventCatalog, resolveChartEvents } from "../lib/timeline-events";
+import { resolveTimelineEvents } from "../lib/timeline-events";
 import { buildEducationStepCopy } from "./education-copy";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
 import GeographyChip from "../components/geography-chip";
@@ -227,21 +227,28 @@ export default function EducationStory({
     },
   ];
 
-  const eventCatalog = getTimelineEventCatalog(context.municipality.id, context.topic.id);
-  const classEvents = eventCatalog
-    ? resolveChartEvents({
-        catalog: eventCatalog,
-        chartId: "act-classes",
-        chartYears: data.series.elemClasses.map((point) => point.year),
-      })
-    : [];
-  const consultationEvents = eventCatalog
-    ? resolveChartEvents({
-        catalog: eventCatalog,
-        chartId: "act3-consultation",
-        chartYears: data.series.educationConsultationCases.map((point) => point.year),
-      })
-    : [];
+  const eventContext = {
+    municipalityId: context.municipality.id,
+    topicId: context.topic.id,
+  };
+  const openingEvents = resolveTimelineEvents({
+    ...eventContext,
+    chartId: "opening",
+    series: act1Series,
+  });
+  const classEvents = resolveTimelineEvents({
+    ...eventContext,
+    chartId: "act-classes",
+    series: [
+      { points: data.series.elemClasses },
+      { points: data.series.elemSpecialSupportClasses },
+    ],
+  });
+  const consultationEvents = resolveTimelineEvents({
+    ...eventContext,
+    chartId: "act3-consultation",
+    series: [{ points: data.series.educationConsultationCases }],
+  });
 
   return (
     <>
@@ -287,6 +294,7 @@ export default function EducationStory({
           series={act1Series}
           copy={buildEducationStepCopy(act1Series, place.municipalityLabel)}
           label={`${place.municipalityLabel}の${context.topic.label}に関する変化`}
+          events={openingEvents}
         />
 
         <StoryInterlude

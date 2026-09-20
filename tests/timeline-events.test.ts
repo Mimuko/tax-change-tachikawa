@@ -23,7 +23,7 @@ test("介護イベント catalog が chart binding を解決する", async () =>
   assert.equal(opening.length, 2);
   assert.deepEqual(
     opening.map((event) => event.id),
-    ["covid-19-2020", "care-insurance-reform-2021"],
+    ["covid-19-2020", "care-plan-period-2021"],
   );
 });
 
@@ -40,6 +40,13 @@ test("教育イベントは chart 年度に一致するものだけ返す", asyn
     classes.map((event) => event.id),
     ["special-needs-education-2018", "covid-19-school-2020"],
   );
+
+  const opening = resolveChartEvents({
+    catalog,
+    chartId: "opening",
+    chartYears: [2019, 2020, 2021, 2022, 2023],
+  });
+  assert.deepEqual(opening.map((event) => event.id), ["covid-19-school-2020"]);
 });
 
 test("初期表示では自治体イベントのみ、トグルで policy / societal を表示できる", () => {
@@ -73,5 +80,44 @@ test("初期表示では自治体イベントのみ、トグルで policy / soci
   assert.equal(
     filterTimelineEvents(events, { municipality: true, policy: true, societal: false }).length,
     2,
+  );
+});
+
+test("同じ chartId の binding を重複登録できない", () => {
+  const catalog = {
+    events: [],
+    bindings: [
+      { chartId: "opening", eventIds: [] },
+      { chartId: "opening", eventIds: [] },
+    ],
+  };
+
+  assert.throws(
+    () => validateTimelineEventCatalog(catalog),
+    /Duplicate timeline event chart binding: opening/,
+  );
+});
+
+test("不正なscopeとbinding内のイベント重複を拒否する", () => {
+  const baseEvent = {
+    id: "event",
+    year: 2020,
+    scope: "municipality",
+    category: "分類",
+    title: "出来事",
+    description: "説明",
+    source: { label: "出典", url: "https://example.com" },
+  };
+
+  assert.throws(
+    () => validateTimelineEventCatalog({ events: [{ ...baseEvent, scope: "other" }], bindings: [] }),
+    /Unknown timeline event scope: event/,
+  );
+  assert.throws(
+    () => validateTimelineEventCatalog({
+      events: [baseEvent],
+      bindings: [{ chartId: "opening", eventIds: ["event", "event"] }],
+    }),
+    /Duplicate timeline event in binding opening: event/,
   );
 });

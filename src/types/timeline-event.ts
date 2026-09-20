@@ -1,6 +1,8 @@
 /** イベントの地理・制度スコープ。UI と docs/timeline-events.md が正本。 */
 export type TimelineEventScope = "municipality" | "policy" | "societal";
 
+export type TimelineEventVisibility = Record<TimelineEventScope, boolean>;
+
 export type TimelineEventSource = {
   label: string;
   url: string;

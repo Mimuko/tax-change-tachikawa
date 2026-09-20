@@ -1,7 +1,7 @@
 import type { DashboardData } from "../types/dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { buildShareUrl } from "../lib/site-url";
-import { getTimelineEventCatalog, resolveChartEvents } from "../lib/timeline-events";
+import { resolveTimelineEvents } from "../lib/timeline-events";
 import { buildCareStepCopy } from "./care-copy";
 import ActSupportSection from "../components/act-support-section";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
@@ -269,18 +269,20 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
   ];
 
   const seriesColors = ["var(--series-1)", "var(--series-2)", "var(--series-3)", "var(--series-4)"];
-  const eventCatalog = getTimelineEventCatalog(context.municipality.id, context.topic.id);
-  const openingYears = act1Series[0]?.points.map((point) => point.year) ?? [];
-  const openingEvents = eventCatalog
-    ? resolveChartEvents({ catalog: eventCatalog, chartId: "opening", chartYears: openingYears })
-    : [];
-  const serviceUnitEvents = eventCatalog && serviceUnitCount?.length
-    ? resolveChartEvents({
-        catalog: eventCatalog,
-        chartId: "act2-service-units",
-        chartYears: serviceUnitCount.map((point) => point.year),
-      })
-    : [];
+  const eventContext = {
+    municipalityId: context.municipality.id,
+    topicId: context.topic.id,
+  };
+  const openingEvents = resolveTimelineEvents({
+    ...eventContext,
+    chartId: "opening",
+    series: act1Series,
+  });
+  const serviceUnitEvents = resolveTimelineEvents({
+    ...eventContext,
+    chartId: "act2-service-units",
+    series: serviceUnitCount?.length ? [{ points: serviceUnitCount }] : [],
+  });
 
   return (
     <>

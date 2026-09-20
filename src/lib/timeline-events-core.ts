@@ -2,6 +2,7 @@ import type {
   TimelineEvent,
   TimelineEventCatalog,
   TimelineEventScope,
+  TimelineEventVisibility,
 } from "../types/timeline-event";
 
 const scopeOrder: Record<TimelineEventScope, number> = {
@@ -9,6 +10,12 @@ const scopeOrder: Record<TimelineEventScope, number> = {
   policy: 1,
   societal: 2,
 };
+
+const timelineEventScopes = new Set<TimelineEventScope>(["municipality", "policy", "societal"]);
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+const isNonEmptyString = (value: unknown): value is string =>
+  typeof value === "string" && value.trim().length > 0;
 
 export function resolveChartEvents(input: {
   catalog: TimelineEventCatalog;
@@ -29,7 +36,7 @@ export function resolveChartEvents(input: {
 
 export function filterTimelineEvents(
   events: TimelineEvent[],
-  visibility: { municipality: boolean; policy: boolean; societal: boolean },
+  visibility: TimelineEventVisibility,
 ): TimelineEvent[] {
   return events.filter((event) => {
     if (event.scope === "municipality") return visibility.municipality;
@@ -46,22 +53,56 @@ export function defaultTimelineEventVisibility(events: TimelineEvent[]) {
   };
 }
 
-export function hasOptionalTimelineEvents(events: TimelineEvent[]) {
-  return events.some((event) => event.scope === "policy" || event.scope === "societal");
-}
+export function validateTimelineEventCatalog(catalog: unknown): asserts catalog is TimelineEventCatalog {
+  if (!isRecord(catalog) || !Array.isArray(catalog.events) || !Array.isArray(catalog.bindings)) {
+    throw new Error("Timeline event catalog must contain events and bindings arrays");
+  }
 
-export function validateTimelineEventCatalog(catalog: TimelineEventCatalog) {
   const ids = new Set<string>();
   for (const event of catalog.events) {
+    if (!isRecord(event) || !isNonEmptyString(event.id)) {
+      throw new Error("Timeline event must have a non-empty id");
+    }
     if (ids.has(event.id)) throw new Error(`Duplicate timeline event id: ${event.id}`);
     ids.add(event.id);
-    if (!event.source.url.startsWith("https://")) {
+    if (!Number.isInteger(event.year)) {
+      throw new Error(`Timeline event year must be an integer: ${event.id}`);
+    }
+    if (!timelineEventScopes.has(event.scope as TimelineEventScope)) {
+      throw new Error(`Unknown timeline event scope: ${event.id}`);
+    }
+    if (![event.category, event.title, event.description].every(isNonEmptyString)) {
+      throw new Error(`Timeline event text fields are required: ${event.id}`);
+    }
+    if (
+      !isRecord(event.source)
+      || !isNonEmptyString(event.source.label)
+      || !isNonEmptyString(event.source.url)
+      || !event.source.url.startsWith("https://")
+    ) {
       throw new Error(`Timeline event source must be https: ${event.id}`);
     }
   }
 
+  const chartIds = new Set<string>();
   for (const binding of catalog.bindings) {
+    if (!isRecord(binding) || !isNonEmptyString(binding.chartId) || !Array.isArray(binding.eventIds)) {
+      throw new Error("Timeline event binding must have a chartId and eventIds array");
+    }
+    if (chartIds.has(binding.chartId)) {
+      throw new Error(`Duplicate timeline event chart binding: ${binding.chartId}`);
+    }
+    chartIds.add(binding.chartId);
+
+    const bindingEventIds = new Set<string>();
     for (const eventId of binding.eventIds) {
+      if (!isNonEmptyString(eventId)) {
+        throw new Error(`Invalid timeline event id in binding ${binding.chartId}`);
+      }
+      if (bindingEventIds.has(eventId)) {
+        throw new Error(`Duplicate timeline event in binding ${binding.chartId}: ${eventId}`);
+      }
+      bindingEventIds.add(eventId);
       if (!ids.has(eventId)) {
         throw new Error(`Unknown timeline event in binding ${binding.chartId}: ${eventId}`);
       }
