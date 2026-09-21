@@ -364,7 +364,7 @@ export default function EducationStory({
             ]}
             kicker={`${place.municipalityLabel} · 各年5月1日現在`}
             heading="市立小中の教職員数の推移"
-            note="※小学校と中学校は別系列です、合算はしていません。教員以外の教職員を含んでいます。"
+            note="※小学校と中学校は別系列です、合算はしていません。教員以外の教職員を含んで��ます。"
             indexMode={false}
           />
           {seriesNote(data.series.elemStaff, "人")}
@@ -474,7 +474,6 @@ export default function EducationStory({
 
         <SupportConnectionSection
           data={buildEducationSupportConnection(place.municipalityLabel)}
-          variant="story"
           id="support-connection"
         />
 

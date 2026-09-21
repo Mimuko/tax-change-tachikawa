@@ -387,7 +387,6 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
         <SupportConnectionSection
           data={buildCareSupportConnection(place.municipalityLabel)}
-          variant="story"
           id="support-connection"
         />
 

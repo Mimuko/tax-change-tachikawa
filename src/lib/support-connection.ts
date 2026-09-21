@@ -214,31 +214,4 @@ export function buildEducationSupportConnection(municipalityLabel: string): Supp
   };
 }
 
-/**
- * 接続状況を「測れない」ことだけを示す例。
- * 指標が無くてもセクションが成立することを示すための最小構成。
- */
-export const unmeasuredSupportConnectionExample: SupportConnectionData = {
-  theme: "介護",
-  eyebrow: "支援への接続",
-  title: "つながっているかは、まだ測れない。",
-  lead: "支援ニーズがあっても、制度や専門機関につながっているかどうかを継続的に測れる公表データは、現時点では確認できていません。ここでは、その「測れなさ」自体を記録します。",
-  framing: {
-    existence: {
-      label: "制度・予算はある",
-      body: "制度も予算も存在し、本編で見たとおり関連する数字は動いています。",
-    },
-    delivery: {
-      label: "届いているかは、記録できていない",
-      body: "必要とする人のうち、どれだけが実際に制度や相談先につながっているかを示す公開データは見当たりません。",
-    },
-  },
-  indicators: [],
-  dataGap: {
-    title: "接続状況を測れる公表データが存在しない",
-    body: "「支援ニーズはあるが、制度や専門機関につながっていない」人の規模を継続比較できるデータは確認できていません。数字が無いことは「課題が無い」ことではなく、見えていないという状態です。分かり次第、ここに追記します。",
-  },
-  source: {
-    label: "表示例（UI検討用のサンプル値）",
-  },
-};
+
