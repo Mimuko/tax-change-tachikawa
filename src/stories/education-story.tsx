@@ -14,6 +14,7 @@ import StoryAct from "../components/story-act";
 import StoryExperience from "../components/story-experience";
 import StoryInterlude from "../components/story-interlude";
 import StoryRecap, { type RecapGroup } from "../components/story-recap";
+import SupportConnectionSection from "../components/support-connection-section";
 import type { DataPoint } from "../types/dashboard";
 
 const changePct = (points: { year: number; value: number }[]) =>
@@ -420,6 +421,17 @@ export default function EducationStory({
           />
           {seriesNote(data.series.educationConsultationCases, "件")}
         </StoryAct>
+
+        {data.supportConnection ? (
+          <SupportConnectionSection
+            data={data.supportConnection}
+            place={place.municipalityLabel}
+            id="act-connection"
+            eyebrow={`支援への接続 — ${place.municipalityLabel}・教育`}
+            title="相談を必要とする児童・家庭が、支援へ到達できているか"
+            lead="教育相談の件数は支援との接点を示しますが、相談を必要とする児童・家庭のうち何人が到達できたかは、この件数だけでは分かりません。"
+          />
+        ) : null}
 
         <StoryAct
           id="act-4"

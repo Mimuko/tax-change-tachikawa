@@ -40,6 +40,10 @@ const KIND_DEFAULTS: Record<DataGapKind, DataGapCopyTemplate> = {
     title: "{label}は、他の指標と同じ期間としては示していません。",
     body: "基準日や期間の種別が異なるため、同じグラフには載せていません。",
   },
+  not_measurable: {
+    title: "{place}で{label}を直接測ることはできません。",
+    body: "公表されているデータでは、支援を必要とする人のうち何人が実際に支援へ到達したかを分けて確認できません。",
+  },
   unavailable_for_comparison: {
     title: "{place}の{label}データはありますが、今回は推移には掲載していません。",
     body: "複数年を同じ条件で比較できるか確認中です。",

@@ -139,6 +139,7 @@ index_value = current_value / base_year_value * 100
 | `definition_break` | 定義・集計方法の変更で系列が途切れた |
 | `not_equivalent` | 名前は近いが別指標。代理にしない |
 | `incompatible_period` | 基準日・期間種別が異なり同一グラフに載せられない |
+| `not_measurable` | 関連データはあるが、必要な人の母数や非利用理由がなく、対象概念を直接測れない |
 | `unavailable_for_comparison` | 原典に地域の表はあるが、複数年の同一定義比較が未確認 |
 
 ### 公開文言
@@ -167,9 +168,33 @@ index_value = current_value / base_year_value * 100
 | `definition_break` | `definition_changed` | 系列接続しない |
 | `not_equivalent` | `not_comparable` | 別指標の代理禁止 |
 | `incompatible_period` | `not_comparable` | 期間種別混在禁止 |
+| `not_measurable` | `not_comparable` | 件数や単純な未利用数から対象概念を推定しない |
 | `unavailable_for_comparison` | `needs_review` | 監査・定義確認待ち |
 
 **介護 Act 3 Case B（都道府県参考のみ）**: `gaps` レコードは作らない。`reference.prefecture` の `referenceOnly: true` 系列を都道府県参考として表示し、意味は `wrong_geography` 相当（都道府県値を市区町村実績にしない）。UI 分岐は `resolveSupportAvailability` が正本。
+
+## 共通評価軸「支援への接続」
+
+`supportConnection` は、支援を必要とする人が相談・制度・サービス等へ**到達したか**を扱う。支援へ到達した後に状態が改善したか、満足したか、課題が解消したかという **Outcome は概念上分離**し、同じ指標・分類へ混在させない。
+
+### 構造
+
+- `dimension`: 到達の局面。`consultation` / `service_access` / `unmet_need` / `navigation`
+- `connectionState`: 原典の設問が直接示す場合だけ `connected` / `partially_connected` / `not_connected` / `unknown` を付ける
+- `supportNetwork`: dimension と直交する支援経路。`public_or_professional` / `informal` / `mixed` / `none` / `unknown`
+- `observations`: 期間・値・単位・回答母数。複数回答は `multipleResponse: true` とする
+- `population`: 誰についての値か。自治体全体、サービス非利用者、相談利用者等を区別する
+- `gaps`: 接続を測れない場合も非表示にせず、DataGap として記録する
+
+`informal_support_only` のように到達局面と支援経路を混ぜた dimension は作らない。家族・友人・地域だけにつながっている状態は、該当する `dimension` と `supportNetwork: "informal"` の組み合わせで表す。
+
+### 判定ルール
+
+1. 単純なサービス未利用を `not_connected` とみなさない。
+2. 本人・家庭の選択、必要性なし、理由不明は、明確な障壁と分離する。
+3. 複数回答の障壁項目を合算して「未接続率」を作らない。
+4. 相談件数を人数へ変換せず、ニーズ母数がなければ接続率を算出しない。
+5. 支援後の改善・満足度は、将来 Outcome 用の別モデルで扱う。
 
 ## フィールド監査結果（2026-09-13）
 

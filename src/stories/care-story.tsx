@@ -14,6 +14,7 @@ import StoryAct from "../components/story-act";
 import StoryExperience from "../components/story-experience";
 import StoryInterlude from "../components/story-interlude";
 import StoryRecap, { type RecapGroup } from "../components/story-recap";
+import SupportConnectionSection from "../components/support-connection-section";
 import {
   comparableReferenceMetrics,
   resolveSupportAvailability,
@@ -369,6 +370,17 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           prefectureReference={prefectureReference}
           seriesColors={seriesColors}
         />
+
+        {data.supportConnection ? (
+          <SupportConnectionSection
+            data={data.supportConnection}
+            place={place.municipalityLabel}
+            id="act-connection"
+            eyebrow={`支援への接続 — ${place.municipalityLabel}`}
+            title="サービスがあっても、必要な人が到達できるとは限らない"
+            lead="費用・供給・手続きが利用の障壁になることがあります。単純な未利用者数ではなく、理由が明確な回答を分けて見ます。"
+          />
+        ) : null}
 
         <StoryAct
           id="act-4"

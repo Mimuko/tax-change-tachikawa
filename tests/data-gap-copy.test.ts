@@ -29,3 +29,12 @@ test("data-gap-copy: override 内のプレースホルダも展開する", () =>
     "立川市のデータはありますが、教育費の比較条件は確認中です。 立川市の値として代理には使っていません。",
   );
 });
+
+test("data-gap-copy: 測定不能は未公表と区別する", () => {
+  const copy = resolveDataGapCopy(
+    { id: "g3", kind: "not_measurable" },
+    { place: "立川市", label: "支援への到達" },
+  );
+  assert.equal(copy.title, "立川市で支援への到達を直接測ることはできません。");
+  assert.match(copy.body, /必要とする人のうち何人/);
+});

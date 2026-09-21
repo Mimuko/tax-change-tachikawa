@@ -216,6 +216,44 @@ const dashboard = {
       sourceUrl: fetched.consultation.url,
     },
   },
+  supportConnection: {
+    indicators: [
+      {
+        metricId: "education_consultation_cases",
+        label: "教育相談として受け付けた件数",
+        dimension: "consultation",
+        supportNetwork: "public_or_professional",
+        connectionState: "connected",
+        observations: educationConsultationCases.map(({ year, value }) => ({
+          periodLabel: `${year}年度`,
+          year,
+          value,
+          unit: "cases",
+        })),
+        population: "立川市の教育相談で年度内に受け付けた相談",
+        geography: "tachikawa",
+        referenceOnly: false,
+        provenance: {
+          title: "立川市オープンデータ『教育相談件数』",
+          sourceUrl: fetched.consultation.url,
+          definition: "年度内の教育相談件数（男女合算）。相談した実人数ではなく、相談の受付件数。",
+        },
+        caveat: "同じ人・家庭による複数回の相談を含み得るため、支援につながった人数や接続率には換算できません。",
+      },
+    ],
+    gaps: [
+      {
+        id: "education_support_reach_rate",
+        kind: "not_measurable",
+        metricId: "education_support_reach_rate",
+        title: "教育相談を必要とする人のうち、実際に相談へ到達できた割合は分かりません。",
+        reason: "公表されているのは相談の受付件数で、相談を必要とする児童・家庭の人数や、誰にも相談していない人の人数は含まれていません。",
+        note: "相談件数を児童生徒数で割って接続率を作ることはしていません。",
+        sourceUrl: fetched.consultation.url,
+        sourceLabel: "立川市オープンデータ『教育相談件数』",
+      },
+    ],
+  },
   gaps: [
     {
       id: "non_attendance_school_refusal",
