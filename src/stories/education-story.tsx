@@ -252,7 +252,7 @@ export default function EducationStory({
 
   return (
     <>
-      <SiteTopbar active="home" context={context} />
+      <SiteTopbar variant="story" active="home" context={context} />
       <main id="main" tabIndex={-1}>
         <header className="hero" id="top">
           <div className="hero-copy">

@@ -1,3 +1,5 @@
-import SourcePage from "../../stories/source-page";
-import { defaultStory } from "../../lib/story-registry";
-export default function Page() { return <SourcePage context={defaultStory} />; }
+import SiteDataHub from "../../components/site-data-hub";
+
+export default function Page() {
+  return <SiteDataHub />;
+}

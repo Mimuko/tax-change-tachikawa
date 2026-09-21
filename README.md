@@ -2,7 +2,7 @@
 
 ## 自治体×テーマ構成
 
-現在の公開ストーリーは `/tachikawa/care/`、出典は `/tachikawa/care/data/` です。既存の `/`・`/data/` も利用できます。
+TOP は `/`、データ方針ハブは `/data/` です。公開ストーリーは `/tachikawa/care/`（介護）と `/tachikawa/education/`（教育）。各ストーリーの出典・定義は `/tachikawa/{topic}/data/` です。
 
 自治体情報は `config/municipalities/`、テーマの指標定義は `config/topics/`、ストーリーの指標参照は `config/stories/`、原典設定は `config/data-sources/` で管理します。画面の組み合わせとコピーは `src/stories/`、共通部品は `src/components/` に置きます。
 

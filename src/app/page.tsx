@@ -1,5 +1,5 @@
-import StoryPage from "../stories/story-page";
-import { defaultStory } from "../lib/story-registry";
+import SiteHome from "../components/site-home";
+
 export default function Home() {
-  return <StoryPage context={defaultStory} />;
+  return <SiteHome />;
 }

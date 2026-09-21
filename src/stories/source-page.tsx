@@ -6,7 +6,7 @@ export default function SourcePage({ context }: { context: StoryContext }) {
   const { data } = context;
   return (
     <>
-      <SiteTopbar active="data" context={context} />
+      <SiteTopbar variant="story" active="data" context={context} />
       <main id="main" tabIndex={-1} className="data-page">
         <section className="data-content">
           <header className="data-intro">
