@@ -644,13 +644,13 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
 .hub-main { max-width: 1440px; margin: 0 auto; }
 .hub-hero { padding: clamp(3.5rem, 9vh, 8rem) var(--space-page) clamp(2.5rem, 6vh, 5rem); }
 .hub-hero .eyebrow { display: flex; align-items: center; }
-.hub-hero h1 { max-width: 12ch; margin: .35em 0 .3em; font-size: clamp(3rem, 8.5vw, 7rem); line-height: .98; letter-spacing: -.06em; }
-.hub-lead { max-width: 42rem; color: var(--muted); font-size: clamp(1.02rem, 1.5vw, 1.22rem); }
+.hub-hero h1 { margin: .35em 0 .3em; font-size: clamp(3rem, 8.5vw, 7rem); line-height: .98; letter-spacing: -.06em; }
+.hub-lead { color: var(--muted); font-size: clamp(1.02rem, 1.5vw, 1.22rem); }
 .hub-note { margin-top: 1.4rem; color: var(--text-secondary); font-size: var(--text-sm); }
 
 .hub-directory { background: var(--panel); padding: clamp(4rem, 8vh, 7rem) var(--space-page); }
 .hub-directory-inner { max-width: 1240px; margin: 0 auto; }
-.hub-directory-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 5vh, 4rem); }
+.hub-directory-head { margin-bottom: clamp(2.5rem, 5vh, 4rem); }
 .hub-directory-head h2 { margin: .35em 0 .55em; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.14; letter-spacing: -.04em; }
 .hub-directory-head p { color: var(--muted); }
 .hub-inline-path, .hub-card-path { font-family: var(--font-serif); letter-spacing: .02em; }

@@ -11,7 +11,7 @@
     "data:normalize": "node scripts/build-data.mjs",
     "data:update": "npm run data:fetch && npm run data:normalize",
     "data:build": "npm run data:normalize",
-    "dev": "next dev",
+    "dev": "node scripts/run-dev.cjs",
     "build": "npm run data:build && next build",
     "start": "next start",
     "lint": "eslint ."
