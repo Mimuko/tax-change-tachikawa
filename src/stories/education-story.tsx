@@ -14,6 +14,8 @@ import StoryAct from "../components/story-act";
 import StoryExperience from "../components/story-experience";
 import StoryInterlude from "../components/story-interlude";
 import StoryRecap, { type RecapGroup } from "../components/story-recap";
+import SupportConnectionSection from "../components/support-connection-section";
+import { buildEducationSupportConnection } from "../lib/support-connection";
 import type { DataPoint } from "../types/dashboard";
 
 const changePct = (points: { year: number; value: number }[]) =>
@@ -469,6 +471,12 @@ export default function EducationStory({
             </p>
           )}
         </StoryAct>
+
+        <SupportConnectionSection
+          data={buildEducationSupportConnection(place.municipalityLabel)}
+          variant="story"
+          id="support-connection"
+        />
 
         <StoryRecap groups={recapGroups} shareUrl={shareUrl} />
         <DetailAccordion items={detailItems} />

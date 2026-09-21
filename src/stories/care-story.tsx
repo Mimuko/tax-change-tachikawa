@@ -18,6 +18,8 @@ import {
   comparableReferenceMetrics,
   resolveSupportAvailability,
 } from "../lib/support-availability";
+import SupportConnectionSection from "../components/support-connection-section";
+import { buildCareSupportConnection } from "../lib/support-connection";
 import type { DataPoint, ReferenceMetric } from "../types/dashboard";
 
 const formatPeople = (value: number) => `${value.toLocaleString("ja-JP")}人`;
@@ -382,6 +384,12 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
             sourceUrl={premiumStandard.sourceUrl}
           />
         </StoryAct>
+
+        <SupportConnectionSection
+          data={buildCareSupportConnection(place.municipalityLabel)}
+          variant="story"
+          id="support-connection"
+        />
 
         <StoryRecap groups={recapGroups} shareUrl={shareUrl} />
 
