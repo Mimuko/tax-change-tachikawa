@@ -111,6 +111,7 @@ const data = {
     periods: municipality.premiumStandard.periods,
   },
   reference: { prefecture: [] },
+  supportConnection: municipality.supportConnection ?? { indicators: [], gaps: [] },
 };
 
 const requiredSeries = ["insured", "certified", "benefits", "premiumRevenue"];

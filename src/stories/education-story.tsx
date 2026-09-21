@@ -5,17 +5,17 @@ import { buildShareUrl } from "../lib/site-url";
 import { resolveTimelineEvents } from "../lib/timeline-events";
 import { buildEducationStepCopy } from "./education-copy";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
-import GeographyChip from "../components/geography-chip";
 import ChartWithTimelineEvents from "../components/timeline-events-panel";
 import SimpleSeriesChart from "../components/simple-series-chart";
 import SiteFooter from "../components/site-footer";
 import SiteTopbar from "../components/site-topbar";
 import StoryAct from "../components/story-act";
 import StoryExperience from "../components/story-experience";
-import StoryInterlude from "../components/story-interlude";
+import StoryInterlude, { DataGapInterlude } from "../components/story-interlude";
 import StoryRecap, { type RecapGroup } from "../components/story-recap";
 import SupportConnectionSection from "../components/support-connection-section";
-import { buildEducationSupportConnection } from "../lib/support-connection";
+import { formatSupportConnectionRecapItems } from "../lib/support-connection-recap";
+import { buildSupportConnectionDetailItem } from "../lib/support-connection-detail";
 import type { DataPoint } from "../types/dashboard";
 
 const changePct = (points: { year: number; value: number }[]) =>
@@ -59,6 +59,10 @@ export default function EducationStory({
   const costCopy = costGap
     ? resolveDataGapCopy(costGap, { place: place.municipalityLabel, label: "1人あたりの教育費" })
     : null;
+  const supportConnectionDetail = buildSupportConnectionDetailItem(
+    data.supportConnection,
+    place.municipalityLabel,
+  );
 
   const act1Series = context.story.opening.map((step) => {
     const definition = context.topic.metrics[step.metricId];
@@ -151,7 +155,7 @@ export default function EducationStory({
       kind: "unavailable",
       note:
         (costCopy && formatDataGapPublicText(costCopy)) ??
-        "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今回は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。",
+        "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今���は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。",
     },
     {
       id: "refusal",
@@ -161,6 +165,7 @@ export default function EducationStory({
         (refusalCopy && formatDataGapPublicText(refusalCopy)) ??
         "立川市だけの不登校の年次推移を確認できるデータはありません。文部科学省の調査は都道府県・指定都市単位で公表されています。東京都全体の値は、立川市の実績としては扱っていません。",
     },
+    ...(supportConnectionDetail ? [supportConnectionDetail] : []),
     {
       id: "source",
       title: "データの出典",
@@ -218,6 +223,16 @@ export default function EducationStory({
         }),
       ],
     },
+    ...(data.supportConnection?.indicators.length
+      ? [
+          {
+            scope: "municipality",
+            chipLabel: place.municipalityLabel,
+            title: "支援への接続",
+            items: formatSupportConnectionRecapItems(data.supportConnection),
+          } satisfies RecapGroup,
+        ]
+      : []),
     {
       scope: "municipality",
       chipLabel: place.municipalityLabel,
@@ -301,7 +316,7 @@ export default function EducationStory({
 
         <StoryInterlude
           variant="pause"
-          eyebrow="Act 1 のまとめ"
+          eyebrow="まとめ"
           title="児童・生徒の数は、大きな変化はない"
         >
           <p>では、学級の数と支援の形は？</p>
@@ -309,9 +324,8 @@ export default function EducationStory({
 
         <StoryAct
           id="act-classes"
-          eyebrow={`Interlude — ${place.municipalityLabel}`}
+          eyebrow={`${place.municipalityLabel}・市立小学校学級数`}
           title="児童の数より、クラスの数と支援の形が変わっている"
-          chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
           <ChartWithTimelineEvents
             series={[
@@ -341,9 +355,8 @@ export default function EducationStory({
 
         <StoryAct
           id="act-2"
-          eyebrow={`Act 2 — ${place.municipalityLabel}`}
+          eyebrow={`${place.municipalityLabel}・市立小中学校教職員数`}
           title="支える側の人数は、増えている"
-          chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
           <SimpleSeriesChart
             series={[
@@ -371,24 +384,18 @@ export default function EducationStory({
           {seriesNote(data.series.junStaff, "人")}
         </StoryAct>
 
-        <StoryInterlude
-          variant="gap"
-          eyebrow="データのすきま"
-          title={
-            <>
-              立川市だけの不登校の年次推移を
-              <br />
-              確認できるデータはありません。
-            </>
+        <DataGapInterlude
+          placeLabel={place.municipalityLabel}
+          subject="不登校の年次推移"
+          reason={
+            refusalGap?.reason ??
+            "文部科学省の調査は都道府県・指定都市単位で公表されています。東京都全体の値は、立川市の実績としては扱っていません。"
+          }
+          followUp={
+            refusalGap?.note ??
+            "また、市が公表している『不就学』は『不登校』とは定義が異なるため、代替指標としては使用していません。"
           }
         >
-          <p>
-            {refusalGap?.reason ??
-              "文部科学省の調査は都道府県・指定都市単位で公表されています。東京都全体の値は、立川市の実績としては扱っていません。"}
-            <br />
-            {refusalGap?.note ??
-              "また、市が公表している『不就学』は『不登校』とは定義が異なるため、代替指標としては使用していません。"}
-          </p>
           {place.links?.mextSchoolRefusalSurvey ? (
             <p>
               <a href={place.links.mextSchoolRefusalSurvey} target="_blank" rel="noopener noreferrer">
@@ -396,13 +403,12 @@ export default function EducationStory({
               </a>
             </p>
           ) : null}
-        </StoryInterlude>
+        </DataGapInterlude>
 
         <StoryAct
           id="act-3"
-          eyebrow={`Act 3 — ${place.municipalityLabel}・教育相談`}
+          eyebrow={`${place.municipalityLabel}・教育相談件数`}
           title="教育相談の件数は、増えている"
-          chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
           <ChartWithTimelineEvents
             series={[
@@ -423,11 +429,32 @@ export default function EducationStory({
           {seriesNote(data.series.educationConsultationCases, "件")}
         </StoryAct>
 
+        {data.supportConnection ? (
+          <SupportConnectionSection
+              data={data.supportConnection}
+              place={place.municipalityLabel}
+              id="act-connection"
+              eyebrow={`${place.municipalityLabel}・支援への接続`}
+              title="制度はある。必要な子どもに、届いているか。"
+              lead={`${place.municipalityLabel}には学校も教職員も教育相談もあり、本編で見たとおりその規模は動いています。けれど「体制があること」と「支援が必要な子どもに届いていること」は、同じではありません。`}
+              framing={{
+                existence: {
+                  label: "体制・窓口はある",
+                  body: "市立小中の教職員数は増え、特別支援学級も教育相談の件数も本編のとおり増えています。",
+                },
+                delivery: {
+                  label: "届いているかは、別の問い",
+                  body: "相談や支援の窓口があることは、支援を必要とする子どもすべてに届いていることを意味しません。入口の分かりにくさや家庭の事情で、つながれないことがあります。",
+                },
+              }}
+              readingNote="教育相談の「件数」は延べの相談数であり、支援が届いた子どもの人数を示すものではありません。同じ子どもが複数回相談することも、相談に至らない子どもがいることもあります。"
+            />
+        ) : null}
+
         <StoryAct
           id="act-4"
-          eyebrow={`Act 4 — ${place.municipalityLabel}・教育費`}
+          eyebrow={`${place.municipalityLabel}・教育費`}
           title="1人あたりの公費支出は、どう変わったか"
-          chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
           {data.series.elemPerStudentCost?.length && data.series.junPerStudentCost?.length ? (
             <SimpleSeriesChart
@@ -472,10 +499,6 @@ export default function EducationStory({
           )}
         </StoryAct>
 
-        <SupportConnectionSection
-          data={buildEducationSupportConnection(place.municipalityLabel)}
-          id="support-connection"
-        />
 
         <StoryRecap groups={recapGroups} shareUrl={shareUrl} />
         <DetailAccordion items={detailItems} />

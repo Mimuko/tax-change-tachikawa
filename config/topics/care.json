@@ -55,6 +55,30 @@
       "unit": "円",
       "definition": "現年分の介護保険料収入額",
       "comparison": "給付費・基準額と分離。個人負担に読み替えない"
+    },
+    "care_service_cost_barrier_nonuser_pct": {
+      "label": "費用負担により介護サービスを利用できない人の割合",
+      "unit": "%",
+      "definition": "在宅の要介護・要支援認定者のうち、介護保険サービス非利用者が回答した非利用理由",
+      "comparison": "複数回答。ほかの非利用理由と合算せず、自治体全体の未接続率に読み替えない"
+    },
+    "care_service_unavailable_nonuser_pct": {
+      "label": "利用したい介護サービスが利用できない人の割合",
+      "unit": "%",
+      "definition": "介護保険サービス非利用者のうち、利用したいサービスが利用できない・身近にないと回答した割合",
+      "comparison": "複数回答。ほかの障壁項目との重複を含む"
+    },
+    "care_service_navigation_barrier_nonuser_pct": {
+      "label": "手続きや利用方法が分からない人の割合",
+      "unit": "%",
+      "definition": "介護保険サービス非利用者のうち、サービスを受けたいが手続きや利用方法が分からないと回答した割合",
+      "comparison": "複数回答。ほかの障壁項目との重複を含む"
+    },
+    "older_adult_no_listener_pct": {
+      "label": "心配事や愚痴を聞いてくれる人がいない人の割合",
+      "unit": "%",
+      "definition": "介護予防・日常生活圏域ニーズ調査で『そのような人はいない』と回答した割合",
+      "comparison": "相談ニーズの有無や専門支援への未到達を直接示す値ではない"
     }
   }
 }

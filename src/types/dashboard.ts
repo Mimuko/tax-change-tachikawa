@@ -1,3 +1,5 @@
+import type { SupportConnectionData } from "./support-connection";
+
 export type DataPoint = { year: number; value: number };
 
 export type CertifiedPoint = DataPoint & { secondInsured?: number };
@@ -71,6 +73,7 @@ export type DashboardData = {
     /** Prefecture reference metrics (`referenceOnly: true`). */
     prefecture: ReferenceMetric[];
   };
+  supportConnection?: SupportConnectionData;
 };
 
 export type DataGapKind =
@@ -80,6 +83,7 @@ export type DataGapKind =
   | "definition_break"
   | "not_equivalent"
   | "incompatible_period"
+  | "not_measurable"
   | "unavailable_for_comparison";
 
 export type DataGap = {
