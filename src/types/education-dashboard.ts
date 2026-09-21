@@ -1,4 +1,5 @@
 import type { DataGap, DataPoint, PlaceInfo, Provenance } from "./dashboard";
+import type { SupportConnectionData } from "./support-connection";
 
 export type EducationProvenance = Provenance & {
   periodKind?: "as_of" | "annual_cumulative" | "fiscal_year" | "plan_period";
@@ -43,4 +44,5 @@ export type EducationDashboardData = {
     junPerStudentCost?: EducationProvenance;
   };
   gaps?: EducationDataGap[];
+  supportConnection?: SupportConnectionData;
 };

@@ -196,7 +196,8 @@ th, td { padding: .4rem; border-bottom: 1px solid var(--line); text-align: left;
 .geography-chip--policy { border-color: var(--orange); background: color-mix(in srgb, var(--orange) 10%, var(--paper)); }
 
 .act-tokyo,
-.act-prefecture-ref { border-top: 4px solid var(--series-4); background: color-mix(in srgb, var(--panel) 40%, var(--paper)); }
+.act-prefecture-ref { background: color-mix(in srgb, var(--panel) 40%, var(--paper)); }
+.act-tokyo { border-top: 4px solid var(--series-4); }
 .act-tokyo .story-act-inner,
 .act-prefecture-ref .story-act-inner { border-left: 3px solid var(--series-4); padding-left: 1.5rem; }
 .tokyo-metric-stack,
@@ -209,6 +210,7 @@ th, td { padding: .4rem; border-bottom: 1px solid var(--line); text-align: left;
   background: var(--panel);
   text-align: center;
 }
+.gap-interlude.story-interlude { border-bottom: 4px solid var(--series-4); }
 .gap-interlude h2 { margin: 0 0 .6em; font-size: clamp(1.85rem, 3.6vw, 2.75rem); line-height: 1.2; letter-spacing: -.035em; }
 .gap-interlude > p { margin: 0 auto; color: var(--muted); }
 
@@ -677,6 +679,38 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
 .hub-card--pending { background: color-mix(in srgb, var(--panel) 55%, var(--paper)); border-style: dashed; }
 .hub-card--pending:hover { transform: none; border-color: var(--border-subtle); }
 .hub-card--pending .hub-card-title { color: var(--text-secondary); }
+
+/* 支援への接続 — v0「ストーリー型」 */
+.support-connection { padding: clamp(4rem, 8vh, 7rem) var(--space-page); background: var(--paper); }
+.support-connection-inner { max-width: 900px; margin: 0 auto; }
+.sc-title { margin: .4em 0 .55em; font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.18; letter-spacing: -.04em; }
+.sc-lead { margin: 0; color: var(--muted); }
+.sc-source { margin: 2.5rem 0 0; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .04em; }
+
+.sc-reading-note { margin: 2rem 0 0; padding: 1rem 1.25rem; background: var(--panel); color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.8; }
+
+.sc-datagap { margin: 2rem 0 0; padding: 1.4rem 1.5rem; background: color-mix(in srgb, var(--panel) 55%, var(--paper)); border: 1px dashed var(--border-subtle); }
+.sc-datagap-title { display: flex; align-items: center; gap: .6rem; margin: 0 0 .5em; font-weight: 700; color: var(--ink); }
+.sc-datagap-mark { display: grid; place-content: center; width: 1.55rem; height: 1.55rem; flex-shrink: 0; border: 1px solid var(--border-subtle); border-radius: 50%; color: var(--text-secondary); font-family: var(--font-serif); font-size: .95rem; }
+.sc-datagap-body { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+.sc-datagap .sc-source { margin-top: 1rem; }
+
+.support-connection.sc-story { border-top: 4px solid var(--orange); }
+.sc-story-framing { margin: 2.75rem 0 0; display: grid; gap: 1rem; }
+.sc-story-framing-line { margin: 0; padding-left: 1.1rem; border-left: 3px solid var(--line); color: var(--muted); line-height: 1.8; }
+.sc-story-framing-line--delivery { border-left-color: var(--orange); }
+.sc-story-framing-label { display: block; margin-bottom: .2rem; font-size: var(--text-sm); font-weight: 700; color: var(--ink); }
+.sc-story-steps { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+.sc-story-step { display: grid; grid-template-columns: 3rem 1fr; gap: 0 1.25rem; padding: 1.75rem 0; border-top: 1px solid var(--line); }
+.sc-story-step:first-child { border-top: 0; }
+.sc-story-index { font-family: var(--font-serif); font-size: 1.1rem; color: var(--orange-text); line-height: 1.4; }
+.sc-story-body { min-width: 0; }
+.sc-story-headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .7rem; margin: 0; }
+.sc-story-value { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1; color: var(--ink); }
+.sc-story-value--none { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 700; color: var(--text-secondary); letter-spacing: .04em; }
+.sc-story-label { margin: .55rem 0 0; font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
+.sc-story-meaning { margin: .7rem 0 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+.sc-story-close { margin-top: 2.5rem; }
 
 .hub-about { background: var(--paper); padding: clamp(4rem, 8vh, 7rem) var(--space-page); }
 .hub-about-inner { max-width: 1100px; margin: 0 auto; }

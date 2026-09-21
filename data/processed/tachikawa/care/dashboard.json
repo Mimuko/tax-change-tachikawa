@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T02:38:03.883Z",
+  "generatedAt": "2026-09-21T08:14:04.263Z",
   "latestFiscalYear": 2023,
   "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
   "place": {
@@ -214,5 +214,115 @@
         }
       }
     ]
+  },
+  "supportConnection": {
+    "indicators": [
+      {
+        "metricId": "care_service_cost_barrier_nonuser_pct",
+        "label": "利用料を支払うのが難しい",
+        "dimension": "service_access",
+        "supportNetwork": "public_or_professional",
+        "connectionState": "not_connected",
+        "observations": [
+          {
+            "periodLabel": "2022年調査",
+            "year": 2022,
+            "value": 2.6,
+            "unit": "percent",
+            "sampleSize": 231
+          }
+        ],
+        "population": "在宅の要介護・要支援認定者のうち、調査月に介護保険サービスを利用していない回答者",
+        "sourceQuestion": "介護保険サービスを利用していない理由は何ですか。（複数回答）",
+        "multipleResponse": true,
+        "geography": "tachikawa",
+        "referenceOnly": false,
+        "provenance": {
+          "title": "立川市高齢者福祉介護計画改定事前調査報告書（2023年5月）",
+          "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/006/659/keikaku_houkoku_gaiyou.pdf",
+          "definition": "介護保険サービス非利用者が選んだ非利用理由。2022年11月15日から12月13日に調査。"
+        }
+      },
+      {
+        "metricId": "care_service_unavailable_nonuser_pct",
+        "label": "利用したいサービスが利用できない・身近にない",
+        "dimension": "unmet_need",
+        "supportNetwork": "public_or_professional",
+        "connectionState": "not_connected",
+        "observations": [
+          {
+            "periodLabel": "2022年調査",
+            "year": 2022,
+            "value": 2.6,
+            "unit": "percent",
+            "sampleSize": 231
+          }
+        ],
+        "population": "在宅の要介護・要支援認定者のうち、調査月に介護保険サービスを利用していない回答者",
+        "sourceQuestion": "介護保険サービスを利用していない理由は何ですか。（複数回答）",
+        "multipleResponse": true,
+        "geography": "tachikawa",
+        "referenceOnly": false,
+        "provenance": {
+          "title": "立川市高齢者福祉介護計画改定事前調査報告書（2023年5月）",
+          "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/006/659/keikaku_houkoku_gaiyou.pdf",
+          "definition": "介護保険サービス非利用者が選んだ非利用理由。2022年11月15日から12月13日に調査。"
+        }
+      },
+      {
+        "metricId": "care_service_navigation_barrier_nonuser_pct",
+        "label": "サービスを受けたいが、手続きや利用方法が分からない",
+        "dimension": "navigation",
+        "supportNetwork": "public_or_professional",
+        "connectionState": "not_connected",
+        "observations": [
+          {
+            "periodLabel": "2022年調査",
+            "year": 2022,
+            "value": 4.3,
+            "unit": "percent",
+            "sampleSize": 231
+          }
+        ],
+        "population": "在宅の要介護・要支援認定者のうち、調査月に介護保険サービスを利用していない回答者",
+        "sourceQuestion": "介護保険サービスを利用していない理由は何ですか。（複数回答）",
+        "multipleResponse": true,
+        "geography": "tachikawa",
+        "referenceOnly": false,
+        "provenance": {
+          "title": "立川市高齢者福祉介護計画改定事前調査報告書（2023年5月）",
+          "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/006/659/keikaku_houkoku_gaiyou.pdf",
+          "definition": "介護保険サービス非利用者が選んだ非利用理由。2022年11月15日から12月13日に調査。"
+        }
+      },
+      {
+        "metricId": "older_adult_no_listener_pct",
+        "label": "心配事や愚痴を聞いてくれる人がいない",
+        "dimension": "consultation",
+        "supportNetwork": "none",
+        "connectionState": "not_connected",
+        "observations": [
+          {
+            "periodLabel": "2022年調査",
+            "year": 2022,
+            "value": 5.5,
+            "unit": "percent",
+            "sampleSize": 1790
+          }
+        ],
+        "population": "65歳以上で要介護認定を受けていない人、および要支援1・2の調査回答者",
+        "sourceQuestion": "あなたの心配事や愚痴を聞いてくれる人は誰ですか。（複数回答）",
+        "multipleResponse": true,
+        "geography": "tachikawa",
+        "referenceOnly": false,
+        "provenance": {
+          "title": "立川市高齢者福祉介護計画改定事前調査報告書（2023年5月）",
+          "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/006/659/keikaku_houkoku_gaiyou.pdf",
+          "definition": "介護予防・日常生活圏域ニーズ調査の『そのような人はいない』回答。2022年11月15日から12月13日に調査。"
+        },
+        "caveat": "心配事の有無や、公的・専門的な相談支援を必要としていたかまでは確認できません。"
+      }
+    ],
+    "gaps": []
   }
 }
