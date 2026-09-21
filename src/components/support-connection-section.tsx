@@ -25,6 +25,7 @@ type SupportConnectionSectionProps = {
 function formatValue(indicator: SupportConnectionIndicator): string | null {
   const latest = indicator.observations.at(-1);
   if (!latest) return null;
+
   const value = latest.value.toLocaleString("ja-JP", {
     maximumFractionDigits: latest.unit === "percent" ? 1 : 0,
   });
@@ -36,6 +37,7 @@ function formatValue(indicator: SupportConnectionIndicator): string | null {
         : latest.unit === "households"
           ? "世帯"
           : "人";
+
   return `${value}${unit}`;
 }
 
@@ -68,6 +70,7 @@ function indicatorMeaning(
   if (sharedKeys.has(indicatorContextKey(indicator))) {
     return indicator.caveat ?? null;
   }
+
   const caveat = indicator.caveat ? ` ${indicator.caveat}` : "";
   return `${indicator.population}。${indicator.provenance.definition}${caveat}`;
 }
@@ -103,6 +106,10 @@ function DataGapBlock({
   );
 }
 
+/**
+ * 「支援への接続」共通セクション（ストーリー型）。
+ * 制度の規模と支援への到達を分けて示し、測れない領域は DataGap として残す。
+ */
 export default function SupportConnectionSection({
   data,
   place,

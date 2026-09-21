@@ -421,6 +421,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           />
         </StoryAct>
 
+
         <StoryRecap groups={recapGroups} shareUrl={shareUrl} />
 
         <DetailAccordion items={detailItems} />

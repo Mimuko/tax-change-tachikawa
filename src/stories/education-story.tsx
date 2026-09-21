@@ -155,7 +155,7 @@ export default function EducationStory({
       kind: "unavailable",
       note:
         (costCopy && formatDataGapPublicText(costCopy)) ??
-        "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今回は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。",
+        "立川市の教育費データはありますが、複数年を同じ条件で比較できるか確認中のため、今���は推移には掲載していません。公表値は会計年度の実績です。児童生徒数から独自に1人あたりの金額を計算することはしていません。",
     },
     {
       id: "refusal",
@@ -377,7 +377,7 @@ export default function EducationStory({
             ]}
             kicker={`${place.municipalityLabel} · 各年5月1日現在`}
             heading="市立小中の教職員数の推移"
-            note="※小学校と中学校は別系列です、合算はしていません。教員以外の教職員を含んでいます。"
+            note="※小学校と中学校は別系列です、合算はしていません。教員以外の教職員を含んで��ます。"
             indexMode={false}
           />
           {seriesNote(data.series.elemStaff, "人")}
@@ -498,6 +498,7 @@ export default function EducationStory({
             </p>
           )}
         </StoryAct>
+
 
         <StoryRecap groups={recapGroups} shareUrl={shareUrl} />
         <DetailAccordion items={detailItems} />
