@@ -92,7 +92,7 @@ export type SupportConnectionData = {
 export const careSupportConnectionExample: SupportConnectionData = {
   theme: "介護",
   eyebrow: "支援への接続",
-  title: "制度はある。では、届いているか。",
+  title: "制度はある。必要な人に、届いているか。",
   lead: "介護保険という制度があり、予算も年々増えています。けれど「制度や予算があること」と「必要な人に支援が届いていること」は、同じではありません。ここでは、支援につながりにくさを示す情報を、数字とその意味の両面から見ます。",
   framing: {
     existence: {
@@ -108,7 +108,7 @@ export const careSupportConnectionExample: SupportConnectionData = {
     {
       id: "no-service-nearby",
       label: "利用したいサービスが利用できない・身近にない",
-      basis: "サービス未利用者のうち",
+      basis: "サービス未利用者への複数回答",
       value: 24,
       unit: "%",
       meaning:
@@ -117,7 +117,7 @@ export const careSupportConnectionExample: SupportConnectionData = {
     {
       id: "unknown-procedure",
       label: "手続きや利用方法が分からない",
-      basis: "サービス未利用者のうち",
+      basis: "サービス未利用者への複数回答",
       value: 18,
       unit: "%",
       meaning:
@@ -126,7 +126,7 @@ export const careSupportConnectionExample: SupportConnectionData = {
     {
       id: "cost-barrier",
       label: "利用料を支払うのが難しい",
-      basis: "サービス未利用者のうち",
+      basis: "サービス未利用者への複数回答",
       value: 15,
       unit: "%",
       meaning:

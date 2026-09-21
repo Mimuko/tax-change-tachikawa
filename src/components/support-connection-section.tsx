@@ -193,13 +193,15 @@ function StoryVariant({ data, id }: { data: SupportConnectionData; id?: string }
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="sc-story-body">
-                  <p className="sc-story-basis">{indicator.basis}</p>
                   <p className="sc-story-headline">
                     <span className="sc-story-value">
                       {value ?? <span className="sc-story-value--none">測定なし</span>}
                     </span>
-                    <span className="sc-story-label">{indicator.label}</span>
+                    {value ? (
+                      <span className="sc-story-basis-inline">{indicator.basis}</span>
+                    ) : null}
                   </p>
+                  <p className="sc-story-label">{indicator.label}</p>
                   <p className="sc-story-meaning">
                     {value ? indicator.meaning : indicator.unavailableReason ?? indicator.meaning}
                   </p>

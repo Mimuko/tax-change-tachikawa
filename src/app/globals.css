@@ -749,10 +749,10 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
 .sc-story-step:first-child { border-top: 0; }
 .sc-story-index { font-family: var(--font-serif); font-size: 1.1rem; color: var(--orange-text); line-height: 1.4; }
 .sc-story-body { min-width: 0; }
-.sc-story-basis { margin: 0; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .08em; }
-.sc-story-headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .9rem; margin: .4rem 0 0; }
+.sc-story-headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .7rem; margin: 0; }
 .sc-story-value { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1; color: var(--ink); }
-.sc-story-label { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.sc-story-basis-inline { color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .04em; white-space: nowrap; }
+.sc-story-label { margin: .55rem 0 0; font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
 .sc-story-meaning { margin: .7rem 0 0; max-width: 42rem; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
 .sc-story-close { margin-top: 2.5rem; }
 
