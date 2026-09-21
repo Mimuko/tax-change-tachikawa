@@ -5,7 +5,6 @@ import { resolveTimelineEvents } from "../lib/timeline-events";
 import { buildCareStepCopy } from "./care-copy";
 import ActSupportSection from "../components/act-support-section";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
-import GeographyChip from "../components/geography-chip";
 import PremiumStandardSection from "../components/premium-standard-section";
 import ChartWithTimelineEvents from "../components/timeline-events-panel";
 import SiteFooter from "../components/site-footer";
@@ -19,6 +18,8 @@ import {
   comparableReferenceMetrics,
   resolveSupportAvailability,
 } from "../lib/support-availability";
+import { formatSupportConnectionRecapItems } from "../lib/support-connection-recap";
+import { buildSupportConnectionDetailItem } from "../lib/support-connection-detail";
 import type { DataPoint, ReferenceMetric } from "../types/dashboard";
 
 const formatPeople = (value: number) => `${value.toLocaleString("ja-JP")}人`;
@@ -113,7 +114,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         id: "capacity",
         title: "サービスの受け皿",
         kind: "unavailable",
-        note: `${place.municipalityLabel}の提供されているサービス数は本編 Act 2 を参照してください。同一定義の時系列が揃い次第、ここにも年度別の値を追加します。`,
+        note: `${place.municipalityLabel}の提供されているサービス数は本編の「市内で提供される介護サービスの量」を参照してください。同一定義の時系列が揃い次第、ここにも年度別の値を追加します。`,
       };
 
   const workforceDetail: DetailItem = availability.localWorkforceAvailable && data.series.careWorkerWorkforce
@@ -135,7 +136,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         title: "支える人",
         kind: "unavailable",
         note: availability.referenceWorkforceAvailable
-          ? `${place.municipalityLabel}単位で継続比較できる公開データは確認できていません。${place.prefectureLabel}の参考値は本編 Act 3 を参照してください。`
+          ? `${place.municipalityLabel}単位で継続比較できる公開データは確認できていません。${place.prefectureLabel}の参考値は本編の「支える人と待遇」を参照してください。`
           : `${place.municipalityLabel}単位で継続比較できる公開データは確認できていません。`,
       };
 
@@ -158,9 +159,14 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         title: "待遇",
         kind: "unavailable",
         note: availability.referenceWageAvailable
-          ? `${place.municipalityLabel}だけの賃金の年次推移を確認できるデータはありません。${place.prefectureLabel}参考の賃金指標は本編 Act 3 を参照してください。`
+          ? `${place.municipalityLabel}だけの賃金の年次推移を確認できるデータはありません。${place.prefectureLabel}参考の賃金指標は本編の「支える人と待遇」を参照してください。`
           : `${place.municipalityLabel}だけの賃金の年次推移を確認できるデータはありません。`,
       };
+
+  const supportConnectionDetail = buildSupportConnectionDetailItem(
+    data.supportConnection,
+    place.municipalityLabel,
+  );
 
   const detailItems: DetailItem[] = [
     {
@@ -212,6 +218,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         },
       ],
     },
+    ...(supportConnectionDetail ? [supportConnectionDetail] : []),
     {
       id: "source",
       title: "データの出典",
@@ -256,6 +263,16 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
               prefectureLabel: place.prefectureLabel,
               localSupportAvailable: availability.localSupportAvailable,
             }),
+          } satisfies RecapGroup,
+        ]
+      : []),
+    ...(data.supportConnection?.indicators.length
+      ? [
+          {
+            scope: "municipality",
+            chipLabel: place.municipalityLabel,
+            title: "支援への接続",
+            items: formatSupportConnectionRecapItems(data.supportConnection),
           } satisfies RecapGroup,
         ]
       : []),
@@ -311,7 +328,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
         <StoryInterlude
           variant="pause"
-          eyebrow="Act 1 のまとめ"
+          eyebrow="まとめ"
           title={
             <>
               介護を必要とする人も、
@@ -325,9 +342,8 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
         <StoryAct
           id="act-2"
-          eyebrow={`Act 2 — ${place.municipalityLabel}`}
+          eyebrow={`${place.municipalityLabel}・介護サービス提供単位数`}
           title="市内で提供される介護サービスの量も、増えた"
-          chip={<GeographyChip scope="municipality" label={place.municipalityLabel} />}
         >
           {serviceUnitCount?.length ? (
             <>
@@ -373,20 +389,30 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
         {data.supportConnection ? (
           <SupportConnectionSection
-            data={data.supportConnection}
-            place={place.municipalityLabel}
-            id="act-connection"
-            eyebrow={`支援への接続 — ${place.municipalityLabel}`}
-            title="サービスがあっても、必要な人が到達できるとは限らない"
-            lead="費用・供給・手続きが利用の障壁になることがあります。単純な未利用者数ではなく、理由が明確な回答を分けて見ます。"
-          />
+              data={data.supportConnection}
+              place={place.municipalityLabel}
+              id="act-connection"
+              eyebrow={`${place.municipalityLabel}・支援への接続`}
+              title="制度はある。必要な人に、届いているか。"
+              lead={`${place.municipalityLabel}では、本編で見たとおり給付と市内の受け皿が増えています。けれど「制度や予算があること」と「必要な人に支援が届いていること」は、同じではありません。`}
+              framing={{
+                existence: {
+                  label: "制度・予算はある",
+                  body: "介護保険制度が整い、給付総額も直近5年で増えています。市内で提供されるサービスの量も増えました。",
+                },
+                delivery: {
+                  label: "届いているかは、別の問い",
+                  body: "制度があることは、必要な人が実際に使えていることを保証しません。相談先・手続き・費用のどこかでつまずくと、支援は届きません。",
+                },
+              }}
+              readingNote="複数回答のため、数値を足し合わせて「未接続率」とすることはできません。また、サービスを利用していないこと自体が、支援につながっていないことを意味するものでもありません。"
+            />
         ) : null}
 
         <StoryAct
           id="act-4"
-          eyebrow={`Act 4 — ${place.municipalityLabel}・介護保険料基準月額`}
+          eyebrow={`${place.municipalityLabel}・介護保険料基準月額`}
           title="介護保険料の基準額も、上がった"
-          chip={<GeographyChip scope="municipality-policy" label={`${place.municipalityLabel}の制度値`} />}
         >
           <PremiumStandardSection
             periods={premiumStandard.periods}

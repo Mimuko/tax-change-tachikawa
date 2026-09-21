@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
+import { resolveDataGapCopy } from "../lib/data-gap-copy";
+import type { SupportConnectionDetailItem } from "../lib/support-connection-detail";
+import type { SupportConnectionIndicator } from "../types/support-connection";
 
 type Point = { year: number; value: number };
 type Provenance = { title: string; definition: string; unit: string; sha256?: string; note?: string };
@@ -20,6 +23,7 @@ type PremiumStandard = {
 };
 
 export type DetailItem =
+  | SupportConnectionDetailItem
   | {
       id: string;
       title: string;
@@ -66,6 +70,95 @@ const yoyPct = (points: Point[]) => {
   if (!prev) return null;
   return ((latest.value - prev.value) / prev.value) * 100;
 };
+
+function formatSupportValue(value: number, unit: SupportConnectionIndicator["observations"][number]["unit"]) {
+  const formatted = value.toLocaleString("ja-JP", {
+    maximumFractionDigits: unit === "percent" ? 1 : 0,
+  });
+  const suffix =
+    unit === "percent" ? "%" : unit === "cases" ? "件" : unit === "households" ? "世帯" : "人";
+  return `${formatted}${suffix}`;
+}
+
+function SupportConnectionBlock({ item }: { item: SupportConnectionDetailItem }) {
+  return (
+    <div className="detail-body">
+      {item.data.indicators.map((indicator) => {
+        const latest = indicator.observations.at(-1);
+        return (
+          <div className="detail-metric" key={indicator.metricId}>
+            <p className="detail-metric-name">{indicator.label}</p>
+            {latest ? (
+              <dl className="detail-stats">
+                <div>
+                  <dt>最新値（{latest.periodLabel}）</dt>
+                  <dd>{formatSupportValue(latest.value, latest.unit)}</dd>
+                </div>
+                <div>
+                  <dt>回答母数</dt>
+                  <dd>{latest.sampleSize ? `n=${latest.sampleSize.toLocaleString("ja-JP")}` : "公表値なし"}</dd>
+                </div>
+              </dl>
+            ) : null}
+            {indicator.observations.length ? (
+              <table>
+                <caption>{indicator.label}</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">時点</th>
+                    <th scope="col">値</th>
+                    <th scope="col">回答母数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {indicator.observations.map((observation) => (
+                    <tr key={`${indicator.metricId}-${observation.periodLabel}`}>
+                      <th scope="row">{observation.periodLabel}</th>
+                      <td>{formatSupportValue(observation.value, observation.unit)}</td>
+                      <td>
+                        {observation.sampleSize
+                          ? `n=${observation.sampleSize.toLocaleString("ja-JP")}`
+                          : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : null}
+            <p><strong>対象:</strong> {indicator.population}</p>
+            {indicator.sourceQuestion ? <p><strong>設問:</strong> {indicator.sourceQuestion}</p> : null}
+            {indicator.multipleResponse ? <p>複数回答のため、ほかの項目とは合算できません。</p> : null}
+            {indicator.caveat ? <p><strong>注意:</strong> {indicator.caveat}</p> : null}
+            <p><strong>定義:</strong> {indicator.provenance.definition}</p>
+            <p>
+              <strong>出典:</strong>{" "}
+              <a href={indicator.provenance.sourceUrl} target="_blank" rel="noopener noreferrer">
+                {indicator.provenance.title} ↗
+              </a>
+            </p>
+          </div>
+        );
+      })}
+
+      {item.data.gaps.map((gap) => {
+        const copy = resolveDataGapCopy(gap, { place: item.placeLabel, label: "支援への到達" });
+        return (
+          <div className="detail-metric" key={gap.id}>
+            <p className="detail-metric-name">{copy.title}</p>
+            <p>{copy.body}</p>
+            {gap.sourceUrl ? (
+              <p>
+                <a href={gap.sourceUrl} target="_blank" rel="noopener noreferrer">
+                  {gap.sourceLabel ?? "関連する原典"}を見る ↗
+                </a>
+              </p>
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 function MetricBlock({ metric }: { metric: MetricSeries }) {
   const points = metric.points;
@@ -149,6 +242,10 @@ function PremiumStandardBlock({ premiumStandard }: { premiumStandard: PremiumSta
 }
 
 function DetailBody({ item }: { item: DetailItem }) {
+  if (item.kind === "support-connection") {
+    return <SupportConnectionBlock item={item} />;
+  }
+
   if (item.kind === "unavailable") {
     return (
       <div className="detail-body">

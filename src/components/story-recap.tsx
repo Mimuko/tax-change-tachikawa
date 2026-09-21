@@ -11,7 +11,7 @@ export default function StoryRecap({ groups, shareUrl }: { groups: RecapGroup[];
   return (
     <section className="story-recap" id="recap">
       <div className="story-recap-inner">
-        <p className="eyebrow">Act 5 — 振り返り</p>
+        <p className="eyebrow">振り返り</p>
         <h2>
           見た変化を、
           <em>もう一度</em>

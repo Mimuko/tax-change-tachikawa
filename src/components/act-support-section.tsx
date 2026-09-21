@@ -5,10 +5,9 @@ import {
   isWageMetric,
   resolveSupportAvailability,
 } from "../lib/support-availability";
-import GeographyChip from "./geography-chip";
 import SimpleSeriesChart from "./simple-series-chart";
 import StoryAct from "./story-act";
-import StoryInterlude from "./story-interlude";
+import { DataGapInterlude } from "./story-interlude";
 
 type ActSupportSectionProps = {
   place: PlaceInfo;
@@ -18,8 +17,9 @@ type ActSupportSectionProps = {
   seriesColors: string[];
   /** Optional copy overrides; defaults interpolate place labels. */
   copy?: {
-    gapTitle?: string;
-    gapBody?: string;
+    gapSubject?: string;
+    gapReason?: string;
+    gapFollowUp?: string;
     localActEyebrow?: string;
     localActTitle?: string;
     referenceActEyebrow?: string;
@@ -156,9 +156,6 @@ export default function ActSupportSection({
   if (!availability.showSupportAct) return null;
 
   const referenceMetrics = comparableReferenceMetrics(prefectureReference);
-  const municipalityChipLabel = place.municipalityLabel;
-  const prefectureChipLabel = `${place.prefectureLabel}参考`;
-
   if (availability.localSupportAvailable) {
     const localMetrics: Array<{ id: string; label: string; unit: string; points: DataPoint[] }> = [];
     if (hasComparablePoints(localWorkforce)) {
@@ -181,9 +178,16 @@ export default function ActSupportSection({
     return (
       <StoryAct
         id="act-3"
-        eyebrow={copy.localActEyebrow ?? `Act 3 — ${place.municipalityLabel}`}
+        eyebrow={
+          copy.localActEyebrow ??
+          `${place.municipalityLabel}・${[
+            hasComparablePoints(localWorkforce) ? "介護職員数" : null,
+            hasComparablePoints(localSalary) ? "介護職員の所定内給与" : null,
+          ]
+            .filter(Boolean)
+            .join("・")}`
+        }
         title={copy.localActTitle ?? "支える人と待遇も、変わりました"}
-        chip={<GeographyChip scope="municipality" label={municipalityChipLabel} />}
       >
         <MetricCharts metrics={localMetrics} place={place} seriesColors={seriesColors} mode="local" />
       </StoryAct>
@@ -191,31 +195,27 @@ export default function ActSupportSection({
   }
 
   // Case B: no local support metrics, but prefecture reference exists
-  const gapTitle = copy.gapTitle ?? `ここから先は、${place.municipalityLabel}だけでは分からない。`;
-  const gapBody =
-    copy.gapBody ??
-    `介護を支える職員数や賃金について、${place.municipalityLabel}単位で継続比較できる公開データは確認できませんでした。\nそこで、ここからは${place.prefectureLabel}全体の変化を見ます。`;
-  const [gapLead, gapTail] = gapBody.split("\n");
-
   return (
     <>
-      <StoryInterlude variant="gap" title={gapTitle}>
-        <p>
-          {gapLead}
-          {gapTail ? (
-            <>
-              <br />
-              {gapTail}
-            </>
-          ) : null}
-        </p>
-      </StoryInterlude>
+      <DataGapInterlude
+        placeLabel={place.municipalityLabel}
+        subject={copy.gapSubject ?? "介護職員数・賃金の年次推移"}
+        reason={
+          copy.gapReason ??
+          `${place.municipalityLabel}単位で継続比較できる公開データは確認できませんでした。`
+        }
+        followUp={copy.gapFollowUp ?? `そこで、ここからは${place.prefectureLabel}全体の変化を見ます。`}
+      />
 
       <StoryAct
         id="act-3"
-        eyebrow={copy.referenceActEyebrow ?? `Act 3 — ${place.prefectureLabel}参考`}
+        eyebrow={
+          copy.referenceActEyebrow ??
+          `${place.prefectureLabel}参考・${referenceMetrics
+            .map((metric) => metric.label.replace(`（${place.prefectureLabel}）`, ""))
+            .join("・")}`
+        }
         title={copy.referenceActTitle ?? `${place.prefectureLabel}では、介護職員の給与も増えた`}
-        chip={<GeographyChip scope="prefecture-ref" label={prefectureChipLabel} />}
         className="act-prefecture-ref"
       >
         <MetricCharts
