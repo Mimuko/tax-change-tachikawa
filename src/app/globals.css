@@ -691,3 +691,90 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
   .hub-muni-head { flex-wrap: wrap; gap: .5rem .9rem; }
   .hub-muni-count { margin-left: 0; flex-basis: 100%; }
 }
+
+/* ================================================================== */
+/* 支援への接続 — 共通セクション（3バリアント）                        */
+/* ================================================================== */
+.support-connection { padding: clamp(4rem, 8vh, 7rem) var(--space-page); background: var(--paper); }
+.support-connection-inner { max-width: 900px; margin: 0 auto; }
+.sc-title { margin: .4em 0 .55em; font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.18; letter-spacing: -.04em; }
+.sc-lead { max-width: 40rem; margin: 0; color: var(--muted); }
+.sc-source { margin: 2.5rem 0 0; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .04em; }
+
+/* 制度がある / 届いているか の対比 */
+.sc-framing { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0 clamp(1.5rem, 3vw, 2.75rem); margin: 2.75rem 0 0; }
+.sc-framing-divider { width: 1px; background: var(--border-subtle); }
+.sc-framing-label { margin: 0 0 .5em; font-size: var(--text-sm); font-weight: 700; letter-spacing: .02em; }
+.sc-framing-side--exists .sc-framing-label { color: var(--text-secondary); }
+.sc-framing-side--delivery .sc-framing-label { color: var(--orange-text); }
+.sc-framing-body { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+.sc-framing--compact { margin-top: 2.25rem; }
+
+/* 読み方の注記 */
+.sc-reading-note { margin: 2rem 0 0; padding: 1rem 1.25rem; background: var(--panel); color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.8; }
+
+/* DataGap */
+.sc-datagap { margin: 2rem 0 0; padding: 1.4rem 1.5rem; background: color-mix(in srgb, var(--panel) 55%, var(--paper)); border: 1px dashed var(--border-subtle); }
+.sc-datagap-title { display: flex; align-items: center; gap: .6rem; margin: 0 0 .5em; font-weight: 700; color: var(--ink); }
+.sc-datagap-mark { display: grid; place-content: center; width: 1.55rem; height: 1.55rem; flex-shrink: 0; border: 1px solid var(--border-subtle); border-radius: 50%; color: var(--text-secondary); font-family: var(--font-serif); font-size: .95rem; }
+.sc-datagap-body { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+
+/* --- A. 静かな説明型 --- */
+.sc-quiet-list { margin: 2.75rem 0 0; padding: 0; border-top: 1px solid var(--border-subtle); }
+.sc-quiet-item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: .5rem clamp(1.5rem, 4vw, 3rem); padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.sc-quiet-term { margin: 0; }
+.sc-quiet-basis { display: block; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .08em; }
+.sc-quiet-label { display: block; margin-top: .35rem; font-size: 1.05rem; line-height: 1.5; }
+.sc-quiet-desc { margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+.sc-quiet-value { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1; color: var(--ink); }
+.sc-quiet-value--none, .sc-card-value--none, .sc-story-value--none { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 700; color: var(--text-secondary); letter-spacing: .04em; }
+.sc-quiet-meaning { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+
+/* --- B. 指標カード型 --- */
+.sc-card-grid { list-style: none; margin: 2.75rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1.25rem; }
+.sc-card { display: flex; flex-direction: column; padding: 1.6rem 1.5rem 1.5rem; background: var(--paper); border: 1px solid var(--border-subtle); border-top: 3px solid var(--orange); }
+.sc-card-basis { margin: 0; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .08em; }
+.sc-card-value { margin: .5rem 0 0; font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1; color: var(--ink); }
+.sc-card-label { margin: .9rem 0 0; font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.sc-card-meaning { flex: 1; margin: .7rem 0 0; padding-top: .8rem; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--text-sm); line-height: 1.75; }
+
+/* --- C. ストーリー型 --- */
+.support-connection.sc-story { border-top: 4px solid var(--orange); }
+.sc-story-framing { margin: 2.75rem 0 0; display: grid; gap: 1rem; }
+.sc-story-framing-line { margin: 0; padding-left: 1.1rem; border-left: 3px solid var(--line); color: var(--muted); line-height: 1.8; }
+.sc-story-framing-line--delivery { border-left-color: var(--orange); }
+.sc-story-framing-label { display: block; margin-bottom: .2rem; font-size: var(--text-sm); font-weight: 700; color: var(--ink); }
+.sc-story-steps { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+.sc-story-step { display: grid; grid-template-columns: 3rem 1fr; gap: 0 1.25rem; padding: 1.75rem 0; border-top: 1px solid var(--line); }
+.sc-story-step:first-child { border-top: 0; }
+.sc-story-index { font-family: var(--font-serif); font-size: 1.1rem; color: var(--orange-text); line-height: 1.4; }
+.sc-story-body { min-width: 0; }
+.sc-story-basis { margin: 0; color: var(--text-secondary); font-size: var(--text-xs); letter-spacing: .08em; }
+.sc-story-headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .9rem; margin: .4rem 0 0; }
+.sc-story-value { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1; color: var(--ink); }
+.sc-story-label { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.sc-story-meaning { margin: .7rem 0 0; max-width: 42rem; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+.sc-story-close { margin-top: 2.5rem; }
+
+/* --- 検討用プレビューページ --- */
+.sc-preview-hero { max-width: 1000px; margin: 0 auto; padding: clamp(3.5rem, 8vh, 6rem) var(--space-page) clamp(2rem, 4vh, 3rem); }
+.sc-preview-title { margin: .35em 0 .35em; font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.02; letter-spacing: -.05em; }
+.sc-preview-lead { max-width: 44rem; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.15rem); }
+.sc-preview-nav { margin-top: 2rem; }
+.sc-preview-nav ul { display: flex; flex-wrap: wrap; gap: .6rem .8rem; margin: 0; padding: 0; list-style: none; }
+.sc-preview-nav a { display: inline-block; padding: .55rem .9rem; background: var(--panel); border: 1px solid var(--border-subtle); color: var(--ink); text-decoration: none; font-size: var(--text-sm); font-weight: 700; }
+.sc-preview-nav a:hover { border-color: var(--orange); color: var(--orange-text); }
+.sc-preview-block { border-top: 1px solid var(--line); }
+.sc-preview-block:first-of-type { border-top: 2px solid var(--ink); }
+.sc-preview-caption { max-width: 900px; margin: 0 auto; padding: clamp(2.5rem, 5vh, 3.5rem) var(--space-page) 0; }
+.sc-preview-caption-name { margin: 0; font-family: var(--font-serif); font-size: 1.4rem; letter-spacing: -.01em; }
+.sc-preview-caption-summary { margin: .6rem 0 0; max-width: 40rem; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
+.sc-preview-caption + .support-connection { padding-top: clamp(1.75rem, 4vh, 2.5rem); }
+
+@media (max-width: 720px) {
+  .sc-framing { grid-template-columns: 1fr; gap: 1.5rem; }
+  .sc-framing-divider { display: none; }
+  .sc-quiet-item { grid-template-columns: 1fr; gap: .9rem; }
+  .sc-quiet-desc { flex-direction: row; align-items: baseline; gap: 1rem; }
+  .sc-quiet-value { flex-shrink: 0; }
+}
