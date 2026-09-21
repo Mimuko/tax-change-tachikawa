@@ -184,32 +184,32 @@ function StoryVariant({ data, id }: { data: SupportConnectionData; id?: string }
       </div>
 
       {data.indicators.length > 0 ? (
-        <ol className="sc-story-steps" role="list">
-          {data.indicators.map((indicator, index) => {
-            const value = formatValue(indicator);
-            return (
-              <li key={indicator.id} className="sc-story-step">
-                <span className="sc-story-index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className="sc-story-body">
-                  <p className="sc-story-headline">
-                    <span className="sc-story-value">
-                      {value ?? <span className="sc-story-value--none">測定なし</span>}
-                    </span>
-                    {value ? (
-                      <span className="sc-story-basis-inline">{indicator.basis}</span>
-                    ) : null}
-                  </p>
-                  <p className="sc-story-label">{indicator.label}</p>
-                  <p className="sc-story-meaning">
-                    {value ? indicator.meaning : indicator.unavailableReason ?? indicator.meaning}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+        <>
+          {data.basisNote ? <p className="sc-story-basis-note">{data.basisNote}</p> : null}
+          <ol className="sc-story-steps" role="list">
+            {data.indicators.map((indicator, index) => {
+              const value = formatValue(indicator);
+              return (
+                <li key={indicator.id} className="sc-story-step">
+                  <span className="sc-story-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="sc-story-body">
+                    <p className="sc-story-headline">
+                      <span className="sc-story-value">
+                        {value ?? <span className="sc-story-value--none">測定なし</span>}
+                      </span>
+                    </p>
+                    <p className="sc-story-label">{indicator.label}</p>
+                    <p className="sc-story-meaning">
+                      {value ? indicator.meaning : indicator.unavailableReason ?? indicator.meaning}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </>
       ) : null}
 
       {data.readingNote ? <p className="sc-reading-note">{data.readingNote}</p> : null}

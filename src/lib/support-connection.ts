@@ -69,6 +69,11 @@ export type SupportConnectionData = {
   /** 導入文。制度と到達を分けて見る、という趣旨を述べる。 */
   lead: string;
   framing: ExistenceDeliveryFraming;
+  /**
+   * 指標一覧の直前に1回だけ示す、全指標に共通する集計条件。
+   * 各指標に basis を繰り返さず、ここでまとめて明示する。
+   */
+  basisNote?: string;
   /** 指標一覧。0件でもセクションは成立する。 */
   indicators: SupportConnectionIndicator[];
   /**
@@ -104,6 +109,7 @@ export const careSupportConnectionExample: SupportConnectionData = {
       body: "制度があることは、必要な人が実際に使えていることを保証しません。相談先・手続き・費用のどこかでつまずくと、支援は届きません。",
     },
   },
+  basisNote: "以下の3項目は、いずれも「サービス未利用者への複数回答」です。",
   indicators: [
     {
       id: "no-service-nearby",
