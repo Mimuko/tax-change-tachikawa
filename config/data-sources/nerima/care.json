@@ -1,0 +1,26 @@
+{
+  "openDataMunicipalityCode": "131202",
+  "sourcePage": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
+  "license": "練馬区統計書掲載条件に従う",
+  "links": {
+    "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+  },
+  "statsBook": {
+    "file": "hyo08.xlsx",
+    "url": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.files/hyo08.xlsx",
+    "sheets": {
+      "insured": "142",
+      "certified": "143",
+      "benefits": "144"
+    }
+  },
+  "premiumStandard": {
+    "metricId": "ltc_premium_standard_monthly",
+    "sourceUrl": "https://www.city.nerima.tokyo.jp/hokenfukushi/kaigohoken/hokenryo/65hokenryo.html",
+    "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
+    "periods": [
+      { "label": "第8期", "range": "2021–2023年度", "value": 5880 },
+      { "label": "第9期", "range": "2024–2026年度", "value": 6670 }
+    ]
+  }
+}

@@ -8,6 +8,7 @@ export default function StoryPage({ context }: { context: StoryContext }) {
   // New themes choose their own composition of shared story primitives.
   switch (context.story.renderer) {
     case "tachikawa-care":
+    case "nerima-care":
       return <CareStory data={context.data as DashboardData} context={context} />;
     case "tachikawa-education":
       return <EducationStory data={context.data as EducationDashboardData} context={context} />;

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T08:14:04.263Z",
+  "generatedAt": "2026-09-25T12:55:50.379Z",
   "latestFiscalYear": 2023,
   "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
   "place": {
@@ -130,25 +130,25 @@
   "provenance": {
     "insured": {
       "title": "介護保険第1号被保険者の推移",
-      "sha256": "249a149ed8379c0b17575be787907e8f4a242681a152a8af8636c775b2ed35ae",
+      "sha256": "14ef24fd40fa4cb65a67c550e9ca9ae4a61e801a9185b12e88e026d0d4d7005b",
       "definition": "各年度末現在の第1号被保険者総数",
       "unit": "人"
     },
     "certified": {
       "title": "要介護（要支援）認定状況の推移（認定者数）",
-      "sha256": "bd46cc43b0c0944bf391785ea902a55824920230512edf56467aa53f07ba6823",
+      "sha256": "3c445f0c7d2b103aa2739861dffc5f654d55b2f7f3ed52c05b9d92d091b40688",
       "definition": "各年度末現在の認定者総数（第2号被保険者を含む）",
       "unit": "人"
     },
     "benefits": {
       "title": "介護保険給付状況の推移",
-      "sha256": "354f9087da92bcb3738df27d3cd3225e7fef7f0ef833af2e56328068535db53e",
+      "sha256": "fbaa425a5e0b037608d3403a4c3df67fb699bcb59d61bde6f0e91f5e373f24a0",
       "definition": "各年度末現在として掲載された介護保険給付総額",
       "unit": "円"
     },
     "premiumRevenue": {
       "title": "介護保険料（現年分）収入状況の推移",
-      "sha256": "edebe9f9df44df23f00894e73e17e605a63042a6f38a5b2cfdbe25c9267bcd5b",
+      "sha256": "0f004d7c3c58e79ef6b1b45af7a0349565230b5a661fb04633246c8ce976c2c9",
       "definition": "各年度末現在の現年分収入額",
       "unit": "円"
     },
