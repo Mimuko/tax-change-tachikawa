@@ -19,7 +19,7 @@ import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const dataset = await datasetContext(root, process.argv.slice(2));
-const MUNICIPALITY = dataset.config.openDataMunicipalityCode ?? dataset.config.municipalityCode;
+const MUNICIPALITY = dataset.config.municipalityCode;
 const MUNICIPALITY_LABEL = dataset.config.municipalityLabel ?? dataset.config.municipalityName;
 const BASE = "https://www.mhlw.go.jp";
 const YEARS = [2020, 2021, 2022, 2023, 2024];

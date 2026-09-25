@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-25T12:55:50.441Z",
-  "latestFiscalYear": 2020,
+  "generatedAt": "2026-09-25T15:14:27.992Z",
+  "latestFiscalYear": 2024,
   "sourcePage": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
   "place": {
-    "municipalityCode": "131203",
+    "municipalityCode": "131202",
     "municipalityLabel": "練馬区",
     "prefectureLabel": "東京都",
     "links": {
@@ -82,28 +82,6 @@
         "value": 59917065000
       }
     ],
-    "premiumRevenue": [
-      {
-        "year": 2020,
-        "value": 12119139840
-      },
-      {
-        "year": 2021,
-        "value": 12480273600
-      },
-      {
-        "year": 2022,
-        "value": 12581940785
-      },
-      {
-        "year": 2023,
-        "value": 12684916980
-      },
-      {
-        "year": 2024,
-        "value": 13429702060
-      }
-    ],
     "serviceUnitCount": [
       {
         "year": 2020,
@@ -144,15 +122,9 @@
     "benefits": {
       "title": "介護保険給付費（統計書 表110(7) 合算）",
       "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
-      "definition": "居宅・施設・地域密着型・高額介護等サービス費等の区分合算。原典は千円単位（四捨五入）のため、円へ換算して保持",
+      "definition": "居宅・施設・地域密着型サービス費 + 高額介護等サービス費 + 審査支払手数料 + 特定入所者介護サービス費（各区分は千円・四捨五入）",
       "unit": "円",
-      "note": "区分合算のため、原典注記どおり合計と区分の端数が一致しない場合があります。"
-    },
-    "premiumRevenue": {
-      "title": "介護保険料収入（統計書 表110(3) 収納額）",
-      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
-      "definition": "各年度の収入済額から還付未済額を引いた収納額。市民負担の代表値ではない",
-      "unit": "円"
+      "note": "立川市 CSV の給付総額列とは原典定義が異なるため、市区町村横断の1対1突合は行わない。練馬区は統計書区分合算の自己整合のみ監査済み。 監査: 練馬区統計書 R7 福祉 Excel hyo08.xlsx 表110(7)（2026-09-17）"
     },
     "serviceUnitCount": {
       "title": "介護サービス情報公表システムオープンデータ（各年12月末）",
