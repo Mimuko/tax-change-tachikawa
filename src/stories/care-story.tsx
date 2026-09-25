@@ -209,14 +209,16 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
       title: "保険料",
       kind: "premium",
       premiumStandard: premiumStandard,
-      metrics: [
-        {
-          label: "介護保険料（現年分）収入額",
-          unit: "円",
-          points: data.series.premiumRevenue,
-          provenance: data.provenance.premiumRevenue,
-        },
-      ],
+      metrics: data.series.premiumRevenue?.length
+        ? [
+            {
+              label: "介護保険料（現年分）収入額",
+              unit: "円",
+              points: data.series.premiumRevenue,
+              provenance: data.provenance.premiumRevenue!,
+            },
+          ]
+        : [],
     },
     ...(supportConnectionDetail ? [supportConnectionDetail] : []),
     {
@@ -387,7 +389,8 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           seriesColors={seriesColors}
         />
 
-        {data.supportConnection?.indicators?.length ? (
+        {data.supportConnection &&
+        (data.supportConnection.indicators.length > 0 || data.supportConnection.gaps.length > 0) ? (
           <SupportConnectionSection
               data={data.supportConnection}
               place={place.municipalityLabel}

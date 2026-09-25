@@ -20,7 +20,7 @@
 | `care_certification_rate_first_insured` | 第1号被保険者の認定率 | **定義調整が必要** | 派生（表110(1)+(5)） | 分子9月末・分母年度末の **期間不一致**。立川式の自動移植は禁止 |
 | `ltc_benefit_total_yen` | 介護保険給付総額 | **定義調整が必要** | 統計書 表110(7) 合算 | 単位**千円**・四捨五入。総額列なし。原典は事業状況報告系だが CSV 総額列との一致は要照合 |
 | `ltc_benefit_by_service_yen` | サービス別給付費 | **定義調整が必要** | 同上（区分別） | 立川 OD の正式サービス分類 CSV とは列構造が異なる。表示分類マッピング要監査 |
-| `service_unit_count` | 介護サービスの提供単位数 | **そのまま再利用** | 厚労省 OD | `132021`→`131203` のみ。2020–2024・12月末・24列構造は立川監査と同一 |
+| `service_unit_count` | 介護サービスの提供単位数 | **そのまま再利用** | 厚労省 OD | `132021`→`131202` のみ。2020–2024・12月末・24列構造は立川監査と同一 |
 | `care_worker_headcount` | 介護職員数（実人数） | **そのまま再利用** | e-Stat 都調査 | 東京都参考。`reference_only: true`。市区町村値なし |
 | `care_worker_fte` | 介護職員 常勤換算 | **そのまま再利用** | 同上 | 同上 |
 | `care_worker_scheduled_salary` | 介護職員の所定内給与 | **そのまま再利用** | e-Stat 賃金構造 DB | 東京都参考。2020年以降のみ。立川の `care_worker_scheduled_salary_tokyo` と同趣旨 |
@@ -50,14 +50,14 @@
 
 公開文言・`kind` の正本は引き続き `docs/data-definition.md` §掲載しない指標。練馬区固有の Gap 文案は `{place}` を「練馬区」に展開するだけで足りる（職員・賃金 Gap は立川版 copy を流用可）。
 
-## 実装前チェックリスト（未着手）
+## 実装前チェックリスト（MY-230 時点）
 
-1. `config/municipalities/nerima.json`（`131203`）と `config/data-sources/nerima/care.json` を追加。
-2. 統計書 Excel 用パーサー（CP932/Excel）または curated 手動監査フローを決定。
-3. 認定者 **9月末** を UI・詳細表・Act 構成に明示。
-4. 給付費合算定義を立川 `benefits.csv` 総額と **年度・金額で突合**。
-5. `dataset-context` に `nerima/care` を登録（現状は Unsupported）。
-6. 指標参照・DataGap・静的ビルドを `tests/architecture.test.mjs` に追加。
+1. [x] `config/municipalities/nerima.json`（`131202`）と `config/data-sources/nerima/care.json` を追加。
+2. [x] 統計書 Excel 用パーサー（`parse-nerima-hyo08.mjs`）を追加。欠損セルは null 扱いでビルド停止。
+3. [x] 認定者 **9月末** を UI・詳細表・Act 構成に明示。
+4. [x] 給付費合算定義を `data/curated/nerima/care/benefit-reconciliation.json` で自己整合監査（立川 CSV とは原典定義が異なるため横断突合は対象外）。
+5. [x] `dataset-context` に `nerima/care` を登録。
+6. [x] 指標参照・DataGap・静的ビルドを `tests/architecture.test.mjs` に追加。
 
 ## 監査結論（MY-156）
 

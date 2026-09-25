@@ -21,9 +21,24 @@ const statsBytes = await readFile(statsPath);
 const statsHash = createHash("sha256").update(statsBytes).digest("hex");
 const parsed = await parseNerimaHyo08(statsPath, municipality.statsBook.sheets);
 
+const reconciliation = await loadOptionalJson(`${dataset.curatedPath}/benefit-reconciliation.json`);
+if (!reconciliation?.totals?.length) {
+  throw new Error("benefit-reconciliation.json is required before publishing nerima/care");
+}
+for (const expected of reconciliation.totals) {
+  const actual = parsed.benefits.find((row) => row.year === expected.year);
+  if (!actual || actual.value !== expected.valueYen) {
+    throw new Error(
+      `benefits reconciliation failed for ${expected.year}: expected ${expected.valueYen}, got ${actual?.value ?? "missing"}`,
+    );
+  }
+}
+
+const latestFiscalYear = Math.max(...parsed.insured.map((row) => row.year));
+
 const data = {
   generatedAt: new Date().toISOString(),
-  latestFiscalYear: Math.min(...parsed.insured.map((row) => row.year)),
+  latestFiscalYear,
   sourcePage: municipality.sourcePage,
   place: {
     municipalityCode: municipality.municipalityCode,
@@ -34,8 +49,7 @@ const data = {
   series: {
     insured: parsed.insured,
     certified: parsed.certified,
-    benefits: parsed.benefits,
-    premiumRevenue: parsed.premiumRevenue,
+    benefits: parsed.benefits.map(({ year, value }) => ({ year, value })),
   },
   provenance: {
     insured: {
@@ -54,16 +68,9 @@ const data = {
     benefits: {
       title: "介護保険給付費（統計書 表110(7) 合算）",
       sha256: statsHash,
-      definition:
-        "居宅・施設・地域密着型・高額介護等サービス費等の区分合算。原典は千円単位（四捨五入）のため、円へ換算して保持",
+      definition: reconciliation.sumDefinition,
       unit: "円",
-      note: "区分合算のため、原典注記どおり合計と区分の端数が一致しない場合があります。",
-    },
-    premiumRevenue: {
-      title: "介護保険料収入（統計書 表110(3) 収納額）",
-      sha256: statsHash,
-      definition: "各年度の収入済額から還付未済額を引いた収納額。市民負担の代表値ではない",
-      unit: "円",
+      note: `${reconciliation.note} 監査: ${reconciliation.source}（${reconciliation.auditedAt}）`,
     },
   },
   premiumStandard: {

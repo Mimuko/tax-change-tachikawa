@@ -45,7 +45,7 @@
 
 | 責務 | 正本 |
 |---|---|
-| 自治体コード・名称 | `config/municipalities/nerima.json`（統計書 131203、厚労省 OD 131202） |
+| 自治体コード・名称 | `config/municipalities/nerima.json`（131202） |
 | 原典・制度値 | `config/data-sources/nerima/care.json` |
 | 統計書 Excel パーサー | `scripts/lib/parse-nerima-hyo08.mjs`, `scripts/build-nerima-care.mjs` |
 | ストーリー | `config/stories/nerima-care.json`, `src/stories/care-story.tsx`（共有 renderer） |

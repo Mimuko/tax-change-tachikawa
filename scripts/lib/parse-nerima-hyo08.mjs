@@ -1,6 +1,6 @@
 /**
  * 練馬区統計書 hyo08.xlsx（表110）から介護系列を抽出する。
- * 表110(1)(3)(5)(7) の行位置は R7 版 hyo08.xlsx 監査時点の固定レイアウトを前提とする。
+ * 表110(1)(5)(7) の行位置は R7 版 hyo08.xlsx 監査時点の固定レイアウトを前提とする。
  */
 import { readFile } from "node:fs/promises";
 import { inflateRawSync } from "node:zlib";
@@ -73,36 +73,59 @@ function readSheetCells(xmlText, sharedStrings) {
 }
 
 function numberAt(cells, row, col) {
-  const raw = cells.get(row)?.get(col);
-  const value = Number(String(raw ?? "").replace(/,/g, ""));
+  const rowMap = cells.get(row);
+  if (!rowMap?.has(col)) return null;
+  const raw = rowMap.get(col);
+  if (raw == null || String(raw).trim() === "" || String(raw).trim() === "-") return null;
+  const value = Number(String(raw).replace(/,/g, ""));
   return Number.isFinite(value) ? value : null;
 }
 
-function leadingRowTotal(cells, row, firstRow) {
-  if (row === firstRow) return numberAt(cells, row, "K");
-  return numberAt(cells, row, "H") ?? numberAt(cells, row, "G");
+function requireAt(cells, row, col, label) {
+  const value = numberAt(cells, row, col);
+  if (value == null) {
+    throw new Error(`${label}: missing or invalid cell at row ${row} col ${col}`);
+  }
+  return value;
 }
 
-function blockTotal(cells, row, firstRow) {
-  return numberAt(cells, row, row === firstRow ? "J" : "G");
+function leadingRowTotal(cells, row, firstRow, label) {
+  if (row === firstRow) return requireAt(cells, row, "K", `${label} total`);
+  const primary = numberAt(cells, row, "H");
+  if (primary != null) return primary;
+  return requireAt(cells, row, "G", `${label} total`);
+}
+
+function blockTotal(cells, row, firstRow, label) {
+  return requireAt(cells, row, row === firstRow ? "J" : "G", label);
 }
 
 function extractInsured(cells) {
   const rows = [9, 10, 11, 12, 13];
-  return rows.map((row, index) => ({
-    year: 2020 + index,
-    value: numberAt(cells, row, "P"),
-  }));
+  return rows.map((row, index) => {
+    const value = requireAt(cells, row, "P", "insured");
+    if (value < 150_000 || value > 200_000) {
+      throw new Error(`insured: unexpected value ${value} at row ${row}`);
+    }
+    return { year: 2020 + index, value };
+  });
 }
 
 function extractCertified(cells) {
   const rows = [21, 22, 23, 24, 25];
   const firstRow = rows[0];
-  return rows.map((row, index) => ({
-    year: 2020 + index,
-    value: leadingRowTotal(cells, row, firstRow),
-    secondInsured: numberAt(cells, row, "T") ?? undefined,
-  }));
+  return rows.map((row, index) => {
+    const value = leadingRowTotal(cells, row, firstRow, "certified");
+    if (value < 30_000 || value > 50_000) {
+      throw new Error(`certified: unexpected value ${value} at row ${row}`);
+    }
+    const secondInsured = numberAt(cells, row, "T");
+    return {
+      year: 2020 + index,
+      value,
+      ...(secondInsured != null ? { secondInsured } : {}),
+    };
+  });
 }
 
 function extractBenefitsFromSheet(cells) {
@@ -110,30 +133,48 @@ function extractBenefitsFromSheet(cells) {
   const facilityRows = [39, 40, 41, 42, 43];
   const communityRows = [49, 50, 51, 52, 53];
   const otherRows = [69, 70, 71, 72, 73];
-  return homeRows.map((row, index) => {
-    const home = blockTotal(cells, row, homeRows[0]) ?? 0;
-    const facility = blockTotal(cells, facilityRows[index], facilityRows[0]) ?? 0;
-    const community = blockTotal(cells, communityRows[index], communityRows[0]) ?? 0;
-    const otherRow = otherRows[index];
-    const high = blockTotal(cells, otherRow, otherRows[0]) ?? 0;
-    const review = numberAt(cells, otherRow, "N") ?? 0;
-    const tokutei = numberAt(cells, otherRow, "W") ?? 0;
-    return { year: 2020 + index, value: (home + facility + community + high + review + tokutei) * 1000 };
-  });
-}
+  const labels = ["home", "facility", "community", "highCost", "reviewFee", "specificAdmission"];
 
-function extractPremiumRevenue(cells) {
-  const rows = [66, 67, 68, 69, 70];
-  const firstRow = rows[0];
-  return rows.map((row, index) => ({
-    year: 2020 + index,
-    value: leadingRowTotal(cells, row, firstRow),
-  }));
+  return homeRows.map((row, index) => {
+    const home = blockTotal(cells, row, homeRows[0], `benefits.${labels[0]}`);
+    const facility = blockTotal(cells, facilityRows[index], facilityRows[0], `benefits.${labels[1]}`);
+    const community = blockTotal(cells, communityRows[index], communityRows[0], `benefits.${labels[2]}`);
+    const otherRow = otherRows[index];
+    const highCost = blockTotal(cells, otherRow, otherRows[0], `benefits.${labels[3]}`);
+    const reviewFee = requireAt(cells, otherRow, "N", `benefits.${labels[4]}`);
+    const specificAdmission = requireAt(cells, otherRow, "W", `benefits.${labels[5]}`);
+    const totalThousands = home + facility + community + highCost + reviewFee + specificAdmission;
+    if (totalThousands < 50_000_000) {
+      throw new Error(`benefits: unexpectedly low total ${totalThousands} at year index ${index}`);
+    }
+    return {
+      year: 2020 + index,
+      value: totalThousands * 1000,
+      components: {
+        homeServicesThousandYen: home,
+        facilityServicesThousandYen: facility,
+        communityServicesThousandYen: community,
+        highCostServicesThousandYen: highCost,
+        reviewFeeThousandYen: reviewFee,
+        specificAdmissionThousandYen: specificAdmission,
+      },
+    };
+  });
 }
 
 function assertFivePoints(label, rows) {
   if (rows.length !== 5 || rows.some((row) => row.value == null)) {
     throw new Error(`${label}: expected 5 comparable points, got ${JSON.stringify(rows)}`);
+  }
+}
+
+function validateLayout(cellsBySheet, sheetNames) {
+  requireAt(cellsBySheet.insured, 9, "P", "layout.insured anchor");
+  requireAt(cellsBySheet.certified, 21, "K", "layout.certified anchor");
+  requireAt(cellsBySheet.benefits, 9, "J", "layout.benefits home anchor");
+  requireAt(cellsBySheet.benefits, 39, "J", "layout.benefits facility anchor");
+  if (!sheetNames.insured || !sheetNames.certified || !sheetNames.benefits) {
+    throw new Error("layout: sheet mapping incomplete");
   }
 }
 
@@ -150,19 +191,24 @@ export async function parseNerimaHyo08(path, sheetNames) {
     return readSheetCells(xml, sharedStrings);
   };
 
-  const insured = extractInsured(readSheet(sheetNames.insured));
-  const certified = extractCertified(readSheet(sheetNames.certified));
-  const benefits = extractBenefitsFromSheet(readSheet(sheetNames.benefits));
-  const premiumRevenue = extractPremiumRevenue(readSheet(sheetNames.insured));
+  const cellsBySheet = {
+    insured: readSheet(sheetNames.insured),
+    certified: readSheet(sheetNames.certified),
+    benefits: readSheet(sheetNames.benefits),
+  };
+  validateLayout(cellsBySheet, sheetNames);
+
+  const insured = extractInsured(cellsBySheet.insured);
+  const certified = extractCertified(cellsBySheet.certified);
+  const benefits = extractBenefitsFromSheet(cellsBySheet.benefits);
 
   for (const [label, rows] of [
     ["insured", insured],
     ["certified", certified],
     ["benefits", benefits],
-    ["premiumRevenue", premiumRevenue],
   ]) {
     assertFivePoints(label, rows);
   }
 
-  return { insured, certified, benefits, premiumRevenue };
+  return { insured, certified, benefits };
 }

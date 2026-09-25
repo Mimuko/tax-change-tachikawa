@@ -47,7 +47,7 @@ export type DashboardData = {
     insured: DataPoint[];
     certified: CertifiedPoint[];
     benefits: DataPoint[];
-    premiumRevenue: DataPoint[];
+    premiumRevenue?: DataPoint[];
     serviceUnitCount?: DataPoint[];
     /** Municipal care-worker salary when comparable public data exists. */
     careWorkerSalary?: DataPoint[];
@@ -58,7 +58,7 @@ export type DashboardData = {
     insured: Provenance;
     certified: Provenance;
     benefits: Provenance;
-    premiumRevenue: Provenance;
+    premiumRevenue?: Provenance;
     serviceUnitCount?: Provenance;
     careWorkerSalary?: Provenance;
     careWorkerWorkforce?: Provenance;
