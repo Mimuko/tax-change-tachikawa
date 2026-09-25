@@ -1,0 +1,29 @@
+{
+  "id": "nerima-care",
+  "municipality": "nerima",
+  "topic": "care",
+  "renderer": "nerima-care",
+  "opening": [
+    {
+      "metricId": "ltc_first_insured_persons",
+      "seriesKey": "insured",
+      "shortLabel": "加入者",
+      "color": "var(--series-1)",
+      "periodKind": "fiscal_year_end"
+    },
+    {
+      "metricId": "care_certified_persons",
+      "seriesKey": "certified",
+      "shortLabel": "認定者",
+      "color": "var(--series-2)",
+      "periodKind": "september_end"
+    },
+    {
+      "metricId": "ltc_benefit_total_yen",
+      "seriesKey": "benefits",
+      "shortLabel": "給付総額",
+      "color": "var(--series-3)",
+      "periodKind": "fiscal_year"
+    }
+  ]
+}

@@ -4,7 +4,13 @@ const changeDirection = (delta: number) => {
   return delta >= 0 ? "増えた" : "減った";
 };
 
-export function buildCareStepCopy(series: { id: string; points: {year: number; value: number}[] }[], municipalityLabel: string) {
+type CareOpeningStep = { metricId: string; periodKind?: string };
+
+export function buildCareStepCopy(
+  series: { id: string; points: {year: number; value: number}[] }[],
+  municipalityLabel: string,
+  opening: CareOpeningStep[] = [],
+) {
   const points = (id: string) => {
     const metric = series.find((entry) => entry.id === id);
     if (!metric) throw new Error(`Missing care narrative metric: ${id}`);
@@ -46,7 +52,10 @@ export function buildCareStepCopy(series: { id: string; points: {year: number; v
     {
       eyebrow: `02 — ${municipalityLabel}・要支援・要介護認定者数`,
       title: certifiedTitle,
-      body: "要支援・要介護の認定者総数です。第2号被保険者も含むため、加入者数との比率はここでは示しません。",
+      body:
+        opening.find((step) => step.metricId === "care_certified_persons")?.periodKind === "september_end"
+          ? "各年9月末現在の要支援・要介護認定者総数です。第1号被保険者数（各年度末）とは基準日が異なるため、ここでは比率は示しません。"
+          : "要支援・要介護の認定者総数です。第2号被保険者も含むため、加入者数との比率はここでは示しません。",
     },
     {
       eyebrow: `03 — ${municipalityLabel}・介護保険給付総額`,

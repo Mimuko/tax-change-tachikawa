@@ -321,7 +321,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
         <StoryExperience
           series={act1Series}
-          copy={buildCareStepCopy(act1Series, place.municipalityLabel)}
+          copy={buildCareStepCopy(act1Series, place.municipalityLabel, context.story.opening)}
           label={`${place.municipalityLabel}の${context.topic.label}に関する変化`}
           events={openingEvents}
         />
@@ -387,7 +387,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           seriesColors={seriesColors}
         />
 
-        {data.supportConnection ? (
+        {data.supportConnection?.indicators?.length ? (
           <SupportConnectionSection
               data={data.supportConnection}
               place={place.municipalityLabel}

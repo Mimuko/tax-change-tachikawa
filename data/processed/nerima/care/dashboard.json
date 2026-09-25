@@ -1,0 +1,220 @@
+{
+  "generatedAt": "2026-09-25T12:55:50.441Z",
+  "latestFiscalYear": 2020,
+  "sourcePage": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
+  "place": {
+    "municipalityCode": "131203",
+    "municipalityLabel": "練馬区",
+    "prefectureLabel": "東京都",
+    "links": {
+      "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+    }
+  },
+  "series": {
+    "insured": [
+      {
+        "year": 2020,
+        "value": 162420
+      },
+      {
+        "year": 2021,
+        "value": 162974
+      },
+      {
+        "year": 2022,
+        "value": 163278
+      },
+      {
+        "year": 2023,
+        "value": 163960
+      },
+      {
+        "year": 2024,
+        "value": 164676
+      }
+    ],
+    "certified": [
+      {
+        "year": 2020,
+        "value": 35103,
+        "secondInsured": 680
+      },
+      {
+        "year": 2021,
+        "value": 36207,
+        "secondInsured": 747
+      },
+      {
+        "year": 2022,
+        "value": 36649,
+        "secondInsured": 715
+      },
+      {
+        "year": 2023,
+        "value": 36770,
+        "secondInsured": 694
+      },
+      {
+        "year": 2024,
+        "value": 37409,
+        "secondInsured": 733
+      }
+    ],
+    "benefits": [
+      {
+        "year": 2020,
+        "value": 53514636000
+      },
+      {
+        "year": 2021,
+        "value": 55548853000
+      },
+      {
+        "year": 2022,
+        "value": 56357793000
+      },
+      {
+        "year": 2023,
+        "value": 58457748000
+      },
+      {
+        "year": 2024,
+        "value": 59917065000
+      }
+    ],
+    "premiumRevenue": [
+      {
+        "year": 2020,
+        "value": 12119139840
+      },
+      {
+        "year": 2021,
+        "value": 12480273600
+      },
+      {
+        "year": 2022,
+        "value": 12581940785
+      },
+      {
+        "year": 2023,
+        "value": 12684916980
+      },
+      {
+        "year": 2024,
+        "value": 13429702060
+      }
+    ],
+    "serviceUnitCount": [
+      {
+        "year": 2020,
+        "value": 978
+      },
+      {
+        "year": 2021,
+        "value": 971
+      },
+      {
+        "year": 2022,
+        "value": 997
+      },
+      {
+        "year": 2023,
+        "value": 1017
+      },
+      {
+        "year": 2024,
+        "value": 984
+      }
+    ]
+  },
+  "provenance": {
+    "insured": {
+      "title": "介護保険第1号被保険者数（統計書 表110(1)）",
+      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+      "definition": "各年度末現在の第1号被保険者総数",
+      "unit": "人"
+    },
+    "certified": {
+      "title": "要支援・要介護認定者数（統計書 表110(5)）",
+      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+      "definition": "各年9月末現在の認定者総数（第2号被保険者を含む）",
+      "unit": "人",
+      "note": "第1号被保険者数（各年度末）と基準日が異なります。認定率は算出しません。"
+    },
+    "benefits": {
+      "title": "介護保険給付費（統計書 表110(7) 合算）",
+      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+      "definition": "居宅・施設・地域密着型・高額介護等サービス費等の区分合算。原典は千円単位（四捨五入）のため、円へ換算して保持",
+      "unit": "円",
+      "note": "区分合算のため、原典注記どおり合計と区分の端数が一致しない場合があります。"
+    },
+    "premiumRevenue": {
+      "title": "介護保険料収入（統計書 表110(3) 収納額）",
+      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+      "definition": "各年度の収入済額から還付未済額を引いた収納額。市民負担の代表値ではない",
+      "unit": "円"
+    },
+    "serviceUnitCount": {
+      "title": "介護サービス情報公表システムオープンデータ（各年12月末）",
+      "definition": "サービスコード×事業所番号の一意組合せ数。市区町村コード131202（練馬区）。定員は用いない。",
+      "unit": "establishments",
+      "note": "厚労省ODの全国ファイルから練馬区行のみ集計。休廃止列はないため公表スナップショット掲載数として扱う。"
+    }
+  },
+  "premiumStandard": {
+    "metricId": "ltc_premium_standard_monthly",
+    "sourceUrl": "https://www.city.nerima.tokyo.jp/hokenfukushi/kaigohoken/hokenryo/65hokenryo.html",
+    "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
+    "periods": [
+      {
+        "label": "第8期",
+        "range": "2021–2023年度",
+        "value": 5880
+      },
+      {
+        "label": "第9期",
+        "range": "2024–2026年度",
+        "value": 6670
+      }
+    ]
+  },
+  "reference": {
+    "prefecture": [
+      {
+        "metricId": "care_worker_scheduled_salary_tokyo",
+        "label": "介護職員の所定内給与（東京都）",
+        "unit": "円",
+        "referenceOnly": true,
+        "geography": "tokyo",
+        "points": [
+          {
+            "year": 2020,
+            "value": 256600
+          },
+          {
+            "year": 2021,
+            "value": 260500
+          },
+          {
+            "year": 2022,
+            "value": 253000
+          },
+          {
+            "year": 2023,
+            "value": 266400
+          },
+          {
+            "year": 2024,
+            "value": 294200
+          }
+        ],
+        "provenance": {
+          "title": "賃金構造基本統計調査 DB 0004007961",
+          "definition": "一般労働者・企業規模10人以上・男女計・東京都・介護職員（医療・福祉施設等）・所定内給与額。2020年改定後のみ。千円表記を円に換算。",
+          "unit": "yen_per_month",
+          "note": "2024年は e-Stat DB 0004007961（時間軸 2020–2023）に未収録のため、令和6年賃金構造基本統計調査の公開表（一般労働者・都道府県別・職種（特掲）・性別・産業計・役職者を除く、statInfId=000040247966）から、東京都×介護職員（医療・福祉施設等）×男女計×所定内給与額（294.2千円）を円換算して追記。役職者を含む本表（000040247953）は用いない。2023年は同系列の公開表と DB が一致することを確認済み。"
+        }
+      }
+    ]
+  }
+}
