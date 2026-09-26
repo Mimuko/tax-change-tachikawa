@@ -24,12 +24,35 @@
 ### 次の組み合わせを追加する手順
 
 1. 自治体またはテーマの正本を追加し、指標定義・比較可能性・出典を監査する。
-2. 原典設定とパーサーを追加し、dataset-contextで対応を明示する。現状は立川市×介護以外のコマンド引数を拒否する。
+2. 原典設定とパーサーを追加し、dataset-contextで対応を明示する。`dataset-context` が許可した組み合わせのみ実行する。
 3. raw・curated・processedを自治体×テーマ配下へ生成する。
 4. metricIdを参照するストーリーとrendererを実装し、登録する。
 5. 指標参照、未知ルート、欠損・参考値の表示、静的ビルドを検証する。
 
-練馬区×介護はこの移行では公開・データ追加していない。立川市×教育は MY-155 で公開済み（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。追加自治体での定義差や部分的な取得可否は、そのデータ監査時に検証する。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
+練馬区×介護は **MY-156/MY-230 で公開済み**（下記）。立川市×教育は MY-155 で公開済み（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
+
+## MY-156 / MY-230: 練馬区×介護 移植性監査・公開（2026-09-17 / 2026-09-25）
+
+`/nerima/care` は **公開済み**（`story-registry` 登録）。監査の正本:
+
+| 責務 | 正本 |
+|---|---|
+| 原典・可用性・5年比較・立川との差分 | `docs/nerima-care-data-sources.md` |
+| metricId 別の移植判定（再利用/定義調整/代替/不可） | `docs/nerima-care-portability.md` |
+| 指標意味・DataGap 共通ルール | `config/topics/care.json`, `docs/data-definition.md` |
+
+監査で確定した要点: 第1号被保険者（年度末）は統計書 Excel で取得可能だが OD CSV なし。認定者は **9月末** 基準で立川（年度末）と非同等。給付費は千円・区分合算。提供単位数・都参考の職員/賃金・保険料基準 UI は立川版をほぼ流用可。Act 3 は Case B（都参考 + Gap）を継承。
+
+| 責務 | 正本 |
+|---|---|
+| 自治体コード・名称 | `config/municipalities/nerima.json`（131202） |
+| 原典・制度値 | `config/data-sources/nerima/care.json`（`redistribution: local-only`） |
+| 統計書パーサー（ローカル再抽出用） | `scripts/lib/parse-nerima-hyo08.mjs`, `scripts/extract-nerima-hyo08.mjs` |
+| ビルド（curated 正本） | `scripts/build-nerima-care.mjs` ← `data/curated/nerima/care/stats-book-series.json` |
+| ストーリー | `config/stories/nerima-care.json`, `src/stories/care-story.tsx`（共有 renderer） |
+| processed | `data/processed/nerima/care/dashboard.json` |
+
+実装判断（MY-230）: 監査内容に矛盾なし。認定者9月末は provenance と scrolly コピーで明示。認定率は算出しない。支援への接続は原典未確認のため未掲載。統計書 Excel は再配布許諾未確認のため Git 非管理。
 
 ## MY-155: 立川市×教育 データ調査・ストーリー設計（2026-09-14）
 

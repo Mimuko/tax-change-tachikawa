@@ -1,11 +1,14 @@
 import type { DashboardData } from "../types/dashboard";
 import type { EducationDashboardData } from "../types/education-dashboard";
-import careRaw from "../../data/processed/tachikawa/care/dashboard.json";
+import tachikawaCareRaw from "../../data/processed/tachikawa/care/dashboard.json";
+import nerimaCareRaw from "../../data/processed/nerima/care/dashboard.json";
 import educationRaw from "../../data/processed/tachikawa/education/dashboard.json";
-import municipality from "../../config/municipalities/tachikawa.json";
+import tachikawa from "../../config/municipalities/tachikawa.json";
+import nerima from "../../config/municipalities/nerima.json";
 import care from "../../config/topics/care.json";
 import education from "../../config/topics/education.json";
-import careStory from "../../config/stories/tachikawa-care.json";
+import tachikawaCareStory from "../../config/stories/tachikawa-care.json";
+import nerimaCareStory from "../../config/stories/nerima-care.json";
 import educationStory from "../../config/stories/tachikawa-education.json";
 
 type TopicMetrics = Record<
@@ -18,6 +21,7 @@ type StoryOpening = {
   seriesKey: string;
   shortLabel: string;
   color: string;
+  periodKind?: string;
 };
 
 type StoryDefinition = {
@@ -34,7 +38,7 @@ type StoryDefinition = {
 export type StoryData = DashboardData | EducationDashboardData;
 
 export type StoryContext = {
-  municipality: typeof municipality;
+  municipality: typeof tachikawa | typeof nerima;
   topic: { id: string; label: string; metrics: TopicMetrics };
   story: StoryDefinition;
   href: string;
@@ -45,19 +49,27 @@ export type StoryContext = {
 // Register only audited combinations, never all municipality × topic pairs.
 export const stories: StoryContext[] = [
   {
-    municipality,
+    municipality: tachikawa,
     topic: care,
-    story: careStory,
-    href: `/${municipality.id}/${care.id}/`,
-    dataHref: `/${municipality.id}/${care.id}/data/`,
-    data: careRaw as DashboardData,
+    story: tachikawaCareStory,
+    href: `/${tachikawa.id}/${care.id}/`,
+    dataHref: `/${tachikawa.id}/${care.id}/data/`,
+    data: tachikawaCareRaw as DashboardData,
   },
   {
-    municipality,
+    municipality: nerima,
+    topic: care,
+    story: nerimaCareStory as StoryDefinition,
+    href: `/${nerima.id}/${care.id}/`,
+    dataHref: `/${nerima.id}/${care.id}/data/`,
+    data: nerimaCareRaw as DashboardData,
+  },
+  {
+    municipality: tachikawa,
     topic: education as StoryContext["topic"],
     story: educationStory as StoryDefinition,
-    href: `/${municipality.id}/${education.id}/`,
-    dataHref: `/${municipality.id}/${education.id}/data/`,
+    href: `/${tachikawa.id}/${education.id}/`,
+    dataHref: `/${tachikawa.id}/${education.id}/data/`,
     data: educationRaw as EducationDashboardData,
   },
 ];

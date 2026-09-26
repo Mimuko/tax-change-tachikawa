@@ -1,0 +1,97 @@
+{
+  "source": {
+    "title": "練馬区統計書 R7 福祉 Excel hyo08.xlsx（表110）",
+    "pageUrl": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
+    "fileUrl": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.files/hyo08.xlsx",
+    "fileName": "hyo08.xlsx",
+    "localPath": "data/raw/nerima/care/hyo08.xlsx",
+    "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+    "auditedAt": "2026-09-17",
+    "sitePolicyUrl": "https://www.city.nerima.tokyo.jp/aboutweb/sitepolicy.html",
+    "redistribution": "local-only",
+    "rationale": "練馬区サイトポリシーは無断転載・複製を原則禁止し、統計書 Excel に CC 等の再配布許諾が明示されていない。公開 Git には原典ファイルを置かず、取得手順・URL・SHA-256・必要最小限の加工済み系列のみを管理する。"
+  },
+  "sheets": {
+    "insured": "142",
+    "certified": "143",
+    "benefits": "144"
+  },
+  "series": {
+    "insured": [
+      { "year": 2020, "value": 162420 },
+      { "year": 2021, "value": 162974 },
+      { "year": 2022, "value": 163278 },
+      { "year": 2023, "value": 163960 },
+      { "year": 2024, "value": 164676 }
+    ],
+    "certified": [
+      { "year": 2020, "value": 35103, "secondInsured": 680 },
+      { "year": 2021, "value": 36207, "secondInsured": 747 },
+      { "year": 2022, "value": 36649, "secondInsured": 715 },
+      { "year": 2023, "value": 36770, "secondInsured": 694 },
+      { "year": 2024, "value": 37409, "secondInsured": 733 }
+    ],
+    "benefits": [
+      {
+        "year": 2020,
+        "value": 53514636000,
+        "components": {
+          "homeServicesThousandYen": 29354494,
+          "facilityServicesThousandYen": 15065380,
+          "communityServicesThousandYen": 5728630,
+          "highCostServicesThousandYen": 2023536,
+          "reviewFeeThousandYen": 60719,
+          "specificAdmissionThousandYen": 1281877
+        }
+      },
+      {
+        "year": 2021,
+        "value": 55548853000,
+        "components": {
+          "homeServicesThousandYen": 31094689,
+          "facilityServicesThousandYen": 15325026,
+          "communityServicesThousandYen": 5940400,
+          "highCostServicesThousandYen": 2010115,
+          "reviewFeeThousandYen": 64026,
+          "specificAdmissionThousandYen": 1114597
+        }
+      },
+      {
+        "year": 2022,
+        "value": 56357793000,
+        "components": {
+          "homeServicesThousandYen": 31594973,
+          "facilityServicesThousandYen": 15724281,
+          "communityServicesThousandYen": 6001872,
+          "highCostServicesThousandYen": 1964798,
+          "reviewFeeThousandYen": 65538,
+          "specificAdmissionThousandYen": 1006331
+        }
+      },
+      {
+        "year": 2023,
+        "value": 58457748000,
+        "components": {
+          "homeServicesThousandYen": 32864284,
+          "facilityServicesThousandYen": 16165199,
+          "communityServicesThousandYen": 6255753,
+          "highCostServicesThousandYen": 2070532,
+          "reviewFeeThousandYen": 67147,
+          "specificAdmissionThousandYen": 1034833
+        }
+      },
+      {
+        "year": 2024,
+        "value": 59917065000,
+        "components": {
+          "homeServicesThousandYen": 33779028,
+          "facilityServicesThousandYen": 16506785,
+          "communityServicesThousandYen": 6351898,
+          "highCostServicesThousandYen": 2196790,
+          "reviewFeeThousandYen": 68968,
+          "specificAdmissionThousandYen": 1013596
+        }
+      }
+    ]
+  }
+}

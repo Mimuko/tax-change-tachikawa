@@ -18,8 +18,9 @@ import { join } from "node:path";
 import { datasetContext } from "./lib/dataset-context.mjs";
 
 const root = resolve(import.meta.dirname, "..");
-const dataset = await datasetContext(root);
+const dataset = await datasetContext(root, process.argv.slice(2));
 const MUNICIPALITY = dataset.config.municipalityCode;
+const MUNICIPALITY_LABEL = dataset.config.municipalityLabel ?? dataset.config.municipalityName;
 const BASE = "https://www.mhlw.go.jp";
 const YEARS = [2020, 2021, 2022, 2023, 2024];
 
@@ -165,9 +166,9 @@ const curated = {
   points,
   provenance: {
     title: "介護サービス情報公表システムオープンデータ（各年12月末）",
-    definition: "サービスコード×事業所番号の一意組合せ数。市区町村コード132021（立川市）。定員は用いない。",
+    definition: `サービスコード×事業所番号の一意組合せ数。市区町村コード${MUNICIPALITY}（${MUNICIPALITY_LABEL}）。定員は用いない。`,
     unit: "establishments",
-    note: "厚労省ODの全国ファイルから立川市行のみ集計。休廃止列はないため公表スナップショット掲載数として扱う。",
+    note: `厚労省ODの全国ファイルから${MUNICIPALITY_LABEL}行のみ集計。休廃止列はないため公表スナップショット掲載数として扱う。`,
   },
 };
 
