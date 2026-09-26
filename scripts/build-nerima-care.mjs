@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { assertBenefitReconciliation } from "./lib/benefit-reconciliation.mjs";
 import { datasetContext } from "./lib/dataset-context.mjs";
 import { parseNerimaHyo08 } from "./lib/parse-nerima-hyo08.mjs";
 
@@ -22,17 +23,10 @@ const statsHash = createHash("sha256").update(statsBytes).digest("hex");
 const parsed = await parseNerimaHyo08(statsPath, municipality.statsBook.sheets);
 
 const reconciliation = await loadOptionalJson(`${dataset.curatedPath}/benefit-reconciliation.json`);
-if (!reconciliation?.totals?.length) {
+if (!reconciliation) {
   throw new Error("benefit-reconciliation.json is required before publishing nerima/care");
 }
-for (const expected of reconciliation.totals) {
-  const actual = parsed.benefits.find((row) => row.year === expected.year);
-  if (!actual || actual.value !== expected.valueYen) {
-    throw new Error(
-      `benefits reconciliation failed for ${expected.year}: expected ${expected.valueYen}, got ${actual?.value ?? "missing"}`,
-    );
-  }
-}
+assertBenefitReconciliation(reconciliation, parsed.benefits);
 
 const latestFiscalYear = Math.max(...parsed.insured.map((row) => row.year));
 
@@ -70,7 +64,7 @@ const data = {
       sha256: statsHash,
       definition: reconciliation.sumDefinition,
       unit: "円",
-      note: `${reconciliation.note} 監査: ${reconciliation.source}（${reconciliation.auditedAt}）`,
+      note: `${reconciliation.note} ${reconciliation.auditScope.rationale} 監査: ${reconciliation.source}（${reconciliation.auditedAt}）`,
     },
   },
   premiumStandard: {

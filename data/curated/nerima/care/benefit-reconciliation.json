@@ -2,12 +2,77 @@
   "source": "練馬区統計書 R7 福祉 Excel hyo08.xlsx 表110(7)",
   "auditedAt": "2026-09-17",
   "sumDefinition": "居宅・施設・地域密着型サービス費 + 高額介護等サービス費 + 審査支払手数料 + 特定入所者介護サービス費（各区分は千円・四捨五入）",
-  "note": "立川市 CSV の給付総額列とは原典定義が異なるため、市区町村横断の1対1突合は行わない。練馬区は統計書区分合算の自己整合のみ監査済み。",
-  "totals": [
-    { "year": 2020, "valueYen": 53514636000 },
-    { "year": 2021, "valueYen": 55548853000 },
-    { "year": 2022, "valueYen": 56357793000 },
-    { "year": 2023, "valueYen": 58457748000 },
-    { "year": 2024, "valueYen": 59917065000 }
+  "auditScope": {
+    "yearsRequired": [2020, 2021, 2022, 2023, 2024],
+    "crossMunicipalityReconciliation": false,
+    "rationale": "立川市 CSV の給付総額列とは原典定義（円・総額列 vs 千円・区分合算）が異なるため、市区町村横断の1対1突合は監査対象外。練馬区は表110(7)の構成要素と手計算合計の自己整合のみを監査要件とする。"
+  },
+  "note": "監査記録の構成要素は原典セルを手計算で突合した値。パーサー出力との一致に加え、構成要素の合計が valueYen と一致することをビルド時に検証する。",
+  "years": [
+    {
+      "year": 2020,
+      "componentsThousandYen": {
+        "homeServices": 29354494,
+        "facilityServices": 15065380,
+        "communityServices": 5728630,
+        "highCostServices": 2023536,
+        "reviewFee": 60719,
+        "specificAdmission": 1281877
+      },
+      "handSumThousandYen": 53514636,
+      "valueYen": 53514636000
+    },
+    {
+      "year": 2021,
+      "componentsThousandYen": {
+        "homeServices": 31094689,
+        "facilityServices": 15325026,
+        "communityServices": 5940400,
+        "highCostServices": 2010115,
+        "reviewFee": 64026,
+        "specificAdmission": 1114597
+      },
+      "handSumThousandYen": 55548853,
+      "valueYen": 55548853000
+    },
+    {
+      "year": 2022,
+      "componentsThousandYen": {
+        "homeServices": 31594973,
+        "facilityServices": 15724281,
+        "communityServices": 6001872,
+        "highCostServices": 1964798,
+        "reviewFee": 65538,
+        "specificAdmission": 1006331
+      },
+      "handSumThousandYen": 56357793,
+      "valueYen": 56357793000
+    },
+    {
+      "year": 2023,
+      "componentsThousandYen": {
+        "homeServices": 32864284,
+        "facilityServices": 16165199,
+        "communityServices": 6255753,
+        "highCostServices": 2070532,
+        "reviewFee": 67147,
+        "specificAdmission": 1034833
+      },
+      "handSumThousandYen": 58457748,
+      "valueYen": 58457748000
+    },
+    {
+      "year": 2024,
+      "componentsThousandYen": {
+        "homeServices": 33779028,
+        "facilityServices": 16506785,
+        "communityServices": 6351898,
+        "highCostServices": 2196790,
+        "reviewFee": 68968,
+        "specificAdmission": 1013596
+      },
+      "handSumThousandYen": 59917065,
+      "valueYen": 59917065000
+    }
   ]
 }

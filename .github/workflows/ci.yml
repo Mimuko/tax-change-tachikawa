@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Provenance SHA vs raw bytes
+        run: npm run data:check
+
+      - name: Rebuild data and assert no unexpected drift
+        run: |
+          npm run data:build
+          npm run data:check
+          npm run data:stable
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build

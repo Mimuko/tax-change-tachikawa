@@ -18,7 +18,7 @@
 | `ltc_first_insured_persons` | 介護保険第1号被保険者数 | **定義調整が必要** | 統計書 表110(1) | 定義（年度末）は一致。**取得経路**が OD CSV→統計書 Excel。系列は令和2–6（5年）のみ確認 |
 | `care_certified_persons` | 要支援・要介護認定者数 | **定義調整が必要** | 統計書 表110(5) | 基準日が **9月末**（立川は**年度末**）。R7統計書で過去分の基準日も改訂 |
 | `care_certification_rate_first_insured` | 第1号被保険者の認定率 | **定義調整が必要** | 派生（表110(1)+(5)） | 分子9月末・分母年度末の **期間不一致**。立川式の自動移植は禁止 |
-| `ltc_benefit_total_yen` | 介護保険給付総額 | **定義調整が必要** | 統計書 表110(7) 合算 | 単位**千円**・四捨五入。総額列なし。原典は事業状況報告系だが CSV 総額列との一致は要照合 |
+| `ltc_benefit_total_yen` | 介護保険給付総額 | **定義調整が必要** | 統計書 表110(7) 合算 | 単位**千円**・四捨五入。総額列なし。立川 CSV 総額列との横断突合は**監査対象外**（構成要素自己整合） |
 | `ltc_benefit_by_service_yen` | サービス別給付費 | **定義調整が必要** | 同上（区分別） | 立川 OD の正式サービス分類 CSV とは列構造が異なる。表示分類マッピング要監査 |
 | `service_unit_count` | 介護サービスの提供単位数 | **そのまま再利用** | 厚労省 OD | `132021`→`131202` のみ。2020–2024・12月末・24列構造は立川監査と同一 |
 | `care_worker_headcount` | 介護職員数（実人数） | **そのまま再利用** | e-Stat 都調査 | 東京都参考。`reference_only: true`。市区町村値なし |
@@ -55,7 +55,7 @@
 1. [x] `config/municipalities/nerima.json`（`131202`）と `config/data-sources/nerima/care.json` を追加。
 2. [x] 統計書 Excel 用パーサー（`parse-nerima-hyo08.mjs`）を追加。欠損セルは null 扱いでビルド停止。
 3. [x] 認定者 **9月末** を UI・詳細表・Act 構成に明示。
-4. [x] 給付費合算定義を `data/curated/nerima/care/benefit-reconciliation.json` で自己整合監査（立川 CSV とは原典定義が異なるため横断突合は対象外）。
+4. [x] 給付費合算を `benefit-reconciliation.json` で監査（2020–2024年集合・構成要素・手計算合計。立川 CSV 横断突合は対象外）。
 5. [x] `dataset-context` に `nerima/care` を登録。
 6. [x] 指標参照・DataGap・静的ビルドを `tests/architecture.test.mjs` に追加。
 
