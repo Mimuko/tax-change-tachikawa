@@ -51,3 +51,8 @@ Desktop.ini
 .vscode/
 *.swp
 *.swo
+
+# Redistribution-restricted municipality raw sources (local fetch only; see data/raw/*/README.md)
+data/raw/nerima/**/*.xlsx
+data/raw/nerima/**/*.xls
+data/raw/nerima/**/*.pdf

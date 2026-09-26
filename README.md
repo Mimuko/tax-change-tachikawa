@@ -79,7 +79,8 @@ npm run data:normalize
 - `data:service-units` … 提供単位数を `data/curated/` へ生成
 - `data:tokyo-reference` … 都道府県参考の賃金系列を curated へ生成（未設定時は既存 curated を維持）
 - `data:normalize` / `data:build` … `data/processed/tachikawa/care/dashboard.json` を生成（`place`・市区町村系列・`reference.prefecture` を含む）
-- `data:check` … processed の provenance SHA-256 が raw 実バイトと一致することを検証（コミット前の監査用）
+- `data:extract-nerima` … ローカルの練馬区統計書 Excel から curated 系列を再生成（原典は Git 非管理）
+- `data:check` … processed の provenance SHA-256 を検証（再配布可 raw は実バイト、local-only は記録 SHA）
 - `data:stable` … `data:build` 後に processed が `generatedAt` 以外でドリフトしていないことを検証（CI 用）
 
 e-Stat 再取得用のアプリIDが必要な場合だけ `.env` に `E_STAT_APP_ID` を置いてください（コミットしない）。変数名のみスクリプト先頭コメントと docs に記載します。

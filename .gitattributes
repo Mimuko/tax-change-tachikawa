@@ -1,3 +1,4 @@
-# Raw source files must be stored and checked out byte-for-byte.
+# Raw source files that are redistributable must be stored and checked out byte-for-byte.
 # Provenance SHA-256 is computed over these bytes; do not normalize newlines.
+# Redistribution-restricted sources (e.g. nerima XLSX) are gitignored; see data/README.md.
 data/raw/** -text

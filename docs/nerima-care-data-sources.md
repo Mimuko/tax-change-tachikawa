@@ -1,6 +1,6 @@
 # 練馬区×介護 データソース調査
 
-調査日: 2026-09-17（公開反映の更新: 2026-09-26）。URL は原則として公的機関の掲載ページを記録する。本書は MY-156 の成果物で、MY-230 により `/nerima/care` は **公開済み**（`story-registry` 登録、`data/raw/nerima/care/hyo08.xlsx` を Git 管理）。立川市版の指標定義を無理に当てはめず、可用性・定義・期間・粒度を先に確認した。
+調査日: 2026-09-17（公開反映の更新: 2026-09-26）。URL は原則として公的機関の掲載ページを記録する。本書は MY-156 の成果物で、MY-230 により `/nerima/care` は **公開済み**（`story-registry` 登録）。統計書 Excel `hyo08.xlsx` は再配布許諾が確認できないため **Git 非管理**（取得手順・期待 SHA・加工済み curated のみ管理）。立川市版の指標定義を無理に当てはめず、可用性・定義・期間・粒度を先に確認した。
 
 ## 今回の調査結論
 
@@ -54,9 +54,9 @@
 
 | 優先度 | データ名 | 提供者 / URL | 形式 | 範囲・更新 | 指標・単位 | 定義・加工 | ライセンス / 状態 |
 |---|---|---|---|---|---|---|---|
-| MVP採用 | 第1号被保険者数 | [練馬区統計書 R7 福祉 Excel](https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html) 表110(1) | XLSX | 年次 | 人 | 各年度末。65歳以上内訳あり | 区サイト条件 / 令和2–6・公開済 |
-| 定義調整済 | 要介護認定者数 | 同上 表110(5) | XLSX | 年次 | 人 | **各年9月末**。要介護度別・第1号/第2号内訳あり | 同上 / 基準日を provenance・UI で明示 |
-| 定義調整済 | 介護給付費 | 同上 表110(7) | XLSX | 年次 | 千円→円 | 居宅・施設・地域密着・高額・審査手数料・特定入所者を合算 | 同上 / `benefit-reconciliation.json` で構成要素監査 |
+| MVP採用 | 第1号被保険者数 | [練馬区統計書 R7 福祉 Excel](https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html) 表110(1) | XLSX（local-only） | 年次 | 人 | 各年度末。65歳以上内訳あり | 区サイトポリシー / 原典は Git 非管理・curated のみ |
+| 定義調整済 | 要介護認定者数 | 同上 表110(5) | XLSX（local-only） | 年次 | 人 | **各年9月末**。要介護度別・第1号/第2号内訳あり | 同上 / 基準日を provenance・UI で明示 |
+| 定義調整済 | 介護給付費 | 同上 表110(7) | XLSX（local-only） | 年次 | 千円→円 | 居宅・施設・地域密着・高額・審査手数料・特定入所者を合算 | 同上 / `benefit-reconciliation.json` で構成要素監査 |
 | MVP採用 | 提供単位数 | [厚労省 OD](https://www.mhlw.go.jp/stf/kaigo-kouhyou_opendata.html) | ZIP/CSV | 2020–2024 | 件 | 131202・12月末・service_code×office_id | 厚労省規約 / 立川版スクリプト流用 |
 | 必須 | 保険料基準額 | [65歳以上の保険料の決め方](https://www.city.nerima.tokyo.jp/hokenfukushi/kaigohoken/hokenryo/65hokenryo.html) | HTML/PDF | 第8期・第9期 | 円/月 | 第9期 6,670 円/月。個人実支払額ではない | 区サイト条件 |
 | 参考 | 介護職員・賃金 | e-Stat（立川版と同一 URL） | CSV/DB | 2020–2024 | 人・円 | 東京都×サービス×職種。市区町村推計禁止 | 政府標準利用規約 |
@@ -99,6 +99,6 @@
 
 ## ライセンス記録
 
-- 練馬区統計書 Excel/PDF: 区サイト掲載条件に従う。OD 一覧 CSV は CC-BY。
+- 練馬区統計書 Excel/PDF: [サイトポリシー](https://www.city.nerima.tokyo.jp/aboutweb/sitepolicy.html)により無断転載・複製は原則禁止。統計書ページに CC 等の再配布許諾は見当たらない。**原典ファイルは Git に含めない**（local-only）。公開リポジトリでは取得手順・原典 URL・期待 SHA-256・必要最小限の加工済み系列（`data/curated/nerima/care/`）のみを管理する。
 - 厚労省 OD・e-Stat: 立川版と同一（出典表示・加工条件は `docs/data-sources.md` を参照）。
-- MY-230 で統計書 `hyo08.xlsx` を `data/raw/nerima/care/` に Git 管理する判断を確定。掲載条件は区サイトに従い、加工・再配布時は出典表示を行う。
+- 他自治体でも再配布許諾が確認できない資料は、練馬区と同じ local-only 基準を適用する（`data/README.md`）。

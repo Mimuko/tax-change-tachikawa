@@ -1,12 +1,17 @@
 {
   "sourcePage": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
-  "license": "練馬区統計書掲載条件に従う",
+  "license": "練馬区統計書掲載条件およびサイトポリシーに従う（再配布許諾なし）",
+  "sitePolicyUrl": "https://www.city.nerima.tokyo.jp/aboutweb/sitepolicy.html",
   "links": {
     "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
   },
   "statsBook": {
     "file": "hyo08.xlsx",
     "url": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.files/hyo08.xlsx",
+    "localPath": "data/raw/nerima/care/hyo08.xlsx",
+    "expectedSha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+    "redistribution": "local-only",
+    "curatedSeriesPath": "data/curated/nerima/care/stats-book-series.json",
     "sheets": {
       "insured": "142",
       "certified": "143",

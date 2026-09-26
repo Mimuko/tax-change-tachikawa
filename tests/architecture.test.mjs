@@ -4,7 +4,6 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { assertBenefitReconciliation } from "../scripts/lib/benefit-reconciliation.mjs";
 import { datasetContext } from "../scripts/lib/dataset-context.mjs";
-import { parseNerimaHyo08 } from "../scripts/lib/parse-nerima-hyo08.mjs";
 import { verifyCareProvenanceShas } from "../scripts/lib/provenance-sha.mjs";
 const root = resolve(import.meta.dirname, "..");
 const json = async (path) => JSON.parse(await readFile(resolve(root, path), "utf8"));
@@ -52,15 +51,12 @@ test("練馬区の最終収録年度は2024", async () => {
 
 test("練馬区給付費は構成要素監査記録と一致する", async () => {
   const reconciliation = await json("data/curated/nerima/care/benefit-reconciliation.json");
-  const dataSources = await json("config/data-sources/nerima/care.json");
-  const parsed = await parseNerimaHyo08(
-    resolve(root, "data/raw/nerima/care", dataSources.statsBook.file),
-    dataSources.statsBook.sheets,
-  );
-  const audited = assertBenefitReconciliation(reconciliation, parsed.benefits);
+  const curatedSeries = await json("data/curated/nerima/care/stats-book-series.json");
+  const audited = assertBenefitReconciliation(reconciliation, curatedSeries.series.benefits);
   const data = await json("data/processed/nerima/care/dashboard.json");
   assert.equal(audited.length, 5);
   assert.equal(reconciliation.auditScope.crossMunicipalityReconciliation, false);
+  assert.equal(curatedSeries.source.redistribution, "local-only");
   for (const expected of audited) {
     const actual = data.series.benefits.find((row) => row.year === expected.year);
     assert.equal(actual?.value, expected.valueYen, `benefits ${expected.year}`);
@@ -149,7 +145,16 @@ test("練馬区給付費監査は年集合の過不足・重複・縮小を拒�
   );
 });
 
-test("介護 processed の provenance SHA は raw 実バイトと一致する", async () => {
+test("練馬区統計書原典は local-only で Git 非管理とする", async () => {
+  const dataSources = await json("config/data-sources/nerima/care.json");
+  const curated = await json("data/curated/nerima/care/stats-book-series.json");
+  assert.equal(dataSources.statsBook.redistribution, "local-only");
+  assert.equal(curated.source.redistribution, "local-only");
+  assert.equal(dataSources.statsBook.expectedSha256, curated.source.sha256);
+  assert.match(dataSources.statsBook.curatedSeriesPath, /stats-book-series\.json$/);
+});
+
+test("介護 processed の provenance SHA は記録方針どおり一致する", async () => {
   const { ok, results } = await verifyCareProvenanceShas(root);
   for (const row of results) {
     assert.equal(row.actual, row.expected, `${row.dashboard}#${row.key}`);

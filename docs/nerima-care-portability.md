@@ -53,11 +53,12 @@
 ## 実装前チェックリスト（MY-230 時点）
 
 1. [x] `config/municipalities/nerima.json`（`131202`）と `config/data-sources/nerima/care.json` を追加。
-2. [x] 統計書 Excel 用パーサー（`parse-nerima-hyo08.mjs`）を追加。欠損セルは null 扱いでビルド停止。
+2. [x] 統計書 Excel 用パーサー（`parse-nerima-hyo08.mjs`）を追加。欠損セルは null 扱いでビルド停止。原典は local-only（Git 非管理）。
 3. [x] 認定者 **9月末** を UI・詳細表・Act 構成に明示。
 4. [x] 給付費合算を `benefit-reconciliation.json` で監査（2020–2024年集合・構成要素・手計算合計。立川 CSV 横断突合は対象外）。
 5. [x] `dataset-context` に `nerima/care` を登録。
 6. [x] 指標参照・DataGap・静的ビルドを `tests/architecture.test.mjs` に追加。
+7. [x] 再配布許諾未確認のため `hyo08.xlsx` を Git から除外し、取得手順・SHA・curated 系列のみ管理。
 
 ## 監査結論（MY-156）
 
