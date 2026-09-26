@@ -80,7 +80,7 @@
 | 期待 SHA-256 | `expectedSha256` / curated `source.sha256` |
 | 必要最小限の加工済み系列 | `data/curated/...`（公開に使う数値のみ） |
 
-ローカルで原典を置いた場合のみ、任意で実バイトと期待 SHA を突合する。CI では原典ファイルなしで `data:build` / `data:check` が通ること。CI ではさらに `data:build` 後に `npm run data:stable` で `generatedAt` 以外のドリフトも拒否する。
+ローカルで原典を置いた場合のみ、任意で実バイトと期待 SHA を突合する。CI では原典ファイルなしで `data:build` / `data:check` が通ること。CI ではさらに `data:build` 後に `npm run data:stable` で `generatedAt` 以外のドリフトも拒否する。加えて `npm run data:history-check` で base..HEAD の全コミットに local-only 対象バイナリ（練馬区の XLSX/PDF 等）が追加されていないことを検査し、「追加して後から削除」による公開履歴残留を防ぐ。
 
 この区分は今後、許諾を確認していない自治体・資料でも同じ基準で適用する。
 

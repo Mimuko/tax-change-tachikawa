@@ -17,6 +17,7 @@
 - [ ] `npm test`
 - [ ] `npm run data:check`（データ変更時）
 - [ ] `npm run data:build && npm run data:stable`（データ変更時・generatedAt 以外のドリフトなし）
+- [ ] `npm run data:history-check`（local-only 原典を履歴に追加していない）
 - [ ] `npm run build`
 - [ ] モバイル幅とキーボード操作を確認した
 - [ ] 欠損を0や推測値として扱っていない

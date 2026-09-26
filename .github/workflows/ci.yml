@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -20,6 +22,11 @@ jobs:
 
       - name: Unit tests
         run: npm test
+
+      - name: Reject local-only raw binaries in PR history
+        env:
+          HISTORY_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || 'origin/master~1' }}
+        run: npm run data:history-check
 
       - name: Provenance SHA vs raw bytes
         run: npm run data:check

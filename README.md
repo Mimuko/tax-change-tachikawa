@@ -82,6 +82,7 @@ npm run data:normalize
 - `data:extract-nerima` … ローカルの練馬区統計書 Excel から curated 系列を再生成（原典は Git 非管理）
 - `data:check` … processed の provenance SHA-256 を検証（再配布可 raw は実バイト、local-only は記録 SHA）
 - `data:stable` … `data:build` 後に processed が `generatedAt` 以外でドリフトしていないことを検証（CI 用）
+- `data:history-check` … base..HEAD で local-only 対象の XLSX/PDF が履歴に追加されていないことを検証
 
 e-Stat 再取得用のアプリIDが必要な場合だけ `.env` に `E_STAT_APP_ID` を置いてください（コミットしない）。変数名のみスクリプト先頭コメントと docs に記載します。
 
