@@ -709,6 +709,7 @@ footer .ui-label { margin-top: 0; color: var(--paper); font-size: var(--text-sm)
 .sc-story-value { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); line-height: 1; color: var(--ink); }
 .sc-story-value--none { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 700; color: var(--text-secondary); letter-spacing: .04em; }
 .sc-story-label { margin: .55rem 0 0; font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
+.sc-story-period { margin: .2rem 0 0; color: var(--text-secondary); font-size: var(--text-xs); }
 .sc-story-meaning { margin: .7rem 0 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.8; }
 .sc-story-close { margin-top: 2.5rem; }
 
