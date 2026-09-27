@@ -27,6 +27,19 @@ test("介護イベント catalog が chart binding を解決する", async () =>
   );
 });
 
+test("練馬区介護の出来事は両グラフの収録年度で解決する", async () => {
+  const catalog = await json("config/events/nerima-care.json");
+  validateTimelineEventCatalog(catalog);
+
+  const chartYears = [2020, 2021, 2022, 2023, 2024];
+  const opening = resolveChartEvents({ catalog, chartId: "opening", chartYears });
+  const serviceUnits = resolveChartEvents({ catalog, chartId: "act2-service-units", chartYears });
+
+  assert.deepEqual(opening.map((event) => event.id), ["covid-19-2020", "care-plan-period-2021"]);
+  assert.deepEqual(serviceUnits.map((event) => event.id), ["covid-19-2020"]);
+  assert.ok(opening.every((event) => event.scope !== "municipality"));
+});
+
 test("教育イベントは chart 年度に一致するものだけ返す", async () => {
   const catalog = await json("config/events/tachikawa-education.json");
   validateTimelineEventCatalog(catalog);
