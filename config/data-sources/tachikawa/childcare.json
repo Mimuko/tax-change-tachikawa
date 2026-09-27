@@ -1,0 +1,10 @@
+{
+  "municipality": "tachikawa",
+  "topic": "childcare",
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "license": "CC BY 4.0",
+  "files": {
+    "nurseries": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-3hoikuenbetsuteiin_hoikunojisshijidosutoshokuinsu8.csv",
+    "consultations": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-5kodomokateishiensenta-riyojokyo8.csv"
+  }
+}

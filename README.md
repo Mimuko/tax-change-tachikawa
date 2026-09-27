@@ -2,6 +2,8 @@
 
 ## 自治体×テーマ構成
 
+追加テーマ PoC: [立川市の子育て](/tachikawa/childcare/)（ソース内の選定理由は [childcare-theme-selection.md](docs/childcare-theme-selection.md)）。保育園の定員・実施児童・職員と子育て相談の 2019–2023 年の変化を示します。
+
 現在の公開ストーリーは `/tachikawa/care/`、出典は `/tachikawa/care/data/` です。既存の `/`・`/data/` も利用できます。
 
 自治体情報は `config/municipalities/`、テーマの指標定義は `config/topics/`、ストーリーの指標参照は `config/stories/`、原典設定は `config/data-sources/` で管理します。画面の組み合わせとコピーは `src/stories/`、共通部品は `src/components/` に置きます。

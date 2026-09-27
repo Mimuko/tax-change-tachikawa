@@ -24,6 +24,8 @@
 
 `raw/tachikawa/` は取得したCSV、`processed/dashboard.json` はその派生物です。取得URL・取得日時・SHA-256・加工処理を追跡可能にします。利用者は原典の最新条件も確認してください。
 
+子育て PoC の原本は `raw/tachikawa/childcare/`、加工済み系列は `processed/tachikawa/childcare/dashboard.json`。原典 URL、取得日、SHA-256、採否は [`docs/childcare-theme-selection.md`](../docs/childcare-theme-selection.md) と JSON の指標別 provenance に記録します。
+
 出典表示例: 「出典: 立川市オープンデータ（CC BY 4.0）、加工して作成」
 
 ## 練馬区統計書（local-only）
