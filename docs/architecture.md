@@ -29,7 +29,24 @@
 4. metricIdを参照するストーリーとrendererを実装し、登録する。
 5. 指標参照、未知ルート、欠損・参考値の表示、静的ビルドを検証する。
 
-練馬区×介護は **MY-156/MY-230 で公開済み**（下記）。立川市×教育は MY-155 で公開済み（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
+練馬区×介護は **MY-156/MY-230 で公開済み**（下記）。立川市×教育は MY-155 で公開済み（下記）。**杉並区×介護**は **MY-238 で公開済み**（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
+
+## MY-238: 杉並区×介護 横展開（2026-09-27）
+
+`/suginami/care` は **公開済み**（`story-registry` 登録）。候補選定の正本: `docs/my-238-municipality-selection.md`。
+
+| 責務 | 正本 |
+|---|---|
+| 原典・可用性 | `docs/suginami-care-data-sources.md` |
+| 移植性監査 | `docs/suginami-care-portability.md` |
+| 自治体 | `config/municipalities/suginami.json`（131156） |
+| 原典設定 | `config/data-sources/suginami/care.json` |
+| CSV パーサー | `scripts/lib/parse-suginami-care-csv.mjs` |
+| ビルド | `scripts/build-suginami-care.mjs` |
+| ストーリー | `config/stories/suginami-care.json`, `care-story.tsx`（共有） |
+| processed | `data/processed/suginami/care/dashboard.json` |
+
+要点: 認定者は **年度末**（立川同型）。原典 CSV は CC BY 4.0 で Git 管理。第8期基準月額 6,200 円・第9期 6,400 円。タイムライン・支援への接続は原典監査後に別 Issue で追加可能。
 
 ## MY-156 / MY-230: 練馬区×介護 移植性監査・公開（2026-09-17 / 2026-09-25）
 

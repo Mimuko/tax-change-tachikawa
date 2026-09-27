@@ -2,13 +2,16 @@ import type { DashboardData } from "../types/dashboard";
 import type { EducationDashboardData } from "../types/education-dashboard";
 import tachikawaCareRaw from "../../data/processed/tachikawa/care/dashboard.json";
 import nerimaCareRaw from "../../data/processed/nerima/care/dashboard.json";
+import suginamiCareRaw from "../../data/processed/suginami/care/dashboard.json";
 import educationRaw from "../../data/processed/tachikawa/education/dashboard.json";
 import tachikawa from "../../config/municipalities/tachikawa.json";
 import nerima from "../../config/municipalities/nerima.json";
+import suginami from "../../config/municipalities/suginami.json";
 import care from "../../config/topics/care.json";
 import education from "../../config/topics/education.json";
 import tachikawaCareStory from "../../config/stories/tachikawa-care.json";
 import nerimaCareStory from "../../config/stories/nerima-care.json";
+import suginamiCareStory from "../../config/stories/suginami-care.json";
 import educationStory from "../../config/stories/tachikawa-education.json";
 
 type TopicMetrics = Record<
@@ -38,7 +41,7 @@ type StoryDefinition = {
 export type StoryData = DashboardData | EducationDashboardData;
 
 export type StoryContext = {
-  municipality: typeof tachikawa | typeof nerima;
+  municipality: typeof tachikawa | typeof nerima | typeof suginami;
   topic: { id: string; label: string; metrics: TopicMetrics };
   story: StoryDefinition;
   href: string;
@@ -63,6 +66,14 @@ export const stories: StoryContext[] = [
     href: `/${nerima.id}/${care.id}/`,
     dataHref: `/${nerima.id}/${care.id}/data/`,
     data: nerimaCareRaw as DashboardData,
+  },
+  {
+    municipality: suginami,
+    topic: care,
+    story: suginamiCareStory as StoryDefinition,
+    href: `/${suginami.id}/${care.id}/`,
+    dataHref: `/${suginami.id}/${care.id}/data/`,
+    data: suginamiCareRaw as DashboardData,
   },
   {
     municipality: tachikawa,

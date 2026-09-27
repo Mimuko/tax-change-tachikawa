@@ -9,6 +9,7 @@ const root = resolve(import.meta.dirname, "..");
 const targets = [
   "data/processed/tachikawa/care/dashboard.json",
   "data/processed/nerima/care/dashboard.json",
+  "data/processed/suginami/care/dashboard.json",
 ];
 
 function significantDiffLines(diffText) {

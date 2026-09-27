@@ -1,0 +1,31 @@
+{
+  "sourcePage": "https://www.city.suginami.tokyo.jp/s016/25286.html",
+  "license": "クリエイティブ・コモンズ 表示 4.0 国際（統計書 CSV）",
+  "sitePolicyUrl": "https://www.city.suginami.tokyo.jp/s016/25286.html",
+  "links": {
+    "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+  },
+  "sources": [
+    {
+      "file": "insured.csv",
+      "url": "https://www.city.suginami.tokyo.jp/documents/25286/r7-09-09-01-01.csv"
+    },
+    {
+      "file": "certified.csv",
+      "url": "https://www.city.suginami.tokyo.jp/documents/25286/r7-09-09-01-02.csv"
+    },
+    {
+      "file": "benefits.csv",
+      "url": "https://www.city.suginami.tokyo.jp/documents/25286/r7-09-09-04.csv"
+    }
+  ],
+  "premiumStandard": {
+    "metricId": "ltc_premium_standard_monthly",
+    "sourceUrl": "https://www.city.suginami.tokyo.jp/s040/1938.html",
+    "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
+    "periods": [
+      { "label": "第8期", "range": "2021–2023年度", "value": 6200 },
+      { "label": "第9期", "range": "2024–2026年度", "value": 6400 }
+    ]
+  }
+}

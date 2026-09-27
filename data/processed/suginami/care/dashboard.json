@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-27T05:20:43.154Z",
+  "generatedAt": "2026-09-27T05:20:43.183Z",
   "latestFiscalYear": 2024,
-  "sourcePage": "https://www.city.nerima.tokyo.jp/kusei/tokei/tokeisho/R7toukeisho.html",
+  "sourcePage": "https://www.city.suginami.tokyo.jp/s016/25286.html",
   "place": {
-    "municipalityCode": "131202",
-    "municipalityLabel": "練馬区",
+    "municipalityCode": "131156",
+    "municipalityLabel": "杉並区",
     "prefectureLabel": "東京都",
     "links": {
       "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
@@ -14,140 +14,135 @@
     "insured": [
       {
         "year": 2020,
-        "value": 162420
+        "value": 121310
       },
       {
         "year": 2021,
-        "value": 162974
+        "value": 121293
       },
       {
         "year": 2022,
-        "value": 163278
+        "value": 121180
       },
       {
         "year": 2023,
-        "value": 163960
+        "value": 121611
       },
       {
         "year": 2024,
-        "value": 164676
+        "value": 121961
       }
     ],
     "certified": [
       {
         "year": 2020,
-        "value": 35103,
-        "secondInsured": 680
+        "value": 25506
       },
       {
         "year": 2021,
-        "value": 36207,
-        "secondInsured": 747
+        "value": 25719
       },
       {
         "year": 2022,
-        "value": 36649,
-        "secondInsured": 715
+        "value": 25571
       },
       {
         "year": 2023,
-        "value": 36770,
-        "secondInsured": 694
+        "value": 26058
       },
       {
         "year": 2024,
-        "value": 37409,
-        "secondInsured": 733
+        "value": 26447
       }
     ],
     "benefits": [
       {
         "year": 2020,
-        "value": 53514636000
+        "value": 38140559974
       },
       {
         "year": 2021,
-        "value": 55548853000
+        "value": 39028309185
       },
       {
         "year": 2022,
-        "value": 56357793000
+        "value": 39284491542
       },
       {
         "year": 2023,
-        "value": 58457748000
+        "value": 40008591876
       },
       {
         "year": 2024,
-        "value": 59917065000
+        "value": 41284828719
       }
     ],
     "serviceUnitCount": [
       {
         "year": 2020,
-        "value": 978
+        "value": 684
       },
       {
         "year": 2021,
-        "value": 971
+        "value": 671
       },
       {
         "year": 2022,
-        "value": 997
+        "value": 682
       },
       {
         "year": 2023,
-        "value": 1017
+        "value": 688
       },
       {
         "year": 2024,
-        "value": 984
+        "value": 674
       }
     ]
   },
   "provenance": {
     "insured": {
-      "title": "介護保険第1号被保険者数（統計書 表110(1)）",
-      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
+      "title": "介護保険（被保険者加入状況 第1号被保険者）",
+      "sha256": "37570e04b0b60333d7dea94b6f250ef426c29d96cdb4f00ed568aeb4115876b6",
       "definition": "各年度末現在の第1号被保険者総数",
       "unit": "人",
-      "note": "原典 XLSX は再配布不可のため Git 非管理。期待 SHA と加工済み系列は curated を正本とする。"
+      "note": "出典: 杉並区統計書 R7 9-9-1-1 CSV（CC BY 4.0）"
     },
     "certified": {
-      "title": "要支援・要介護認定者数（統計書 表110(5)）",
-      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
-      "definition": "各年9月末現在の認定者総数（第2号被保険者を含む）",
+      "title": "介護保険（被保険者加入状況 要介護（要支援）認定者）",
+      "sha256": "3e609896e89902194137dbdd14a8342f284fa087064c1563d8b80b6a3374cd5e",
+      "definition": "各年度末現在の要支援・要介護認定者総数（第2号被保険者を含む）",
       "unit": "人",
-      "note": "第1号被保険者数（各年度末）と基準日が異なります。認定率は算出しません。原典 XLSX は再配布不可のため Git 非管理。"
+      "note": "原典は最新年度のみ第1号/第2号内訳行あり。5年分の認定率は算出しない。"
     },
     "benefits": {
-      "title": "介護保険給付費（統計書 表110(7) 合算）",
-      "sha256": "63f53f0ee209f17c612795c299c58ae1d235f65cbdd3c9a190f5e5115ca73fe9",
-      "definition": "居宅・施設・地域密着型サービス費 + 高額介護等サービス費 + 審査支払手数料 + 特定入所者介護サービス費（各区分は千円・四捨五入）",
+      "title": "介護保険（保険給付状況）",
+      "sha256": "5303ab3fc25b6be8ca102825da91fb18ddf4e41d8f4673b59ca193ad82927e7d",
+      "definition": "各年度の介護保険給付総数金額（区分合算）",
       "unit": "円",
-      "note": "監査記録の構成要素は原典セルを手計算で突合した値。パーサー出力との一致に加え、構成要素の合計が valueYen と一致することをビルド時に検証する。 立川市 CSV の給付総額列とは原典定義（円・総額列 vs 千円・区分合算）が異なるため、市区町村横断の1対1突合は監査対象外。練馬区は表110(7)の構成要素と手計算合計の自己整合のみを監査要件とする。 監査: 練馬区統計書 R7 福祉 Excel hyo08.xlsx 表110(7)（2026-09-17） 原典 XLSX は再配布不可のため Git 非管理。"
+      "note": "出典: 杉並区統計書 R7 9-9-4 CSV（CC BY 4.0）"
     },
     "serviceUnitCount": {
       "title": "介護サービス情報公表システムオープンデータ（各年12月末）",
-      "definition": "サービスコード×事業所番号の一意組合せ数。市区町村コード131202（練馬区）。定員は用いない。",
+      "definition": "サービスコード×事業所番号の一意組合せ数。市区町村コード131156（杉並区）。定員は用いない。",
       "unit": "establishments",
-      "note": "厚労省ODの全国ファイルから練馬区行のみ集計。休廃止列はないため公表スナップショット掲載数として扱う。"
+      "note": "厚労省ODの全国ファイルから杉並区行のみ集計。休廃止列はないため公表スナップショット掲載数として扱う。"
     }
   },
   "premiumStandard": {
     "metricId": "ltc_premium_standard_monthly",
-    "sourceUrl": "https://www.city.nerima.tokyo.jp/hokenfukushi/kaigohoken/hokenryo/65hokenryo.html",
+    "sourceUrl": "https://www.city.suginami.tokyo.jp/s040/1938.html",
     "definition": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
     "periods": [
       {
         "label": "第8期",
         "range": "2021–2023年度",
-        "value": 5880
+        "value": 6200
       },
       {
         "label": "第9期",
         "range": "2024–2026年度",
-        "value": 6670
+        "value": 6400
       }
     ]
   },
