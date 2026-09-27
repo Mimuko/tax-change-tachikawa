@@ -29,7 +29,7 @@ export default function SiteFooter({ data, context }: { data: FooterData; contex
           >
             {context.municipality.municipalityLabel}の公開データ
           </a>
-          。最終収録年度: {data.latestFiscalYear}年度。
+          。最終収録{context.topic.id === "childcare" ? "年" : "年度"}: {data.latestFiscalYear}{context.topic.id === "childcare" ? "年（相談件数は年度）" : "年度"}。
         </p>
         <p><Link href={context.dataHref}>定義・加工方法を見る →</Link></p>
       </div>

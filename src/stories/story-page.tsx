@@ -1,8 +1,10 @@
 import CareStory from "./care-story";
 import EducationStory from "./education-story";
+import ChildcareStory from "./childcare-story";
 import type { StoryContext } from "../lib/story-registry";
 import type { DashboardData } from "../types/dashboard";
 import type { EducationDashboardData } from "../types/education-dashboard";
+import type { ChildcareDashboardData } from "../types/childcare-dashboard";
 
 export default function StoryPage({ context }: { context: StoryContext }) {
   // New themes choose their own composition of shared story primitives.
@@ -12,6 +14,8 @@ export default function StoryPage({ context }: { context: StoryContext }) {
       return <CareStory data={context.data as DashboardData} context={context} />;
     case "tachikawa-education":
       return <EducationStory data={context.data as EducationDashboardData} context={context} />;
+    case "tachikawa-childcare":
+      return <ChildcareStory data={context.data as ChildcareDashboardData} context={context} />;
     default:
       throw new Error(`Unknown story renderer: ${context.story.renderer}`);
   }

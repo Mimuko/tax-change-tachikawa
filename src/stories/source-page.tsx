@@ -29,6 +29,9 @@ export default function SourcePage({ context }: { context: StoryContext }) {
                 <h2>{source.title}</h2>
                 <p>{source.definition}</p>
                 <p>単位: {source.unit}</p>
+                {"sourceUrl" in source && typeof source.sourceUrl === "string" ? <p><a href={source.sourceUrl} target="_blank" rel="noopener noreferrer">原典 CSV を開く ↗</a></p> : null}
+                {"retrievedAt" in source && typeof source.retrievedAt === "string" ? <p>取得日: {source.retrievedAt}</p> : null}
+                {source.note ? <p>{source.note}</p> : null}
                 {source.sha256 ? <details>
                   <summary>取得ファイルの照合情報</summary>
                   <code>SHA-256: {source.sha256}</code>
@@ -36,6 +39,7 @@ export default function SourcePage({ context }: { context: StoryContext }) {
               </article>
             ))}
           </div>
+          {context.topic.id === "childcare" ? <p>出典: 立川市オープンデータ（CC BY 4.0）、加工して作成。</p> : null}
         </section>
       </main>
       <SiteFooter data={data} context={context} />

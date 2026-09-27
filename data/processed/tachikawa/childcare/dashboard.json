@@ -1,0 +1,145 @@
+{
+  "generatedAt": "2026-09-27",
+  "latestFiscalYear": 2023,
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "place": {
+    "municipalityCode": "132021",
+    "municipalityLabel": "立川市",
+    "prefectureLabel": "東京都"
+  },
+  "series": {
+    "capacity": [
+      {
+        "year": 2019,
+        "value": 3794
+      },
+      {
+        "year": 2020,
+        "value": 3794
+      },
+      {
+        "year": 2021,
+        "value": 3823
+      },
+      {
+        "year": 2022,
+        "value": 3852
+      },
+      {
+        "year": 2023,
+        "value": 3853
+      }
+    ],
+    "enrolled": [
+      {
+        "year": 2019,
+        "value": 3798
+      },
+      {
+        "year": 2020,
+        "value": 3793
+      },
+      {
+        "year": 2021,
+        "value": 3738
+      },
+      {
+        "year": 2022,
+        "value": 3728
+      },
+      {
+        "year": 2023,
+        "value": 3617
+      }
+    ],
+    "staff": [
+      {
+        "year": 2019,
+        "value": 782
+      },
+      {
+        "year": 2020,
+        "value": 800
+      },
+      {
+        "year": 2021,
+        "value": 792
+      },
+      {
+        "year": 2022,
+        "value": 768
+      },
+      {
+        "year": 2023,
+        "value": 705
+      }
+    ],
+    "consultations": [
+      {
+        "year": 2019,
+        "value": 11773
+      },
+      {
+        "year": 2020,
+        "value": 14374
+      },
+      {
+        "year": 2021,
+        "value": 16696
+      },
+      {
+        "year": 2022,
+        "value": 15427
+      },
+      {
+        "year": 2023,
+        "value": 17302
+      }
+    ]
+  },
+  "provenance": {
+    "capacity": {
+      "title": "立川市統計年報・保育園別定員等の推移",
+      "definition": "全園行の定員総数。幼保連携型認定こども園（保育認定）を含む。",
+      "unit": "人",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-3hoikuenbetsuteiin_hoikunojisshijidosutoshokuinsu8.csv",
+      "retrievedAt": "2026-09-27",
+      "sha256": "cd244a79ba58893aad9ac482770967187f179f76603fe23c8c817529585d22ff",
+      "note": "各年の公表値。原表は基準日を明記していないため、年度末値とは扱わない。"
+    },
+    "enrolled": {
+      "title": "立川市統計年報・保育園別定員等の推移",
+      "definition": "全園行の保育の実施児童数の総数。市内受託児童を含む。",
+      "unit": "人",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-3hoikuenbetsuteiin_hoikunojisshijidosutoshokuinsu8.csv",
+      "retrievedAt": "2026-09-27",
+      "sha256": "cd244a79ba58893aad9ac482770967187f179f76603fe23c8c817529585d22ff",
+      "note": "定員との差は待機児童数ではない。"
+    },
+    "staff": {
+      "title": "立川市統計年報・保育園別定員等の推移",
+      "definition": "全園行の職員数。常勤換算ではない。",
+      "unit": "人",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-3hoikuenbetsuteiin_hoikunojisshijidosutoshokuinsu8.csv",
+      "retrievedAt": "2026-09-27",
+      "sha256": "cd244a79ba58893aad9ac482770967187f179f76603fe23c8c817529585d22ff",
+      "note": "保育の質や人員充足を示す指標ではない。"
+    },
+    "consultations": {
+      "title": "立川市統計年報・子ども家庭支援センター利用状況",
+      "definition": "子育て相談事業の年度内相談件数。延べ件数であり、相談した世帯数ではない。",
+      "unit": "件",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-5kodomokateishiensenta-riyojokyo8.csv",
+      "retrievedAt": "2026-09-27",
+      "sha256": "8370ce7f09951cc1516c954acbfc0039e64829faec2873c38304ec519b9c5b69",
+      "note": "各年度末現在。保育園の年次値とは期間種別が異なる。"
+    }
+  },
+  "gaps": [
+    {
+      "id": "childcare_waitlist",
+      "kind": "not_published",
+      "reason": "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。"
+    }
+  ]
+}
