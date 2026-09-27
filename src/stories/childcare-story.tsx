@@ -36,6 +36,7 @@ export default function ChildcareStory({ data, context }: { data: ChildcareDashb
       { label: "子育て相談件数", unit: "件", points: series.consultations, provenance: provenance.consultations },
     ] },
     { id: "waitlist", title: "待機児童数", kind: "unavailable", note: "この原表には待機児童の年次系列がありません。定員と実施児童数の差は待機児童数として扱いません。" },
+    { id: "reach", title: "相談の到達率", kind: "unavailable", note: "相談件数は延べ件数です。支援を必要とする家庭の総数が分からないため、相談へ到達した割合は算出していません。" },
     { id: "source", title: "データの出典", kind: "source", sourcePage: data.sourcePage },
   ];
   const recap: RecapGroup[] = [
@@ -47,11 +48,11 @@ export default function ChildcareStory({ data, context }: { data: ChildcareDashb
     <main id="main" tabIndex={-1}>
       <header className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="dot" aria-hidden="true" />{place.municipalityLabel} · 子育て · 保育と相談</p>
+          <p className="eyebrow"><span className="dot" aria-hidden="true" />{place.municipalityLabel} · 保育と子育て相談</p>
           <h1>自分の街は、<br /><em>どう変わった？</em></h1>
           <p>保育園の定員と実施児童数、その後に職員数と子育て相談の推移を見ます。相談件数は年度内の延べ件数として分けて示します。</p>
         </div>
-        <div className="hero-bottom"><div><span>対象</span><strong>{place.municipalityLabel} / 子育て / 2019–2023</strong></div><a className="circle-button" href="#story">変化<br />を見る <b aria-hidden="true">↓</b></a></div>
+        <div className="hero-bottom"><div><span>対象</span><strong>{place.municipalityLabel} / 保育と子育て相談 / 2019–2023</strong></div><a className="circle-button" href="#story">変化<br />を見る <b aria-hidden="true">↓</b></a></div>
         <div className="hero-mark" aria-hidden="true">05<span>YEARS</span></div>
       </header>
       <StoryExperience
@@ -73,6 +74,7 @@ export default function ChildcareStory({ data, context }: { data: ChildcareDashb
       <StoryAct id="consultation" eyebrow={`${place.municipalityLabel}・子ども家庭支援センター`} title="子育て相談の延べ件数は、増えている">
         <ChartWithTimelineEvents series={[{ label: "子育て相談件数", shortLabel: "相談", unit: "件", color: "var(--series-4)", points: series.consultations }]} events={resolveTimelineEvents({ ...eventContext, chartId: "consultation", series: [{ points: series.consultations }] })} kicker={`${place.municipalityLabel} · 年度内の延べ件数`} heading="子育て相談事業の相談件数" note="※相談した人数・世帯数ではありません。保育園の年次値とは期間種別が異なります。" indexMode={false} />
         <p className="act-note">{summary("相談", "件", series.consultations)}</p>
+        <p className="act-note">相談件数から、支援を必要とする家庭に届いた割合は分かりません。保育の実施児童数や定員を分母にして接続率を作ることはしていません。</p>
       </StoryAct>
       <StoryInterlude variant="gap" eyebrow="データのすきま" title="待機児童の変化は、この原表からは分からない">
         <p>{data.gaps[0].reason}</p>

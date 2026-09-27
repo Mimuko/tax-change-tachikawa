@@ -140,6 +140,14 @@
       "id": "childcare_waitlist",
       "kind": "unavailable_for_comparison",
       "reason": "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。"
+    },
+    {
+      "id": "childcare_support_reach_rate",
+      "kind": "not_measurable",
+      "metricId": "childcare_support_reach_rate",
+      "reason": "公表されているのは相談の延べ件数で、支援を必要とする家庭の総数は含まれていません。",
+      "note": "保育の実施児童数や定員を分母にして、支援が届いた割合を作ることはしていません。",
+      "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-5kodomokateishiensenta-riyojokyo8.csv"
     }
   ]
 }

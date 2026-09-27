@@ -78,7 +78,10 @@ const output = {
     staff: provenance("nursery", "立川市統計年報・保育園別定員等の推移", "全園行の職員数。常勤換算ではない。", "人", "保育の質や人員充足を示す指標ではない。"),
     consultations: provenance("consultation", "立川市統計年報・子ども家庭支援センター利用状況", "子育て相談事業の年度内相談件数。延べ件数であり、相談した世帯数ではない。", "件", "各年度末現在。保育園の年次値とは期間種別が異なる。"),
   },
-  gaps: [{ id: "childcare_waitlist", kind: "unavailable_for_comparison", reason: "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。" }],
+  gaps: [
+    { id: "childcare_waitlist", kind: "unavailable_for_comparison", reason: "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。" },
+    { id: "childcare_support_reach_rate", kind: "not_measurable", metricId: "childcare_support_reach_rate", reason: "公表されているのは相談の延べ件数で、支援を必要とする家庭の総数は含まれていません。", note: "保育の実施児童数や定員を分母にして、支援が届いた割合を作ることはしていません。", sourceUrl: urlBase + files.consultation.remote },
+  ],
 };
 const target = "data/processed/tachikawa/childcare";
 mkdirSync(target, { recursive: true });
