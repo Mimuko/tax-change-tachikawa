@@ -27,6 +27,18 @@ test("介護イベント catalog が chart binding を解決する", async () =>
   );
 });
 
+test("子育てイベント catalog が chart binding を解決する", async () => {
+  const catalog = await json("config/events/tachikawa-childrearing.json");
+  validateTimelineEventCatalog(catalog);
+
+  const opening = resolveChartEvents({
+    catalog,
+    chartId: "opening",
+    chartYears: [2018, 2019, 2020, 2021, 2022, 2023],
+  });
+  assert.deepEqual(opening.map((event) => event.id), ["childcare-free-2019", "covid-19-2020"]);
+});
+
 test("教育イベントは chart 年度に一致するものだけ返す", async () => {
   const catalog = await json("config/events/tachikawa-education.json");
   validateTimelineEventCatalog(catalog);

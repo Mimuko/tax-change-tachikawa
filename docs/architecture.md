@@ -54,6 +54,18 @@
 
 実装判断（MY-230）: 監査内容に矛盾なし。認定者9月末は provenance と scrolly コピーで明示。認定率は算出しない。支援への接続は原典未確認のため未掲載。統計書 Excel は再配布許諾未確認のため Git 非管理。
 
+## MY-239: 立川市×子育て PoC（2026-09-27）
+
+`/tachikawa/childrearing` は **PoC 公開**（`story-registry` 登録）。候補比較・選定の正本は `docs/childrearing-theme-selection.md`。
+
+| 責務 | 正本 |
+|---|---|
+| 候補テーマ比較・採否 | `docs/childrearing-theme-selection.md` |
+| データソース監査 | `docs/childrearing-data-sources.md` |
+| Act 構造・DataGap | `docs/childrearing-story.md` |
+| config / processed / renderer | `config/topics/childrearing.json`, `config/data-sources/tachikawa/childrearing.json`, `config/stories/tachikawa-childrearing.json`, `data/processed/tachikawa/childrearing/dashboard.json`, `src/stories/childrearing-story.tsx` |
+| ビルド | `scripts/build-childrearing-dashboard.mjs`（教育と同様、fetch はビルド時。成果物は Git 管理） |
+
 ## MY-155: 立川市×教育 データ調査・ストーリー設計（2026-09-14）
 
 `/tachikawa/education` は **公開済み**（`story-registry` 登録）。調査・設計の正本は `docs/education-*.md`。掲載しない指標（DataGap）の共通ルールは `docs/data-definition.md` §掲載しない指標。1人あたり教育費は推移未掲載（DataGap: `unavailable_for_comparison`）。不登校は `wrong_geography`。

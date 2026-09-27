@@ -1,0 +1,44 @@
+{
+  "id": "tachikawa-childrearing",
+  "municipality": "tachikawa",
+  "topic": "childrearing",
+  "renderer": "tachikawa-childrearing",
+  "status": "registered",
+  "note": "MY-239 PoC。待機児童・児童手当統一系列は DataGap。",
+  "opening": [
+    {
+      "metricId": "pregnancy_notifications",
+      "seriesKey": "pregnancyNotifications",
+      "shortLabel": "妊娠届出",
+      "color": "var(--series-1)"
+    },
+    {
+      "metricId": "nursery_children_count",
+      "seriesKey": "nurseryChildren",
+      "shortLabel": "保育園児",
+      "color": "var(--series-2)"
+    }
+  ],
+  "acts": [
+    {
+      "id": "act1_opening",
+      "metrics": ["pregnancy_notifications", "nursery_children_count"],
+      "periodKind": "mixed"
+    },
+    {
+      "id": "act2_capacity",
+      "metrics": ["nursery_capacity_total", "nursery_staff_count", "afterschool_registrations"],
+      "periodKind": "mixed"
+    },
+    {
+      "id": "interlude_waiting",
+      "type": "data_gap",
+      "reason": "nursery_waiting_children"
+    },
+    {
+      "id": "act3_consultation",
+      "metrics": ["childrearing_consultation_cases"],
+      "periodKind": "annual_cumulative"
+    }
+  ]
+}

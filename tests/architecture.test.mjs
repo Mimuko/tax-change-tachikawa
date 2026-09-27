@@ -23,7 +23,12 @@ test("データセットの入出力は自治体×テーマに閉じる", async 
 });
 
 test("ストーリーの指標参照がテーマ定義と実データに解決する", async () => {
-  for (const storyPath of ["config/stories/tachikawa-care.json", "config/stories/nerima-care.json"]) {
+  for (const storyPath of [
+    "config/stories/tachikawa-care.json",
+    "config/stories/nerima-care.json",
+    "config/stories/tachikawa-education.json",
+    "config/stories/tachikawa-childrearing.json",
+  ]) {
     const story = await json(storyPath);
     const topic = await json(`config/topics/${story.topic}.json`);
     const place = await json(`config/municipalities/${story.municipality}.json`);

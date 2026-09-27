@@ -1,0 +1,47 @@
+{
+  "sourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007020.html",
+  "healthSourcePage": "https://www.city.tachikawa.lg.jp/shisei/tokei/1007009/1007025.html",
+  "license": "CC BY 4.0",
+  "pageUpdatedAt": "2026-03-26",
+  "publicationNotes": {
+    "odLag": "ODページ更新とCSV最終年に差がある。2026-09-27監査時点で主要CSV最終年は2023。",
+    "encoding": "Shift_JIS (CP932)"
+  },
+  "sources": [
+    {
+      "file": "maternity-handbook.csv",
+      "metricIds": ["pregnancy_notifications", "maternity_handbook_deliveries"],
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/025/5-1-9boshikenkotechokofu8.csv"
+    },
+    {
+      "file": "nursery-children-by-cause.csv",
+      "metricIds": ["nursery_children_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年4月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-1hoikunojisshigeninbetsuhoikuenjisu8.csv"
+    },
+    {
+      "file": "nursery-capacity-staff.csv",
+      "metricIds": ["nursery_capacity_total", "nursery_staff_count"],
+      "periodKind": "as_of",
+      "asOfRule": "各年4月1日現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-3hoikuenbetsuteiin_hoikunojisshijidosutoshokuinsu8.csv"
+    },
+    {
+      "file": "afterschool-registrations.csv",
+      "metricIds": ["afterschool_registrations"],
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-4gakudouhoikushotourokujidosu8.csv"
+    },
+    {
+      "file": "child-family-support-center.csv",
+      "metricIds": ["childrearing_consultation_cases"],
+      "periodKind": "annual_cumulative",
+      "asOfRule": "各年度末現在",
+      "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/020/6-2-5kodomokateishiensenta-riyojokyo8.csv"
+    }
+  ]
+}

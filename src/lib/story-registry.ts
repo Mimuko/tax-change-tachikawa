@@ -1,15 +1,19 @@
 import type { DashboardData } from "../types/dashboard";
 import type { EducationDashboardData } from "../types/education-dashboard";
+import type { ChildrearingDashboardData } from "../types/childrearing-dashboard";
 import tachikawaCareRaw from "../../data/processed/tachikawa/care/dashboard.json";
 import nerimaCareRaw from "../../data/processed/nerima/care/dashboard.json";
 import educationRaw from "../../data/processed/tachikawa/education/dashboard.json";
+import childrearingRaw from "../../data/processed/tachikawa/childrearing/dashboard.json";
 import tachikawa from "../../config/municipalities/tachikawa.json";
 import nerima from "../../config/municipalities/nerima.json";
 import care from "../../config/topics/care.json";
 import education from "../../config/topics/education.json";
+import childrearing from "../../config/topics/childrearing.json";
 import tachikawaCareStory from "../../config/stories/tachikawa-care.json";
 import nerimaCareStory from "../../config/stories/nerima-care.json";
 import educationStory from "../../config/stories/tachikawa-education.json";
+import childrearingStory from "../../config/stories/tachikawa-childrearing.json";
 
 type TopicMetrics = Record<
   string,
@@ -35,7 +39,7 @@ type StoryDefinition = {
   acts?: unknown[];
 };
 
-export type StoryData = DashboardData | EducationDashboardData;
+export type StoryData = DashboardData | EducationDashboardData | ChildrearingDashboardData;
 
 export type StoryContext = {
   municipality: typeof tachikawa | typeof nerima;
@@ -71,6 +75,14 @@ export const stories: StoryContext[] = [
     href: `/${tachikawa.id}/${education.id}/`,
     dataHref: `/${tachikawa.id}/${education.id}/data/`,
     data: educationRaw as EducationDashboardData,
+  },
+  {
+    municipality: tachikawa,
+    topic: childrearing as StoryContext["topic"],
+    story: childrearingStory as StoryDefinition,
+    href: `/${tachikawa.id}/${childrearing.id}/`,
+    dataHref: `/${tachikawa.id}/${childrearing.id}/data/`,
+    data: childrearingRaw as ChildrearingDashboardData,
   },
 ];
 

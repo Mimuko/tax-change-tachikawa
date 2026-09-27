@@ -1,0 +1,55 @@
+{
+  "id": "childrearing",
+  "label": "子育て",
+  "metrics": {
+    "pregnancy_notifications": {
+      "label": "妊娠届出者数",
+      "unit": "人",
+      "definition": "母子健康手帳交付表に掲載される妊娠届出者数。各年度",
+      "comparison": "年度累計同士のみ。出生数・手帳交付数と混同しない",
+      "periodKind": "annual_cumulative"
+    },
+    "maternity_handbook_deliveries": {
+      "label": "母子健康手帳交付数",
+      "unit": "件",
+      "definition": "母子健康手帳の交付総数。各年度",
+      "comparison": "年度累計同士のみ",
+      "periodKind": "annual_cumulative"
+    },
+    "nursery_children_count": {
+      "label": "保育園児数",
+      "unit": "人",
+      "definition": "保育の実施原因別表における年齢=全ての園児総数。各年4月1日現在",
+      "comparison": "同一表・同一基準日のみ。学童登録児童と合算しない",
+      "periodKind": "as_of"
+    },
+    "nursery_capacity_total": {
+      "label": "保育所等定員",
+      "unit": "人",
+      "definition": "保育園別定員表の全園行・定員総数。各年4月1日現在",
+      "comparison": "2016年以降の列定義で接続。園児数と分離",
+      "periodKind": "as_of"
+    },
+    "nursery_staff_count": {
+      "label": "保育職員数",
+      "unit": "人",
+      "definition": "保育園別定員表の全園行・職員数。各年4月1日現在",
+      "comparison": "定員と分離。常勤換算ではない",
+      "periodKind": "as_of"
+    },
+    "afterschool_registrations": {
+      "label": "学童保育登録児童数",
+      "unit": "人",
+      "definition": "学童保育所登録児童数表の全保育所行・総数。各年度",
+      "comparison": "年度累計（登録ベース）。4月1日園児数と混在禁止",
+      "periodKind": "annual_cumulative"
+    },
+    "childrearing_consultation_cases": {
+      "label": "子育て相談件数",
+      "unit": "件",
+      "definition": "子ども家庭支援センターの子育て相談事業相談件数。各年度末現在",
+      "comparison": "年間累計同士のみ",
+      "periodKind": "annual_cumulative"
+    }
+  }
+}

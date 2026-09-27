@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "id": "covid-19-2020",
+      "year": 2020,
+      "scope": "societal",
+      "category": "感染症",
+      "title": "新型コロナウイルス感染症の流行",
+      "description": "2020年以降、保育・学童・相談窓口の運用にも影響が及んだ年度があります。",
+      "source": {
+        "label": "内閣官房（新型コロナウイルス感染症対策）",
+        "url": "https://www.cas.go.jp/jp/influenza/novel_coronavirus.html"
+      }
+    },
+    {
+      "id": "childcare-free-2019",
+      "year": 2019,
+      "scope": "policy",
+      "category": "保育",
+      "title": "幼児教育・保育の無償化（2019年度から段階的）",
+      "description": "2019年度から幼児教育・保育の無償化が段階的に始まりました。保育需要や利用の見え方に影響し得ます。",
+      "source": {
+        "label": "こども家庭庁（幼児教育・保育の無償化）",
+        "url": "https://www.cfa.go.jp/policies/kokosei/hoiku/mushoka/"
+      }
+    }
+  ],
+  "bindings": [
+    {
+      "chartId": "opening",
+      "eventIds": ["childcare-free-2019", "covid-19-2020"]
+    },
+    {
+      "chartId": "act-capacity",
+      "eventIds": ["childcare-free-2019", "covid-19-2020"]
+    },
+    {
+      "chartId": "act-consultation",
+      "eventIds": ["covid-19-2020"]
+    }
+  ]
+}

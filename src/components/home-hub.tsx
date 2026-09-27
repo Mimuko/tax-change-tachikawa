@@ -11,6 +11,8 @@ const TOPIC_BLURB: Record<string, string> = {
   care: "高齢化が進むなかで、認定者数・給付・保険料・担い手はどう動いたか。支える側と支えられる側の変化を追う。",
   education:
     "児童生徒数、学級、教職員、子ども一人あたりの学校教育費。まちの子どもをめぐる数字の推移をたどる。",
+  childrearing:
+    "妊娠届出、保育・学童、子育て相談。乳幼児期とその受け皿、相談窓口までの公開データの推移をたどる。",
 };
 
 // Group the registry into municipality blocks so the directory reads as
