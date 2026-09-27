@@ -1,5 +1,7 @@
 # 立川市×教育 データソース調査
 
+教科別授業時数と学力指標の追加調査・採用判断は [MY-237 調査記録](education-subject-hours-achievement.md) を参照。
+
 調査日: 2026-09-14。URLは原則として公的機関の掲載ページを記録する。`/tachikawa/education` は公開済み（`story-registry` 登録）。主系列は processed JSON として同梱する。地方教育費調査の年度連続監査と自動 fetch は後続。
 
 ## 今回の調査結論
