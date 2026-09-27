@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "id": "care-plan-period-2024",
+      "year": 2024,
+      "scope": "municipality",
+      "category": "府中市の介護保険",
+      "title": "第9期介護保険事業計画の開始（2024年度）",
+      "description": "2024年度から府中市の第9期計画期間が始まりました。保険料の基準月額は第8期から据え置かれています。",
+      "source": {
+        "label": "府中市（介護保険料の改正）",
+        "url": "https://www.city.fuchu.tokyo.jp/kenko/hoken/kaigohokennryo/hokenryoukaisei2021.html"
+      }
+    }
+  ],
+  "bindings": [
+    { "chartId": "opening", "eventIds": ["care-plan-period-2024"] },
+    { "chartId": "act2-service-units", "eventIds": ["care-plan-period-2024"] }
+  ]
+}

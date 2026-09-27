@@ -31,6 +31,8 @@
 
 練馬区×介護は **MY-156/MY-230 で公開済み**（下記）。立川市×教育は MY-155 で公開済み（下記）。介護の職員/賃金表示は既存の可用性判定を引き継いでいる。掲載しない指標の共通ルールは `docs/data-definition.md` §掲載しない指標（DataGap）。
 
+府中市×介護は **MY-238 で追加**。候補比較・定義・取得・横展開監査は [`next-municipality-selection.md`](next-municipality-selection.md)。府中市の主要3系列は CC BY 4.0 の CSV を `data/raw/fuchu/care/` に保存し、`scripts/build-fuchu-care.mjs` で検証・加工する。提供単位数は全国 OD から132063を抽出した curated、職員・賃金は東京都参考を使用する。
+
 ## MY-156 / MY-230: 練馬区×介護 移植性監査・公開（2026-09-17 / 2026-09-25）
 
 `/nerima/care` は **公開済み**（`story-registry` 登録）。監査の正本:

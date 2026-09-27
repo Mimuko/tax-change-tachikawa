@@ -8,6 +8,7 @@ export type Provenance = {
   title: string;
   definition: string;
   unit: string;
+  sourceUrl?: string;
   sha256?: string;
   note?: string;
 };

@@ -17,7 +17,7 @@
     "ltc_benefit_total_yen": {
       "label": "介護保険給付総額",
       "unit": "円",
-      "definition": "居宅・施設・地域密着型サービスの給付総額",
+      "definition": "介護保険給付費の年度総額。含まれる区分は自治体の原典定義を確認",
       "comparison": "決算歳出とは別系列。年度・給付範囲が同じ場合のみ比較"
     },
     "service_unit_count": {

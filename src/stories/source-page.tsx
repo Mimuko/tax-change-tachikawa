@@ -13,6 +13,7 @@ export default function SourcePage({ context }: { context: StoryContext }) {
             <p className="eyebrow">データの根拠</p>
             <h1>定義と加工方法</h1>
             <p>{context.municipality.municipalityLabel}の{context.topic.label}に関する公開データを扱います。原典ごとの形式と定義に沿って加工し、欠損記号「-」は0ではなく欠損として扱います。都道府県の参考値は自治体値と区別します。</p>
+            <p>掲載データの生成日: {new Date(data.generatedAt).toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" })}。最終収録年度: {data.latestFiscalYear}年度。</p>
             <p><a className="button-primary" href={data.sourcePage} target="_blank" rel="noopener noreferrer" aria-label="原典の掲載ページを開く（外部サイト）">原典の掲載ページを開く ↗</a></p>
             <p><a href={context.href}>物語へ戻る</a></p>
           </header>
@@ -29,7 +30,7 @@ export default function SourcePage({ context }: { context: StoryContext }) {
                 <h2>{source.title}</h2>
                 <p>{source.definition}</p>
                 <p>単位: {source.unit}</p>
-                {"sourceUrl" in source && typeof source.sourceUrl === "string" ? <p><a href={source.sourceUrl} target="_blank" rel="noopener noreferrer">原典 CSV を開く ↗</a></p> : null}
+                {"sourceUrl" in source && typeof source.sourceUrl === "string" ? <p><a href={source.sourceUrl} target="_blank" rel="noopener noreferrer">この指標の原典を開く ↗</a></p> : null}
                 {"retrievedAt" in source && typeof source.retrievedAt === "string" ? <p>取得日: {source.retrievedAt}</p> : null}
                 {source.note ? <p>{source.note}</p> : null}
                 {source.sha256 ? <details>

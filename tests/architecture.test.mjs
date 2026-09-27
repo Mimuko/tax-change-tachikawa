@@ -12,9 +12,10 @@ test("データセットの入出力は自治体×テーマに閉じる", async 
   for (const args of [
     ["tachikawa", "care"],
     ["nerima", "care"],
+    ["fuchu", "care"],
   ]) {
     const context = await datasetContext(root, args);
-    assert.equal(context.config.municipalityCode, args[0] === "nerima" ? "131202" : "132021");
+    assert.equal(context.config.municipalityCode, { tachikawa: "132021", nerima: "131202", fuchu: "132063" }[args[0]]);
     assert.equal(context.outputPath, `data/processed/${args[0]}/${args[1]}/dashboard.json`);
   }
   for (const args of [["tachikawa", "education"], ["../", "care"]]) {
@@ -23,7 +24,7 @@ test("データセットの入出力は自治体×テーマに閉じる", async 
 });
 
 test("ストーリーの指標参照がテーマ定義と実データに解決する", async () => {
-  for (const storyPath of ["config/stories/tachikawa-care.json", "config/stories/nerima-care.json"]) {
+  for (const storyPath of ["config/stories/tachikawa-care.json", "config/stories/nerima-care.json", "config/stories/fuchu-care.json"]) {
     const story = await json(storyPath);
     const topic = await json(`config/topics/${story.topic}.json`);
     const place = await json(`config/municipalities/${story.municipality}.json`);
