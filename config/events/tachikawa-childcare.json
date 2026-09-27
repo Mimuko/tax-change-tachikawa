@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "id": "childcare-free-2019",
+      "year": 2019,
+      "scope": "policy",
+      "category": "保育制度",
+      "title": "幼児教育・保育の無償化の開始（2019年10月）",
+      "description": "2019年10月から、3〜5歳児クラスの子どもと、住民税非課税世帯の0〜2歳児クラスの子どもについて、保育所・幼稚園・認定こども園等の利用料が無料になりました。保育園の各年値は原表に基準日の記載がないため、2019年の値が開始前か後かは分かりません。",
+      "source": {
+        "label": "こども家庭庁（幼児教育・保育の無償化）",
+        "url": "https://www.cfa.go.jp/policies/kokoseido/mushouka"
+      }
+    },
+    {
+      "id": "covid-19-childcare-2020",
+      "year": 2020,
+      "scope": "societal",
+      "category": "感染症",
+      "title": "新型コロナウイルス感染症の流行",
+      "description": "2020年2月以降、国は保育所に感染予防に留意した原則開所を求めつつ、感染者の発生時や地域での感染拡大時には臨時休園の検討を示しました。",
+      "source": {
+        "label": "厚生労働省（学校の臨時休業に関連しての保育所等の対応について・2020年2月27日）",
+        "url": "https://www.mhlw.go.jp/content/11920000/000601896.pdf"
+      }
+    }
+  ],
+  "bindings": [
+    {
+      "chartId": "opening",
+      "eventIds": ["childcare-free-2019", "covid-19-childcare-2020"]
+    },
+    {
+      "chartId": "staff",
+      "eventIds": ["covid-19-childcare-2020"]
+    },
+    {
+      "chartId": "consultation",
+      "eventIds": ["covid-19-childcare-2020"]
+    }
+  ]
+}

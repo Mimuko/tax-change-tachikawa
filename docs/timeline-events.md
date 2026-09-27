@@ -79,6 +79,7 @@
 - 立川市×介護: Act 1 累積グラフ（`opening`）、Act 2 サービス数（`act2-service-units`）
 - 練馬区×介護: Act 1 累積グラフ（`opening`）、Act 2 サービス数（`act2-service-units`）。確認済みの全国共通イベントのみ
 - 立川市×教育: Act 1 累積グラフ（`opening`）、学級数（`act-classes`）、教育相談（`act3-consultation`）
+- 立川市×子育て: 定員と実施児童（`opening`）、職員数（`staff`）、子育て相談（`consultation`）。確認済みの国・制度と広域・社会の出来事のみ
 
 残課題:
 

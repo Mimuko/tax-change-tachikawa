@@ -62,6 +62,20 @@ test("教育イベントは chart 年度に一致するものだけ返す", asyn
   assert.deepEqual(opening.map((event) => event.id), ["covid-19-school-2020"]);
 });
 
+test("立川市子育ての出来事は3グラフの収録年度で解決する", async () => {
+  const catalog = await json("config/events/tachikawa-childcare.json");
+  validateTimelineEventCatalog(catalog);
+
+  const chartYears = [2019, 2020, 2021, 2022, 2023];
+  const resolve = (chartId: string) =>
+    resolveChartEvents({ catalog, chartId, chartYears }).map((event) => event.id);
+
+  assert.deepEqual(resolve("opening"), ["childcare-free-2019", "covid-19-childcare-2020"]);
+  assert.deepEqual(resolve("staff"), ["covid-19-childcare-2020"]);
+  assert.deepEqual(resolve("consultation"), ["covid-19-childcare-2020"]);
+  assert.ok(catalog.events.every((event: { scope: string }) => event.scope !== "municipality"));
+});
+
 test("初期表示では自治体イベントのみ、トグルで policy / societal を表示できる", () => {
   const events = [
     {
