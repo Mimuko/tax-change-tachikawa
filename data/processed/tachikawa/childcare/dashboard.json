@@ -138,7 +138,7 @@
   "gaps": [
     {
       "id": "childcare_waitlist",
-      "kind": "not_published",
+      "kind": "unavailable_for_comparison",
       "reason": "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。"
     }
   ]
