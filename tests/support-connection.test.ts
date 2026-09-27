@@ -11,7 +11,8 @@ test("support-connection: 介護の本人選択と明確な障壁を混同しな
   const indicators = data.supportConnection.indicators;
   const ids = indicators.map((indicator: { metricId: string }) => indicator.metricId);
 
-  assert.deepEqual(ids.slice(0, 3), [
+  assert.deepEqual(ids.slice(0, 4), [
+    "caregiver_care_manager_consultation_pct",
     "care_service_cost_barrier_nonuser_pct",
     "care_service_unavailable_nonuser_pct",
     "care_service_navigation_barrier_nonuser_pct",
@@ -25,6 +26,22 @@ test("support-connection: 介護の本人選択と明確な障壁を混同しな
     indicators.every((indicator: { multipleResponse?: boolean }) => indicator.multipleResponse === true),
     true,
   );
+});
+
+test("support-connection: 主な介護者の相談先は調査対象と年を限定する", () => {
+  const data = loadDashboard("../data/processed/tachikawa/care/dashboard.json");
+  const indicator = data.supportConnection.indicators.find(
+    (row: { metricId: string }) => row.metricId === "caregiver_care_manager_consultation_pct",
+  );
+
+  assert.equal(indicator.connectionState, "connected");
+  assert.equal(indicator.dimension, "consultation");
+  assert.equal(indicator.geography, "tachikawa");
+  assert.equal(indicator.referenceOnly, false);
+  assert.deepEqual(indicator.observations, [
+    { periodLabel: "2022年調査", year: 2022, value: 55, unit: "percent", sampleSize: 331 },
+  ]);
+  assert.match(indicator.caveat, /2019年調査とは抽出方法が異なる/);
 });
 
 test("support-connection: supportNetwork は dimension と分離する", () => {

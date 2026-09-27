@@ -1,0 +1,16 @@
+{
+  "id": "tachikawa-childcare",
+  "municipality": "tachikawa",
+  "topic": "childcare",
+  "renderer": "tachikawa-childcare",
+  "status": "poc",
+  "opening": [
+    { "metricId": "nursery_capacity", "seriesKey": "capacity", "shortLabel": "定員", "color": "var(--series-1)" },
+    { "metricId": "nursery_enrolled", "seriesKey": "enrolled", "shortLabel": "実施児童", "color": "var(--series-2)" }
+  ],
+  "acts": [
+    { "id": "opening", "metrics": ["nursery_capacity", "nursery_enrolled"], "periodKind": "as_of" },
+    { "id": "staff", "metrics": ["nursery_staff"], "periodKind": "as_of" },
+    { "id": "consultation", "metrics": ["childcare_consultations"], "periodKind": "annual_cumulative" }
+  ]
+}

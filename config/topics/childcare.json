@@ -1,0 +1,10 @@
+{
+  "id": "childcare",
+  "label": "保育と子育て相談",
+  "metrics": {
+    "nursery_capacity": { "label": "保育園の定員総数", "unit": "人", "definition": "立川市統計年報の全園行。幼保連携型認定こども園（保育認定）を含む", "comparison": "同じ全園行の年次値だけを比較。待機児童数には換算しない", "periodKind": "as_of" },
+    "nursery_enrolled": { "label": "保育の実施児童数", "unit": "人", "definition": "立川市統計年報の全園行。市内受託児童を含む", "comparison": "同じ全園行の年次値だけを比較。定員との差は待機児童数ではない", "periodKind": "as_of" },
+    "nursery_staff": { "label": "保育園の職員数", "unit": "人", "definition": "立川市統計年報の全園行。常勤換算ではない", "comparison": "同じ全園行の年次値だけを比較。人数から保育の質は判断しない", "periodKind": "as_of" },
+    "childcare_consultations": { "label": "子育て相談件数", "unit": "件", "definition": "子ども家庭支援センターの子育て相談事業の年度内延べ件数", "comparison": "年度累計同士で比較。保育園の年次値と同一グラフに載せない", "periodKind": "annual_cumulative" }
+  }
+}

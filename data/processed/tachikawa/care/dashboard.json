@@ -218,6 +218,33 @@
   "supportConnection": {
     "indicators": [
       {
+        "metricId": "caregiver_care_manager_consultation_pct",
+        "label": "介護についてケアマネジャーに相談している",
+        "dimension": "consultation",
+        "supportNetwork": "public_or_professional",
+        "connectionState": "connected",
+        "observations": [
+          {
+            "periodLabel": "2022年調査",
+            "year": 2022,
+            "value": 55,
+            "unit": "percent",
+            "sampleSize": 331
+          }
+        ],
+        "population": "在宅の要介護・要支援認定者を対象とする調査で、主な介護者について回答した人（n=331）",
+        "sourceQuestion": "主な介護者の方は、介護について誰かに相談していますか。（複数回答）",
+        "multipleResponse": true,
+        "geography": "tachikawa",
+        "referenceOnly": false,
+        "provenance": {
+          "title": "立川市高齢者福祉介護計画改定事前調査報告書（2023年5月）・在宅介護実態調査 問41",
+          "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/006/659/keikaku_houkoku_gaiyou.pdf",
+          "definition": "2022年11月15日から12月13日の調査。相談先として『介護支援専門員（ケアマネジャー）』を選んだ回答割合。"
+        },
+        "caveat": "回答者内の相談先であり、介護を担う人全体の到達率や相談後の改善を示しません。2019年調査とは抽出方法が異なるため、増減は示しません。"
+      },
+      {
         "metricId": "care_service_cost_barrier_nonuser_pct",
         "label": "利用料を支払うのが難しい",
         "dimension": "service_access",

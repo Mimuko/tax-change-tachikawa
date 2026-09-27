@@ -1,18 +1,22 @@
 import type { DashboardData } from "../types/dashboard";
 import type { EducationDashboardData } from "../types/education-dashboard";
+import type { ChildcareDashboardData } from "../types/childcare-dashboard";
 import tachikawaCareRaw from "../../data/processed/tachikawa/care/dashboard.json";
 import nerimaCareRaw from "../../data/processed/nerima/care/dashboard.json";
 import fuchuCareRaw from "../../data/processed/fuchu/care/dashboard.json";
 import educationRaw from "../../data/processed/tachikawa/education/dashboard.json";
+import childcareRaw from "../../data/processed/tachikawa/childcare/dashboard.json";
 import tachikawa from "../../config/municipalities/tachikawa.json";
 import nerima from "../../config/municipalities/nerima.json";
 import fuchu from "../../config/municipalities/fuchu.json";
 import care from "../../config/topics/care.json";
 import education from "../../config/topics/education.json";
+import childcare from "../../config/topics/childcare.json";
 import tachikawaCareStory from "../../config/stories/tachikawa-care.json";
 import nerimaCareStory from "../../config/stories/nerima-care.json";
 import fuchuCareStory from "../../config/stories/fuchu-care.json";
 import educationStory from "../../config/stories/tachikawa-education.json";
+import childcareStory from "../../config/stories/tachikawa-childcare.json";
 
 type TopicMetrics = Record<
   string,
@@ -38,7 +42,7 @@ type StoryDefinition = {
   acts?: unknown[];
 };
 
-export type StoryData = DashboardData | EducationDashboardData;
+export type StoryData = DashboardData | EducationDashboardData | ChildcareDashboardData;
 
 export type StoryContext = {
   municipality: typeof tachikawa | typeof nerima | typeof fuchu;
@@ -82,6 +86,14 @@ export const stories: StoryContext[] = [
     href: `/${tachikawa.id}/${education.id}/`,
     dataHref: `/${tachikawa.id}/${education.id}/data/`,
     data: educationRaw as EducationDashboardData,
+  },
+  {
+    municipality: tachikawa,
+    topic: childcare,
+    story: childcareStory as StoryDefinition,
+    href: `/${tachikawa.id}/${childcare.id}/`,
+    dataHref: `/${tachikawa.id}/${childcare.id}/data/`,
+    data: childcareRaw as ChildcareDashboardData,
   },
 ];
 

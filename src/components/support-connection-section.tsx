@@ -172,6 +172,9 @@ export default function SupportConnectionSection({
                       </span>
                     </p>
                     <p className="sc-story-label">{indicator.label}</p>
+                    {indicator.observations.at(-1) ? (
+                      <p className="sc-story-period">{indicator.observations.at(-1)!.periodLabel}</p>
+                    ) : null}
                     {meaning ? <p className="sc-story-meaning">{meaning}</p> : null}
                   </div>
                 </li>
