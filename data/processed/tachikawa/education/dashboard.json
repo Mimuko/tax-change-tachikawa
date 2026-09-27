@@ -375,6 +375,98 @@
         "year": 2023,
         "value": 632
       }
+    ],
+    "elemStudentsPerClass": [
+      {
+        "year": 2013,
+        "value": 31.1
+      },
+      {
+        "year": 2014,
+        "value": 31.2
+      },
+      {
+        "year": 2015,
+        "value": 30.7
+      },
+      {
+        "year": 2016,
+        "value": 31
+      },
+      {
+        "year": 2017,
+        "value": 30.7
+      },
+      {
+        "year": 2018,
+        "value": 31.1
+      },
+      {
+        "year": 2019,
+        "value": 31.3
+      },
+      {
+        "year": 2020,
+        "value": 31
+      },
+      {
+        "year": 2021,
+        "value": 31
+      },
+      {
+        "year": 2022,
+        "value": 30.7
+      },
+      {
+        "year": 2023,
+        "value": 29.8
+      }
+    ],
+    "junStudentsPerClass": [
+      {
+        "year": 2013,
+        "value": 33
+      },
+      {
+        "year": 2014,
+        "value": 32.9
+      },
+      {
+        "year": 2015,
+        "value": 32.5
+      },
+      {
+        "year": 2016,
+        "value": 32.3
+      },
+      {
+        "year": 2017,
+        "value": 31.8
+      },
+      {
+        "year": 2018,
+        "value": 32.3
+      },
+      {
+        "year": 2019,
+        "value": 31.7
+      },
+      {
+        "year": 2020,
+        "value": 32
+      },
+      {
+        "year": 2021,
+        "value": 32.6
+      },
+      {
+        "year": 2022,
+        "value": 31.3
+      },
+      {
+        "year": 2023,
+        "value": 31.5
+      }
     ]
   },
   "provenance": {
@@ -449,6 +541,28 @@
       "asOfRule": "各年度内の相談件数",
       "sha256": "c2252992d8333837dd4586592b1295a3feed445df25725b04df550cafcbc3d0d",
       "sourceUrl": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/007/015/7-1-1-2kyoikusodankensu2014-1.csv"
+    },
+    "elemStudentsPerClass": {
+      "title": "市立小学校 1学級あたり児童数",
+      "definition": "市立小学校児童数 ÷ 通常学級数。各年5月1日現在。特別支援学級児童は含まない。",
+      "unit": "persons_per_class",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "derivedFrom": [
+        "elemStudents",
+        "elemClasses"
+      ]
+    },
+    "junStudentsPerClass": {
+      "title": "市立中学校 1学級あたり生徒数",
+      "definition": "市立中学校生徒数 ÷ 学級数。各年5月1日現在。",
+      "unit": "persons_per_class",
+      "periodKind": "as_of",
+      "asOfRule": "各年5月1日現在",
+      "derivedFrom": [
+        "junStudents",
+        "junClasses"
+      ]
     }
   },
   "supportConnection": {
@@ -460,16 +574,66 @@
         "supportNetwork": "public_or_professional",
         "connectionState": "connected",
         "observations": [
-          { "periodLabel": "2014年度", "year": 2014, "value": 302, "unit": "cases" },
-          { "periodLabel": "2015年度", "year": 2015, "value": 367, "unit": "cases" },
-          { "periodLabel": "2016年度", "year": 2016, "value": 449, "unit": "cases" },
-          { "periodLabel": "2017年度", "year": 2017, "value": 515, "unit": "cases" },
-          { "periodLabel": "2018年度", "year": 2018, "value": 549, "unit": "cases" },
-          { "periodLabel": "2019年度", "year": 2019, "value": 560, "unit": "cases" },
-          { "periodLabel": "2020年度", "year": 2020, "value": 560, "unit": "cases" },
-          { "periodLabel": "2021年度", "year": 2021, "value": 619, "unit": "cases" },
-          { "periodLabel": "2022年度", "year": 2022, "value": 671, "unit": "cases" },
-          { "periodLabel": "2023年度", "year": 2023, "value": 632, "unit": "cases" }
+          {
+            "periodLabel": "2014年度",
+            "year": 2014,
+            "value": 302,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2015年度",
+            "year": 2015,
+            "value": 367,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2016年度",
+            "year": 2016,
+            "value": 449,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2017年度",
+            "year": 2017,
+            "value": 515,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2018年度",
+            "year": 2018,
+            "value": 549,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2019年度",
+            "year": 2019,
+            "value": 560,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2020年度",
+            "year": 2020,
+            "value": 560,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2021年度",
+            "year": 2021,
+            "value": 619,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2022年度",
+            "year": 2022,
+            "value": 671,
+            "unit": "cases"
+          },
+          {
+            "periodLabel": "2023年度",
+            "year": 2023,
+            "value": 632,
+            "unit": "cases"
+          }
         ],
         "population": "立川市の教育相談で年度内に受け付けた相談",
         "geography": "tachikawa",

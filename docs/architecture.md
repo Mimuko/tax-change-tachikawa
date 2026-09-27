@@ -50,6 +50,7 @@
 | 統計書パーサー（ローカル再抽出用） | `scripts/lib/parse-nerima-hyo08.mjs`, `scripts/extract-nerima-hyo08.mjs` |
 | ビルド（curated 正本） | `scripts/build-nerima-care.mjs` ← `data/curated/nerima/care/stats-book-series.json` |
 | ストーリー | `config/stories/nerima-care.json`, `src/stories/care-story.tsx`（共有 renderer） |
+| 時系列イベント | `config/events/nerima-care.json`（MY-240・立川介護と同一全国イベント） |
 | processed | `data/processed/nerima/care/dashboard.json` |
 
 実装判断（MY-230）: 監査内容に矛盾なし。認定者9月末は provenance と scrolly コピーで明示。認定率は算出しない。支援への接続は原典未確認のため未掲載。統計書 Excel は再配布許諾未確認のため Git 非管理。

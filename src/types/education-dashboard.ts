@@ -25,6 +25,8 @@ export type EducationDashboardData = {
     elemClasses: DataPoint[];
     elemSpecialSupportClasses: DataPoint[];
     junClasses?: DataPoint[];
+    elemStudentsPerClass?: DataPoint[];
+    junStudentsPerClass?: DataPoint[];
     elemStaff: DataPoint[];
     junStaff: DataPoint[];
     educationConsultationCases: DataPoint[];
@@ -37,6 +39,8 @@ export type EducationDashboardData = {
     elemClasses: EducationProvenance;
     elemSpecialSupportClasses: EducationProvenance;
     junClasses?: EducationProvenance;
+    elemStudentsPerClass?: EducationProvenance;
+    junStudentsPerClass?: EducationProvenance;
     elemStaff: EducationProvenance;
     junStaff: EducationProvenance;
     educationConsultationCases: EducationProvenance;

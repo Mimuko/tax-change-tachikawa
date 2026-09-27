@@ -115,6 +115,20 @@ const educationConsultationCases = [...byYear.entries()]
   .sort((a, b) => a[0] - b[0])
   .map(([year, value]) => ({ year, value }));
 
+function deriveStudentsPerClass(students, classes) {
+  const classesByYear = new Map(classes.map((point) => [point.year, point.value]));
+  return students
+    .map((point) => {
+      const classCount = classesByYear.get(point.year);
+      if (classCount == null || classCount === 0) return null;
+      return { year: point.year, value: Math.round((point.value / classCount) * 10) / 10 };
+    })
+    .filter(Boolean);
+}
+
+const elemStudentsPerClass = deriveStudentsPerClass(elemStudents, elemClasses);
+const junStudentsPerClass = deriveStudentsPerClass(junStudents, junClasses);
+
 const latestFiscalYear = Math.max(...elemStudents.map((p) => p.year));
 
 const dashboard = {
@@ -137,6 +151,8 @@ const dashboard = {
     elemClasses,
     elemSpecialSupportClasses,
     junClasses,
+    elemStudentsPerClass,
+    junStudentsPerClass,
     elemStaff,
     junStaff,
     educationConsultationCases,
@@ -186,6 +202,23 @@ const dashboard = {
       asOfRule: "各年5月1日現在",
       sha256: fetched.junClasses.sha256,
       sourceUrl: fetched.junClasses.url,
+    },
+    elemStudentsPerClass: {
+      title: "市立小学校 1学級あたり児童数",
+      definition:
+        "市立小学校児童数 ÷ 通常学級数。各年5月1日現在。特別支援学級児童は含まない。",
+      unit: "persons_per_class",
+      periodKind: "as_of",
+      asOfRule: "各年5月1日現在",
+      derivedFrom: ["elemStudents", "elemClasses"],
+    },
+    junStudentsPerClass: {
+      title: "市立中学校 1学級あたり生徒数",
+      definition: "市立中学校生徒数 ÷ 学級数。各年5月1日現在。",
+      unit: "persons_per_class",
+      periodKind: "as_of",
+      asOfRule: "各年5月1日現在",
+      derivedFrom: ["junStudents", "junClasses"],
     },
     elemStaff: {
       title: "市立小学校教職員数",

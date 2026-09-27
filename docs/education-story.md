@@ -39,7 +39,7 @@
 
 ### Interlude — 学級と特別支援
 
-- **指標**: `elem_class_count`, `elem_special_support_class_count`（必要なら `students_per_elem_class`）
+- **指標**: `elem_class_count`, `elem_special_support_class_count`, `jun_class_count`, `students_per_elem_class`, `students_per_jun_class`（MY-240）
 - **期間種別**: 時点値
 - **橋渡し**: 人数横ばい〜微減のなか、学級構成・支援学級がどう変わったか
 - **見出し方向**: 「児童の数より、クラスの数と支援の形が変わっている。」

@@ -115,6 +115,36 @@ export default function EducationStory({
           points: data.series.elemSpecialSupportClasses,
           provenance: data.provenance.elemSpecialSupportClasses,
         },
+        ...(data.series.junClasses?.length && data.provenance.junClasses
+          ? [
+              {
+                label: "市立中学校学級数",
+                unit: "学級",
+                points: data.series.junClasses,
+                provenance: data.provenance.junClasses,
+              },
+            ]
+          : []),
+        ...(data.series.elemStudentsPerClass?.length && data.provenance.elemStudentsPerClass
+          ? [
+              {
+                label: "市立小学校 1学級あたり児童数",
+                unit: "人",
+                points: data.series.elemStudentsPerClass,
+                provenance: data.provenance.elemStudentsPerClass,
+              },
+            ]
+          : []),
+        ...(data.series.junStudentsPerClass?.length && data.provenance.junStudentsPerClass
+          ? [
+              {
+                label: "市立中学校 1学級あたり生徒数",
+                unit: "人",
+                points: data.series.junStudentsPerClass,
+                provenance: data.provenance.junStudentsPerClass,
+              },
+            ]
+          : []),
       ],
     },
     {
@@ -200,6 +230,27 @@ export default function EducationStory({
           unit: "学級",
           points: data.series.elemSpecialSupportClasses,
         }),
+        ...(data.series.junClasses?.length
+          ? [formatMetricRecap({ label: "中学校学級", unit: "学級", points: data.series.junClasses })]
+          : []),
+        ...(data.series.elemStudentsPerClass?.length
+          ? [
+              formatMetricRecap({
+                label: "小/1学級あたり児童",
+                unit: "人",
+                points: data.series.elemStudentsPerClass,
+              }),
+            ]
+          : []),
+        ...(data.series.junStudentsPerClass?.length
+          ? [
+              formatMetricRecap({
+                label: "中/1学級あたり生徒",
+                unit: "人",
+                points: data.series.junStudentsPerClass,
+              }),
+            ]
+          : []),
       ],
     },
     {
@@ -351,7 +402,57 @@ export default function EducationStory({
             indexMode={false}
           />
           {seriesNote(data.series.elemSpecialSupportClasses, "学級")}
+          {data.series.junClasses?.length ? (
+            <SimpleSeriesChart
+              series={[
+                {
+                  label: "市立中学校学級数",
+                  shortLabel: "中学校学級",
+                  unit: "学級",
+                  color: "var(--series-5)",
+                  points: data.series.junClasses,
+                },
+              ]}
+              kicker={`${place.municipalityLabel} · 各年5月1日現在`}
+              heading="市立中学校の学級数の推移"
+              note="※小学校の通常学級・特別支援学級とは別系列です。"
+              indexMode={false}
+            />
+          ) : null}
         </StoryAct>
+
+        {data.series.elemStudentsPerClass?.length && data.series.junStudentsPerClass?.length ? (
+          <StoryAct
+            id="act-class-size"
+            eyebrow={`${place.municipalityLabel}・学級規模`}
+            title="児童・生徒の数は横ばいでも、1学級あたりの人数は動いている"
+          >
+            <SimpleSeriesChart
+              series={[
+                {
+                  label: "市立小学校 1学級あたり児童数",
+                  shortLabel: "小/1学級",
+                  unit: "人",
+                  color: "var(--series-1)",
+                  points: data.series.elemStudentsPerClass,
+                },
+                {
+                  label: "市立中学校 1学級あたり生徒数",
+                  shortLabel: "中/1学級",
+                  unit: "人",
+                  color: "var(--series-2)",
+                  points: data.series.junStudentsPerClass,
+                },
+              ]}
+              kicker={`${place.municipalityLabel} · 各年5月1日現在`}
+              heading="1学級あたりの児童・生徒数の推移"
+              note="※児童・生徒数を通常学級数（小）または学級数（中）で除した派生値です。特別支援学級の児童は含みません。"
+              indexMode={false}
+            />
+            {seriesNote(data.series.elemStudentsPerClass, "人")}
+            {seriesNote(data.series.junStudentsPerClass, "人")}
+          </StoryAct>
+        ) : null}
 
         <StoryAct
           id="act-2"

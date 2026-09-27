@@ -167,3 +167,17 @@ test("練馬区は介護保険料収入を公開系列に含めない", async ()
   assert.equal(data.series.premiumRevenue, undefined);
   assert.equal(data.provenance.premiumRevenue, undefined);
 });
+
+test("立川市×教育の学級規模派生系列が児童生徒数と学級数から整合する", async () => {
+  const data = await json("data/processed/tachikawa/education/dashboard.json");
+  const topic = await json("config/topics/education.json");
+  assert.ok(topic.metrics.students_per_elem_class);
+  assert.ok(topic.metrics.students_per_jun_class);
+  assert.equal(data.series.elemStudentsPerClass.length, data.series.elemClasses.length);
+  for (const point of data.series.elemStudentsPerClass) {
+    const students = data.series.elemStudents.find((row) => row.year === point.year);
+    const classes = data.series.elemClasses.find((row) => row.year === point.year);
+    const expected = Math.round((students.value / classes.value) * 10) / 10;
+    assert.equal(point.value, expected, `elem ${point.year}`);
+  }
+});

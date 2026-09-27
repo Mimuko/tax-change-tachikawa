@@ -71,6 +71,20 @@
       "definition": "同上（中学校）",
       "comparison": "同上",
       "periodKind": "fiscal_year"
+    },
+    "students_per_elem_class": {
+      "label": "市立小学校 1学級あたり児童数",
+      "unit": "人",
+      "definition": "市立小学校児童数 ÷ 通常学級数。各年5月1日現在の同一時点のみ",
+      "comparison": "特別支援学級児童は含まない。小と中の合算禁止",
+      "periodKind": "as_of"
+    },
+    "students_per_jun_class": {
+      "label": "市立中学校 1学級あたり生徒数",
+      "unit": "人",
+      "definition": "市立中学校生徒数 ÷ 学級数。各年5月1日現在の同一時点のみ",
+      "comparison": "同上（中学校）",
+      "periodKind": "as_of"
     }
   }
 }

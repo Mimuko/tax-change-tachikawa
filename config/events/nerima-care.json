@@ -1,0 +1,38 @@
+{
+  "events": [
+    {
+      "id": "covid-19-2020",
+      "year": 2020,
+      "scope": "societal",
+      "category": "感染症",
+      "title": "新型コロナウイルス感染症の流行",
+      "description": "2020年1月以降、国内でも感染が確認され、介護現場を含む社会全体で感染対策が広がりました。",
+      "source": {
+        "label": "厚生労働省（介護事業所等における新型コロナウイルス感染症への対応等）",
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000121431_00089.html"
+      }
+    },
+    {
+      "id": "care-plan-period-2021",
+      "year": 2021,
+      "scope": "policy",
+      "category": "介護保険制度",
+      "title": "第8期介護保険事業計画の開始（2021年度）",
+      "description": "2021年度から、第8期介護保険事業計画の期間が始まりました。",
+      "source": {
+        "label": "厚生労働省（令和3年4月の主な制度変更）",
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000198659_00011.html"
+      }
+    }
+  ],
+  "bindings": [
+    {
+      "chartId": "opening",
+      "eventIds": ["covid-19-2020", "care-plan-period-2021"]
+    },
+    {
+      "chartId": "act2-service-units",
+      "eventIds": ["covid-19-2020"]
+    }
+  ]
+}

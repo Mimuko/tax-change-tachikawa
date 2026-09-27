@@ -11,6 +11,18 @@ import {
 const root = resolve(import.meta.dirname, "..");
 const json = async (path: string) => JSON.parse(await readFile(resolve(root, path), "utf8"));
 
+test("練馬区介護イベント catalog が chart binding を解決する", async () => {
+  const catalog = await json("config/events/nerima-care.json");
+  validateTimelineEventCatalog(catalog);
+
+  const opening = resolveChartEvents({
+    catalog,
+    chartId: "opening",
+    chartYears: [2019, 2020, 2021, 2022, 2023, 2024],
+  });
+  assert.equal(opening.length, 2);
+});
+
 test("介護イベント catalog が chart binding を解決する", async () => {
   const catalog = await json("config/events/tachikawa-care.json");
   validateTimelineEventCatalog(catalog);
