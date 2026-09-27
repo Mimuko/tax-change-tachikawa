@@ -2,7 +2,7 @@
 
 ## 自治体×テーマ構成
 
-現在の公開ストーリーは `/tachikawa/care/`、出典は `/tachikawa/care/data/` です。既存の `/`・`/data/` も利用できます。
+公開ストーリーは `/tachikawa/care/`、`/nerima/care/`、`/tachikawa/education/`、`/fuchu/care/` です。各ストーリーの `/data/` で出典を確認できます。既存の `/`・`/data/` も利用できます。
 
 自治体情報は `config/municipalities/`、テーマの指標定義は `config/topics/`、ストーリーの指標参照は `config/stories/`、原典設定は `config/data-sources/` で管理します。画面の組み合わせとコピーは `src/stories/`、共通部品は `src/components/` に置きます。
 
@@ -83,6 +83,7 @@ npm run data:normalize
 - `data:check` … processed の provenance SHA-256 を検証（再配布可 raw は実バイト、local-only は記録 SHA）
 - `data:stable` … `data:build` 後に processed が `generatedAt` 以外でドリフトしていないことを検証（CI 用）
 - `data:history-check` … base..HEAD で local-only 対象の XLSX/PDF が履歴に追加されていないことを検証
+- `data:fetch-fuchu` … 府中市の CC BY 4.0 CSV 3系列を取得。`data:build` は保存済み raw と curated から `/fuchu/care/` を再生成
 
 e-Stat 再取得用のアプリIDが必要な場合だけ `.env` に `E_STAT_APP_ID` を置いてください（コミットしない）。変数名のみスクリプト先頭コメントと docs に記載します。
 
@@ -107,6 +108,8 @@ npm run build
 ## 他自治体への展開（方針）
 
 自治体名・都道府県名・出典URLは `config/*.json` → `dashboard.json` の `place` に載せ、UI にハードコードしません。市区町村の職員・給与時系列が揃えば Act 3 は Gap なしで表示し、無い場合のみ都道府県参考を明示します。詳細は [`docs/architecture.md`](docs/architecture.md) と [`docs/requirements.md`](docs/requirements.md) の Act 3 節を参照してください。
+
+次の自治体の候補比較、府中市の採用根拠、共通機能の差分監査は [`docs/next-municipality-selection.md`](docs/next-municipality-selection.md) を参照してください。
 
 ## ライセンス
 

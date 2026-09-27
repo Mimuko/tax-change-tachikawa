@@ -47,7 +47,7 @@ export function buildCareStepCopy(
     {
       eyebrow: `01 — ${municipalityLabel}・第1号被保険者数`,
       title: insuredTitle,
-      body: "65歳以上の第1号被保険者数です。5年間で大きな変動はなく、ほぼ同じ水準で推移しています。",
+      body: `65歳以上の第1号被保険者数です。表示期間の最初と最後を比べると${Math.abs(insuredDelta).toFixed(1)}%${insuredDelta >= 0 ? "増加" : "減少"}しました。`,
     },
     {
       eyebrow: `02 — ${municipalityLabel}・要支援・要介護認定者数`,
@@ -62,8 +62,8 @@ export function buildCareStepCopy(
       title: benefitsTitle,
       body:
         benefitsDelta > certifiedDelta && benefitsDelta >= 2
-          ? "居宅・施設・地域密着型サービスを合わせた給付総額です。認定者の伸びよりも大きく、同じ5年間で増えています。"
-          : "居宅・施設・地域密着型サービスを合わせた給付総額です。5年間の推移を、他の指標と並べて見ています。",
+          ? "介護保険給付費の総額です。認定者数の伸びよりも大きく、同じ期間に増えています。"
+          : "介護保険給付費の総額です。同じ期間の推移を、他の指標と並べて見ています。",
     },
   ];
   const ids = ["ltc_first_insured_persons", "care_certified_persons", "ltc_benefit_total_yen"];

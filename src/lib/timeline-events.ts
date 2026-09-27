@@ -1,5 +1,6 @@
 import careEvents from "../../config/events/tachikawa-care.json";
 import educationEvents from "../../config/events/tachikawa-education.json";
+import fuchuCareEvents from "../../config/events/fuchu-care.json";
 import type { TimelineEvent, TimelineEventCatalog } from "../types/timeline-event";
 import {
   resolveChartEvents as resolveCatalogChartEvents,
@@ -14,6 +15,7 @@ const defineTimelineEventCatalog = (catalog: unknown): TimelineEventCatalog => {
 const catalogs: Record<string, TimelineEventCatalog> = {
   "tachikawa/care": defineTimelineEventCatalog(careEvents),
   "tachikawa/education": defineTimelineEventCatalog(educationEvents),
+  "fuchu/care": defineTimelineEventCatalog(fuchuCareEvents),
 };
 
 const catalogKey = (municipalityId: string, topicId: string) => `${municipalityId}/${topicId}`;

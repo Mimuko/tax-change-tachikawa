@@ -1,7 +1,7 @@
 /**
  * 厚労省 介護サービス情報公表システムOD（各年12月末）から
- * 立川市（132021）の service_unit_count を算出し
- * data/curated/service-unit-count.json を書き出す。
+ * 指定した自治体の service_unit_count を算出し
+ * data/curated/{municipality}/care/service-unit-count.json を書き出す。
  *
  * キー: サービスコード（ファイル名） × 事業所番号
  * 全国CSV/ZIPは保持せず、集計結果のみ curated へ保存する。
@@ -119,11 +119,12 @@ async function countFromCsvUrl(url, serviceCode, keys) {
 
 async function countFromZipUrl(url, serviceCode, keys) {
   const zipPath = await downloadToTemp(url, "zip");
-  const listed = spawnSync("unzip", ["-Z1", zipPath], { encoding: "utf8" });
+  const extractor = process.platform === "win32" ? "tar" : "unzip";
+  const listed = spawnSync(extractor, process.platform === "win32" ? ["-tf", zipPath] : ["-Z1", zipPath], { encoding: "utf8" });
   if (listed.status !== 0) throw new Error(`unzip list failed: ${url}`);
   const csvName = listed.stdout.split(/\r?\n/).find((name) => name.toLowerCase().endsWith(".csv"));
   if (!csvName) throw new Error(`no csv in zip: ${url}`);
-  const extracted = spawnSync("unzip", ["-p", zipPath, csvName], { encoding: "buffer", maxBuffer: 80 * 1024 * 1024 });
+  const extracted = spawnSync(extractor, process.platform === "win32" ? ["-xOf", zipPath, csvName] : ["-p", zipPath, csvName], { encoding: "buffer", maxBuffer: 80 * 1024 * 1024 });
   if (extracted.status !== 0) throw new Error(`unzip -p failed: ${url}`);
   await countUnitsFromCsvStream(Readable.from(extracted.stdout), serviceCode, keys);
 }

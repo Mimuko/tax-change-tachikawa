@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const SUPPORTED = new Set(["tachikawa/care", "nerima/care"]);
+const SUPPORTED = new Set(["tachikawa/care", "nerima/care", "fuchu/care"]);
 
 export async function datasetContext(root, args = process.argv.slice(2)) {
   const [municipality = "tachikawa", topic = "care"] = args;

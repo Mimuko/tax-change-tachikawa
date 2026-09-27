@@ -52,6 +52,14 @@ export async function loadCareProvenanceChecks(root) {
         benefits: recorded,
       },
     },
+    {
+      dashboard: "data/processed/fuchu/care/dashboard.json",
+      series: {
+        insured: { kind: "raw-file", path: "data/raw/fuchu/care/insured.csv" },
+        certified: { kind: "raw-file", path: "data/raw/fuchu/care/certified.csv" },
+        benefits: { kind: "raw-file", path: "data/raw/fuchu/care/benefits.csv" },
+      },
+    },
   ];
 }
 

@@ -1,0 +1,22 @@
+{
+  "sourcePage": "https://www.city.fuchu.tokyo.jp/gyosei/opendata/toukeisyo-opendata.html",
+  "license": "CC BY 4.0（出典: 府中市オープンデータ）",
+  "licenseUrl": "https://www.city.fuchu.tokyo.jp/gyosei/opendata/index.html",
+  "links": {
+    "wageStructureSurvey": "https://www.mhlw.go.jp/toukei/list/chinginkouzou_a.html"
+  },
+  "files": [
+    { "key": "insured", "file": "insured.csv", "url": "https://www.city.fuchu.tokyo.jp/gyosei/opendata/toukeisyo-opendata.files/fuc22a07ltc01longtermcare_insurance.csv" },
+    { "key": "certified", "file": "certified.csv", "url": "https://www.city.fuchu.tokyo.jp/gyosei/opendata/toukeisyo-opendata.files/fuc22a07ltc02longtermcare_insurance.csv" },
+    { "key": "benefits", "file": "benefits.csv", "url": "https://www.city.fuchu.tokyo.jp/gyosei/opendata/toukeisyo-opendata.files/fuc22a07ltc03longtermcare_insurance.csv" }
+  ],
+  "premiumStandard": {
+    "metricId": "ltc_premium_standard_monthly",
+    "sourceUrl": "https://www.city.fuchu.tokyo.jp/kenko/hoken/kaigohokennryo/hokenryoukaisei2021.html",
+    "definition": "第1号被保険者の基準月額。第8期と第9期は同額。実際の保険料は所得段階等によって異なります。",
+    "periods": [
+      { "label": "第8期", "range": "2021–2023年度", "value": 5995 },
+      { "label": "第9期", "range": "2024–2026年度", "value": 5995 }
+    ]
+  }
+}

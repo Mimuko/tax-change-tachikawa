@@ -27,6 +27,16 @@ test("介護イベント catalog が chart binding を解決する", async () =>
   );
 });
 
+test("府中市の第9期イベントは対応する年度とグラフだけに出る", async () => {
+  const catalog = await json("config/events/fuchu-care.json");
+  validateTimelineEventCatalog(catalog);
+  for (const chartId of ["opening", "act2-service-units"]) {
+    const events = resolveChartEvents({ catalog, chartId, chartYears: [2021, 2022, 2023, 2024, 2025] });
+    assert.deepEqual(events.map((event) => event.id), ["care-plan-period-2024"]);
+  }
+  assert.deepEqual(resolveChartEvents({ catalog, chartId: "opening", chartYears: [2020, 2021, 2022] }), []);
+});
+
 test("教育イベントは chart 年度に一致するものだけ返す", async () => {
   const catalog = await json("config/events/tachikawa-education.json");
   validateTimelineEventCatalog(catalog);

@@ -91,6 +91,8 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
 
   const serviceUnitCount = data.series.serviceUnitCount;
   const serviceUnitDelta = serviceUnitCount?.length ? changePct(serviceUnitCount) : null;
+  const localArea = place.municipalityLabel.endsWith("区") ? "区内" : "市内";
+  const premiumDelta = premiumStandard.periods.at(-1)!.value - premiumStandard.periods[0].value;
 
   const capacityDetail: DetailItem = serviceUnitCount?.length
     ? {
@@ -333,9 +335,9 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
           eyebrow="まとめ"
           title={
             <>
-              介護を必要とする人も、
+              介護を必要とする人と、
               <br />
-              使われるお金も増えた。
+              使われるお金の変化。
             </>
           }
         >
@@ -345,7 +347,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         <StoryAct
           id="act-2"
           eyebrow={`${place.municipalityLabel}・介護サービス提供単位数`}
-          title="市内で提供される介護サービスの量も、増えた"
+          title={serviceUnitDelta === null ? `${localArea}の介護サービスの量はどう変わった？` : serviceUnitDelta > 0 ? `${localArea}の介護サービスの量は増えた` : serviceUnitDelta < 0 ? `${localArea}の介護サービスの量は減った` : `${localArea}の介護サービスの量は変わらなかった`}
         >
           {serviceUnitCount?.length ? (
             <>
@@ -376,7 +378,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
             </>
           ) : (
             <p className="act-note act-pending">
-              {place.municipalityLabel}の提供されているサービス数は、同一定義の時系列が揃い次第ここへ掲載します。
+              {place.municipalityLabel}の提供されているサービス数は、同一定義の時系列を検証後に掲載します。
             </p>
           )}
         </StoryAct>
@@ -415,7 +417,7 @@ export default function CareStory({ data, context }: { data: DashboardData; cont
         <StoryAct
           id="act-4"
           eyebrow={`${place.municipalityLabel}・介護保険料基準月額`}
-          title="介護保険料の基準額も、上がった"
+          title={premiumDelta > 0 ? "介護保険料の基準額は上がった" : premiumDelta < 0 ? "介護保険料の基準額は下がった" : "介護保険料の基準額は据え置かれた"}
         >
           <PremiumStandardSection
             periods={premiumStandard.periods}
