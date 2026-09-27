@@ -1,4 +1,5 @@
 import careEvents from "../../config/events/tachikawa-care.json";
+import nerimaCareEvents from "../../config/events/nerima-care.json";
 import educationEvents from "../../config/events/tachikawa-education.json";
 import fuchuCareEvents from "../../config/events/fuchu-care.json";
 import type { TimelineEvent, TimelineEventCatalog } from "../types/timeline-event";
@@ -14,6 +15,7 @@ const defineTimelineEventCatalog = (catalog: unknown): TimelineEventCatalog => {
 
 const catalogs: Record<string, TimelineEventCatalog> = {
   "tachikawa/care": defineTimelineEventCatalog(careEvents),
+  "nerima/care": defineTimelineEventCatalog(nerimaCareEvents),
   "tachikawa/education": defineTimelineEventCatalog(educationEvents),
   "fuchu/care": defineTimelineEventCatalog(fuchuCareEvents),
 };
