@@ -1,0 +1,31 @@
+{
+  "events": [
+    {
+      "id": "childcare-fee-free-2019",
+      "year": 2019,
+      "scope": "policy",
+      "category": "保育制度",
+      "title": "幼児教育・保育の無償化開始（2019年10月）",
+      "description": "国の制度として、対象となる子どもの幼児教育・保育の利用料の無償化が始まりました。年齢や世帯などの対象条件があります。保育園の原表は基準日を明記していないため、2019年の値を制度開始後の実績とは扱いません。",
+      "source": {
+        "label": "立川市・広報たちかわ（2019年8月10日号、3面）",
+        "url": "https://www.city.tachikawa.lg.jp/_res/projects/default_project/_page_/001/005/730/20190810.pdf#page=3"
+      }
+    },
+    {
+      "id": "shibasaki-nursery-transfer-2020",
+      "year": 2020,
+      "scope": "municipality",
+      "category": "保育園の運営",
+      "title": "柴崎保育園の民営化（2020年4月）",
+      "description": "立川市は2020年4月に柴崎保育園を民営化しました。運営主体の変更に関する参考情報です。グラフは公立・私立を含む全園の集計であり、この園だけの定員・実施児童数・職員数の変化や、民営化の効果を示すものではありません。",
+      "source": {
+        "label": "立川市（民営化の経過等）",
+        "url": "https://www.city.tachikawa.lg.jp/kosodate/m-kosodate/1004946/1005092/1005101/1005105.html"
+      }
+    }
+  ],
+  "bindings": [
+    { "chartId": "opening", "eventIds": ["shibasaki-nursery-transfer-2020"] }
+  ]
+}
