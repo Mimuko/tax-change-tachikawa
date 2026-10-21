@@ -26,7 +26,6 @@
     }
   ],
   "bindings": [
-    { "chartId": "opening", "eventIds": ["childcare-fee-free-2019", "shibasaki-nursery-transfer-2020"] },
-    { "chartId": "staff", "eventIds": ["shibasaki-nursery-transfer-2020"] }
+    { "chartId": "opening", "eventIds": ["shibasaki-nursery-transfer-2020"] }
   ]
 }

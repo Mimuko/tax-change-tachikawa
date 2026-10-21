@@ -19,6 +19,10 @@ test("子育て PoC は同じ5年を比較し原本を照合できる", () => {
   assert.equal(data.series.capacity.at(-1).value, 3853);
   assert.equal(data.series.enrolled.at(-1).value, 3617);
   assert.equal(data.series.consultations.at(-1).value, 17302);
-  assert.equal(data.gaps.find(({ id }) => id === "childcare_waitlist")?.kind, "unavailable_for_comparison");
+  const waitlist = data.gaps.find(({ id }) => id === "childcare_waitlist");
+  assert.equal(waitlist?.kind, "not_published");
+  assert.equal(waitlist?.title, "待機児童の変化は、この原表からは分かりません。");
+  assert.match(waitlist.reason, /この原表/);
+  assert.match(waitlist.note, /待機児童数として扱いません/);
   assert.equal(data.gaps.find(({ id }) => id === "childcare_support_reach_rate")?.kind, "not_measurable");
 });

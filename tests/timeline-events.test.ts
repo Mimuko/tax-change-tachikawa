@@ -18,12 +18,14 @@ test("保育イベントは対象指標・収録年に限定し、自治体の�
   const data = await json("data/processed/tachikawa/childcare/dashboard.json");
   const chartYears = data.series.capacity.map((point: { year: number }) => point.year);
   const opening = resolveChartEvents({ catalog, chartId: "opening", chartYears });
-  assert.deepEqual(opening.map((event) => event.id), ["childcare-fee-free-2019", "shibasaki-nursery-transfer-2020"]);
+  assert.deepEqual(opening.map((event) => event.id), ["shibasaki-nursery-transfer-2020"]);
   const visibility = defaultTimelineEventVisibility(opening);
   assert.deepEqual(filterTimelineEvents(opening, visibility).map((event) => event.id), ["shibasaki-nursery-transfer-2020"]);
-  assert.equal(filterTimelineEvents(opening, { ...visibility, policy: true }).length, 2);
-  assert.deepEqual(resolveChartEvents({ catalog, chartId: "staff", chartYears }).map((event) => event.id), ["shibasaki-nursery-transfer-2020"]);
-  assert.deepEqual(resolveChartEvents({ catalog, chartId: "consultation", chartYears }), []);
+  assert.equal(filterTimelineEvents(opening, { ...visibility, policy: true }).length, 1);
+  const yearsFor = (key: string) => data.series[key].map((point: { year: number }) => point.year);
+  assert.deepEqual(resolveChartEvents({ catalog, chartId: "staff", chartYears: yearsFor("staff") }), []);
+  assert.deepEqual(resolveChartEvents({ catalog, chartId: "consultation", chartYears: yearsFor("consultations") }), []);
+  assert.equal(catalog.events.find((event: { id: string }) => event.id === "childcare-fee-free-2019").year, 2019);
   assert.deepEqual(resolveChartEvents({ catalog, chartId: "unknown", chartYears }), []);
   assert.deepEqual(resolveChartEvents({ catalog, chartId: "opening", chartYears: [2021, 2022, 2023] }), []);
   assert.ok(opening.every((event) => event.source.url.startsWith("https://www.city.tachikawa.lg.jp/")));

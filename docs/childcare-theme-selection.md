@@ -30,6 +30,6 @@
 
 ## 既存機能の継承
 
-`StoryExperience` の累積表示、`StoryAct`、`StoryInterlude`、`StoryRecap`、`DetailAccordion`、`GeographyChip`、共通グラフ、共有リンク、出典ページ、レスポンシブと reduced motion の共通挙動を再利用する。イベントレイヤーは共通 resolver を通すが、根拠を確認したテーマ固有イベントがないため登録せず、レイヤーを表示しない。都道府県参考値を利用しないため `referenceOnly` / 都道府県 chip は不要。待機児童は数値を補わず DataGap とする。
+`StoryExperience` の累積表示、`StoryAct`、`StoryInterlude`、`StoryRecap`、`DetailAccordion`、`GeographyChip`、共通グラフ、共有リンク、出典ページ、レスポンシブと reduced motion の共通挙動を再利用する。イベントレイヤーは共通 resolver を通す。MY-242で一次資料を確認した自治体イベントを定員・実施児童数に追加した（掲載・見送り理由は [監査記録](my-242-childcare-audit.md)）。都道府県参考値を利用しないため `referenceOnly` / 都道府県 chip は不要。待機児童は数値を補わず DataGap とする。
 
 PoC 再生成: `node scripts/build-childcare.mjs`。原本の更新時は同じ URL から CSV を再取得し、ヘッダー・対象年・SHA と表示値を再監査する。標準の `npm run data:build` と `npm run build` にも生成を組み込む。
