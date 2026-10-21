@@ -2,6 +2,7 @@ import type { ChildcareDashboardData } from "../types/childcare-dashboard";
 import type { DataPoint } from "../types/dashboard";
 import type { StoryContext } from "../lib/story-registry";
 import { buildShareUrl } from "../lib/site-url";
+import { formatDataGapPublicText, resolveDataGapCopy } from "../lib/data-gap-copy";
 import { resolveTimelineEvents } from "../lib/timeline-events";
 import ChartWithTimelineEvents from "../components/timeline-events-panel";
 import DetailAccordion, { type DetailItem } from "../components/detail-accordion";
@@ -20,6 +21,10 @@ function summary(label: string, unit: string, points: DataPoint[]) {
 
 export default function ChildcareStory({ data, context }: { data: ChildcareDashboardData; context: StoryContext }) {
   const { place, series, provenance } = data;
+  const waitlistGap = data.gaps.find((gap) => gap.id === "childcare_waitlist");
+  const reachGap = data.gaps.find((gap) => gap.id === "childcare_support_reach_rate");
+  const waitlistCopy = waitlistGap ? resolveDataGapCopy({ ...waitlistGap, title: "待機児童の変化は、この原表からは分からない" }, { place: place.municipalityLabel, label: "待機児童" }) : null;
+  const reachCopy = reachGap ? resolveDataGapCopy(reachGap, { place: place.municipalityLabel, label: "相談の到達率" }) : null;
   const opening = context.story.opening.map((step) => {
     const key = step.seriesKey as keyof typeof series;
     const metric = context.topic.metrics[step.metricId];
@@ -35,8 +40,8 @@ export default function ChildcareStory({ data, context }: { data: ChildcareDashb
     { id: "consultation", title: "子育て相談", kind: "metrics", metrics: [
       { label: "子育て相談件数", unit: "件", points: series.consultations, provenance: provenance.consultations },
     ] },
-    { id: "waitlist", title: "待機児童数", kind: "unavailable", note: "この原表には待機児童の年次系列がありません。定員と実施児童数の差は待機児童数として扱いません。" },
-    { id: "reach", title: "相談の到達率", kind: "unavailable", note: "相談件数は延べ件数です。支援を必要とする家庭の総数が分からないため、相談へ到達した割合は算出していません。" },
+    ...(waitlistCopy ? [{ id: "waitlist", title: "待機児童数", kind: "unavailable" as const, note: formatDataGapPublicText(waitlistCopy) }] : []),
+    ...(reachCopy ? [{ id: "reach", title: "相談の到達率", kind: "unavailable" as const, note: formatDataGapPublicText(reachCopy) }] : []),
     { id: "source", title: "データの出典", kind: "source", sourcePage: data.sourcePage },
   ];
   const recap: RecapGroup[] = [
@@ -76,9 +81,9 @@ export default function ChildcareStory({ data, context }: { data: ChildcareDashb
         <p className="act-note">{summary("相談", "件", series.consultations)}</p>
         <p className="act-note">相談件数から、支援を必要とする家庭に届いた割合は分かりません。保育の実施児童数や定員を分母にして接続率を作ることはしていません。</p>
       </StoryAct>
-      <StoryInterlude variant="gap" eyebrow="データのすきま" title="待機児童の変化は、この原表からは分からない">
-        <p>{data.gaps[0].reason}</p>
-      </StoryInterlude>
+      {waitlistCopy ? <StoryInterlude variant="gap" eyebrow="データのすきま" title={waitlistCopy.title}>
+        <p>{waitlistCopy.body}</p>
+      </StoryInterlude> : null}
       <StoryRecap groups={recap} shareUrl={buildShareUrl({ text: `${place.municipalityLabel}の子育て、この数年で何が変わった？ #税金で何が変わった`, path: context.href })} />
       <DetailAccordion items={details} />
     </main>
