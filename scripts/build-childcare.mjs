@@ -79,7 +79,7 @@ const output = {
     consultations: provenance("consultation", "立川市統計年報・子ども家庭支援センター利用状況", "子育て相談事業の年度内相談件数。延べ件数であり、相談した世帯数ではない。", "件", "各年度末現在。保育園の年次値とは期間種別が異なる。"),
   },
   gaps: [
-    { id: "childcare_waitlist", kind: "unavailable_for_comparison", reason: "同じ原表に待機児童の年次系列はないため、定員と実施児童数の差から推計しない。" },
+    { id: "childcare_waitlist", kind: "not_published", title: "待機児童の変化は、この原表からは分かりません。", reason: "この原表には待機児童の年次系列がありません。", note: "定員と実施児童数の差は、待機児童数として扱いません。" },
     { id: "childcare_support_reach_rate", kind: "not_measurable", metricId: "childcare_support_reach_rate", reason: "公表されているのは相談の延べ件数で、支援を必要とする家庭の総数は含まれていません。", note: "保育の実施児童数や定員を分母にして、支援が届いた割合を作ることはしていません。", sourceUrl: urlBase + files.consultation.remote },
   ],
 };
