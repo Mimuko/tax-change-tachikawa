@@ -1,0 +1,1595 @@
+{
+  "issue": "MY-352",
+  "v0Commit": "ba017a5895c9115ec8564bce5dbc52e0be786323",
+  "capturedAt": "2026-10-31T07:38:09.564290+00:00",
+  "scope": "Local HEAD /tachikawa/care SSR plus interaction-only source inspection; not live-production parity or reader testing",
+  "sourceFiles": [
+    {
+      "path": "src/components/act-support-section.tsx",
+      "sha256": "790e87ce47e045e3c1db16cb51058f3efdaf8ad3b8e54af19f149737fef0b0ec"
+    },
+    {
+      "path": "src/components/detail-accordion.tsx",
+      "sha256": "7fed39dc2be9d9a15e7aa57b33fcf1c5803e2ac007018b5428ad9c4250379c63"
+    },
+    {
+      "path": "src/components/geography-chip.tsx",
+      "sha256": "1c04e462d5894aa7ffca453f53f55d320f00a720f03bebd244fc064228abde47"
+    },
+    {
+      "path": "src/components/home-hub.tsx",
+      "sha256": "c51d0e7c0d42982c0eb3abfe794dbd2f1592e5b342357c3b2008ae02fdb8af56"
+    },
+    {
+      "path": "src/components/premium-standard-section.tsx",
+      "sha256": "b7253756fa23fb41b1ce65afaafa2b3440c187bb31c2a7438fce65e6f954058d"
+    },
+    {
+      "path": "src/components/simple-series-chart.tsx",
+      "sha256": "88663883192e6f032bfd537e9718305189d083d56528671b69cedebd27623345"
+    },
+    {
+      "path": "src/components/site-footer.tsx",
+      "sha256": "2534c4f3a7d477feeb2cd343c9daf15b23ceffcb7aa62f6b626d4090f9caf5fe"
+    },
+    {
+      "path": "src/components/site-topbar.tsx",
+      "sha256": "a829eb021643743c896921f00c5148f07469fcaf769e8f3d29d599061da62e11"
+    },
+    {
+      "path": "src/components/story-act.tsx",
+      "sha256": "8a9c62c35d9208a892b421170c24ac21a60f2c80aac1e441d6f48077757580b0"
+    },
+    {
+      "path": "src/components/story-experience.tsx",
+      "sha256": "e1c5631eed13a3f0b71ad3ccf5145d2a730350470ed0efaf6799486e101fdcb5"
+    },
+    {
+      "path": "src/components/story-interlude.tsx",
+      "sha256": "823da1cfcd2b882ed2aebfc66b52dc24724a619948a8c67106338808b602cb47"
+    },
+    {
+      "path": "src/components/story-recap.tsx",
+      "sha256": "106ccb1b78dadf6cc8dc77623a0d7e6fa0a15fdc028b565745703e12929efc3c"
+    },
+    {
+      "path": "src/components/support-connection-section.tsx",
+      "sha256": "2c6c76f56dbbef7550fcb91c95efb82e84a436270ea6d2f641d567b8bb67f7fc"
+    },
+    {
+      "path": "src/components/timeline-event-chart-layer.tsx",
+      "sha256": "1b41d66bb690e8e074a3abe081810d7e75a716ceafb9a1f66a70b15b03778951"
+    },
+    {
+      "path": "src/components/timeline-event-overlay.tsx",
+      "sha256": "e214fdff77686b6d67a5b52b10416513b84b3af53675a9d6151ff166692d9e2a"
+    },
+    {
+      "path": "src/components/timeline-events-panel.tsx",
+      "sha256": "3fbdc551c52105c890c60514ce7b35e39ab9b195da8bf99aa7543af2477e33fc"
+    },
+    {
+      "path": "src/lib/support-availability.ts",
+      "sha256": "b7f8d30be596fe2839ccc547db1c390ae3fdc08552f0fd91734477ff51ab5eff"
+    },
+    {
+      "path": "src/lib/support-connection-detail.ts",
+      "sha256": "a4c9e492daef86d85d1f6c33dbc254096ff0622434c5cd2083dba8a47ef7424b"
+    },
+    {
+      "path": "src/lib/support-connection-recap.ts",
+      "sha256": "65191895060ebf4c0a8e6bb04f338f35d30cc3b84beb9113b5a4d621c8271025"
+    },
+    {
+      "path": "src/stories/care-story.tsx",
+      "sha256": "2732fedb0950f5b466479b76895d8709f46189f4f6792b51d79f458531131214"
+    },
+    {
+      "path": "src/stories/care-copy.ts",
+      "sha256": "cb72f8ec17c5a0905288f7b4fd14f54c45285a68e0dcdec7db43cafb9741828d"
+    },
+    {
+      "path": "src/lib/story-registry.ts",
+      "sha256": "b26fb27bbf3e76309f38c774cf07c4711a5692e61c241580b10c02310e9e2836"
+    },
+    {
+      "path": "src/lib/data-gap-copy.ts",
+      "sha256": "242764a5a37acb5bbd613b4b3fcae50eba3eec3bdb7003b8d67b1ed13c14ba62"
+    },
+    {
+      "path": "config/topics/care.json",
+      "sha256": "dad2dff2c115ea97b2ffa72ba34cfeb41e088213aafb5f5e27fde5cf8bf356bd"
+    },
+    {
+      "path": "config/stories/tachikawa-care.json",
+      "sha256": "8079e7fd3b3cc0860361c2b2832f3e036cd8ce7abba11c6d5e3d08be8a0f9228"
+    },
+    {
+      "path": "config/municipalities/tachikawa.json",
+      "sha256": "6defeef132bae8f2e0a3e0b21713917f3bfc77c2c1842904a407194b8a111029"
+    },
+    {
+      "path": "config/events/tachikawa-care.json",
+      "sha256": "9de0fdc4d640fb2be31fc565c65b21f1f746ae88a0b493166b4b8bb2cbcad595"
+    },
+    {
+      "path": "data/processed/tachikawa/care/dashboard.json",
+      "sha256": "053123c36f21181dea1627a931fbab6a97580f332bcccb42c20c6f0a3e35b61e"
+    },
+    {
+      "path": "data/curated/tachikawa/care/service-unit-count.json",
+      "sha256": "6eadae6879704206b8523777a33b3942284369806cf1f1ab0c6b85099d878f08"
+    },
+    {
+      "path": "data/curated/tachikawa/care/tokyo-reference.json",
+      "sha256": "b507b452e231d9f1bc0690860640a9ccc273d1f19c1e6d5e21f6acbb1aa86c9c"
+    },
+    {
+      "path": "docs/data-definition.md",
+      "sha256": "eb1fabfc0d8dea07beabdc7b45680b4a937d161e214e4a365a0adb1dfef3ef6d"
+    },
+    {
+      "path": "docs/metrics.md",
+      "sha256": "bb8aa7450ef00fdeb5a8f3d5ced9edf0cb6f3a8fcb71df1e50b65f076c78206c"
+    },
+    {
+      "path": "docs/data-sources.md",
+      "sha256": "013587e6ee8813c20865472360847f7839e667f099f67222894f339977d27784"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "1faf22ef982a04614ff023593334597717e8715b309c32fd8a0ff860c3eaed90"
+    },
+    {
+      "path": "data/raw/tachikawa/care/benefits.csv",
+      "sha256": "354f9087da92bcb3738df27d3cd3225e7fef7f0ef833af2e56328068535db53e"
+    },
+    {
+      "path": "data/raw/tachikawa/care/certified.csv",
+      "sha256": "bd46cc43b0c0944bf391785ea902a55824920230512edf56467aa53f07ba6823"
+    },
+    {
+      "path": "data/raw/tachikawa/care/insured.csv",
+      "sha256": "249a149ed8379c0b17575be787907e8f4a242681a152a8af8636c775b2ed35ae"
+    },
+    {
+      "path": "data/raw/tachikawa/care/premium-revenue.csv",
+      "sha256": "edebe9f9df44df23f00894e73e17e605a63042a6f38a5b2cfdbe25c9267bcd5b"
+    },
+    {
+      "path": "data/raw/tachikawa/care/service-benefits.csv",
+      "sha256": "21078d8abf66108ea7cbba977c95deaca5dd652a02a90cd92c5a67c5965bfbfa"
+    },
+    {
+      "path": "src/app/data/page.tsx",
+      "sha256": "fc1dea61f163bbce2cb2aae5925870e4064016a6435db7a1ab82deea157b9d34"
+    },
+    {
+      "path": "src/lib/timeline-events-core.ts",
+      "sha256": "c9f02b18a076c97b18369943e8ac62cd4373bec65165114554a3fceef9ec1395"
+    },
+    {
+      "path": "src/stories/source-page.tsx",
+      "sha256": "5c9a7e19f16d0da33174ff36dc87efeb5cfe6cf45d224f9c30b0d9c078406865"
+    },
+    {
+      "path": "scripts/build-data.mjs",
+      "sha256": "0b0d6bebef880bd14fb0c582e6a10f291fd444f1e2c8e697a69f72bb49a2752f"
+    }
+  ],
+  "skills": [
+    {
+      "path": "mimu-core/1.12.0/skills/ux-writing/SKILL.md",
+      "sha256": "33b05a4334d3023bf027bc949438a011ed9dbe19966e91b997ef459fbe24cf09"
+    },
+    {
+      "path": "mimu-core/1.12.0/skills/ux-writing/references/guidelines.md",
+      "sha256": "431ed76d460b4644b14845af110a707e60ab1c2c716e21642f98e236904a95a9"
+    },
+    {
+      "path": "mimu-core/1.12.0/skills/ux-writing/references/review-rules.md",
+      "sha256": "34f7babdaf371bd6b0acfc306b2e83f1600e0ace2775eebd739eec176a423c47"
+    }
+  ],
+  "verification": [
+    {
+      "check": "insured raw values",
+      "ok": true,
+      "detail": [
+        {
+          "year": 2019,
+          "value": 44747
+        },
+        {
+          "year": 2020,
+          "value": 44946
+        },
+        {
+          "year": 2021,
+          "value": 45088
+        },
+        {
+          "year": 2022,
+          "value": 45156
+        },
+        {
+          "year": 2023,
+          "value": 45209
+        }
+      ]
+    },
+    {
+      "check": "insured normalized SHA",
+      "ok": true,
+      "detail": "LF normalization only; raw byte SHA check remains failed"
+    },
+    {
+      "check": "benefits raw values",
+      "ok": true,
+      "detail": [
+        {
+          "year": 2019,
+          "value": 11314243659
+        },
+        {
+          "year": 2020,
+          "value": 11515114002
+        },
+        {
+          "year": 2021,
+          "value": 11963494164
+        },
+        {
+          "year": 2022,
+          "value": 12089388278
+        },
+        {
+          "year": 2023,
+          "value": 12714555458
+        }
+      ]
+    },
+    {
+      "check": "benefits normalized SHA",
+      "ok": true,
+      "detail": "LF normalization only; raw byte SHA check remains failed"
+    },
+    {
+      "check": "premiumRevenue raw values",
+      "ok": true,
+      "detail": [
+        {
+          "year": 2019,
+          "value": 3015823400
+        },
+        {
+          "year": 2020,
+          "value": 2958623000
+        },
+        {
+          "year": 2021,
+          "value": 2964357300
+        },
+        {
+          "year": 2022,
+          "value": 2990866900
+        },
+        {
+          "year": 2023,
+          "value": 3000481600
+        }
+      ]
+    },
+    {
+      "check": "premiumRevenue normalized SHA",
+      "ok": true,
+      "detail": "LF normalization only; raw byte SHA check remains failed"
+    },
+    {
+      "check": "certified raw values",
+      "ok": true,
+      "detail": [
+        {
+          "year": 2019,
+          "value": 8639,
+          "secondInsured": 206
+        },
+        {
+          "year": 2020,
+          "value": 8827,
+          "secondInsured": 204
+        },
+        {
+          "year": 2021,
+          "value": 8978,
+          "secondInsured": 216
+        },
+        {
+          "year": 2022,
+          "value": 9087,
+          "secondInsured": 211
+        },
+        {
+          "year": 2023,
+          "value": 9226,
+          "secondInsured": 232
+        }
+      ]
+    },
+    {
+      "check": "certified normalized SHA",
+      "ok": true,
+      "detail": "LF normalization only"
+    },
+    {
+      "check": "service units curated",
+      "ok": true,
+      "detail": [
+        {
+          "year": 2020,
+          "value": 232
+        },
+        {
+          "year": 2021,
+          "value": 236
+        },
+        {
+          "year": 2022,
+          "value": 239
+        },
+        {
+          "year": 2023,
+          "value": 241
+        },
+        {
+          "year": 2024,
+          "value": 237
+        }
+      ]
+    },
+    {
+      "check": "Tokyo reference curated",
+      "ok": true,
+      "detail": "geography=tokyo; referenceOnly=true"
+    },
+    {
+      "check": "insured change",
+      "ok": true,
+      "detail": 1.0325
+    },
+    {
+      "check": "certified change",
+      "ok": true,
+      "detail": 6.7948
+    },
+    {
+      "check": "benefits change",
+      "ok": true,
+      "detail": 12.3765
+    },
+    {
+      "check": "serviceUnitCount change",
+      "ok": true,
+      "detail": 2.1552
+    }
+  ],
+  "comparison": [
+    {
+      "id": "U01",
+      "location": "共通/skip",
+      "role": "操作",
+      "v0": "本文へスキップ",
+      "node_range": "2–2",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：本文への移動先が分かる。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "U02",
+      "location": "ナビ/物語",
+      "role": "ナビ",
+      "v0": "物語を読む",
+      "node_range": "7–7",
+      "verdict": "Review",
+      "cause": "ia-ui",
+      "reason": "Contextual：MY-152は理解優先。「読む」は長文閲覧を想起させるが、ナビ名称変更はIA判断。",
+      "v1": "提案：変化を見る",
+      "risk": "中：カテゴリ名・遷移先との整合を全ページで判断する必要",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "U03",
+      "location": "ナビ/出典",
+      "role": "ナビ",
+      "v0": "データと出典",
+      "node_range": "8–8",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Consistent：/tachikawa/care/data/へ遷移し、定義・比較ルール・加工情報がある。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "H01",
+      "location": "Hero",
+      "role": "訴求見出し",
+      "v0": "自分の街は、どう変わった？",
+      "node_range": "11–12",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "User-centered：自分の街の変化という問い。政策評価や因果の断定がない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "H02",
+      "location": "Hero/小ラベル",
+      "role": "補助",
+      "v0": "立川市· 介護 · 直近5年",
+      "node_range": "9–10",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：直近は現在年を基準にも読める。保存版の冒頭は2019–2023年度で、供給・給与は2020–2024年。",
+      "v1": "提案：立川市 · 介護 · 5年分の変化",
+      "risk": "中：直近という鮮度の訴求を変える。更新方針をMimu確認",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "H03",
+      "location": "Hero/説明",
+      "role": "本文",
+      "v0": "立川市の介護に関する主要な数字が、5年間でどう変わったかをたどります。",
+      "node_range": "13–14",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：介護の主要指標の変化をたどる目的が分かる。「5年間」はH02/P02の期間判断と合わせて再確認。事実の全面保証ではない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "H04",
+      "location": "Hero/対象",
+      "role": "補助",
+      "v0": "立川市/ 介護 / 直近5年間",
+      "node_range": "16–17",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：H02と同じ期間・鮮度の論点。",
+      "v1": "提案：立川市 / 介護 / 5年分の変化",
+      "risk": "中：H02と一緒に判断",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "H05",
+      "location": "Hero/開始CTA",
+      "role": "操作",
+      "v0": "変化を見る",
+      "node_range": "18–19",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：#storyへ移動して変化を見る操作に一致。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O01",
+      "location": "冒頭1/小ラベル",
+      "role": "ラベル",
+      "v0": "01 — 立川市・第1号被保険者数",
+      "node_range": "23–23",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：指標名・地域が明示される。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O02",
+      "location": "冒頭1/見出し",
+      "role": "訴求見出し",
+      "v0": "高齢者の加入者数は、大きく変わらなかった",
+      "node_range": "24–24",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：+1.0%で、既存の2%未満という分岐に一致。閾値の妥当性は本検証では変更しない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O03",
+      "location": "冒頭1/本文",
+      "role": "本文",
+      "v0": "65歳以上の第1号被保険者数です。表示期間の最初と最後を比べると1.0%増加しました。",
+      "node_range": "25–25",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：65歳以上・第1号・1.0%増加がprocessed/rawと一致。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O04",
+      "location": "冒頭2/小ラベル",
+      "role": "ラベル",
+      "v0": "02 — 立川市・要支援・要介護認定者数",
+      "node_range": "49–49",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：要支援と要介護の両方を明示。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O05",
+      "location": "冒頭2/見出し",
+      "role": "訴求見出し",
+      "v0": "介護を必要とする人は、増えた",
+      "node_range": "50–50",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：認定者数を必要とする人全体と読む余地。MY-152の既存編集例でもあり自動修正しない。",
+      "v1": "提案：要支援・要介護の認定を受けた人は、増えた",
+      "risk": "中：見出しの訴求と専門語の出し方を変える。未認定者・利用者数を含めないことを確認",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "O06",
+      "location": "冒頭2/本文",
+      "role": "本文",
+      "v0": "要支援・要介護の認定者総数です。第2号被保険者も含むため、加入者数との比率はここでは示しません。",
+      "node_range": "51–51",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear：加入者数の指す対象を直前の冒頭1で確認できる第1号へ明示。",
+      "v1": "要支援・要介護の認定者総数です。第2号被保険者も含むため、第1号被保険者数との比率はここでは示しません。",
+      "risk": "低：主体・対象・条件を維持",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "O07",
+      "location": "冒頭3/小ラベル",
+      "role": "ラベル",
+      "v0": "03 — 立川市・介護保険給付総額",
+      "node_range": "75–75",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：介護保険給付総額という指標名。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "O08",
+      "location": "冒頭3/見出し",
+      "role": "訴求見出し",
+      "v0": "給付費は、認定者より大きく伸びた",
+      "node_range": "76–76",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear：金額と人数そのものではなく増加率の比較だと分かるよう、「数」を補う。",
+      "v1": "給付費は、認定者数より大きく伸びた",
+      "risk": "低：+12.4%と+6.8%の比較を維持。本文・指数グラフを併読する前提",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "O09",
+      "location": "冒頭3/本文",
+      "role": "本文",
+      "v0": "介護保険給付費の総額です。認定者数の伸びよりも大きく、同じ期間に増えています。",
+      "node_range": "77–77",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear / 自然な言語：「伸びよりも大きく、同じ期間に増えています」の係り受けを解消。",
+      "v1": "介護保険給付費の総額です。同じ期間で比べると、認定者数より増加率が大きくなっています。",
+      "risk": "低：総額と人数の増加率比較。1人当たり費用や原因を足さない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "O10",
+      "location": "冒頭/展開CTA（3か所）",
+      "role": "操作",
+      "v0": "年度別の値と定義を見る",
+      "node_range": "34–34",
+      "verdict": "Review",
+      "cause": "ia-ui",
+      "reason": "約束と実体：展開先は年度別表と指標名のみで、定義本文がない。60・86も同文。",
+      "v1": "提案：年度別の値を見る",
+      "risk": "中：ラベルを狭めるか定義を追加するかMimu判断。文言だけでは仕様を決められない",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "C01",
+      "location": "冒頭グラフ/タイトル",
+      "role": "ラベル",
+      "v0": "5年間の変化を重ねる",
+      "node_range": "107–107",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：スクロールに従って系列を重ねる表示に対応。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "C02",
+      "location": "冒頭グラフ/指数",
+      "role": "補助",
+      "v0": "2019年度を100とした変化",
+      "node_range": "108–109",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：2019年度を基準100としている。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "C03",
+      "location": "冒頭グラフ/注記",
+      "role": "本文",
+      "v0": "単位の違う指標を変化率で比べるため、最初の年度を100に揃えています。",
+      "node_range": "134–134",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：指数化の目的と基準が明示されている。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "I01",
+      "location": "幕間/見出し",
+      "role": "訴求見出し",
+      "v0": "介護を必要とする人と、使われるお金の変化。",
+      "node_range": "136–137",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：必要とする人はO05と同じ概念の論点。使われるお金は給付費で、税金・歳出総額ではない。",
+      "v1": "提案：認定を受けた人と、介護保険の給付費の変化。",
+      "risk": "中：MY-152の第一階層で一般語を優先する方針との調整が必要",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "I02",
+      "location": "幕間/問い",
+      "role": "本文",
+      "v0": "では、支える側は？",
+      "node_range": "138–138",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：続く供給側の話題へ接続する。語の好みによる変更はしない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "S01",
+      "location": "供給/小ラベル",
+      "role": "ラベル",
+      "v0": "立川市・介護サービス提供単位数",
+      "node_range": "140–140",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：地域と提供単位数を明示。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "S02",
+      "location": "供給/見出し",
+      "role": "訴求見出し",
+      "v0": "市内の介護サービスの量は増えた",
+      "node_range": "141–141",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：公表掲載組合せ数の+2.2%を、利用量・定員・稼働量の増加と読む余地。",
+      "v1": "提案：市内で公表されている介護サービスの提供単位数は増えた",
+      "risk": "高：一般語と正式定義の境界の判断。施設数・需要・利用量への置換は禁止",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "S03",
+      "location": "供給/グラフ見出し",
+      "role": "ラベル",
+      "v0": "介護サービスの提供単位数の推移",
+      "node_range": "148–148",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Consistent：正式指標名・定義と整合。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "S04",
+      "location": "供給/凡例",
+      "role": "ラベル",
+      "v0": "サービス数",
+      "node_range": "149–149",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：「サービス数」はサービス種類数にも読める。160、詳細361・376、振り返り263にも同系列の語がある。",
+      "v1": "提案：提供単位数",
+      "risk": "中：正式名称を第一階層でどこまで出すかS02と合わせて判断",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "S05",
+      "location": "供給/数え方",
+      "role": "本文",
+      "v0": "※1つの事業所が複数のサービスを提供する場合、それぞれ1つとして数えています。",
+      "node_range": "165–165",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：事業所とサービスの組合せとして数える補足。S02の稼働量誤読までは解消しない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "S06",
+      "location": "供給/期間と実数",
+      "role": "補助",
+      "v0": "2020年232→2024年237（↑2.2%）",
+      "node_range": "166–176",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：2020年232→2024年237、+2.2%。各年12月末の掲載数と一致。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "G01",
+      "location": "DataGap/小ラベル",
+      "role": "ラベル",
+      "v0": "データのすきま",
+      "node_range": "177–177",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：データの欠測を知らせる。一般名称への恣意的変更はしない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "G02",
+      "location": "DataGap/見出し",
+      "role": "訴求見出し",
+      "v0": "立川市だけでは、介護職員数・賃金の年次推移を確認できるデータはありません。",
+      "node_range": "178–178",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：本文は確認できなかったという調査範囲の限定、見出しは存在しないという断定。",
+      "v1": "提案：立川市の介護職員数・賃金の推移は、今回は掲載していません。",
+      "risk": "中：不存在断定から掲載判断へ変えるため編集判断が必要。not_publishedへ分類替えしない",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "G03",
+      "location": "DataGap/理由",
+      "role": "本文",
+      "v0": "立川市単位で継続比較できる公開データは確認できませんでした。",
+      "node_range": "179–179",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：市単位・継続比較・公開データ・確認範囲に限定。非公表や0人と断定していない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "G04",
+      "location": "DataGap/次への接続",
+      "role": "本文",
+      "v0": "そこで、ここからは東京都全体の変化を見ます。",
+      "node_range": "180–180",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Contextual：ここからはだと後続の市の支援・保険料まで都の話に読める。直後の参考給与に範囲を限定。",
+      "v1": "続いて、東京都全体の介護職員の給与の変化を参考に見ます。",
+      "risk": "低：次節の対象だけ具体化。東京都を立川市の代理値にしない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "W01",
+      "location": "都参考/小ラベル",
+      "role": "ラベル",
+      "v0": "東京都参考・介護職員の所定内給与",
+      "node_range": "181–181",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：東京都参考・所定内給与を表示。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "W02",
+      "location": "都参考/見出し",
+      "role": "訴求見出し",
+      "v0": "東京都では、介護職員の給与も増えた",
+      "node_range": "182–182",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：東京都の2020→2024で+14.7%。前年ごとの増加や立川市値とは述べていない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "W03",
+      "location": "都参考/指数ラベル",
+      "role": "補助",
+      "v0": "初年度を100とした変化",
+      "node_range": "184–184",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：「年度」が暦年の給与系列と合わない。共通グラフを使っているためテーマ横断確認が要る。",
+      "v1": "提案：2020年を100とした変化",
+      "risk": "中：暦年・年度・時点を持つメタデータを確認してから反映",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "W04",
+      "location": "都参考/注記",
+      "role": "本文",
+      "v0": "市区町村値ではなく、東京都の参考指標です。",
+      "node_range": "201–201",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：市区町村値でないことを明示。短縮して参考区分を落とさない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "W05",
+      "location": "都参考/給与説明",
+      "role": "本文",
+      "v0": "東京都内の介護職員（医療・福祉施設等）の、残業代などを除いた所定内給与額です。一般労働者・企業規模10人以上・男女計のデータを使用しています。立川市単位で継続比較できる公開データが確認できないため、東京都の値を参考として掲載しています。",
+      "node_range": "203–208",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "自然な言語：長い名詞連結と内の…のを整理。一般労働者等の原典条件は保持。",
+      "v1": "東京都内で働く介護職員（医療・福祉施設等）の所定内給与額で、残業代などを除いた金額です。対象は一般労働者・企業規模10人以上・男女計です。立川市単位で継続比較できる公開データが確認できないため、東京都の値を参考として掲載しています。",
+      "risk": "低：職種・規模・性別集計・地域・参考扱いを保持。手取り・年収とは呼ばない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "A01",
+      "location": "接続/見出し",
+      "role": "訴求見出し",
+      "v0": "制度はある。必要な人に、届いているか。",
+      "node_range": "212–212",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "User-centered：支援への到達を問い、届いていないと断定しない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A02",
+      "location": "接続/導入",
+      "role": "本文",
+      "v0": "立川市では、本編で見たとおり給付と市内の受け皿が増えています。けれど「制度や予算があること」と「必要な人に支援が届いていること」は、同じではありません。",
+      "node_range": "213–213",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：受け皿は公表掲載数。給付費とは比較期間も2019–2023と2020–2024で異なる。",
+      "v1": "提案：立川市では、介護保険の給付総額と、公表されているサービスの提供単位数が増えています。ただし、「制度や予算があること」と「必要な人に支援が届いていること」は、同じではありません。",
+      "risk": "高：S02の用語判断と連動。増加の期間を本文か隣接表示で説明するか判断",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "A03",
+      "location": "接続/制度ラベル",
+      "role": "ラベル",
+      "v0": "制度・予算はある",
+      "node_range": "214–214",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：制度の存在と到達の問いを分ける。整備の政策評価はA04で保留。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A04",
+      "location": "接続/制度説明",
+      "role": "本文",
+      "v0": "介護保険制度が整い、給付総額も直近5年で増えています。市内で提供されるサービスの量も増えました。",
+      "node_range": "215–215",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：「整い」は政策評価にも読める。サービスの量はS02の定義問題。",
+      "v1": "提案：介護保険制度があり、給付総額は表示期間に増えています。市内で公表されているサービスの提供単位数も増えました。",
+      "risk": "高：整備評価と供給量の主張を変更。Mimu判断まで保留",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "A05",
+      "location": "接続/問いラベル",
+      "role": "ラベル",
+      "v0": "届いているかは、別の問い",
+      "node_range": "216–216",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：規模と到達を別の問いと示す。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A06",
+      "location": "接続/到達説明",
+      "role": "本文",
+      "v0": "制度があることは、必要な人が実際に使えていることを保証しません。相談先・手続き・費用のどこかでつまずくと、支援は届きません。",
+      "node_range": "217–217",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：「どこかでつまずくと、支援は届きません」は一律の因果。資料は回答者内の障壁・相談先で、全員の未到達を証明しない。",
+      "v1": "提案：制度があっても、必要な人が実際に使えているかは別に確かめる必要があります。ここでは、相談先や、手続き・費用などの利用上の障壁を見ます。",
+      "risk": "高：因果断定を外す意味変更。提案にも到達率・改善率を足さない",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "A07",
+      "location": "接続/相談ラベル",
+      "role": "ラベル",
+      "v0": "介護についてケアマネジャーに相談している",
+      "node_range": "220–220",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：ケアマネジャーという相談先。本人か介護者かはA08で説明。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A08",
+      "location": "接続/相談の対象・意味",
+      "role": "本文",
+      "v0": "在宅の要介護・要支援認定者を対象とする調査で、主な介護者について回答した人（n=331）。2022年11月15日から12月13日の調査。相談先として『介護支援専門員（ケアマネジャー）』を選んだ回答割合。 回答者内の相談先であり、介護を担う人全体の到達率や相談後の改善を示しません。2019年調査とは抽出方法が異なるため、増減は示しません。",
+      "node_range": "222–222",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear / Concise：調査を重複説明する断片をつなぎ、誰について答えた値かを先に出す。",
+      "v1": "在宅の要介護・要支援認定者を対象とする調査で、主な介護者について回答した人（n=331）のうち、相談先に「介護支援専門員（ケアマネジャー）」を選んだ割合です。調査期間は2022年11月15日から12月13日です。回答者内の相談先であり、介護を担う人全体の到達率や相談後の改善を示しません。2019年調査とは抽出方法が異なるため、増減は示しません。",
+      "risk": "低：回答者=主な介護者本人と断定しない。n・期間・比較不可・Outcome分離を保持",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "A09",
+      "location": "接続/費用ラベル",
+      "role": "ラベル",
+      "v0": "利用料を支払うのが難しい",
+      "node_range": "225–225",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：非利用理由の回答項目を維持。一般市民の2.6%とは呼ばない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A10",
+      "location": "接続/利用可否ラベル",
+      "role": "ラベル",
+      "v0": "利用したいサービスが利用できない・身近にない",
+      "node_range": "229–229",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：利用不能と身近にないという選択肢を保つ。種類・施設不足と断定しない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A11",
+      "location": "接続/方法ラベル",
+      "role": "ラベル",
+      "v0": "サービスを受けたいが、手続きや利用方法が分からない",
+      "node_range": "233–233",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：希望と手続き・利用方法の障壁を保持。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A12",
+      "location": "接続/聞き手ラベル",
+      "role": "ラベル",
+      "v0": "心配事や愚痴を聞いてくれる人がいない",
+      "node_range": "237–237",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：原設問の聞き手がいない状態。孤立率や公的支援未到達率へ変換しない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "A13",
+      "location": "接続/聞き手の対象・意味",
+      "role": "本文",
+      "v0": "65歳以上で要介護認定を受けていない人、および要支援1・2の調査回答者。介護予防・日常生活圏域ニーズ調査の『そのような人はいない』回答。2022年11月15日から12月13日に調査。 心配事の有無や、公的・専門的な相談支援を必要としていたかまでは確認できません。",
+      "node_range": "239–239",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "自然な言語：対象と回答の体言止めを一文へ接続。",
+      "v1": "65歳以上で要介護認定を受けていない人、および要支援1・2の調査回答者のうち、心配事や愚痴を聞いてくれる人について「そのような人はいない」と答えた割合です。介護予防・日常生活圏域ニーズ調査で、調査期間は2022年11月15日から12月13日です。心配事の有無や、公的・専門的な相談支援を必要としていたかまでは確認できません。",
+      "risk": "低：母集団・回答・調査期間・留保を保持",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "A14",
+      "location": "接続/非利用理由の共通注記",
+      "role": "本文",
+      "v0": "「利用料を支払うのが難しい」、「利用したいサービスが利用できない・身近にない」、「サービスを受けたいが、手続きや利用方法が分からない」は共通して、在宅の要介護・要支援認定者のうち、調査月に介護保険サービスを利用していない回答者。介護保険サービス非利用者が選んだ非利用理由。2022年11月15日から12月13日に調査。 複数回答のため、数値を足し合わせて「未接続率」とすることはできません。また、サービスを利用していないこと自体が、支援につながっていないことを意味するものでもありません。",
+      "node_range": "240–240",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear / 自然な言語：共通して、回答者という述語の欠落を直す。合算禁止・非利用≠未到達を保持。",
+      "v1": "「利用料を支払うのが難しい」、「利用したいサービスが利用できない・身近にない」、「サービスを受けたいが、手続きや利用方法が分からない」は、在宅の要介護・要支援認定者のうち、調査月に介護保険サービスを利用していない回答者が選んだ非利用理由です。調査期間は2022年11月15日から12月13日です。複数回答のため、数値を足し合わせて「未接続率」とすることはできません。また、サービスを利用していないこと自体が、支援につながっていないことを意味するものでもありません。",
+      "risk": "低：設問の対象・複数回答・推測禁止を維持。段落長自体はUI変更なしで解決しない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "P01",
+      "location": "保険料/見出し",
+      "role": "訴求見出し",
+      "v0": "介護保険料の基準額は上がった",
+      "node_range": "243–243",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：基準額は5,880→6,183円/月。実支払額とは述べていない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "P02",
+      "location": "保険料/定義",
+      "role": "本文",
+      "v0": "第1号被保険者の基準月額。実際の保険料は所得段階等によって異なります。",
+      "node_range": "252–252",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：第1号の基準月額と実際の保険料を区別する重要な留保。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "P03",
+      "location": "保険料/原典CTA",
+      "role": "操作",
+      "v0": "基準月額の原典を開く ↗",
+      "node_range": "253–253",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：基準月額の原典ページへ遷移。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R01",
+      "location": "振り返り/見出し",
+      "role": "訴求見出し",
+      "v0": "見た変化を、もう一度",
+      "node_range": "255–256",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：既出の変化を振り返る役割。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R02",
+      "location": "振り返り/導入",
+      "role": "本文",
+      "v0": "本編で見た指標を、地域のまとまりごとに振り返ります。",
+      "node_range": "257–257",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear：「地域のまとまり」を実際の2区分へ具体化。",
+      "v1": "本編で見た指標を、立川市の値と東京都の参考値に分けて振り返ります。",
+      "risk": "低：確認済みの区分のみ。東京都を市値と統合しない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "R03",
+      "location": "振り返り/区分",
+      "role": "ラベル",
+      "v0": "需要と受け皿",
+      "node_range": "259–259",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：第1号・認定・給付・公表提供単位を需要と受け皿へまとめるのは広義の編集。",
+      "v1": "提案：加入者・認定者・給付費・サービスの提供単位数",
+      "risk": "中：第一階層の要約粒度・O05/S02と連動して判断",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "R04",
+      "location": "振り返り/給与",
+      "role": "補助",
+      "v0": "介護職員の所定内給与（東京都） 256,600円 → 294,200円（2020→2024 ↑14.7%）（東京都参考）",
+      "node_range": "266–266",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Concise：地域名の繰り返しを減らし、単独でも参考値と分かる表示を維持。",
+      "v1": "介護職員の所定内給与 256,600円 → 294,200円（2020→2024 ↑14.7%・東京都参考）",
+      "risk": "低：主体・対象・条件を維持",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "R05",
+      "location": "振り返り/相談",
+      "role": "補助",
+      "v0": "介護についてケアマネジャーに相談している 55%（2022年調査・回答母数 n=331）",
+      "node_range": "269–269",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：55%・2022年調査・n=331を維持。回答母数の違いを消さない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R06",
+      "location": "振り返り/費用",
+      "role": "補助",
+      "v0": "利用料を支払うのが難しい 2.6%（2022年調査・回答母数 n=231）",
+      "node_range": "270–270",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：2.6%・2022年調査・n=231。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R07",
+      "location": "振り返り/利用可否",
+      "role": "補助",
+      "v0": "利用したいサービスが利用できない・身近にない 2.6%（2022年調査・回答母数 n=231）",
+      "node_range": "271–271",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：2.6%・2022年調査・n=231。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R08",
+      "location": "振り返り/方法",
+      "role": "補助",
+      "v0": "サービスを受けたいが、手続きや利用方法が分からない 4.3%（2022年調査・回答母数 n=231）",
+      "node_range": "272–272",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：4.3%・2022年調査・n=231。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R09",
+      "location": "振り返り/聞き手",
+      "role": "補助",
+      "v0": "心配事や愚痴を聞いてくれる人がいない 5.5%（2022年調査・回答母数 n=1,790）",
+      "node_range": "273–273",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：5.5%・2022年調査・n=1,790。別母集団として保持。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "R10",
+      "location": "振り返り/共有",
+      "role": "操作",
+      "v0": "気づきを共有する ↗",
+      "node_range": "278–278",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：X共有画面へ遷移し、aria-labelも外部サイト・Xと明示。共有の実行はしていない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D01",
+      "location": "詳細/見出し",
+      "role": "訴求見出し",
+      "v0": "気になったところから、詳しく見る",
+      "node_range": "280–281",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：関心を持った内容の具体値へ進める。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D02",
+      "location": "詳細/導入",
+      "role": "本文",
+      "v0": "気になったテーマから、具体値・定義・出典を確認できます。",
+      "node_range": "282–282",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Consistent / Clear：具体値を自然な語にし、テーマ=介護との衝突を避ける。",
+      "v1": "気になった項目から、具体的な数値・定義・出典を確認できます。",
+      "risk": "低：主体・対象・条件を維持",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "D03",
+      "location": "詳細/需要の展開名",
+      "role": "操作",
+      "v0": "介護を必要とする人",
+      "node_range": "285–285",
+      "verdict": "Review",
+      "cause": "ia-ui,spec",
+      "reason": "Accurate：展開先に第1号被保険者も含むので必要とする人だけでは内容を限定しすぎる。",
+      "v1": "提案：介護保険の加入者と認定者",
+      "risk": "中：ナビゲーション・展開名の変更としてMimu確認",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "D04",
+      "location": "詳細/比較ラベル",
+      "role": "補助",
+      "v0": "5年前比（2019→2023）",
+      "node_range": "292–296",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：2019→2023は5年度分・4年間隔。366–370などにも共通する。",
+      "v1": "提案：最初の年との比較（2019→2023）",
+      "risk": "中：年度・暦年・12月末を扱う共通部品の仕様確認が必要。数値は変えない",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "D05",
+      "location": "詳細/サービス数の最新値",
+      "role": "補助",
+      "v0": "最新値（2024年度）",
+      "node_range": "362–364",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：2024年12月末の公表掲載数を年度として表示している。",
+      "v1": "提案：最新値（2024年12月末）",
+      "risk": "中：期間メタデータと共通部品の扱いをMimu確認",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "D06",
+      "location": "詳細/サービス単位",
+      "role": "補助",
+      "v0": "establishments",
+      "node_range": "393–393",
+      "verdict": "Revise",
+      "cause": "expression",
+      "reason": "Clear / Consistent：内部enumを日本語UIの確認済み単位へ戻す。",
+      "v1": "単位",
+      "risk": "低：単位はtopic・表・237単位と整合。データのenumは変更しない",
+      "decision": "採用候補（未反映）"
+    },
+    {
+      "id": "D07",
+      "location": "詳細/職員の未掲載理由",
+      "role": "本文",
+      "v0": "立川市単位で継続比較できる公開データは確認できていません。",
+      "node_range": "400–400",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：市単位・継続比較できる公開データの確認範囲に限定する。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D08",
+      "location": "詳細/賃金の未掲載理由",
+      "role": "本文",
+      "v0": "立川市だけの賃金の年次推移を確認できるデータはありません。東京都参考の賃金指標は本編の「支える人と待遇」を参照してください。",
+      "node_range": "405–405",
+      "verdict": "Review",
+      "cause": "ia-ui,spec",
+      "reason": "Accurate / Consistent：不存在断定と、本編に存在しない「支える人と待遇」見出しへの案内がある。",
+      "v1": "提案：立川市単位で継続比較できる公開データは確認できていません。東京都の参考値は、本編の「東京都では、介護職員の給与も増えた」を参照してください。",
+      "risk": "中：確認できない/ないの意味差と到着先名の判断。将来の増減別見出しも確認が必要",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "D09",
+      "location": "詳細/給付の展開名",
+      "role": "操作",
+      "v0": "行政支出",
+      "node_range": "408–408",
+      "verdict": "Review",
+      "cause": "ia-ui,spec",
+      "reason": "Accurate：給付費は決算歳出とは別指標。行政支出では範囲が広い。",
+      "v1": "提案：介護保険の給付費",
+      "risk": "中：展開名変更。MY-152と原典定義を優先しMimu判断",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "D10",
+      "location": "詳細/保険料収入名",
+      "role": "ラベル",
+      "v0": "介護保険料（現年分）収入額",
+      "node_range": "465–465",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：現年分の収入額と明示。基準月額・個人支払額へ変えない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D11",
+      "location": "詳細/複数回答注記",
+      "role": "本文",
+      "v0": "複数回答のため、ほかの項目とは合算できません。",
+      "node_range": "620–620",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：合算不可を保持。非利用理由とは母集団が異なる聞き手設問も複数回答。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D12",
+      "location": "詳細/原典処理説明",
+      "role": "本文",
+      "v0": "立川市オープンデータ「統計年報・社会福祉」を Shift_JIS の CSV として読み取り、最新5年度を抽出しています。欠損記号「-」は0ではなく欠損として扱います。",
+      "node_range": "632–632",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual：第二階層の加工方法としてShift_JIS/CSV・欠損記号の取扱いを説明している。第一階層へ持ち出さない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "D13",
+      "location": "詳細/加工情報CTA",
+      "role": "操作",
+      "v0": "定義・加工方法・照合情報を見る →",
+      "node_range": "634–634",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：定義・加工・照合の情報へ進む。/data/はsrc/app/data/page.tsxでdefaultStory（立川市×介護）のSourcePageを直接表示する。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "F01",
+      "location": "Footer/非公式表記",
+      "role": "本文",
+      "v0": "本サイトは立川市その他の行政機関が提供・運営する公式サービスではありません。",
+      "node_range": "641–643",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：行政機関の公式サービスと誤認させない。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "F02",
+      "location": "Footer/データと問い合わせ",
+      "role": "本文",
+      "v0": "本サイトは公開されている行政データを独自に収集・整理・可視化するものです。原典の数値・定義等に関するお問い合わせは、各データの掲載元へお願いいたします。",
+      "node_range": "644–644",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Clear：加工主体と原典に関する問い合わせ先を区別する。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "F03",
+      "location": "Footer/最終収録年度",
+      "role": "補助",
+      "v0": "出典:立川市の公開データ。最終収録年度:2023年度。",
+      "node_range": "645–653",
+      "verdict": "Review",
+      "cause": "spec",
+      "reason": "Accurate：2023年度は主系列の最終年度。2024年の給与・掲載数、2024–2026年度の制度値もある。",
+      "v1": "提案：出典:立川市の公開データ。主な年次系列の最終収録年度:2023年度。",
+      "risk": "中：全データの最終年と誤読させない表示範囲を確認。2026年度を実績最終年にしない",
+      "decision": "保留・Mimu判断"
+    },
+    {
+      "id": "E1t",
+      "location": "出来事/covid-19-2020/title（ソース確認）",
+      "role": "ラベル",
+      "v0": "新型コロナウイルス感染症の流行",
+      "node_range": "config/events/tachikawa-care.json",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual / Accurate：同時期の背景事実を示す文言。グラフの増減の原因や政策効果とは述べていない。事実の外部再調査は本検証の対象外。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E1d",
+      "location": "出来事/covid-19-2020/description（ソース確認）",
+      "role": "本文",
+      "v0": "2020年1月以降、国内でも感染が確認され、介護現場を含む社会全体で感染対策が広がりました。",
+      "node_range": "config/events/tachikawa-care.json",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual / Accurate：同時期の背景事実を示す文言。グラフの増減の原因や政策効果とは述べていない。事実の外部再調査は本検証の対象外。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E2t",
+      "location": "出来事/care-plan-period-2021/title（ソース確認）",
+      "role": "ラベル",
+      "v0": "第8期介護保険事業計画の開始（2021年度）",
+      "node_range": "config/events/tachikawa-care.json",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual / Accurate：同時期の背景事実を示す文言。グラフの増減の原因や政策効果とは述べていない。事実の外部再調査は本検証の対象外。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E2d",
+      "location": "出来事/care-plan-period-2021/description（ソース確認）",
+      "role": "本文",
+      "v0": "2021年度から、第8期介護保険事業計画の期間が始まりました。",
+      "node_range": "config/events/tachikawa-care.json",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Contextual / Accurate：同時期の背景事実を示す文言。グラフの増減の原因や政策効果とは述べていない。事実の外部再調査は本検証の対象外。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E03",
+      "location": "出来事/閉じる（ソース確認）",
+      "role": "操作",
+      "v0": "閉じる",
+      "node_range": "src/components/timeline-event-overlay.tsx",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：出来事ポップオーバーを閉じるボタンのaria-label。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E04",
+      "location": "出来事/表示",
+      "role": "操作",
+      "v0": "出来事を表示",
+      "node_range": "101–101",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：チェックで出来事を表示する。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E05",
+      "location": "出来事/制度scope",
+      "role": "ラベル",
+      "v0": "国・制度",
+      "node_range": "102–102",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Consistent：制度に関する背景と対応。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E06",
+      "location": "出来事/社会scope",
+      "role": "ラベル",
+      "v0": "広域・社会",
+      "node_range": "103–103",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Consistent：社会の出来事という区分。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E07",
+      "location": "出来事/見方",
+      "role": "操作",
+      "v0": "出来事の見方",
+      "node_range": "105–105",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Actionable：補足説明を展開する。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    },
+    {
+      "id": "E08",
+      "location": "出来事/非因果注記",
+      "role": "本文",
+      "v0": "表示される出来事は、数値変化の原因を示すものではなく、同時期に起きた事実を確認するための参考情報です。",
+      "node_range": "106–106",
+      "verdict": "Keep",
+      "cause": "—",
+      "reason": "Accurate：数値変化の原因ではないと明記。因果関係を創作しないため維持。",
+      "v1": "",
+      "risk": "変更なし",
+      "decision": "原文維持"
+    }
+  ],
+  "limitations": [
+    "npm run data:check failed on four Windows CRLF raw files; all four hashes match recorded provenance after read-only LF normalization.",
+    "Salary/service-unit source tables and support-connection PDF were not re-fetched; local curated/config/processed metadata were checked.",
+    "No reader test, A/B test, browser interaction QA or production comparison."
+  ],
+  "authorization": {
+    "date": "2026-10-31",
+    "operations": [
+      "add review documents",
+      "commit",
+      "push work branch",
+      "create PR",
+      "post results to MY-352",
+      "move MY-352 to In Review"
+    ],
+    "uiCopyImplementation": false
+  },
+  "prValidation": {
+    "productionBuild": {
+      "command": "npm run build",
+      "exitCode": 0,
+      "staticPages": 14,
+      "typecheck": "passed"
+    },
+    "generatedData": "Restored only the four processed JSON files generated by this build to their unchanged pre-build HEAD contents.",
+    "documentationChecks": [
+      "91 unique comparison IDs",
+      "59 Keep / 12 Revise / 20 Review / 0 Blocked",
+      "Keep has no replacement; Review is labelled proposal",
+      "relative links resolve",
+      "git diff --check"
+    ],
+    "relatedExistingInvestigation": "https://github.com/Mimuko/tax-change-tachikawa/pull/19"
+  }
+}
