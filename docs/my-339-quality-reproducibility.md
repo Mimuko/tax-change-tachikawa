@@ -82,6 +82,8 @@ npm run data:stable
 
 `data:stable` の対象はcareの3dashboardのみで、保育・教育は含まれない。今回のfixtureでは5つとも比較したが、恒久的な検証対象拡張は別途範囲を明示する。
 
+取得経路もコードで確認した。`scripts/fetch-data.mjs` は `response.arrayBuffer()` を `Uint8Array` にして `writeFile` へ渡し、`scripts/fetch-fuchu-care.mjs` は同じ応答を `Buffer.from` で保存している。これらのraw保存処理には文字列化・改行置換がなく、現状は応答バイトを保持する実装である。今回ネットワーク再取得による上書きは行っていないため、配信元の現在のバイトとの一致までは検証していない。保育は共通 `data:fetch` の対応対象外なので、後続では保育を含む手動取得経路も確認し、10CSVすべてについて取得からGit保存・checkoutまでバイトを保つことを受入条件にする。
+
 ## 共通品質の変更前baseline
 
 ### 主要ルートと3幅
@@ -142,12 +144,16 @@ npx --yes --package=lighthouse@11.7.1 lighthouse https://tax-change-tachikawa.ve
 |---|---|---|
 | コントラスト | `color-contrast` 失敗。Hero `h1 > em` の `#e57443 / #f5f0e7` は2.67、必要3。step-eyebrowやdetail-numの `#b84a22 / #e9e4d9` は4.09、必要4.5。教育Heroの補助ラベル等も検出 | 既存共通CSS。背景別に失敗selectorを棚卸しし、既存トークンの適用案から確認。新色・配色変更は承認後 |
 | Footerの名前不一致 | `label-content-name-mismatch`。表示「立川市の公開データ」に対し `aria-label="原典を開く（外部サイト）"`。他自治体でも同じ部品 | 既存SiteFooter。可視ラベルを含むaccessible nameへ最小修正。自治体名を固定しない |
-| canonical | local / publicとも `canonical` 失敗。理由は `Is not an absolute URL (/tachikawa/childcare/)`。`/data/` はタグ自体なし | 既存metadataとビルド環境。既存alternatesはある。`getSiteUrl` と本番origin解決を確認し絶対URL出力、旧 `/data/` のcanonical方針も定義 |
+| canonical | local / publicとも `canonical` 失敗。理由は `Is not an absolute URL (/tachikawa/childcare/)`。`/data/` はタグ自体なし | 既存metadataとビルド環境。`getSiteUrl` は `NEXT_PUBLIC_SITE_URL ?? URL` の順に参照し、Netlifyの `URL` に依存するfallbackを持つ。Vercel側の `NEXT_PUBLIC_SITE_URL` 設定は未確認。共有URL・OGへの波及も後続案Bで確認する |
 | favicon | local / publicとも `/favicon.ico` が404 | 既存の欠落。承認済み資産の有無を確認し、ある場合のみ最小追加。新しいロゴを無断生成しない |
 | RSC txt | Pythonでprefetchのflattened pathが404、Vercelで同一pathが200 | 配信条件差。公開障害とは扱わない。次節参照 |
 | 初回描画・blocking | local保育 FCP6.70s / LCP12.98s / TBT137ms。public保育 FCP6.02s / LCP10.84s / TBT269.5ms | 共通リソースと配信差を要分析。イベント追加の性能影響と断定しない |
 
 コントラストの数値は今回のLighthouseノード診断による。canonicalについては[Chrome公式の監査説明](https://developer.chrome.com/docs/lighthouse/seo/canonical)と今回の `explanation` を照合した。
+
+canonicalの原因候補をコードから絞ると、`src/lib/site-url.ts` の `getSiteUrl()` は `process.env.NEXT_PUBLIC_SITE_URL ?? process.env.URL` だけを参照する。`src/app/layout.tsx` はその戻り値を `metadataBase` に渡し、`src/lib/story-metadata.ts` はcanonicalと `openGraph.url` に相対パスを設定する。`URL` は[Netlifyのビルド環境変数](https://docs.netlify.com/build/configure-builds/environment-variables/)であり、[Vercelの標準変数](https://vercel.com/docs/environment-variables/system-environment-variables)は `VERCEL_URL` 等の別名で、この関数はそれらを参照しない。したがってVercelで `NEXT_PUBLIC_SITE_URL` と独自設定の `URL` がともに未設定なら、`getSiteUrl()` と `metadataBase` はundefinedになる。今回の実出力が相対canonicalであることと整合する原因候補だが、Vercelプロジェクトの環境変数の有無・値・適用環境は未確認であり、「未設定だった」と確定しない。
+
+同じファイルの `buildShareUrl()` も `getSiteUrl()` を使い、戻り値がない場合はX共有リンクへ `url` パラメータを追加しない。呼出元はcare・education・childcareの各storyである。共有URLの欠落とOG URLの不適切な解決は波及候補として扱い、現在の公開ページでの発生有無は未検証とする。後続案BではVercel Project Settingsの `NEXT_PUBLIC_SITE_URL` の有無・Production / Previewへの適用、生成HTMLのcanonical / `og:url`、共有リンクの `url` パラメータをそれぞれ確認する。環境変数の未設定をコードの推測だけで断定したり、previewのホストをそのまま正規URLに採用したりしない。
 
 MY-242の `1cf8054^..42fc995` の差分には共通CSS、SiteFooter、metadata、layout、raw CSVの変更がない。変更は保育イベントcatalog、resolver登録、保育story/copy、gap生成文言、関連tests/docsだった。共通ページでも同じ指摘が再現するため、上記をイベント変更の新規不具合と分類する根拠はない。ただしイベント追加前commitの性能を同条件で再ビルドしていないので、イベントの性能影響ゼロとは結論しない。
 
@@ -174,18 +180,18 @@ Python側の実ファイルはディレクトリを含む形式だが、クラ�
 
 ### A. 原本CSVのバイト保存とWindows再現性
 
-- **実装対象**: `.gitattributes` で全raw CSVの `-text` を指定し、既存保育属性を維持。Windows fresh checkoutとLinuxでSHA・再生成を確認。service-benefitsの検証方針とcare以外の検証対象拡張は必要性を明記して範囲を確定する。
+- **実装対象**: `.gitattributes` で全raw CSVの `-text` を指定し、既存保育属性を維持。Windows fresh checkoutとLinuxでSHA・再生成を確認。`data:fetch` 系のraw書込みがBuffer / Uint8Arrayのままであることと、保育の手動取得経路も確認する。service-benefitsの検証方針とcare以外の検証対象拡張は必要性を明記して範囲を確定する。
 - **非対象**: 原本の一括LF化、文字コード変換、原典再取得によるデータ更新、SHA計算の正規化、系列値や定義の変更。
 - **守る既存仕様**: raw実バイトとprovenanceの一致、local-only原典のexpectedSha256、府中CRLF・保育CP932の保存、自治体/topic/story責務分離。
-- **完了条件**: `core.autocrlf=true` のWindows fresh checkoutとLinuxで `data:check`、`data:build`、`data:check`、`data:stable` が成功。10CSVのcheckoutバイトがGit保存済みバイトと一致し、processedがgeneratedAt以外で変化しない。rawの意図しない差分がない。
+- **完了条件**: `core.autocrlf=true` のWindows fresh checkoutとLinuxで `data:check`、`data:build`、`data:check`、`data:stable` が成功。`git ls-files --eol data/raw` で全10CSVが `attr/-text` になり、checkoutバイトがGit保存済みバイトと一致する。取得処理が文字列化・改行変換せず応答バイトを保存することを確認し、processedがgeneratedAt以外で変化せず、rawの意図しない差分がない。
 - **停止条件**: 原典との差が改行だけでは説明できない、原典・ライセンス・意味への影響がある、未保存のraw編集がある場合はMimuへ戻す。
 
 ### B. Footerとcanonicalの最小修正
 
-- **実装対象**: SiteFooterのaccessible nameに可視自治体名と公開データの文言を含める。`getSiteUrl` / metadataBaseと実ホストのビルド環境を照合し、全公開ルートの絶対canonicalと旧 `/data/` の正規URLを定義する。
+- **実装対象**: SiteFooterのaccessible nameに可視自治体名と公開データの文言を含める。原因候補である `getSiteUrl()` の `NEXT_PUBLIC_SITE_URL ?? URL` という優先順位とNetlify前提のfallbackを、Vercelのビルド環境と照合する。Vercel Project Settingsで `NEXT_PUBLIC_SITE_URL` の有無・Production / Previewの適用範囲を確認する（現時点では未確認）。確定したoriginから全公開ルートの絶対canonicalと旧 `/data/` の正規URLを定義し、同じ関数を使う共有URLとOGへの波及も確認する。
 - **非対象**: 配色・レイアウト・本文再設計、公開環境変数の無断変更、テーマ別のmetadata重複実装。
 - **守る既存仕様**: municipalityから自治体名を取得、外部リンクのrelとtarget、既存パスと出典導線、設定値優先順位、自治体/topic/story責務分離。
-- **完了条件**: 全自治体のFooterに可視ラベルを含む読み上げ名があり、`label-content-name-mismatch` が解消。確定した公開originでのビルドとpreview HTMLでcanonicalを確認し、公開URLで `canonical` auditを通過。既存ルートの遷移が維持される。
+- **完了条件**: 全自治体のFooterに可視ラベルを含む読み上げ名があり、`label-content-name-mismatch` が解消。Vercelの `NEXT_PUBLIC_SITE_URL` 設定状況・適用環境とoriginの優先順位を記録し、確定した公開originでのビルドとProduction / Previewの生成HTMLでcanonical・`og:url` が意図した絶対URLになることを確認する。care・education・childcareの共有リンクに意図したstory絶対URLの `url` パラメータが含まれ、公開URLで `canonical` auditを通過し、既存ルートの遷移が維持される。
 - **停止条件**: 正規の公開originや旧 `/data/` の扱いが未確定、複数ホストのindex方針が衝突する、本番設定変更が必要な場合はMimuへ戻す。
 
 ### C. コントラストとfavicon
