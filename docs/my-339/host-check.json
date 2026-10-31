@@ -1,0 +1,306 @@
+{
+  "checkedAt": "2026-10-31T07:58:50.091Z",
+  "issue": "MY-339",
+  "documentCommitBeforeUpdate": "b9299894df40ec304ec4fb11c5e5eacc319ce616",
+  "scope": "GET responses and metadata only; not a new Lighthouse or responsive baseline; production host policy and project environment settings not verified",
+  "rows": [
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 31757,
+      "sha256": "12330dae61cb1526f8a256cf07d102d6931ffdd6a25da9c62c05fc22275de58d",
+      "canonical": "https://machinohenka.seijinotonari.jp/",
+      "ogUrl": null,
+      "robots": null,
+      "shareUrls": []
+    },
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 52981,
+      "sha256": "a7b597fc18aa95c1b15454fed1b966b4e3b793115db69f07282ea55771ebd625",
+      "canonical": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "ogUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "robots": null,
+      "shareUrls": [
+        "https://twitter.com/intent/tweet?text=%E7%AB%8B%E5%B7%9D%E5%B8%82%E3%81%AE%E5%AD%90%E8%82%B2%E3%81%A6%E3%80%81%E3%81%93%E3%81%AE%E6%95%B0%E5%B9%B4%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F%EF%BC%9F+%23%E7%A8%8E%E9%87%91%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F&url=https%3A%2F%2Fmachinohenka.seijinotonari.jp%2Ftachikawa%2Fchildcare%2F"
+      ]
+    },
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/favicon.ico",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/favicon.ico",
+      "status": 404,
+      "server": "Netlify",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 12041,
+      "sha256": "be8b1dd1733ff1e4af636ae453327cd1d10cc1b573671584caaa528a0d878df9"
+    },
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/index.txt",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/index.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 21214,
+      "sha256": "13b8774d19d8eb91f101e0633be2ffdd7c71b859b0496c91d7d31d9a978ef814",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[79520,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 19976,
+      "sha256": "bd9c0af6a04b3cdc75a331b965b66f6f3fee5eb83f0e288d94edcc8596433f78",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[22016,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "finalUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "status": 404,
+      "server": "Netlify",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 12041,
+      "sha256": "be8b1dd1733ff1e4af636ae453327cd1d10cc1b573671584caaa528a0d878df9"
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/",
+      "finalUrl": "https://machinohenka.netlify.app/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 31757,
+      "sha256": "12330dae61cb1526f8a256cf07d102d6931ffdd6a25da9c62c05fc22275de58d",
+      "canonical": "https://machinohenka.seijinotonari.jp/",
+      "ogUrl": null,
+      "robots": null,
+      "shareUrls": []
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/tachikawa/childcare/",
+      "finalUrl": "https://machinohenka.netlify.app/tachikawa/childcare/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 52981,
+      "sha256": "a7b597fc18aa95c1b15454fed1b966b4e3b793115db69f07282ea55771ebd625",
+      "canonical": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "ogUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "robots": null,
+      "shareUrls": [
+        "https://twitter.com/intent/tweet?text=%E7%AB%8B%E5%B7%9D%E5%B8%82%E3%81%AE%E5%AD%90%E8%82%B2%E3%81%A6%E3%80%81%E3%81%93%E3%81%AE%E6%95%B0%E5%B9%B4%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F%EF%BC%9F+%23%E7%A8%8E%E9%87%91%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F&url=https%3A%2F%2Fmachinohenka.seijinotonari.jp%2Ftachikawa%2Fchildcare%2F"
+      ]
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/favicon.ico",
+      "finalUrl": "https://machinohenka.netlify.app/favicon.ico",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "image/vnd.microsoft.icon",
+      "xRobotsTag": null,
+      "bytes": 15086,
+      "sha256": "d029ee2f8b418ee988836acac9bb63b82be5e23d285c52d1f1afdfe3e546f4fe"
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/tachikawa/childcare/index.txt",
+      "finalUrl": "https://machinohenka.netlify.app/tachikawa/childcare/index.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 21214,
+      "sha256": "13b8774d19d8eb91f101e0633be2ffdd7c71b859b0496c91d7d31d9a978ef814",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[79520,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "finalUrl": "https://machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": null,
+      "bytes": 19976,
+      "sha256": "bd9c0af6a04b3cdc75a331b965b66f6f3fee5eb83f0e288d94edcc8596433f78",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[22016,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "finalUrl": "https://machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "status": 404,
+      "server": "Netlify",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 12041,
+      "sha256": "be8b1dd1733ff1e4af636ae453327cd1d10cc1b573671584caaa528a0d878df9"
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": "noindex",
+      "bytes": 32061,
+      "sha256": "4111ca29525f1f74d4b1d9b9eeeeeae4904a643f032770ec2362bd578401c671",
+      "canonical": "https://machinohenka.seijinotonari.jp/",
+      "ogUrl": null,
+      "robots": null,
+      "shareUrls": []
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/html; charset=UTF-8",
+      "xRobotsTag": "noindex",
+      "bytes": 53285,
+      "sha256": "abe6267fd724fe1570ad818e466602a9e89ed30c2b41b674fc63a783a00d4a7b",
+      "canonical": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "ogUrl": "https://machinohenka.seijinotonari.jp/tachikawa/childcare/",
+      "robots": null,
+      "shareUrls": [
+        "https://twitter.com/intent/tweet?text=%E7%AB%8B%E5%B7%9D%E5%B8%82%E3%81%AE%E5%AD%90%E8%82%B2%E3%81%A6%E3%80%81%E3%81%93%E3%81%AE%E6%95%B0%E5%B9%B4%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F%EF%BC%9F+%23%E7%A8%8E%E9%87%91%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F&url=https%3A%2F%2Fmachinohenka.seijinotonari.jp%2Ftachikawa%2Fchildcare%2F"
+      ]
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/favicon.ico",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/favicon.ico",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "image/vnd.microsoft.icon",
+      "xRobotsTag": "noindex",
+      "bytes": 15086,
+      "sha256": "d029ee2f8b418ee988836acac9bb63b82be5e23d285c52d1f1afdfe3e546f4fe"
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/index.txt",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/index.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": "noindex",
+      "bytes": 21214,
+      "sha256": "b0d9ac00ea4bf5bbe6d1cc40cee0478c6cc8c2485985483029b2cd4bc346aa69",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[79520,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "status": 200,
+      "server": "Netlify",
+      "contentType": "text/plain; charset=UTF-8",
+      "xRobotsTag": "noindex",
+      "bytes": 19976,
+      "sha256": "427149224d0c702360fd5c081a8a249d6bd1cf907358560f70c46fc26449cba7",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[22016,[\"/_next/static/chunks/44oxwbh__ebkl.js"
+    },
+    {
+      "requestedUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "finalUrl": "https://deploy-preview-19--machinohenka.netlify.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "status": 404,
+      "server": "Netlify",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": "noindex",
+      "bytes": 12345,
+      "sha256": "07fef8c7766ff01b8122d63269b0f3f8c57adff7621345e1536ce465f8b5d786"
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/",
+      "status": 200,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 31984,
+      "sha256": "d3c7cdf3e0961194c2c791a4cb8947275bbe38cfa9835a20de82be7a3228e8a8",
+      "canonical": "/",
+      "ogUrl": null,
+      "robots": null,
+      "shareUrls": []
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/",
+      "status": 200,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 53018,
+      "sha256": "8cbcde0aa01bf8b5ab22387a7a3c52274df6ad7fb492cccbdf41a04d4b35d406",
+      "canonical": "/tachikawa/childcare/",
+      "ogUrl": "/tachikawa/childcare/",
+      "robots": null,
+      "shareUrls": [
+        "https://twitter.com/intent/tweet?text=%E7%AB%8B%E5%B7%9D%E5%B8%82%E3%81%AE%E5%AD%90%E8%82%B2%E3%81%A6%E3%80%81%E3%81%93%E3%81%AE%E6%95%B0%E5%B9%B4%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F%EF%BC%9F+%23%E7%A8%8E%E9%87%91%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F"
+      ]
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/favicon.ico",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/favicon.ico",
+      "status": 404,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 12170,
+      "sha256": "60000afc67f2e68d1fb47c75086d6741b4c15e095728d4813672959ba8e8be32"
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/index.txt",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/index.txt",
+      "status": 200,
+      "server": "Vercel",
+      "contentType": "text/plain; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 21065,
+      "sha256": "01de47d90586d8215793c532d08d7de5ae0f1e66178d0e09432ab5ef9da8b7d0",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[79520,[\"/_next/static/chunks/3aa4fr35vqpis.js"
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/__next.$d$municipality.$d$topic.__PAGE__.txt",
+      "status": 200,
+      "server": "Vercel",
+      "contentType": "text/plain; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 19827,
+      "sha256": "42bc1a8f6142ba4f6d81387eeb9edf9cb733f73727190fbcf5c54b0d949b27f8",
+      "prefix": "1:\"$Sreact.fragment\"\n2:I[22016,[\"/_next/static/chunks/3aa4fr35vqpis.js"
+    },
+    {
+      "requestedUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "finalUrl": "https://tax-change-tachikawa.vercel.app/tachikawa/childcare/__next.$d$municipality/$d$topic/__PAGE__.txt",
+      "status": 404,
+      "server": "Vercel",
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "bytes": 12170,
+      "sha256": "60000afc67f2e68d1fb47c75086d6741b4c15e095728d4813672959ba8e8be32"
+    }
+  ],
+  "localOutput": {
+    "path": "out/tachikawa/childcare/index.html",
+    "canonical": "/tachikawa/childcare/",
+    "ogUrl": "/tachikawa/childcare/",
+    "robots": null,
+    "shareUrls": [
+      "https://twitter.com/intent/tweet?text=%E7%AB%8B%E5%B7%9D%E5%B8%82%E3%81%AE%E5%AD%90%E8%82%B2%E3%81%A6%E3%80%81%E3%81%93%E3%81%AE%E6%95%B0%E5%B9%B4%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F%EF%BC%9F+%23%E7%A8%8E%E9%87%91%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%9F"
+    ],
+    "scope": "existing local build; not rebuilt during review response"
+  }
+}
