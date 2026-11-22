@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+[[redirects]]
+  from = "https://machinohenka.netlify.app/*"
+  to = "https://machinohenka.seijinotonari.jp/:splat"
+  status = 301
+  force = true
